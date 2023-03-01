@@ -1,0 +1,25 @@
+#table_SliderImage{
+  .slider-photo{
+    width:100px;
+    height: 60px;
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+//slider Edit
+.slider-image-edit-form{
+  #slider-image-preview{
+    width: 100%;
+    height: 330px;
+    #slider-image{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+//End Slider Edit

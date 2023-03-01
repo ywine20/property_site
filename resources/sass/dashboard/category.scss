@@ -1,0 +1,71 @@
+//category create
+.form-control:focus,.form-select:focus,{
+  box-shadow: none !important;
+}
+.create{
+  .header{
+    font-size: calc(1.2rem + 0.3vw);
+  }
+  .create-input,.create-select,.create-file{
+    //background:#423E3D;
+    background: #7A757491;
+
+    outline: none;
+    border:none;
+    color:white;
+  }
+  .create-textarea{
+    //background:#423E3D;
+    background: #7A757491;
+
+    outline: none;
+    border:none;
+    color:white !important;
+  }
+  .image-preview{
+    background: #7A757491;
+
+  }
+  .create-btn{
+
+  }
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .create{
+    .header{
+      font-size: calc(1rem + 0.3vw);
+    }
+    .create-input{
+      background:#423E3D;
+      outline: none;
+      border:none;
+    }
+    .create-btn{
+
+    }
+
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

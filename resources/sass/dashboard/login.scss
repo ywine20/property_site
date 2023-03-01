@@ -1,0 +1,29 @@
+.form-control:focus,.form-select:focus,{
+  box-shadow: 0 0 2px #F5CC7A !important;
+  background-color: #7A757491;
+  border-color: #F5CC7A;
+  outline: 0;
+}
+.login-form{
+  label{
+    color: #BEBEBEFF !important;
+  }
+  input{
+    background: #7A757491;
+    outline: none;
+    border:none;
+    color:white;
+  }
+  .logInBtn{
+    letter-spacing: 1px;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 992px) {
+  .login-form{
+    .logInBtn{
+      width: 100%;
+    }
+  }
+}

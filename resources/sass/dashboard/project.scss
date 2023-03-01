@@ -1,0 +1,171 @@
+
+////project 360
+.project-360-preview{
+  transition: all 1s;
+
+  .three-preview {
+    overflow:hidden;
+    cursor: pointer;
+    transition:all .6s;
+
+    img{
+      width: 100%;
+      height:100%;
+      object-fit:cover;
+
+    }
+    &:hover{
+      filter: brightness(1.2);
+    }
+    &:active{
+      transform:scale(.95);
+      border:2px solid red;
+
+    }
+  }
+
+}
+//facebookCreate SCSS
+
+//project cover
+.project-cover-preview{
+  transition: all 1s;
+
+  #cover-preview {
+    overflow:hidden;
+    cursor: pointer;
+    transition:all .6s;
+
+    img{
+      width: 100%;
+      height:100%;
+      object-fit:cover;
+
+    }
+    &:hover{
+      filter: brightness(1.2);
+    }
+    &:active{
+      transform:scale(.95);
+      border:2px solid red;
+
+    }
+  }
+
+}
+
+
+/////PROJECT DETAIL//////////////////////
+.project-detail-dashboard{
+  .project-detail-table{
+    background-color: transparent !important;
+    tbody{
+      background-color: transparent !important;
+
+      tr{
+        background-color: transparent !important;
+
+        td{
+          background-color: transparent !important;
+        }
+        &:first-child{
+          max-width: 150px;
+          background-color: deepskyblue;
+        }
+        &:nth-child(2){
+          width: 20px;
+        }
+      }
+    }
+
+  }
+
+}
+/////END PORJECT DETAL///////////////////
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  //
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  /////PROJECT DETAIL//////////////////////
+  .project-detail-dashboard{
+    .coverImage{
+      max-height: 340px;
+    }
+    .project-detail-table{
+      background-color: transparent !important;
+      tbody{
+        background-color: transparent !important;
+
+        tr{
+          background-color: transparent !important;
+
+          td{
+            background-color: transparent !important;
+          }
+          &:first-child{
+            max-width: 150px;
+            background-color: deepskyblue;
+          }
+          &:nth-child(2){
+            width: 20px;
+          }
+        }
+      }
+
+    }
+
+  }
+  /////END PORJECT DETAL///////////////////
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  /////PROJECT DETAIL//////////////////////
+  .project-detail-dashboard{
+    .coverImage{
+      max-height: 400px;
+    }
+    .project-detail-table{
+      background-color: transparent !important;
+      tbody{
+        background-color: transparent !important;
+
+        tr{
+          background-color: transparent !important;
+
+          td{
+            background-color: transparent !important;
+          }
+          &:first-child{
+            max-width: 150px;
+            background-color: deepskyblue;
+          }
+          &:nth-child(2){
+            width: 20px;
+          }
+        }
+      }
+
+    }
+
+  }
+  /////END PORJECT DETAL///////////////////
+}
+
+//endfacebookCreate SCSS

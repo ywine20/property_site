@@ -1,0 +1,565 @@
+*{
+    color: var(--primary-dark);
+}
+#our-story{
+    color: var(--primary-dark);
+    .group-image{
+        width: 100%;
+        overflow: hidden;
+        border-radius: 5px;
+        .img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .ourStory-text{
+       .ourStory-Title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div:first-child{
+            width: 40%;
+        }
+        .title{
+            font-size: 2.5rem;
+        }
+       }
+        .text{
+            font-size: 1.2rem;
+        }
+    }
+
+}
+
+#our-vision-mission{
+    .our-vision{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        color: var(--gold) !important;
+        .card{
+            width: 75%;
+            border: 0;
+            // backdrop-filter: blur(1.2);
+            padding:20px;
+            text-align: center;
+            background-color: #ffffff08;
+            color: var(--gold) !important;
+            h4{
+                color: var(--gold) !important;
+            }
+            p{
+                font-size: 1.1rem;
+                color: var(--gold) !important;
+            }
+        }
+    }
+    .our-mission{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        .card{
+            width: 75%;
+            border: 0;
+            // backdrop-filter: blur(1.2);
+            padding:20px ;
+            text-align: center;
+            background-color: #ffffff08;
+            h4{
+                color: var(--gold) !important;
+            }
+            p{
+                font-size: 1.1rem;
+                color: var(--gold) !important;
+
+            }
+        }
+    }
+
+}
+
+//   achievement & Awards
+.achievement-awards {
+        .awards-row{
+           .col{
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+           }
+        }  
+         /* custom scrollbar */
+         ::-webkit-scrollbar {
+            width: 20px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: #d6dee1;
+            border-radius: 20px;
+            border: 6px solid transparent;
+            background-clip: content-box;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #a8bbbf;
+        }
+}
+
+// // u nay lin tun
+// #uNayLinTun{
+//     // background-color: blueviolet;
+// }
+
+//event & activities
+#event-activities{
+    .second-col{
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            
+        }
+    }
+}
+
+//brand partnership
+#brand-partnership{
+    .second-col{
+        .col{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            div:first-child{
+                width: 50%;
+            }
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+//   our story
+    #our-story{
+            .ourStory-text{
+                .ourStory-Title{
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+                 div:first-child{
+                     width: 65%;
+                 }
+                 .title{
+                    font-size: 2rem;
+                    margin-bottom: 1.8px;
+                 }
+                }
+                 .text{
+                     font-size: 1rem;
+                 }
+             }
+          
+    }
+
+//  our vision and mission
+    #our-vision-mission{
+        .our-vision{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            .card{
+                width: 95%;
+                padding:20px ;
+                h4{
+                    font-size: 1.125rem !important;
+                }
+                p{
+                    font-size: .9rem;
+                }
+            }
+        }
+        .our-mission{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .card{
+                width: 95%;
+                padding:20px;
+                h4{
+                    font-size: 1.125rem !important;
+                }
+                p{
+                    font-size: .9rem;
+                }
+        }
+    
+    }
+    }
+// Company-timeLine
+    #company-timeLine{
+        .title{
+            font-size: 1.3rem;
+            // font-size: calc(1.3rem + 0.6vw);
+
+        }
+    }
+
+//   achievement & Awards
+    .achievement-awards {
+        .title{
+            font-size: 1.3rem;
+            // font-size: calc(1.3rem + 0.6vw);
+
+        }
+        .awards-row{
+            flex-wrap: nowrap !important;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+    }
+
+// organization chart
+#organization-chart{
+    .title{
+        font-size: 1.3rem;
+        // font-size: calc(1.3rem + 0.6vw);
+    }
+}
+
+// event activities
+#event-activities{
+    .title{
+        font-size: 1.3rem;
+        // font-size: calc(1.3rem + 0.6vw);
+    }
+}
+
+        //brand partnership
+#brand-partnership{
+    .title{
+        font-size: 1.3rem;
+        // font-size: calc(1.3rem + 0.6vw);
+    }
+    .second-col{
+        .col{
+            div:first-child{
+                width: 75%;
+            }
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+//   our story
+    #our-story{
+        .ourStory-text{
+            .ourStory-Title{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                div:first-child{
+                    width: 65%;
+                }
+                .title{
+                   font-size: 2rem;
+                   margin-bottom: 1.8px;
+                }
+               }
+                .text{
+                    font-size: 1rem;
+                }
+            }
+        }
+        //  our vision and mission
+    #our-vision-mission{
+        .our-vision{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            .card{
+                width: 95%;
+                padding:20px ;
+                p{
+                    font-size: 1rem;
+                }
+            }
+        }
+        .our-mission{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .card{
+                width: 95%;
+                padding:20px;
+                p{
+                    font-size: 1rem;
+            }
+        }
+    
+    }
+    }
+
+//   achievement & Awards
+    .achievement-awards{
+        .awards-row{
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            overflow-y: hidden;
+
+        }
+    }
+
+// u nay lin tun
+#uNayLinTun{
+    .text{
+        .fs-5{
+            font-size: 1.1rem !important;
+        }
+    }
+}
+
+    //brand partnership
+#brand-partnership{
+    .second-col{
+        .col{
+            div:first-child{
+                width: 75%;
+            }
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+    }
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #our-story{
+        .ourStory-text{
+            .ourStory-Title{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                div:first-child{
+                    width: 50%;
+                }
+                .title{
+                   font-size: 2rem;
+                   margin-bottom: 1.8px;
+                }
+               }
+                .text{
+                    font-size: 1rem;
+                }
+        }
+    }
+
+    
+    #our-vision-mission{
+        .our-vision{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .card{
+                width: 90%;
+                padding:20px ;
+                p{
+                    font-size: 1rem;
+                }
+            }
+        }
+        .our-mission{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .card{
+                width: 90%;
+                padding:20px;
+                p{
+                    font-size: 1rem;
+            }
+        }
+    
+    }
+    }
+
+    //   achievement & Awards
+    .achievement-awards{
+        .awards-row{
+            flex-wrap: wrap;
+            overflow: hidden;
+        }
+    }
+
+        //brand partnership
+#brand-partnership{
+    .second-col{
+        .col{
+            div:first-child{
+                width: 75%;
+            }
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    #our-story{
+        .ourStory-text{
+            .ourStory-Title{
+                div:first-child{
+                    width: 40%;
+                }
+                .title{
+                    font-size: 1.8rem;
+                    margin-bottom: 10px;                }
+               }
+                .text{
+                    font-size: 1rem;
+                }
+            }
+        }
+    
+    #our-vision-mission{
+        .our-vision{
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            margin-bottom: 0px;
+            .card{
+                width: 90%;
+                padding:10px ;
+                p{
+                    font-size: 1rem;
+                }
+            }
+        }
+        .our-mission{
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            .card{
+                width: 90%;
+                padding:10px;
+                p{
+                    font-size: 1rem;
+            }
+        }
+    
+    }
+}
+
+        //brand partnership
+        #brand-partnership{
+            .second-col{
+                .col{
+                    div:first-child{
+                        width: 65%;
+                    }
+                }
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    #our-story{
+        .group-image{
+            width: 100%;
+            overflow: hidden;
+            border-radius: 5px;
+            .img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .ourStory-text{
+            .ourStory-Title{
+                div:first-child{
+                    width: 40%;
+                }
+                .title{
+                    font-size: 2.5rem;
+                    margin-bottom: 10px;                }
+               }
+                .text{
+                    font-size: 1.1rem;
+                }
+        }
+    
+    }
+    
+    #our-vision-mission{
+        color: var(--gold);
+        .our-vision{
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            .card{
+                width: 75%;
+                border: 0;
+                // backdrop-filter: blur(1.2);
+                padding:20px ;
+                text-align: center;
+                background-color: #ffffff08;
+    
+                p{
+                    font-size: 1.05rem;
+                }
+            }
+        }
+        .our-mission{
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            .card{
+                width: 75%;
+                border: 0;
+                // backdrop-filter: blur(1.2);
+                padding:20px ;
+                text-align: center;
+                background-color: #ffffff08;
+                p{
+                    font-size: 1.05rem;
+                }
+            }
+        }
+    
+    }
+}

@@ -1,0 +1,260 @@
+.reach-out-container {
+  position: sticky;
+  top: 53px;
+  z-index: -1;
+}
+
+.reach-out {
+  background-color: #292626;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+  overflow: hidden;
+  height: 300px;
+}
+.reach-out div:first-child {
+  width: 50% !important;
+}
+.reach-out div:first-child p {
+  font-size: 1.3rem;
+}
+
+#contact {
+  position: static;
+  z-index: 100;
+}
+#contact .contact-static {
+  width: 75%;
+}
+#contact .contact-static .contact-static-img {
+  width: 50%;
+  box-shadow: 0rem 0.3rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+}
+#contact .contact-static .contact-static-card {
+  width: 75%;
+}
+#contact .contact-static .contact-static-card .card {
+  background-color: var(--primary-dark);
+  color: var(--gold);
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: row;
+  border: none;
+  box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+  font-size: 1rem;
+  font-weight: lighter;
+}
+#contact .contact-form-div {
+  width: 75% !important;
+}
+#contact .contact-form-div .contact-form .submitBtn {
+  letter-spacing: 3px;
+  box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+}
+
+#map .map-div {
+  min-height: 200px;
+  max-height: 450px;
+  height: 450px;
+}
+#map .map-div iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 600px) {
+  .reach-out {
+    height: 250px;
+  }
+  .reach-out div:first-child {
+    width: 90%;
+  }
+  .reach-out div:first-child p {
+    font-size: 1rem;
+  }
+  #contact .contact-static {
+    width: 100%;
+  }
+  #contact .contact-static .contact-static-img {
+    width: 60%;
+    box-shadow: none !important;
+  }
+  #contact .contact-static .contact-static-card {
+    width: 90%;
+  }
+  #contact .contact-static .contact-static-card .card {
+    background-color: var(--primary-dark);
+    color: var(--gold);
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+    font-size: 1rem;
+    font-weight: lighter;
+  }
+  #contact .contact-form-div {
+    width: 100%;
+  }
+  #contact .contact-form-div .contact-form .submitBtn {
+    letter-spacing: 3px;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+  }
+  #map .map-div {
+    min-height: 200px;
+    max-height: 450px;
+    height: 300px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .reach-out div:first-child {
+    width: 75%;
+  }
+  .reach-out div:first-child p {
+    font-size: 1.2rem;
+  }
+  #contact .contact-static {
+    width: 100%;
+  }
+  #contact .contact-static .contact-static-img {
+    width: 60%;
+    box-shadow: none;
+  }
+  #contact .contact-static .contact-static-card {
+    width: 75%;
+  }
+  #contact .contact-static .contact-static-card .card {
+    background-color: var(--primary-dark);
+    color: var(--gold);
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+    font-size: 1rem;
+    font-weight: lighter;
+  }
+  #contact .contact-form-div {
+    width: 100%;
+  }
+  #contact .contact-form-div .contact-form .submitBtn {
+    letter-spacing: 3px;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  .reach-out {
+    height: 300px;
+  }
+  .reach-out div:first-child {
+    width: 75%;
+  }
+  .reach-out div:first-child p {
+    font-size: 1.2rem;
+  }
+  #contact .contact-static {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  #contact .contact-static .contact-static-img {
+    width: 30%;
+    box-shadow: none !important;
+  }
+  #contact .contact-static .contact-static-card {
+    width: 50%;
+  }
+  #contact .contact-static .contact-static-card .card {
+    background-color: var(--primary-dark);
+    color: var(--gold);
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+    font-size: 1rem;
+    font-weight: lighter;
+  }
+  #contact .contact-form-div {
+    width: 90%;
+  }
+  #contact .contact-form-div .contact-form .submitBtn {
+    letter-spacing: 3px;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+  }
+}
+@media screen and (min-width: 992px) {
+  .reach-out div:first-child {
+    width: 50%;
+  }
+  .reach-out div:first-child p {
+    font-size: 1.3rem;
+  }
+  #contact .contact-static {
+    width: 90%;
+  }
+  #contact .contact-static .contact-static-img {
+    width: 60%;
+    box-shadow: 0rem 0.3rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+  }
+  #contact .contact-static .contact-static-card {
+    width: 100%;
+  }
+  #contact .contact-static .contact-static-card .card {
+    background-color: var(--primary-dark);
+    color: var(--gold);
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+    font-size: 1rem;
+    font-weight: lighter;
+  }
+  #contact .contact-form-div {
+    width: 90%;
+  }
+  #contact .contact-form-div .contact-form .submitBtn {
+    letter-spacing: 3px;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .reach-out div:first-child {
+    width: 50% !important;
+  }
+  .reach-out div:first-child p {
+    font-size: 1.3rem;
+  }
+  #contact .contact-static {
+    width: 90% !important;
+  }
+  #contact .contact-static .contact-static-img {
+    width: 50% !important;
+    box-shadow: 0rem 0.3rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+  }
+  #contact .contact-static .contact-static-card {
+    width: 75% !important;
+  }
+  #contact .contact-static .contact-static-card .card {
+    background-color: var(--primary-dark);
+    color: var(--gold);
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+    font-size: 1rem;
+    font-weight: lighter;
+  }
+  #contact .contact-form-div {
+    width: 75% !important;
+  }
+  #contact .contact-form-div .contact-form .submitBtn {
+    letter-spacing: 3px;
+    box-shadow: 0rem 0.2rem 5px 0px rgba(0, 0, 0, 0.2588235294) !important;
+  }
+}
+
+/*# sourceMappingURL=contact-us.css.map */

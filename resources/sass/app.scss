@@ -1,0 +1,1096 @@
+
+
+$primary:#F5CC7A;
+// $danger:#423e3ddf;
+$secondary:#423E3D;
+$success:#0fd101;
+
+$border-radius: .15rem;
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-icons/font/bootstrap-icons.scss';
+// @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
+// @import url("~bootstrap-icons/font/bootstrap-icons.scss");
+@import 'project-list.scss';
+@import 'project-detail.scss';
+@import 'about-us.scss';
+@import 'contact-us.scss';
+@import 'faq.scss';
+@import 'directorProfile.scss';
+@import 'termsAndConditions.scss';
+//@import 'dashboard/contact';
+// @import '~animate/animate.min.css';
+@import '~venobox/dist/venobox.min.css';
+
+
+:root{
+    --light : #fff;
+    // --primary-dark :#423E3D;
+    --primary-dark:#423E3D;
+    --gold : #F5CC7A;
+    --text-grey : rgb(101, 101, 101);
+    --dark : #000;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.btn-link:focus-visible {
+    color: var(--bs-btn-color);
+    box-shadow: none;
+}
+.bg-green{
+    background-color: var(--primary-dark);
+    color: var(--gold) !important;
+}
+.text-gold{
+    color: var(--gold) !important;
+}
+.text-grey{
+    color: var(--primary-dark) !important;
+}
+.form-control:focus{
+    box-shadow:none;
+}
+
+
+body{
+    background-color: var(--light);
+    width:100vw;
+    overflow-x: hidden;
+}
+//start nav
+nav{
+    background-color: var(--primary-dark);
+    position: fixed !important ;
+    width: 100%;
+    top:0;
+    z-index:1000;
+
+    #sideNavButton{
+        cursor:pointer;
+    }
+
+    .logo-div{
+        width:50px;
+    }
+
+    .nav-item .nav-link{
+        color: var(--gold) !important;
+
+    }
+    .nav-item{
+        transition:.2s;
+        &:hover{
+            transform:scale(1.05);
+        }
+    }
+}
+
+//end nav
+
+//start side nav
+.side-nav{
+    position: fixed;
+    top: 0;
+    left: inherit;
+    width: 30vw;
+    height: 100vh;
+    z-index: 1100;
+    background: #423e3dd1;
+    backdrop-filter: blur(10px);
+    box-shadow: 2px 2px 11px #0000004f;
+    transition: .4s;
+
+    #slideClose{
+        transition:.2s;
+        transform:scale(1);
+        transform-origin: center;
+        &:active{
+            transform:scale(.95);
+        }
+    }
+    .side-nav-item{
+        color:var(--gold);
+        border:1px solid var(--primary-dark);
+        .side-nav-link{
+            transition:.2s;
+            transform:scale(1);
+            transform-origin: center;
+            // &:hover{
+            //     padding-right:0;
+            //     transform:scale(1);
+            //     background-color: #423e3dd1;
+
+            // }
+            &:active{
+                transform:scale(.95);
+            }
+        }
+
+    }
+
+}
+.offcanvas-backdrop{
+    z-index: 1099;
+    background-color: rgba(0, 0, 0, 0.322);
+    backdrop-filter: blur(5px);
+    width:100%;
+    height:100%;
+    overflow:hidden !important;
+
+}
+.backdropHide{
+    display:none
+}
+.backdropShow{
+    overflow:hidden;
+    width:100%;
+    height:100%;
+}
+.left0{
+    left:0
+}
+.leftMinus{
+    // left:-50%;
+    transform: translateX(-110%);
+
+}
+//end side nav
+
+//footer
+#footer{
+    position: relative;
+    z-index:1001;
+    .bi{
+        color:var(--gold);
+    }
+    .footer-logo{
+        margin-right:-5%
+    }
+}
+//endfooter
+
+//################################################################################################
+// START LANDING PAGE CSS
+//###############################################################################################
+
+main{
+    padding-top:3rem;
+    position:relative;
+}
+
+// start slider
+.carousel-item{
+    img{
+        object-fit:cover;
+    }
+}
+
+.slider-first-div{
+    height:80vh;
+}
+// end slider
+
+//counting
+#counting{
+    .counting-table{
+        tbody>tr>td{
+            text-align: center;
+            color: var(--gold);
+            padding: 0;
+            // padding-bottom: 0px;
+        }
+        .counting-title2{
+            font-size: 1.25rem;
+        }
+        .counting-number2{
+            font-size:calc(1.3rem + 0.6vw);
+        }
+    }
+}
+//end counting
+
+
+// fbpost section
+.fb-card{
+    background-color: var(--primary-dark);
+    .card-body{
+        padding: .5rem;
+    }
+    .card-body .card-text{
+        color: var(--gold);
+    }
+
+}
+.seemore-fb{
+    font-size: 1.05rem;
+    width:initial;
+    height: auto;
+    background: #fff;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.24);
+    position: absolute;
+    right:3%;
+    top:47%;
+    display: none;
+    cursor:pointer;
+}
+.show{
+    display: flex;
+}
+// end fbpost section
+
+// project
+.project-card{
+    transition:.4s;
+    transform:scale(1);
+
+    .project-card-table{
+        tbody>tr>td{
+            color: var(--gold);
+            padding: 0;
+        }
+    }
+}
+.project-card:hover{
+    transform:scale(1.02);
+}
+// end project
+
+// about
+#about{
+    background-color: var(--primary-dark);
+}
+.about-heading{
+    font-size:1rem;
+}
+.about-text{
+    font-size:.7rem
+}
+// end about
+
+// send message
+.input-group-lg > .form-control{
+    padding: 0.5rem 1rem;
+    font-size: 1rem !important;
+    color:var(--primary);
+    border-radius: 0.5rem;
+}
+// end send message
+
+//################################################################################################
+// END LANDING PAGE CSS
+//###############################################################################################
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// start Device responsive
+
+//mobile sm 320
+@media screen and (max-width:374px){
+    main{
+        padding-top:3.3rem;
+    }
+    .side-nav{
+        width:65vw;
+    }
+    .logo-div{
+        width:40px !important;
+    }
+    .carousel-item{
+        img{
+            object-fit:cover;
+        }
+    }
+    //footer
+    #footer{
+        .list-group-item{
+            font-size:.8rem;
+        }
+    }
+    //endfooter
+
+
+    .slider-first-div{
+        height:30vh;
+    }
+    #counting{
+        .counting-title{
+            font-size:.7rem;
+        }
+        .counting-number{
+            font-size:1rem;
+            // font-size: calc(1.3rem + 0.6vw) !important;
+        }
+    }
+    .slick-prev,.slick-next{
+        top:50% !important;
+    }
+    .slick-prev:before, .slick-next:before {
+        /* font-family: 'slick'; */
+        font-size: 24px !important;
+    }
+    .fb-card-text{
+        font-size:.8rem;
+    }
+    .page-link{
+        font-size:.7rem;
+    }
+    .go-to-arrow{
+        font-size:.6rem;
+    }
+    .seemore-fb{
+        display:none !important;
+    }
+    //end facebook
+    // project
+    .project-heading{
+        width:100%
+    }
+    .project-card {
+        // max-height: 350px;
+        width:100%;
+
+        .project-img{
+            object-fit:cover;
+        }
+        .card-title{
+            font-size:.8rem;
+        }
+        h3{
+            font-size: 1rem;
+            font-weight:bold;
+        }
+        .entity{
+            font-size:.6rem;
+        }
+
+        .project-card-table{
+            tbody>tr>td{
+                font-size: .6rem;
+            }
+        }
+    }
+    // end project
+    // about
+    .about-heading{
+        font-size:1rem;
+    }
+    .about-text{
+        font-size:.7rem
+    }
+    // end about
+    // send message
+    #contact{
+        .send-message-input{
+            width:90%
+        }
+        .send-message-heading{
+            font-size:1rem;
+        }
+        .send-message-heading-small{
+            font-size:.8rem !important;
+        }
+    }
+    // end send message
+
+
+}
+
+//mobile md 375
+@media screen and (min-width:374px) and (max-width:424px){
+    main{
+        padding-top:3.37rem;
+    }
+    .side-nav{
+        width:65vw;
+    }
+    .logo-div{
+        width:40px !important;
+    }
+    .carousel-item{
+        img{
+            object-fit:cover;
+        }
+    }
+    .slider-first-div{
+        height:30vh;
+    }
+    #counting{
+        .counting-title{
+            font-size:.7rem;
+        }
+        .counting-number{
+            font-size:1rem;
+            // font-size: calc(1.3rem + 0.6vw) !important;
+        }
+    }
+    .slick-prev{
+        left:1%;
+    }
+    .slick-prev,.slick-next{
+        top:50% !important;
+    }
+    .slick-prev:before, .slick-next:before {
+        /* font-family: 'slick'; */
+        font-size: 24px !important;
+    }
+    .fb-card-text{
+        font-size:.8rem;
+    }
+    .page-link{
+        font-size:.7rem;
+    }
+    .go-to-arrow{
+        font-size:.7rem;
+    }
+    .seemore-fb{
+        display:none !important;
+    }
+    //  end facebook
+
+    // project
+    .project-heading{
+        width:100%
+    }
+    .project-card {
+        // max-height: 350px;
+        width:100%;
+        .card-title{
+            font-size:1rem;
+        }
+        h3{
+            font-size: 1.2rem;
+            font-weight:bold;
+        }
+        .entity{
+            font-size:.8rem;
+        }
+        .project-card-table{
+            tbody>tr>td{
+                font-size: .8rem;
+            }
+        }
+    }
+    // end project
+    // about
+    .about-heading{
+        font-size:1rem;
+    }
+    .about-text{
+        font-size:.7rem
+    }
+    // end about
+    // send message
+    #contact{
+        .send-message-input{
+            width:90%
+        }
+        .send-message-heading{
+            font-size:1.2rem;
+        }
+        .send-message-heading-small{
+            font-size:.5rem;
+        }
+    }
+    // end send message
+
+}
+
+//mobile lg 425
+@media screen and (min-width:424px) and (max-width:767px){
+    main{
+        padding-top:3.37rem;
+    }
+    .side-nav{
+        width:65vw;
+    }
+    .logo-div{
+        width:40px !important;
+    }
+    .carousel-item{
+        img{
+            object-fit:cover;
+        }
+    }
+    .slider-first-div{
+        height:30vh;
+    }
+    #counting{
+        .counting-title{
+            font-size:1rem;
+        }
+        .counting-number{
+            font-size:1.2rem;
+            // font-size: calc(1.3rem + 0.6vw) !important;
+        }
+    }
+    //facebook post
+    .slick-prev,.slick-next{
+        top:54% !important;
+    }
+    .slick-prev{
+        left:1%;
+    }
+    .slick-prev:before, .slick-next:before {
+        /* font-family: 'slick'; */
+        font-size: 24px !important;
+    }
+    .fb-card-text{
+        font-size:.8rem;
+    }
+    .page-link{
+        font-size:.7rem;
+    }
+    .go-to-arrow{
+        font-size:.8rem;
+    }
+    .seemore-fb{
+        display:none !important;
+    }
+
+    // project
+    .project-heading{
+        width:100%
+    }
+    .project-card {
+        // max-height: 350px;
+        width:100%;
+        .card-title{
+            font-size:1.2rem;
+        }
+        .range{
+            font-size: 1.5rem;
+            font-weight:bold;
+            padding-top: 5px !important;
+            padding-bottom:5px !important;
+        }
+        .entity{
+            font-size:1rem;
+        }
+        .project-card-table{
+            tbody>tr>td{
+                font-size: 1rem;
+            }
+        }
+    }
+    // end project
+    // about
+    .about-heading{
+        font-size:1rem;
+    }
+    .about-text{
+        font-size:.7rem
+    }
+    // end about
+    // send message
+    #contact{
+        .send-message-input{
+            width:90%
+        }
+        .send-message-heading{
+            font-size:1.2rem;
+        }
+        .send-message-heading-small{
+            font-size:.5rem;
+        }
+    }
+    // end send message
+}
+
+//tablet 768
+@media screen and (min-width:767px) and (max-width:1024px){
+    main{
+        padding-top:3.8rem !important;
+    }
+    nav{
+        .logo-div{
+            width:40px;
+        }
+    }
+    .side-nav{
+        width:35vw;
+    }
+    .slider-first-div{
+        height:45vh;
+    }
+    #counting{
+        .counting-title{
+            font-size:1.25rem;
+        }
+        .counting-number{
+            font-size:1.3rem;
+            // font-size: calc(1.3rem + 0.6vw) !important;
+        }
+    }
+    // .counting-text{
+    //     font-size:1.25rem
+
+    // }
+    // .counting-number{
+    //     font-size:1.5rem
+
+    // }
+    .slick-prev,.slick-next{
+        top:47% !important;
+    }
+    .slick-prev:before, .slick-next:before {
+        /* font-family: 'slick'; */
+        font-size: 35px !important;
+    }
+    //start facebook-post
+    .seemore-fb{
+        font-size: .8rem;
+        background: rgb(255, 255, 255);
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.24);
+        right:-2%;
+        top:50%;
+    }
+    //end facebook-post
+    .project-card {
+        // max-height: 350px;
+        width:100%;
+        .card-title{
+            font-size:1rem;
+        }
+        .range{
+            font-size: 1.3rem;
+            font-weight:bold;
+        }
+        // span{
+        //     font-size:1.5rem;
+        // }
+        .entity{
+            font-size:.8rem;
+        }
+        .project-card-table{
+            tbody>tr>td{
+                font-size: .8rem;
+            }
+        }
+    }
+    // about
+    #about{
+        background-color: var(--primary-dark);
+        background-image: url('/image/about.png');
+        // background-size: 55%;
+        // background-size: 103% 43%;
+        // background-repeat: no-repeat;
+        // background-attachment: local;
+        // background-position:top;
+        background-size: 55% 103%;
+        background-repeat: no-repeat;
+        background-attachment: local;
+        background-position:right;
+
+        .about-heading{
+            font-size:1rem;
+        }
+        .about-text{
+            font-size:.8rem;
+        }
+    }
+
+    // end about
+    // send message
+    .send-message-input{
+        width:75%
+    }
+    .send-message-heading{
+        font-size:1.4rem;
+    }
+    // end send message
+
+}
+
+//Laptop 1024
+@media screen and (min-width:1024px) and (max-width:1365px){
+    main{
+        padding-top:4rem !important;
+    }
+    .side-nav{
+        width:0 !important;
+    }
+    .offcanvas-backdrop{
+        width: 0 !important;
+    }
+    .slider-first-div{
+        height:45vh;
+    }
+    #counting{
+        .counting-title{
+            font-size:1.3rem;
+        }
+        .counting-number{
+            font-size:1.5rem;
+            // font-size: calc(1.3rem + 0.6vw) !important;
+        }
+    }
+
+
+    .carousel-item{
+        img{
+            object-fit:cover;
+        }
+    }
+    // .counting-text{
+    //     font-size:1.35rem
+    // }
+    // .counting-number{
+    //     font-size:1.7rem
+
+    // }
+
+    //start facebook-post
+    .slick-prev,.slick-next{
+        top:47% !important;
+    }
+    .slick-prev{
+        left:3% !important  ;
+    }
+    .slick-next{
+        right:3% !important;
+    }
+    .slick-prev:before, .slick-next:before {
+        /* font-family: 'slick'; */
+        font-size: 45px !important;
+    }
+    .seemore-fb{
+        font-size: 1rem;
+        background: rgb(255, 255, 255);
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.24);
+        right:3%;
+        top:46%;
+    }
+    //end facebook-post
+
+    .project-heading{
+        width:75%
+    }
+    .project-card {
+        // max-height: 350px;
+        width:100%;
+        .card-title{
+            font-size:1.2rem;
+        }
+        h3,.range{
+            font-size: 1.5rem;
+            font-weight:bold;
+        }
+        .entity{
+            font-size:1rem;
+        }
+        .project-card-table{
+            tbody>tr>td{
+                font-size: 1rem;
+            }
+        }
+    }
+    // about
+    #about{
+        background-color: var(--primary-dark);
+        background-image: url('/image/about.png');
+        // background-size: 55%;
+        background-size: 55% 103%;
+        background-repeat: no-repeat;
+        background-attachment: local;
+        background-position:right;
+        .about-heading{
+            font-size:1.2rem;
+        }
+        .about-text{
+            font-size:1rem;
+        }
+    }
+
+    // end about
+    // send message
+    .send-message-input{
+        width:50%
+    }
+    .send-message-heading{
+        font-size:1.4rem;
+    }
+    // end send message
+
+    //footer
+    .footer-logo{
+        margin-right:-3.5%
+    }
+    //endfooter
+
+}
+
+@media screen and (min-width:1365px) and (max-width:1439px){
+    main{
+        padding-top:4rem !important;
+    }
+    .side-nav{
+        width:0 !important;
+    }
+    .offcanvas-backdrop{
+        width: 0 !important;
+    }
+    .slider-first-div{
+        height:80vh;
+    }
+    #counting{
+        .counting-title{
+            font-size:1.3rem;
+        }
+        .counting-number{
+            font-size:1.5rem;
+            // font-size: calc(1.3rem + 0.6vw) !important;
+        }
+    }
+
+    .carousel-item{
+        img{
+            object-fit:cover;
+        }
+    }
+    // .counting-text{
+    //     font-size:1.35rem
+    // }
+    // .counting-number{
+    //     font-size:1.7rem
+
+    // }
+
+    //start facebook-post
+    .slick-prev,.slick-next{
+        top:47% !important;
+    }
+    .slick-prev{
+        left:3% !important  ;
+    }
+    .slick-next{
+        right:3% !important;
+    }
+    .slick-prev:before, .slick-next:before {
+        /* font-family: 'slick'; */
+        font-size: 45px !important;
+    }
+    .seemore-fb{
+        font-size: 1rem;
+        background: rgb(255, 255, 255);
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.24);
+        right:3%;
+        top:46%;
+    }
+    //end facebook-post
+
+    .project-heading{
+        width:75%
+    }
+    .project-card {
+        // max-height: 350px;
+        width:100%;
+        .card-title{
+            font-size:1.2rem;
+        }
+        h3,.range{
+            font-size: 1.5rem;
+            font-weight:bold;
+        }
+        .entity{
+            font-size:1rem;
+        }
+        .project-card-table{
+            tbody>tr>td{
+                font-size: 1rem;
+            }
+        }
+    }
+    // about
+    #about{
+        background-color: var(--primary-dark);
+        background-image: url('/image/about.png');
+        // background-size: 55%;
+        background-size: 55% 103%;
+        background-repeat: no-repeat;
+        background-attachment: local;
+        background-position:right;
+        .about-heading{
+            font-size:1.2rem;
+        }
+        .about-text{
+            font-size:1rem;
+        }
+    }
+
+    // end about
+    // send message
+    .send-message-input{
+        width:50%
+    }
+    .send-message-heading{
+        font-size:1.4rem;
+    }
+    // end send message
+
+    //footer
+    .footer-logo{
+        margin-right:-3.5%
+    }
+    //endfooter
+}
+
+//Laptop L 1440
+@media screen and (min-width:1439px) and (max-width:2559px){
+    main{
+        padding-top:4rem !important;
+    }
+    .side-nav{
+        width:0 !important;
+    }
+    .offcanvas-backdrop{
+        width: 0 !important;
+    }
+
+    .slider-first-div{
+        height:80vh;
+    }
+    #counting{
+        .counting-title{
+            font-size:1.5rem;
+        }
+        .counting-number{
+            font-size:1.7rem;
+            // font-size: calc(1.3rem + 0.6vw) !important;
+        }
+    }
+    //facebook
+    .seemore-fb{
+
+        top:50%;
+    }
+    //endfacebook
+    //project
+    .project-card {
+        // max-height: 350px;
+        // width:100%;
+        .card-title{
+            font-size:1.5rem;
+        }
+        h3,.range{
+            font-size: 1.7rem;
+            font-weight:bold;
+        }
+        .entity{
+            font-size:1.3rem;
+        }
+        .project-card-table{
+            tbody>tr>td{
+                font-size: 1.3rem;
+            }
+        }
+    }
+    //end project
+    // about
+    #about{
+        background-image: url('/image/about.png') !important;
+        background-size: 55%;
+        background-repeat: no-repeat;
+        background-attachment: local;
+        background-position:right;
+        .about-heading{
+            font-size:1.5rem;
+        }
+        .about-text{
+            font-size:1.1rem;
+        }
+    }
+    // end about
+    // send message
+    .send-message-input{
+        width:50%
+    }
+    .send-message-heading{
+        font-size:1.5rem;
+    }
+    // end send message
+
+
+    //footer
+    .footer-logo{
+        margin-right:-4%
+    }
+    //endfooter
+}
+
+//4K 2560
+@media screen and (min-width:2559px){
+    main{
+        padding-top:4rem !important;
+    }
+    .side-nav{
+        width:0 !important;
+    }
+    .slider-first-div{
+        height:80vh;
+    }
+    .offcanvas-backdrop{
+        width: 0 !important;
+    }
+    .side-nav{
+        width:20vw;
+    }
+
+    //fb post
+    .seemore-fb{
+        top:50%;
+    }
+    //end fb post
+    //project
+    .project-card {
+        // max-height: 350px;
+        // width:100%;
+        .card-title{
+            font-size:1.5rem;
+        }
+        h3,.range{
+            font-size: 1.7rem;
+            font-weight:bold;
+        }
+        .entity{
+            font-size:1.3rem;
+        }
+        .project-card-table{
+            tbody>tr>td{
+                font-size: 1.3rem;
+            }
+        }
+    }
+    //end project
+    //about
+    #about{
+        background-image: url('/image/about.png') !important;
+        background-size: 55%;
+        background-repeat: no-repeat;
+        background-attachment: local;
+        background-position:right;
+        // .about-heading{
+        //     font-size:1.5rem;
+        //    }
+        //    .about-text{
+        //        font-size:1.1rem;
+        //    }
+    }
+    //end about
+}
+
+
+//end Device responsive
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

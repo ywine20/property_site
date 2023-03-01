@@ -1,0 +1,200 @@
+
+// // @import 'layout.scss';
+// $primary:#F5CC7A;
+// $secondary:#423e3d;
+// $info : #5fb4de;
+// $success:#55d85f;
+// $danger : #f36565;
+// @import '../node_modules/bootstrap/scss/bootstrap.scss';
+//#table_amenities_filter{
+//    label{
+//
+//    }
+//}
+
+.trash-icon,.edit-icon,.info-icon{
+    transition: .4s;
+    border-radius: 100%;
+    &:hover{
+        background-color: rgba(128, 128, 128, 0.173);
+    }
+    &:first-child{
+        &:active{
+            background-color: rgba(128, 128, 128, 0.173);
+            border:none;
+        }
+    }
+    &:active{
+        transform: scale(1.1);
+    }
+    &:disabled{
+        border: none !important;
+    }
+}
+
+
+.trash-icon-disable{
+    opacity:.5 !important;
+    cursor:none !important;
+    &:hover{
+        background: none !important;
+    }
+}
+
+.create-form{
+    label{
+        color: #BEBEBEFF !important;
+        margin-bottom: 0;
+    }
+    .form-create-btn{
+        letter-spacing: 1px;
+    }
+    .form-reset-btn{
+        border: 1px solid #BEBEBEFF;
+        color: #fff;
+        letter-spacing: 1px;
+        &:hover{
+            border: 1px solid #BEBEBEFF;
+            background-color: rgba(190, 190, 190, 0.3);
+            color: #fff;
+        }
+
+    }
+    .error-text{
+        font-size: .8rem;
+    }
+}
+.create-btn{
+    transition: .4s;
+    // border-radius: 100%;
+    &:hover{
+        background-color: rgba(128, 128, 128, 0.173);
+        // border: 1px solid grey;
+    }
+    &:active{
+        transform: scale(1.1);
+    }
+}
+
+// bootstrap class changing css
+a:hover {
+    color: var(--bs-link-color);
+}
+.card,.card-body{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    //padding-bottom: 0 !important;
+}
+.table-dark{
+    --bs-table-bg:#4d4a49;
+
+}
+
+//--bs-table-hover-bg : $pink-100;
+
+.table-hover > tbody > tr:hover > * {
+    //--bs-table-accent-bg: var(--bs-table-hover-bg);
+    background-color: #505050;
+    color: var(--gold);
+}
+.table{
+    border-color: #565453;
+
+    thead{
+        background-color: #423e3d !important;
+        color: white;
+        tr{
+            th{
+
+            }
+        }
+
+    }
+    tbody{
+        tr{
+            background-color: #4d4a49 !important;
+            color: white;
+            td{
+
+            }
+        }
+    }
+}
+
+
+//Modal Box
+.modal{
+    .modal-dialog{
+            .modal-content{
+                background-color: #423e3d;
+                .modal-header{
+                .btn-close{
+                    background-image:none;
+
+                }
+            }
+            .modal-body {
+                background-color: #565252;
+            }
+            .modal-footer{
+                background-color: #565252;
+            }
+        }
+    }
+}
+// end bootstrap class changing
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+   .breadcrumb{
+       .breadcrumb-item{
+           font-size: .8rem !important;
+       }
+   }
+
+    .form-create-btn{
+        font-size: 1.1rem !important;
+        padding:0.3rem 0.5rem !important;
+    }
+    .form-reset-btn {
+        font-size: 1.1rem !important;
+        padding: 0.3rem 0.5rem !important;
+    }
+
+    //all create button
+    .create{
+        .header{
+            font-size: calc(1rem + 0.3vw);
+        }
+        .create-input,.create-select{
+            background:#423E3D;
+            outline: none;
+            border:none;
+        }
+        .create-btn{
+
+        }
+
+    }
+//    end all create button
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

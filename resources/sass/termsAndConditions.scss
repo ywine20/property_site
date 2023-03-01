@@ -1,0 +1,58 @@
+*{
+    color: var(--primary-dark);
+}
+
+#termsAndCondition{
+    letter-spacing: .09rem;
+    .container{
+        z-index: 4;
+        p{
+            font-size: 1rem;
+        }
+    }
+    .bgTermsAndCondition{
+        width: 100%;
+        height: 400px;
+        z-index: 3;
+        opacity: 0.06;
+        img{
+            object-fit: cover;
+        }
+    }
+   
+}
+
+
+
+@media screen and (max-width: 600px) {
+    #termsAndCondition{
+        .container{
+            p{
+                font-size: .8rem;
+            }
+        }
+        .bgTermsAndCondition{
+            height: 300px;
+            img{
+                object-fit: cover;
+            }
+        }
+       
+    }
+}
+
+@media screen and (min-width: 600px) {
+    
+}
+
+@media screen and (min-width: 768px) {
+    
+}
+
+@media screen and (min-width: 992px) {
+    
+}
+
+@media screen and (min-width: 1200px) {
+    
+}
