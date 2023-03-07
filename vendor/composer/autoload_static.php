@@ -173,6 +173,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'BeyondCode\\Vouchers\\' => 20,
         ),
         'A' => 
         array (
@@ -504,6 +505,10 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
+        'BeyondCode\\Vouchers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src',
+        ),
         'Asm89\\Stack\\' => 
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src',
@@ -551,6 +556,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Http\\Controllers\\DeleteController' => __DIR__ . '/../..' . '/app/Http/Controllers/DeleteController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\PanoramaController' => __DIR__ . '/../..' . '/app/Http/Controllers/PanoramaController.php',
+        'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
         'App\\Http\\Controllers\\ProjectListController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProjectListController.php',
         'App\\Http\\Controllers\\WelcomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/WelcomeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -577,6 +583,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Models\\FacebookLink' => __DIR__ . '/../..' . '/app/Models/FacebookLink.php',
         'App\\Models\\Gallery' => __DIR__ . '/../..' . '/app/Models/Gallery.php',
         'App\\Models\\Image' => __DIR__ . '/../..' . '/app/Models/Image.php',
+        'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\Project' => __DIR__ . '/../..' . '/app/Models/Project.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\Town' => __DIR__ . '/../..' . '/app/Models/Town.php',
@@ -591,6 +598,18 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'BeyondCode\\Vouchers\\Events\\VoucherRedeemed' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Events/VoucherRedeemed.php',
+        'BeyondCode\\Vouchers\\Exceptions\\VoucherAlreadyRedeemed' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Exceptions/VoucherAlreadyRedeemed.php',
+        'BeyondCode\\Vouchers\\Exceptions\\VoucherExpired' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Exceptions/VoucherExpired.php',
+        'BeyondCode\\Vouchers\\Exceptions\\VoucherIsInvalid' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Exceptions/VoucherIsInvalid.php',
+        'BeyondCode\\Vouchers\\Facades\\Vouchers' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Facades/Vouchers.php',
+        'BeyondCode\\Vouchers\\Models\\Voucher' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Models/Voucher.php',
+        'BeyondCode\\Vouchers\\Rules\\Voucher' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Rules/Voucher.php',
+        'BeyondCode\\Vouchers\\Traits\\CanRedeemVouchers' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Traits/CanRedeemVouchers.php',
+        'BeyondCode\\Vouchers\\Traits\\HasVouchers' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Traits/HasVouchers.php',
+        'BeyondCode\\Vouchers\\VoucherGenerator' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/VoucherGenerator.php',
+        'BeyondCode\\Vouchers\\Vouchers' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Vouchers.php',
+        'BeyondCode\\Vouchers\\VouchersServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/VouchersServiceProvider.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -722,6 +741,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'Database\\Factories\\CityFactory' => __DIR__ . '/../..' . '/database/factories/CityFactory.php',
         'Database\\Factories\\DeleteFactory' => __DIR__ . '/../..' . '/database/factories/DeleteFactory.php',
         'Database\\Factories\\FacebookLinkFactory' => __DIR__ . '/../..' . '/database/factories/FacebookLinkFactory.php',
+        'Database\\Factories\\ProductFactory' => __DIR__ . '/../..' . '/database/factories/ProductFactory.php',
         'Database\\Factories\\ProjectFactory' => __DIR__ . '/../..' . '/database/factories/ProjectFactory.php',
         'Database\\Factories\\SliderFactory' => __DIR__ . '/../..' . '/database/factories/SliderFactory.php',
         'Database\\Factories\\TownFactory' => __DIR__ . '/../..' . '/database/factories/TownFactory.php',
