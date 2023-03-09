@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
 	//   Visitor::factory(0)->create();
 	  Slider::factory(7)->create();
     //   Product::factory(10)->create();
+
 //        FacebookLink::factory(12)->create();
     }
 }
