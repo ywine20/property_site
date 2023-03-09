@@ -60,17 +60,15 @@ class ProjectController extends Controller
         // return $request;
         $request->validate([
             'project_Id' => "required|string|min:3|max:255",
-            'cover' => "required|mimes:jpeg,png,jpg,gif|max:2048|dimensions:width=600,height=900",
+            // dimensions:width=600,height=900
+            'cover' => "required|mimes:jpeg,png,jpg,gif|max:2048|",
             'gallery' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
             'description' => "required|string",
             'lower_price' => "required|min:2|max:20",
             'upper_price' => "required|min:2|max:30",
             'category' => "required",
-            // 'longitude' => "required",
-            // 'latitude' => "required",
             'layer' => "required|string|min:1|max:255",
             'squre_feet' => "required|string|min:1|max:255",
-            // 'project_id_number' => "required|integer",
             'map_link'=>"required|string",
             'progress'=>"required|string",
             'amenity.*' => "required|string",
@@ -80,17 +78,18 @@ class ProjectController extends Controller
             'town_slug' => "required",
             'city_slug' => "required",
             // 'images'=> 'required|mimes:jpeg,bmp,png|max:1024',
-            'images.*'=> 'required|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            // |max:1024|mensions:width=800,height=di800
+            'images.*'=> 'required|mimes:jpeg,png',
         ]);
 
         $image = $request->file('cover');
         if($image){
             $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/projects/'), $image_name);    
+            $image->move(public_path('/images/projects/'), $image_name);
         }
 
-      
-       
+
+
 
         $category = Category::where('category_id', $request->category)->first();
         if(!$category){
@@ -158,7 +157,7 @@ class ProjectController extends Controller
             'layer' =>$request->layer,
             'squre_feet' =>$request->squre_feet,
             // 'project_id_number' => $request->project_id_number,
-            
+
             'hou_no' => $request->hou_no,
             'street' => $request->street,
             'ward' => $request->ward,
@@ -168,21 +167,21 @@ class ProjectController extends Controller
         $p->amenity()->sync($amenities);
 
 
-       
+//images
 
-        if($request->hasFile("images")){
-                $files=$request->file("images");
-                foreach($files as $file){
-                    $image_name=time().'_'.$file->getClientOriginalName();
-                    $request['project_id']=$project->id;
-                    $request['image']=$image_name;
-                    $file->move(\public_path("/images/gallery/"),$image_name);
-                    Image::create($request->all());
+        // if($request->hasFile("images")){
+        //         $files=$request->file("images");
+        //         foreach($files as $file){
+        //             $image_name=time().'_'.$file->getClientOriginalName();
+        //             $request['project_id']=$project->id;
+        //             $request['image']=$image_name;
+        //             $file->move(\public_path("/images/gallery/"),$image_name);
+        //             Image::create($request->all());
 
-                }
-            }
+        //         }
+        //     }
 
-        
+
 
         return redirect('/admin/project')->with('status', 'Project created successful.');
     }
@@ -238,9 +237,10 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-           
+
             'project_Id' => "required|string|min:3|max:255",
-            'cover' => "nullable|mimes:jpeg,png,jpg,gif|max:2048|dimensions:width=600,height=900",
+            // dimensions:width=600,height=900
+            'cover' => "nullable|mimes:jpeg,png,jpg,gif|max:2048|",
             'gallery' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
             'description' => "required|string",
             'lower_price' => "required|min:2|max:20",
@@ -260,7 +260,8 @@ class ProjectController extends Controller
             'hou_no' => "required|string",
             'street' => "required|string",
             'ward' => "required|string",
-            'images.*'=> 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            // dimensions:width=800,height=800
+            'images.*'=> 'nullable|mimes:jpeg,png|max:1024|',
 
         ]);
 
