@@ -57,7 +57,6 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
 
-        // return $request;
         $request->validate([
             'project_Id' => "required|string|min:3|max:255",
             'cover' => "required|mimes:jpeg,png,jpg,gif|max:2048|dimensions:width=600,height=900",
@@ -81,6 +80,7 @@ class ProjectController extends Controller
             'city_slug' => "required",
             // 'images'=> 'required|mimes:jpeg,bmp,png|max:1024',
             'images.*'=> 'required|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_1'=>'nullable|mimes:jpeg,png|max:1024|'
         ]);
 
         $image = $request->file('cover');
@@ -136,7 +136,6 @@ class ProjectController extends Controller
             $image = $request->file('gallery');
             $image_file = uniqid() . $image->getClientOriginalName();
             $image->move(public_path('/images/360images/'), $image_file);
-            return $image_file;
         }
 
         $project = Project::create([
@@ -170,17 +169,15 @@ class ProjectController extends Controller
 
        
 
-        if($request->hasFile("images")){
-                $files=$request->file("images");
-                foreach($files as $file){
+        if($request->hasFile("small_img_1")){
+                $file=$request->file("small_img_1");
                     $image_name=time().'_'.$file->getClientOriginalName();
                     $request['project_id']=$project->id;
                     $request['image']=$image_name;
                     $file->move(\public_path("/images/gallery/"),$image_name);
                     Image::create($request->all());
-
-                }
             }
+
 
         
 
