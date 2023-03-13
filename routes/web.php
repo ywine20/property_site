@@ -7,6 +7,7 @@ use App\Http\Controllers\ProjectListController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\UserController;
 // use Illuminate\Support\Facades\Session;
 // use App\Http\Controllers\EngagementController;
 
@@ -20,6 +21,10 @@ use App\Http\Controllers\ContactUsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//User
+Route::resource('/user',"UserController");
+
+
 
 /*
  Client Site and User View Point Routes

@@ -573,6 +573,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',
         'App\\Models\\Contact' => __DIR__ . '/../..' . '/app/Models/Contact.php',
+        'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\Delete' => __DIR__ . '/../..' . '/app/Models/Delete.php',
         'App\\Models\\FacebookLink' => __DIR__ . '/../..' . '/app/Models/FacebookLink.php',
         'App\\Models\\Gallery' => __DIR__ . '/../..' . '/app/Models/Gallery.php',
