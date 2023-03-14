@@ -59,8 +59,8 @@ class ProjectController extends Controller
 
         $request->validate([
             'project_Id' => "required|string|min:3|max:255",
-            // dimensions:width=600,height=900
-            'cover' => "required|mimes:jpeg,png,jpg,gif|max:2048|",
+            // dimensions:width=600,height=900|max:2048|
+            'cover' => "required|mimes:jpeg,png,jpg,gif",
             'gallery' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
             'description' => "required|string",
             'lower_price' => "required|min:2|max:20",
@@ -76,18 +76,9 @@ class ProjectController extends Controller
             'ward' => "required|string",
             'town_slug' => "required",
             'city_slug' => "required",
-            // 'images'=> 'required|mimes:jpeg,bmp,png|max:1024',
-            'images.*'=> 'required|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-            'small_img_1'=>'nullable|mimes:jpeg,png|max:1024|'
+            // |max:1024|dimensions:width=800,height=800
+            'small_img_1'=>'nullable|mimes:jpeg,png',
         ]);
-
-        $image = $request->file('cover');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/projects/'), $image_name);
-        }
-
-
 
 
         $category = Category::where('category_id', $request->category)->first();
@@ -129,6 +120,13 @@ class ProjectController extends Controller
             $amenities[] = $amenity->id;
         }
 
+        $image_name="";
+           $image = $request->file('cover');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/projects/'), $image_name);
+        }
+
         $image_file = '';
         if($request->hasFile('gallery')){
             $image = $request->file('gallery');
@@ -164,28 +162,78 @@ class ProjectController extends Controller
         $p = Project::find($project->id);
         $p->amenity()->sync($amenities);
 
+// start Small images
 
-//images
+ $image_name="";
+           $image = $request->file('small_img_1');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/gallery/'), $image_name);
+        }
 
-        // if($request->hasFile("images")){
-        //         $files=$request->file("images");
-        //         foreach($files as $file){
-        //             $image_name=time().'_'.$file->getClientOriginalName();
-        //             $request['project_id']=$project->id;
-        //             $request['image']=$image_name;
-        //             $file->move(\public_path("/images/gallery/"),$image_name);
-        //             Image::create($request->all());
+ $image_name="";
+           $image = $request->file('small_img_2');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/gallery/'), $image_name);
+        }
+ $image_name="";
+           $image = $request->file('small_img_3');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/gallery/'), $image_name);
+        }
+ $image_name="";
+           $image = $request->file('small_img_4');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/gallery/'), $image_name);
+        }
+ $image_name="";
+           $image = $request->file('small_img_5');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/gallery/'), $image_name);
+        }
+ $image_name="";
+           $image = $request->file('small_img_6');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/gallery/'), $image_name);
+        }
+ $image_name="";
+           $image = $request->file('small_img_7');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/gallery/'), $image_name);
+        }
+ $image_name="";
+           $image = $request->file('small_img_8');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/gallery/'), $image_name);
+        }
+ $image_name="";
+           $image = $request->file('small_img_9');
+        if($image){
+            $image_name = uniqid() . $image->getClientOriginalName();
+            $image->move(public_path('/images/gallery/'), $image_name);
+        }
+        Image::create([
+                'project_id'=>$project->id,
+                'small_img1'=>$image_name,
+                'small_img2'=>$image_name,
+                'small_img3'=>$image_name,
+                'small_img4'=>$image_name,
+                'small_img5'=>$image_name,
+                'small_img6'=>$image_name,
+                'small_img7'=>$image_name,
+                'small_img8'=>$image_name,
+                'small_img9'=>$image_name,
+        ]);
 
-        //         }
-        //     }
-        if($request->hasFile("small_img_1")){
-                $file=$request->file("small_img_1");
-                    $image_name=time().'_'.$file->getClientOriginalName();
-                    $request['project_id']=$project->id;
-                    $request['image']=$image_name;
-                    $file->move(\public_path("/images/gallery/"),$image_name);
-                    Image::create($request->all());
-            }
+//end Small image
+
 
         return redirect('/admin/project')->with('status', 'Project created successful.');
     }
@@ -250,9 +298,6 @@ class ProjectController extends Controller
             'lower_price' => "required|min:2|max:20",
             'upper_price' => "required|min:2|max:30",
             'category_id' => "required",
-
-            // 'longitude' => "required",
-            // 'latitude' => "required",
             'layer' => "required|string|min:1|max:255",
             'squre_feet' => "required|string|min:1|max:255",
             // 'project_id_number' => "required|integer",
@@ -264,7 +309,6 @@ class ProjectController extends Controller
             'hou_no' => "required|string",
             'street' => "required|string",
             'ward' => "required|string",
-            // dimensions:width=800,height=800
             'images.*'=> 'nullable|mimes:jpeg,png|max:1024|',
 
         ]);

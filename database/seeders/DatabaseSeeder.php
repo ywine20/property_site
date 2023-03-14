@@ -20,14 +20,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Admin::create([
-        //     'name' => 'SMT',
-        //     'email' => 'smt@gmail.com',
-        //     'password' => Hash::make('password'),
-        //     'phone' => '09497777701',
-        //     'role' => 'SuperAdmin',
-        //     'image' => 'userPlaceholder.png',
-        // ]);
+        Admin::create([
+            'name' => 'SMT',
+            'email' => 'smt@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '09497777701',
+            'role' => 'SuperAdmin',
+            'image' => 'userPlaceholder.png',
+        ]);
         // Admin::create([
         //     'name' => 'PaingPaingKyaw',
         //     'email' => 'paing@gmail.com',
