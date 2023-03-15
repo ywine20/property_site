@@ -10,7 +10,7 @@ use App\Models\Project;
 use App\Models\Category;
 use App\Models\Town;
 use App\Models\Amenity;
-use App\Models\Previewimage;
+use App\Models\Image;
 use App\Models\City;
 use Illuminate\Support\Str;
 
@@ -217,7 +217,7 @@ $small_img_9=null;
 
 
 
-       Previewimage::create([
+       Image::create([
                 'project_id'=>$project->id,
                 'small_img1'=>$small_img_1,
                 'small_img2'=>$small_img_2,
