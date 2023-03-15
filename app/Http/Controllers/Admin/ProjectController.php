@@ -10,7 +10,7 @@ use App\Models\Project;
 use App\Models\Category;
 use App\Models\Town;
 use App\Models\Amenity;
-use App\Models\Image;
+use App\Models\Previewimage;
 use App\Models\City;
 use Illuminate\Support\Str;
 
@@ -157,86 +157,86 @@ class ProjectController extends Controller
         $p = Project::find($project->id);
         $p->amenity()->sync($amenities);
 
-// start Small images
+// start preview images
 
-$samll_img_1=null;
+$small_img_1=null;
         $image = $request->file('small_img_1');
             if($image){
-                $samll_img_1 = uniqid() . $image->getClientOriginalName();
-                $image->move(public_path('/images/gallery/'), $samll_img_1);
+                $small_img_1 = uniqid() . $image->getClientOriginalName();
+                $image->move(public_path('/images/gallery/'), $small_img_1);
             }
 
- $samll_img_2=null;
-        $image = $request->file('small_img_2');
+ $small_img_2=null;
+        $image = $request->file('small_img_2');  //
                 if($image){
-                    $samll_img_2 = uniqid() . $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery/'), $samll_img_2);
+                    $small_img_2 = uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery/'), $small_img_2);
                 }
 $small_img_3=null;
                 $image=$request->file('small_img_3');
                 if($image){
                     $small_img_3=uniqid() . $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$samll_img_2);
+                    $image->move(public_path('/images/gallery'),$small_img_2);
                 }
 $small_img_4=null;
                 $image=$request->file('small_img_4');
                 if($image){
                     $small_img_4=uniqid() . $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$samll_img_4);
+                    $image->move(public_path('/images/gallery'),$small_img_4);
                 }
 $small_img_5=null;
                 $image=$request->file('small_img_5');
                 if($image){
-                    $small_img_4=uniqid() . $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$samll_img_4);
+                    $small_img_5=uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery'),$small_img_5);
                 }
 $small_img_6=null;
                 $image=$request->file('small_img_6');
                 if($image){
                     $small_img_6=uniqid() . $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$samll_img_7);
+                    $image->move(public_path('/images/gallery'),$small_img_6);
                 }
 $small_img_7=null;
                 $image=$request->file('small_img_7');
                 if($image){
-                    $small_img_4=uniqid() . $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$samll_img_7);
+                    $small_img_7=uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery'),$small_img_7);
                 }
 $small_img_8=null;
                 $image=$request->file('small_img_8');
                 if($image){
                     $small_img_8=uniqid() . $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$samll_img_8);
+                    $image->move(public_path('/images/gallery'),$small_img_8);
                 }
 $small_img_9=null;
                 $image=$request->file('small_img_9');
                 if($image){
                     $small_img_9=uniqid() . $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$samll_img_9);
+                    $image->move(public_path('/images/gallery'),$small_img_9);
                 }
 
 
 
-        $preview=Image::create([
+        $preview=Previewimage::create([
                 'project_id'=>$project->id,
-                'small_img1'=>$samll_img_1,
-                'small_img2'=>$samll_img_2,
+                'small_img1'=>$small_img_1,
+                'small_img2'=>$small_img_2,
                 'small_img3'=>$small_img_3,
                 'small_img4'=>$small_img_4,
-                'small_img5'=>$samll_img_5,
-                'small_img6'=>$samll_img_6,
+                'small_img5'=>$small_img_5,
+                'small_img6'=>$small_img_6,
                 'small_img7'=>$small_img_7,
                 'small_img8'=>$small_img_8,
-                'small_img8'=>$small_img_9,
+                'small_img9'=>$small_img_9,
 
 
         ]);
-        $i = Image::find($project->id);
+        // $i = previewimage::find($project->id);
 
 
 
 
-//end Small image
+//end preview image
 
 
         return redirect('/admin/project')->with('status', 'Project created successful.');

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Project;
 
-class Image extends Model
+class Previewimage extends Model
 {
     use HasFactory;
     protected $fillable = [
