@@ -176,16 +176,19 @@
           @auth
           <!-- After Login -->
           <a href="#" class="text-decoration-none w-100">
-            <div class="bg-secondary border border-primary rounded px-3 py-3 text-primary w-100 d-flex justify-content-start align-items-center">
+            <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
+">
               <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
                 <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
               </div>
-              <span class="text-primary">Mr.John Doe</span>
+              <span class="text-primary usernameSmallDevice">Mr.John Doe dfsf fdsa</span>
             </div>
           </a>
-          @else <!-- Before Login -->
+          @else
+          <!-- Before Login -->
           <button class="btn btn-link text-decoration-none w-100 px-0" onclick="openLoginModalInSmallDevice()">
-            <div class="bg-secondary border border-primary rounded px-3 py-3 text-primary w-100 text-center">
+            <div class="rounded px-3 py-3 text-primary w-100 text-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
+">
               Login
             </div>
           </button>
@@ -229,10 +232,8 @@
           <div class="bg-primary mx-4 opacity-50" style="width:.1px; height:50px;"></div>
           <div class="">
             @auth
-            <a href="{{url('/profile')}}" class="text-decoration-none  d-flex justify-content-center align-items-center ">
-              <span class="text-primary me-2">
-                Mr.JonhDoe
-              </span>
+             <a href="{{url('/profile')}}" class="text-decoration-none  d-flex justify-content-center align-items-center ">
+              <span class="text-primary me-2 usernameLargeDevice ">Mr.JonhDoe gfdsf fasfa</span>
               <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
                 <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
               </div>
@@ -240,9 +241,6 @@
             @else
             <button class="btn btn-link text-decoration-none" onclick="openLoginModal()">Login</button>
             @endauth
-
-
-
           </div>
         </div>
       </div>
@@ -353,30 +351,30 @@
                 <label for="floatingInput">Password</label>
                 <span class="invalid-feedback">Password doesn't match.</span>
               </div>
-             
+
               <!-- login Button -->
               <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase mt-2">LOG IN</button>
-             
+
             </form>
-             <!-- forgot password -->
-             <div class="w-100 text-end mb-3">
-                <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span class="text-primary">Forgot Password?</span></buttonhref=>
-              </div>
-             <!-- login with social app -->
-             <div class="text-center w-100 pt-1">
-                <button class="btn rounded-circle border border-secondary mx-1 social-icon">
-                  <i class="bi bi-google fa-fw text-secondary fs-5"></i>
-                </button>
-                <button  class="btn rounded-circle border border-secondary social-icon">
-                  <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
-                </button>
-              </div>
-              <!-- don't have an account -->
-              <div class="text-center w-100 my-3">
-                <small>Don't have an account?
-                  <button  class="btn btn-link text-primary" onclick="openRegisterModal()">Register</button> Now!
-                </small>
-              </div>
+            <!-- forgot password -->
+            <div class="w-100 text-end mb-3">
+              <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span class="text-primary">Forgot Password?</span></buttonhref=>
+            </div>
+            <!-- login with social app -->
+            <div class="text-center w-100 pt-1">
+              <button class="btn rounded-circle border border-secondary mx-1 social-icon">
+                <i class="bi bi-google fa-fw text-secondary fs-5"></i>
+              </button>
+              <button class="btn rounded-circle border border-secondary social-icon">
+                <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
+              </button>
+            </div>
+            <!-- don't have an account -->
+            <div class="text-center w-100 my-3">
+              <small>Don't have an account?
+                <button class="btn btn-link text-primary" onclick="openRegisterModal()">Register</button> Now!
+              </small>
+            </div>
           </div>
         </div>
       </div>
@@ -387,7 +385,7 @@
     <div id="registerModal" class="custom-modal">
       <div class="register d-flex justify-content-center w-100 bg-secondary bg-opacity-10 py-5 ">
         <div class="card bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
-        <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose" onclick="closeRegisterModal()">&times;</span>
+          <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose" onclick="closeRegisterModal()">&times;</span>
           <div class="card-body">
             <h4 class="mb-4">Register To Sun Myat Tun</h4>
             <form action="">
@@ -418,29 +416,29 @@
               <!-- registere Button -->
               <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
             </form>
-               <!-- register with social app -->
-               <div class="text-center w-100">
-                <button class="btn rounded-circle border border-secondary mx-1 social-icon">
-                  <i class="bi bi-google fa-fw text-secondary fs-5"></i>
-                </button>
-                <button class="btn rounded-circle border border-secondary social-icon">
-                  <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
-                </button>
-              </div>
-              <!-- Already have an account -->
-              <div class="text-center w-100 my-3">
-                <small>Don't have an account?
-                  <button  class="btn btn-link text-primary" onclick="openLoginModal()">Log in</button> Now!
-                </small>
-              </div>
+            <!-- register with social app -->
+            <div class="text-center w-100">
+              <button class="btn rounded-circle border border-secondary mx-1 social-icon">
+                <i class="bi bi-google fa-fw text-secondary fs-5"></i>
+              </button>
+              <button class="btn rounded-circle border border-secondary social-icon">
+                <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
+              </button>
+            </div>
+            <!-- Already have an account -->
+            <div class="text-center w-100 my-3">
+              <small>Don't have an account?
+                <button class="btn btn-link text-primary" onclick="openLoginModal()">Log in</button> Now!
+              </small>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
 
-      <!--Customer forgot password -->
-      <div id="forgotPasswordModal" class="custom-modal ">
+    <!--Customer forgot password -->
+    <div id="forgotPasswordModal" class="custom-modal ">
       <div class="forgotPassword d-flex justify-content-center w-100 bg-secondary bg-opacity-10 vh-100 py-5">
         <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
           <span class="close fs-5 me-2 end-0 position-absolute pointer forgoPasswordCloseButton" onclick="closeforgotPasswordModal()">&times;</span>
@@ -455,7 +453,7 @@
                 <span class="invalid-feedback">Email doesn't match.</span>
               </div>
               <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">SEND</button>
-             
+
             </form>
           </div>
         </div>
@@ -564,7 +562,7 @@
       send = `mailto:salses@sunmyattun.com?subject=SMT Information Website!&body=${input.value}`;
       sendMail.action = send;
       sendMail.submit();
-      console.log(sendMail.action);
+      // console.log(sendMail.action);
     })
 
     //end send message
@@ -584,12 +582,14 @@
       document.body.classList.add('backdropShow');
 
     }
+
     function openRegisterModal() {
       loginModal.style.display = "none";
       registerModal.style.display = "block";
       document.body.classList.add('backdropShow');
 
     }
+
     function openForgotPasswordModal() {
       loginModal.style.display = "none";
       registerModal.style.display = "none";
@@ -597,12 +597,13 @@
       document.body.classList.add('backdropShow');
 
     }
+
     function openLoginModalInSmallDevice() {
       sideBarCloseOpen();
       loginModal.style.display = "block";
-      document.body.classList.add('backdropShow');      
+      document.body.classList.add('backdropShow');
     }
-    
+
     loginCloseButton.onclick = function() {
       loginModal.style.display = "none";
       document.body.classList.remove('backdropShow');
@@ -615,6 +616,18 @@
       forgotPasswordModal.style.display = "none";
       document.body.classList.remove('backdropShow');
     }
+
+
+    //limit username
+    let text = document.querySelector(".usernameLargeDevice").textContent;
+    let maxLength = 10;
+
+    if (text.length > maxLength) {
+      text = text.substring(0, maxLength) + "...";
+    }
+    document.querySelector(".usernameLargeDevice").textContent = text;
+    document.querySelector(".usernameSmallDevice").textContent = text;
+
   </script>
   @yield('script')
 
