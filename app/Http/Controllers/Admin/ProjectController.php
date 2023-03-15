@@ -217,7 +217,7 @@ $small_img_9=null;
 
 
 
-        $preview=Previewimage::create([
+       Previewimage::create([
                 'project_id'=>$project->id,
                 'small_img1'=>$small_img_1,
                 'small_img2'=>$small_img_2,
@@ -231,7 +231,8 @@ $small_img_9=null;
 
 
         ]);
-        // $i = previewimage::find($project->id);
+
+
 
 
 
