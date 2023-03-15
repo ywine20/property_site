@@ -26,6 +26,7 @@ use App\Http\Controllers\AuthController;
 //Login
 Route::get('/login',[AuthController::class,'showlogin']);
 Route::post('/login',[AuthController::class,'login']);
+Route::get('/logout',[AuthController::class,'logout']);
 
 
 //User

@@ -31,14 +31,12 @@ class AuthController extends Controller
         if(auth()->guard('user')->attempt($credentials)){
             return redirect('/');
         }
-
-        dd($credentials);
         return ('nahh');
     }
     
     public function logout()
     {
-        Auth::logout();
-        return redirect('/posts/index');
+        auth()->guard('user')->logout();
+        return redirect('/');
     }
 }

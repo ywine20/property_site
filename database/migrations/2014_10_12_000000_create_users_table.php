@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('tier')->nullable();
             $table->string('phone');
             $table->string('password');
-            $table->string('profile_img');
+            $table->string('profile_img')->nullable();
+            $table->enum('tier',['bronze','silver','gold','platinum','diamond'])->default('bronze');
             $table->rememberToken();
             $table->timestamps();
         });
