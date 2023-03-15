@@ -76,8 +76,16 @@ class ProjectController extends Controller
             'ward' => "required|string",
             'town_slug' => "required",
             'city_slug' => "required",
-            // |max:1024|dimensions:width=800,height=800
-            'small_img_1'=>'nullable|mimes:jpeg,png',
+            'small_img_1'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_2'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_3'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_4'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_5'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_6'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_7'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_8'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_9'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+
         ]);
 
 
@@ -96,20 +104,7 @@ class ProjectController extends Controller
             return redirect()->back()->with('error', 'Not found township');
         }
 
-        // $address = Address::where('id', $request->id)->first();
-        // if(!$address){
-        //     return redirect()->back()->with('error', 'Not found Address');
-        // }
 
-        // $amenity = Amenity::where('amenity_id', $request->amenity_id)->first();
-        // if(!$amenity){
-        //     return redirect()->back()->with('error', 'Not found Amenity');
-        // }
-
-        // $gallery = Gallery::where('id', $request->id)->first();
-        // if(!$gallery){
-        //     return redirect()->back()->with('error', 'Not found Gallery');
-        // }
 
         $amenities = [];
         foreach($request->amenity as $am){
@@ -164,73 +159,82 @@ class ProjectController extends Controller
 
 // start Small images
 
- $image_name="";
-           $image = $request->file('small_img_1');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/gallery/'), $image_name);
-        }
+$samll_img_1=null;
+        $image = $request->file('small_img_1');
+            if($image){
+                $samll_img_1 = uniqid() . $image->getClientOriginalName();
+                $image->move(public_path('/images/gallery/'), $samll_img_1);
+            }
 
- $image_name="";
-           $image = $request->file('small_img_2');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/gallery/'), $image_name);
-        }
- $image_name="";
-           $image = $request->file('small_img_3');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/gallery/'), $image_name);
-        }
- $image_name="";
-           $image = $request->file('small_img_4');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/gallery/'), $image_name);
-        }
- $image_name="";
-           $image = $request->file('small_img_5');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/gallery/'), $image_name);
-        }
- $image_name="";
-           $image = $request->file('small_img_6');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/gallery/'), $image_name);
-        }
- $image_name="";
-           $image = $request->file('small_img_7');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/gallery/'), $image_name);
-        }
- $image_name="";
-           $image = $request->file('small_img_8');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/gallery/'), $image_name);
-        }
- $image_name="";
-           $image = $request->file('small_img_9');
-        if($image){
-            $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/gallery/'), $image_name);
-        }
-        Image::create([
+ $samll_img_2=null;
+        $image = $request->file('small_img_2');
+                if($image){
+                    $samll_img_2 = uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery/'), $samll_img_2);
+                }
+$small_img_3=null;
+                $image=$request->file('small_img_3');
+                if($image){
+                    $small_img_3=uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery'),$samll_img_2);
+                }
+$small_img_4=null;
+                $image=$request->file('small_img_4');
+                if($image){
+                    $small_img_4=uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery'),$samll_img_4);
+                }
+$small_img_5=null;
+                $image=$request->file('small_img_5');
+                if($image){
+                    $small_img_4=uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery'),$samll_img_4);
+                }
+$small_img_6=null;
+                $image=$request->file('small_img_6');
+                if($image){
+                    $small_img_6=uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery'),$samll_img_7);
+                }
+$small_img_7=null;
+                $image=$request->file('small_img_7');
+                if($image){
+                    $small_img_4=uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery'),$samll_img_7);
+                }
+$small_img_8=null;
+                $image=$request->file('small_img_8');
+                if($image){
+                    $small_img_8=uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery'),$samll_img_8);
+                }
+$small_img_9=null;
+                $image=$request->file('small_img_9');
+                if($image){
+                    $small_img_9=uniqid() . $image->getClientOriginalName();
+                    $image->move(public_path('/images/gallery'),$samll_img_9);
+                }
+
+
+
+        $preview=Image::create([
                 'project_id'=>$project->id,
-                'small_img1'=>$image_name,
-                'small_img2'=>$image_name,
-                'small_img3'=>$image_name,
-                'small_img4'=>$image_name,
-                'small_img5'=>$image_name,
-                'small_img6'=>$image_name,
-                'small_img7'=>$image_name,
-                'small_img8'=>$image_name,
-                'small_img9'=>$image_name,
+                'small_img1'=>$samll_img_1,
+                'small_img2'=>$samll_img_2,
+                'small_img3'=>$small_img_3,
+                'small_img4'=>$small_img_4,
+                'small_img5'=>$samll_img_5,
+                'small_img6'=>$samll_img_6,
+                'small_img7'=>$small_img_7,
+                'small_img8'=>$small_img_8,
+                'small_img8'=>$small_img_9,
+
+
         ]);
+        $i = Image::find($project->id);
+
+
+
 
 //end Small image
 
@@ -309,7 +313,16 @@ class ProjectController extends Controller
             'hou_no' => "required|string",
             'street' => "required|string",
             'ward' => "required|string",
-            'images.*'=> 'nullable|mimes:jpeg,png|max:1024|',
+            'small_img_1'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_2'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_3'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_4'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_5'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_6'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_7'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_8'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_9'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+
 
         ]);
 
@@ -349,21 +362,6 @@ class ProjectController extends Controller
             return redirect()->back()->with('error', 'Not found city');
         }
 
-        // $address = Address::where('id', $request->id)->first();
-        // if(!$address){
-        //     return redirect()->back()->with('error', 'Not found Address');
-        // }
-
-        // $amenity = Amenity::where('amenity_id', $request->amenity_id)->first();
-        // if(!$amenity){
-        //     return redirect()->back()->with('error', 'Not found Amenity');
-        // }
-
-        // $gallery = Gallery::where('id', $request->id)->first();
-        // if(!$gallery){
-        //     return redirect()->back()->with('error', 'Not found Gallery');
-        // }
-
         $amenities = [];
         foreach($request->amenity as $am){
             $amenity = Amenity::where('id', $am)->first();
@@ -384,12 +382,9 @@ class ProjectController extends Controller
             'city_id' => $city->id,
             'gmlink'=>$request->map_link,
             'progress'=>$request->progress,
-            // 'amenity_id' => $amenity->amenity_id,
             'description' => $request->description,
             'lower_price' => $request->lower_price,
             'upper_price' => $request->upper_price,
-            // 'longitude' => $request->longitude,
-            // 'latitude' => $request->latitude,
             'layer' =>$request->layer,
             'squre_feet' =>$request->squre_feet,
             'hou_no' => $request->hou_no,
@@ -400,18 +395,22 @@ class ProjectController extends Controller
         $project = Project::find($project_id);
         $project->amenity()->sync($amenities);
 
-        // for images
-        if($request->hasFile("images")){
-            $files=$request->file("images");
-            foreach($files as $file){
-                $image_name=time().'_'.$file->getClientOriginalName();
-                $request["project_id"]=$project->id;
-                $request["image"]=$image_name;
-                $file->move(\public_path("images/gallery"),$image_name);
-                Image::create($request->all());
 
-            }
-        }
+
+
+
+        // for images
+        // if($request->hasFile("images")){
+        //     $files=$request->file("images");
+        //     foreach($files as $file){
+        //         $image_name=time().'_'.$file->getClientOriginalName();
+        //         $request["project_id"]=$project->id;
+        //         $request["image"]=$image_name;
+        //         $file->move(\public_path("images/gallery"),$image_name);
+        //         Image::create($request->all());
+
+        //     }
+        // }
 
         return redirect(route('project.index', $slug))->with('status', 'Project updated successful.');
     }
@@ -463,8 +462,8 @@ class ProjectController extends Controller
 
         public function deleteimage($id){
         $images=Image::findOrFail($id);
-        if (File::exists("images/gallery/".$images->image)) {
-        File::delete(public_path("images/gallery/".$images->image));
+        if (File::exists("images/gallery/".$images->small_img_1)) {
+        File::delete(public_path("images/gallery/".$images->samll_img_1));
         }
 
         Image::find($id)->delete();

@@ -249,6 +249,7 @@
                                 </a>
                             </div>
                         </div>
+
                         <div class="col-12 col-md-12 col-lg-12 ">
 
                             <form action="{{ route('project.store') }}" method="POST" enctype="multipart/form-data"
