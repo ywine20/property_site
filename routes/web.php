@@ -8,6 +8,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 // use Illuminate\Support\Facades\Session;
 // use App\Http\Controllers\EngagementController;
 
@@ -21,6 +22,12 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//Login
+Route::get('/login',[AuthController::class,'showlogin']);
+Route::post('/login',[AuthController::class,'login']);
+
+
 //User
 Route::resource('/user',"UserController");
 
