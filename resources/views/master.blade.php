@@ -175,7 +175,7 @@
         <div class="d-flex justify-content-start align-items-center">
           @auth
           <!-- After Login -->
-          <a href="{{url('/login')}}" class="text-decoration-none w-100">
+          <a href="#" class="text-decoration-none w-100">
             <div class="bg-secondary border border-primary rounded px-3 py-3 text-primary w-100 d-flex justify-content-start align-items-center">
               <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
                 <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
@@ -184,11 +184,11 @@
             </div>
           </a>
           @else <!-- Before Login -->
-          <a href="{{url('/login')}}" class="text-decoration-none w-100">
+          <button class="btn btn-link text-decoration-none w-100 px-0" onclick="openLoginModalInSmallDevice()">
             <div class="bg-secondary border border-primary rounded px-3 py-3 text-primary w-100 text-center">
               Login
             </div>
-          </a>
+          </button>
           @endauth
 
 
@@ -238,7 +238,7 @@
               </div>
             </a>
             @else
-            <a href="{{url('/login')}}" class="text-decoration-none">Login</a>
+            <button class="btn btn-link text-decoration-none" onclick="openLoginModal()">Login</button>
             @endauth
 
 
@@ -315,22 +315,160 @@
           </div>
         </div>
         <div class="row">
-            <div class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
-              <div class="pointer mx-2" >
-                <img src="{{asset('image/EnglishFlag.jpg')}}" alt="" class="rounded"  style="width:40px;height:30px" >
-                 <span class="text-primary d-none d-md-inline">English</span>
-              </div>
-              <div class="pointer mx-2" >
-                <img src="{{asset('image/BurmaFlag.jpg')}}" alt="" class="rounded"  style="width:40px;height:30px" >
-                 <span class="text-primary d-none d-md-inline">Myanmar</span>
-              </div>
+          <div class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
+            <div class="pointer mx-2">
+              <img src="{{asset('image/EnglishFlag.jpg')}}" alt="" class="rounded" style="width:40px;height:30px">
+              <span class="text-primary d-none d-md-inline">English</span>
+            </div>
+            <div class="pointer mx-2">
+              <img src="{{asset('image/BurmaFlag.jpg')}}" alt="" class="rounded" style="width:40px;height:30px">
+              <span class="text-primary d-none d-md-inline">Myanmar</span>
             </div>
           </div>
+        </div>
       </div>
     </section>
     <!-- end footer -->
 
+
+
+    <!--Customer LOG IN -->
+    <div id="loginModal" class="custom-modal ">
+      <div class="login d-flex justify-content-center w-100 bg-secondary bg-opacity-10 vh-100 py-5">
+        <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
+          <span class="close fs-5 me-2 end-0 position-absolute pointer loginClose" onclick="closeLoginModal()">&times;</span>
+          <div class="card-body">
+            <h4 class="mb-4">Log In To Sun Myat Tun</h4>
+            <form action="">
+              <!-- email -->
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email</label>
+                <span class="invalid-feedback">Username doesn't match.</span>
+
+              </div>
+              <!-- password -->
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Password</label>
+                <span class="invalid-feedback">Password doesn't match.</span>
+              </div>
+             
+              <!-- login Button -->
+              <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase mt-2">LOG IN</button>
+             
+            </form>
+             <!-- forgot password -->
+             <div class="w-100 text-end mb-3">
+                <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span class="text-primary">Forgot Password?</span></buttonhref=>
+              </div>
+             <!-- login with social app -->
+             <div class="text-center w-100 pt-1">
+                <button class="btn rounded-circle border border-secondary mx-1 social-icon">
+                  <i class="bi bi-google fa-fw text-secondary fs-5"></i>
+                </button>
+                <button  class="btn rounded-circle border border-secondary social-icon">
+                  <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
+                </button>
+              </div>
+              <!-- don't have an account -->
+              <div class="text-center w-100 my-3">
+                <small>Don't have an account?
+                  <button  class="btn btn-link text-primary" onclick="openRegisterModal()">Register</button> Now!
+                </small>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Customer Register -->
+    <div id="registerModal" class="custom-modal">
+      <div class="register d-flex justify-content-center w-100 bg-secondary bg-opacity-10 py-5 ">
+        <div class="card bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
+        <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose" onclick="closeRegisterModal()">&times;</span>
+          <div class="card-body">
+            <h4 class="mb-4">Register To Sun Myat Tun</h4>
+            <form action="">
+              <!-- user name -->
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">User Name</label>
+                <span class="invalid-feedback">This field is required.</span>
+              </div>
+              <!-- email -->
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email</label>
+                <span class="invalid-feedback">This field is required.</span>
+              </div>
+              <!-- password -->
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Password</label>
+                <span class="invalid-feedback">This field is required.</span>
+              </div>
+              <!--cofirmed password -->
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Confirm Password</label>
+                <span class="invalid-feedback">Confirm password doesn't match.</span>
+              </div>
+              <!-- registere Button -->
+              <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
+            </form>
+               <!-- register with social app -->
+               <div class="text-center w-100">
+                <button class="btn rounded-circle border border-secondary mx-1 social-icon">
+                  <i class="bi bi-google fa-fw text-secondary fs-5"></i>
+                </button>
+                <button class="btn rounded-circle border border-secondary social-icon">
+                  <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
+                </button>
+              </div>
+              <!-- Already have an account -->
+              <div class="text-center w-100 my-3">
+                <small>Don't have an account?
+                  <button  class="btn btn-link text-primary" onclick="openLoginModal()">Log in</button> Now!
+                </small>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+      <!--Customer forgot password -->
+      <div id="forgotPasswordModal" class="custom-modal ">
+      <div class="forgotPassword d-flex justify-content-center w-100 bg-secondary bg-opacity-10 vh-100 py-5">
+        <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
+          <span class="close fs-5 me-2 end-0 position-absolute pointer forgoPasswordCloseButton" onclick="closeforgotPasswordModal()">&times;</span>
+          <div class="card-body">
+            <h5 class="mb-4 fw-bolder">Forgot Password?</h5>
+            <span class="text-black-50 mb-4" style="font-size: .9rem;">Please Enter Your Email Address To Receive A New Password</span>
+            <form action="">
+              <!-- email -->
+              <div class="form-floating mb-5">
+                <input type="email" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Vertify Email Address</label>
+                <span class="invalid-feedback">Email doesn't match.</span>
+              </div>
+              <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">SEND</button>
+             
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
   </div>
+
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -430,6 +568,53 @@
     })
 
     //end send message
+  </script>
+  <script>
+    // LOGIN AND REGISTER
+    let loginModal = document.getElementById("loginModal");
+    let registerModal = document.getElementById("registerModal");
+    let forgotPasswordModal = document.getElementById("forgotPasswordModal");
+    let loginCloseButton = document.getElementsByClassName("loginClose")[0];
+    let registerCloseButton = document.getElementsByClassName("registerClose")[0];
+    let forgoPasswordCloseButton = document.getElementsByClassName("forgoPasswordCloseButton")[0];
+
+    function openLoginModal() {
+      registerModal.style.display = "none";
+      loginModal.style.display = "block";
+      document.body.classList.add('backdropShow');
+
+    }
+    function openRegisterModal() {
+      loginModal.style.display = "none";
+      registerModal.style.display = "block";
+      document.body.classList.add('backdropShow');
+
+    }
+    function openForgotPasswordModal() {
+      loginModal.style.display = "none";
+      registerModal.style.display = "none";
+      forgotPasswordModal.style.display = "block";
+      document.body.classList.add('backdropShow');
+
+    }
+    function openLoginModalInSmallDevice() {
+      sideBarCloseOpen();
+      loginModal.style.display = "block";
+      document.body.classList.add('backdropShow');      
+    }
+    
+    loginCloseButton.onclick = function() {
+      loginModal.style.display = "none";
+      document.body.classList.remove('backdropShow');
+    }
+    registerCloseButton.onclick = function() {
+      registerModal.style.display = "none";
+      document.body.classList.remove('backdropShow');
+    }
+    forgoPasswordCloseButton.onclick = function() {
+      forgotPasswordModal.style.display = "none";
+      document.body.classList.remove('backdropShow');
+    }
   </script>
   @yield('script')
 

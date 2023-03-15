@@ -127,3 +127,11 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
 //     Session::put('message', $message);
 //     // echo Session::get('message');
 // });
+
+
+
+
+//SMT UPDATE 13-March-2023
+
+Route::view('/register','auth/customer/register');
+
