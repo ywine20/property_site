@@ -154,19 +154,13 @@
                         @endif --}}
 
                         <!-- Normal Image -->
-                        @if ($project->small_img1)
-
-                            <div class="col" style="aspect-ratio: 1;">
-                                <a href="/images/gallery/{{ $project->small_img1 }}" class="myGallery"
-                                    data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                    <img src="/images/gallery/{{ $project->small_img1 }}"
-                                        style="width: 100%;height:100%;object-fit:cover;" alt="">
-                                </a>
-                            </div>
-                        @else
-                       {{ $project}}
-                            <div class="">Small img ma shi bu</div>
-                        @endif
+                        <div class="col" style="aspect-ratio: 1;">
+                            <a href="/images/gallery/{{ $project->small_img1 }}" class="myGallery" data-gall="myGallery"
+                                data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="/images/gallery/{{ $project->small_img1 }}"
+                                    style="width: 100%;height:100%;object-fit:cover;" alt="">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -202,14 +196,14 @@
 
             <!-- 360 img -->
             <!-- <div class="pb-5 project-360">
-                          <div class="row">
-                            <div class="col-12">
-                              <div id="panorama-360-view"></div> -->
+                              <div class="row">
+                                <div class="col-12">
+                                  <div id="panorama-360-view"></div> -->
             <!-- <img src="./image/gallery/360img.jpeg" alt=""> -->
             <!-- <iframe src="https://momento360.com/e/u/28c5f6727652423fb96a02e1c0a10c83?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true" class="w-100" height="500px" frameborder="0"></iframe> -->
             <!-- </div>
-                          </div>
-                        </div> -->
+                              </div>
+                            </div> -->
             <!-- end 360 img -->
 
         </div>

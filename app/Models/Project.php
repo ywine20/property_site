@@ -13,6 +13,8 @@ use App\Models\Amenity;
 use App\Models\FacebookLink;
 use App\Models\Town;
 use App\Models\City;
+use App\Modles\Album;
+use App\Models\AlbumDocument;
 
 class Project extends Model implements Viewable
 {
@@ -63,9 +65,10 @@ class Project extends Model implements Viewable
         return $this->hasOne(FacebookLink::class);
     }
 
-    public function images()
+//update preview images
+    public function previewimages()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Previewimage::class);
     }
 
     // public function gallery()
@@ -81,5 +84,10 @@ class Project extends Model implements Viewable
     public function cities()
     {
         return $this->belongsTo(City::class);
+    }
+// add document/albums file 16/3/23 ..
+  public function album()
+    {
+        return $this->belongsToMany(Amenity::class, 'album_documents');
     }
 }
