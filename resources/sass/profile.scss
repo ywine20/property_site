@@ -1,0 +1,149 @@
+#profile {
+    .profile-image {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    #tier {
+        position: relative;
+        .progress-bg {
+            height: 15px;
+        }
+
+        .progress-percent-bar {
+            height: 15px;
+            width: 25%;
+        }
+
+        .tier {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            position: absolute;
+            // top: 0;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .bronze{
+            left: -3%;
+        }
+        .silver{
+            left: 22%;
+
+        }
+        .gold{
+            left: 47%;
+
+        }
+        .platinum{
+            left: 72%;
+
+        }
+        .diamond{
+            left: 97%;
+
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 600px) {
+    #profile{
+
+    }
+    #tier{
+        .progress-bg {
+            height: 10px;
+        }
+
+        .progress-percent-bar {
+            height: 10px;
+            width: 25%;
+        }
+
+        .tier {
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    #authorize{
+
+        .nav-tabs{
+            .nav-item{
+                .nav-link{
+                    font-size:.75rem;
+                }
+                .active{
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .table-explain{
+            font-size: .7rem;
+        }
+
+        .authorized-assets-table{
+            .table-responsive{
+                table{
+                thead{
+                    tr{
+                        th{
+                            font-size: .8rem;
+                        }
+                    }
+                }
+                    tbody{
+                        tr{
+                            td{
+                                font-size:.75rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    #authorize{
+        
+        .table-explain{
+            font-size: .9rem;
+        }
+        .authorized-assets-table{
+            .table-responsive{
+                table{
+                    thead{
+                        tr{
+                            th{
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+                    tbody{
+                        tr{
+                            td{
+                                font-size:.9rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {}
+
+@media screen and (min-width: 992px) {}
+
+@media screen and (min-width: 1200px) {}

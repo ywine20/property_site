@@ -20520,6 +20520,90 @@ textarea.form-control-lg {
   background-color: #F5CC7A;
 }
 
+#profile .profile-image {
+  width: 250px;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+#profile #tier {
+  position: relative;
+}
+#profile #tier .progress-bg {
+  height: 15px;
+}
+#profile #tier .progress-percent-bar {
+  height: 15px;
+  width: 25%;
+}
+#profile #tier .tier {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: absolute;
+}
+#profile #tier .tier img {
+  width: 100%;
+  height: 100%;
+}
+#profile #tier .bronze {
+  left: -3%;
+}
+#profile #tier .silver {
+  left: 22%;
+}
+#profile #tier .gold {
+  left: 47%;
+}
+#profile #tier .platinum {
+  left: 72%;
+}
+#profile #tier .diamond {
+  left: 97%;
+}
+
+@media screen and (max-width: 600px) {
+  #tier .progress-bg {
+    height: 10px;
+  }
+  #tier .progress-percent-bar {
+    height: 10px;
+    width: 25%;
+  }
+  #tier .tier {
+    width: 25px;
+    height: 25px;
+  }
+  #authorize .nav-tabs .nav-item .nav-link {
+    font-size: 0.75rem;
+  }
+  #authorize .nav-tabs .nav-item .active {
+    font-weight: bold;
+  }
+  #authorize .table-explain {
+    font-size: 0.7rem;
+  }
+  #authorize .authorized-assets-table .table-responsive table thead tr th {
+    font-size: 0.8rem;
+  }
+  #authorize .authorized-assets-table .table-responsive table tbody tr td {
+    font-size: 0.75rem;
+  }
+}
+@media screen and (min-width: 600px) {
+  #authorize .table-explain {
+    font-size: 0.9rem;
+  }
+  #authorize .authorized-assets-table .table-responsive table thead tr th {
+    font-size: 1rem;
+  }
+  #authorize .authorized-assets-table .table-responsive table tbody tr td {
+    font-size: 0.9rem;
+  }
+}
 :root {
   --light: #fff;
   --primary-dark:#423E3D;
