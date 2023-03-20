@@ -136,35 +136,76 @@
                                 </a>
                             </div>
                         @endif
-
-
                         <!-- 360* images -->
 
-                        <!-- Normal Image -->
-                        {{-- @if (count($project->small_img1) > 0)
-                            @foreach ($project->small_img1 as $img)
-                                <div class="col" style="aspect-ratio: 1;">
-                                    <a href="/images/gallery/{{ $img->small_img1 }}" class="myGallery"
-                                        data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                        <img src="/images/gallery/{{ $img->small_img1 }}"
-                                            style="width: 100%;height:100%;object-fit:cover;" alt="">
-                                    </a>
-                                </div>
-                            @endforeach
-                        @endif --}}
-
-                        <!-- Normal Image -->
+                        <!-- preview Image -->
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->small_img1 }}" class="myGallery" data-gall="myGallery"
-                                data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="/images/gallery/{{ $project->small_img1 }}"
+                            <a href="/images/gallery/{{ $project->previewimages->small_img1 }}" class="myGallery"
+                                data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img1) }}"
+                                    style="width: 100%;height:100%;object-fit:cover;" alt="">
+                            </a>
+                        </div>
+                        <div class="col" style="aspect-ratio: 1;">
+                            <a href="/images/gallery/{{ $project->previewimages->small_img2 }}" class="myGallery"
+                                data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img2) }}"
+                                    style="width: 100%;height:100%;object-fit:cover;" alt="">
+                            </a>
+                        </div>
+                        <div class="col" style="aspect-ratio: 1;">
+                            <a href="/images/gallery/{{ $project->previewimages->small_img3 }}" class="myGallery"
+                                data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img3) }}"
+                                    style="width: 100%;height:100%;object-fit:cover;" alt="">
+                            </a>
+                        </div>
+                        <div class="col" style="aspect-ratio: 1;">
+                            <a href="/images/gallery/{{ $project->previewimages->small_img4 }}" class="myGallery"
+                                data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img4) }}"
+                                    style="width: 100%;height:100%;object-fit:cover;" alt="">
+                            </a>
+                        </div>
+                        <div class="col" style="aspect-ratio: 1;">
+                            <a href="/images/gallery/{{ $project->previewimages->small_img5 }}" class="myGallery"
+                                data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img5) }}"
+                                    style="width: 100%;height:100%;object-fit:cover;" alt="">
+                            </a>
+                        </div>
+                        <div class="col" style="aspect-ratio: 1;">
+                            <a href="/images/gallery/{{ $project->previewimages->small_img6 }}" class="myGallery"
+                                data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img6) }}"
+                                    style="width: 100%;height:100%;object-fit:cover;" alt="">
+                            </a>
+                        </div>
+                        <div class="col" style="aspect-ratio: 1;">
+                            <a href="/images/gallery/{{ $project->previewimages->small_img7 }}" class="myGallery"
+                                data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img7) }}"
+                                    style="width: 100%;height:100%;object-fit:cover;" alt="">
+                            </a>
+                        </div>
+                        <div class="col" style="aspect-ratio: 1;">
+                            <a href="/images/gallery/{{ $project->previewimages->small_img8 }}" class="myGallery"
+                                data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img8) }}"
+                                    style="width: 100%;height:100%;object-fit:cover;" alt="">
+                            </a>
+                        </div>
+                        <div class="col" style="aspect-ratio: 1;">
+                            <a href="/images/gallery/{{ $project->previewimages->small_img9 }}" class="myGallery"
+                                data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img9) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- end gallery -->
+            <!-- end preview gallery -->
 
 
             <!-- Map -->
@@ -196,14 +237,14 @@
 
             <!-- 360 img -->
             <!-- <div class="pb-5 project-360">
-                              <div class="row">
-                                <div class="col-12">
-                                  <div id="panorama-360-view"></div> -->
+                                                                          <div class="row">
+                                                                            <div class="col-12">
+                                                                              <div id="panorama-360-view"></div> -->
             <!-- <img src="./image/gallery/360img.jpeg" alt=""> -->
             <!-- <iframe src="https://momento360.com/e/u/28c5f6727652423fb96a02e1c0a10c83?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true" class="w-100" height="500px" frameborder="0"></iframe> -->
             <!-- </div>
-                              </div>
-                            </div> -->
+                                                                          </div>
+                                                                        </div> -->
             <!-- end 360 img -->
 
         </div>

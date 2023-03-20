@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -172,7 +171,7 @@ $small_img_3=null;
                 $image=$request->file('small_img_3');
                 if($image){
                     $small_img_3=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$small_img_2);
+                    $image->move(public_path('/images/gallery'),$small_img_3);
                 }
 $small_img_4=null;
                 $image=$request->file('small_img_4');
@@ -224,9 +223,6 @@ $small_img_9=null;
 
 
         ]);
-
-
-
 //end preview image
 
         return redirect('/admin/project')->with('status', 'Project created successful.');
@@ -251,6 +247,8 @@ $small_img_9=null;
         return view('admin.project.show',compact('project', 'amenities', 'categories', 'cities', 'towns'));
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -263,18 +261,15 @@ $small_img_9=null;
         $categories = Category::all();
         $cities = City::all();
         $amenity = Amenity::all();
-        // $galleries = Gallery::all();
-        // $small_img_1=Previewimage::all();
         $project = Project::where('slug', $id)
             ->with('categories', 'amenity', 'towns', 'cities')
             ->first();
             if(!$project){
                 return redirect()->back()->with('error', 'Project Not found');
             }
+
         return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'));
     }
-
-
     /**
      * Update the specified resource in storage.
      *
@@ -284,7 +279,7 @@ $small_img_9=null;
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+
         $request->validate([
             'project_Id' => "required|string|min:3|max:255",
             'cover' => "nullable|mimes:jpeg,png,jpg,gif|max:2048|", // dimensions:width=600,height=900
@@ -313,183 +308,172 @@ $small_img_9=null;
             'small_img_8'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
             'small_img_9'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
 
+        ]);
+
+
+        $find_project = Project::where('slug',$id);
+        if(!$find_project->first()){
+            return redirect()->back()->with('error', 'not found project');
+        }
+
+        $project_id = $find_project->first()->id;
+        if($file = $request->file('cover')){
+            $file_name = uniqid() . $file->getClientOriginalName();
+            $file->move(public_path('/images/projects'), $file_name);
+
+        }
+        else{
+            $file_name = $find_project->first()->cover;
+        }
+
+        $project_id = $find_project->first()->id;
+        if($file = $request->file('gallery')){
+            $file_image = uniqid() . $file->getClientOriginalName();
+            $file->move(public_path('/images/360images'), $file_image);
+        }else{
+            $file_image = $find_project->first()->gallery;
+        }
+
+        $category = Category::where('category_id', $request->category_id)->first();
+        if(!$category){
+            return redirect()->back()->with('error', 'Not found category');
+        }
+
+        $town = Town::where('id', $request->town)->first();
+        if(!$town){
+            return redirect()->back()->with('error', 'Not found township');
+        }
+
+        $city = City::where('id', $request->city)->first();
+        if(!$city){
+            return redirect()->back()->with('error', 'Not found city');
+        }
+
+
+        $amenities = [];
+        foreach($request->amenity as $am){
+            $amenity = Amenity::where('id', $am)->first();
+            if(!$amenity){
+                return redirect()->back()->with('error', 'amenity not found');
+            }
+            $amenities[] = $amenity->id;
+        }
+         $project_id = $find_project->first()->id;
+        if($file = $request->file('small_img_1')){
+            $image1= uniqid() . $file->getClientOriginalName();
+            $file->move(public_path('/images/gallery'), $image1);
+        }else{
+            $image1 = $find_project->first()->previewimages->small_img1;
+        }
+
+        $slug = uniqid() . Str::slug($request->project_name);
+           dd($request->all());
+        $find_project->update([
+            'slug' => $slug,
+            'project_name' => $request->project_Id,
+            'cover' => $file_name,
+            'gallery' => $file_image,
+            'category_id' => $category->category_id,
+            'township_id' => $town->id,
+            'city_id' => $city->id,
+            'gmlink'=>$request->map_link,
+            'progress'=>$request->progress,
+            'description' => $request->description,
+            'lower_price' => $request->lower_price,
+            'upper_price' => $request->upper_price,
+            'layer' =>$request->layer,
+            'squre_feet' =>$request->squre_feet,
+            'hou_no' => $request->hou_no,
+            'street' => $request->street,
+            'ward' => $request->ward,
+            'small_img_1'=>$image1,
+            // 'small_img_2'=>$small_img_2,
+            // 'small_img_3'=>$small_img_3,
+            // 'small_img_4'=>$small_img_4,
+            // 'small_img_5'=>$small_img_5,
+            // 'small_img_6'=>$small_img_6,
+            // 'small_img_7'=>$small_img_7,
+            // 'small_img_8'=>$small_img_8,
+            // 'small_img_9'=>$small_img_9,
+
+
 
         ]);
 
 
-        $find_project = Project::where('slug',$id)->get();
+         // for amenity select
+        $project = Project::find($project_id);
+        $project->amenity()->sync($amenities);
 
-        if(!$find_project->first()){
-
-            return redirect()->back()->with('error', 'not found project');
-
+        return redirect(route('project.index', $slug))->with('status', 'Project updated successful.');
         }
-        //   $data=$this->requestupdate($request);
 
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+        public function destory($id)
+        {
+            $project = Project::where('id', $id);
+            Project::find($project->first()->id)->amenity()->sync([]);
+            $project->delete();
+                return response()->json([
+                    "status" => 'success',
+                    "info"=>'delete successful'
+                ]);
+           $projects=Project::findOrFail($id);
 
-    //  dd($request->all());
+           if(!$projects->first()){
+               return redirect()->back()->with('error', 'not found project');
+          }
 
-//         $project_id = $find_project->first()->id;
-//         if($file = $request->file('cover')){
-//             $file_name = uniqid() . $file->getClientOriginalName();
-//             $file->move(public_path('/images/projects'), $file_name);
+           Project::find($projects->first()->id)->amenity()->sync([]);
+         if (File::exists("images/projects/".$projects->cover)) {
+           File::delete(public_path('images/projects/' . $projects->cover));
 
-//         }
-//         else{
-//             $file_name = $find_project->first()->cover;
-//         }
+         }
+        if (File::exists("images/360images/".$projects->gallery)) {
+            File::delete(public_path('images/360images/' . $projects->gallery));
+             }
 
-//         $project_id = $find_project->first()->id;
-//         if($file = $request->file('gallery')){
-//             $file_image = uniqid() . $file->getClientOriginalName();
-//             $file->move(public_path('/images/360images'), $file_image);
-//         }else{
-//             $file_image = $find_project->first()->gallery;
-//         }
+             previewimages::where('id',$projects->id)-get();
+             if(File::exists("images/gallery/".$project->previeimages->small_img_1)){
+                    File::delet(public_path("images/gallerry".$project->previewimages->small_img_1));
+             }
 
-//         $category = Category::where('category_id', $request->category_id)->first();
-//         if(!$category){
-//             return redirect()->back()->with('error', 'Not found category');
-//         }
+            //  $images = Image::where("id",$projects->id)->get();
+            //  foreach($images as $image){
+            //  if (File::exists("images/gallery/".$image->image)) {
+            //  File::delete(public_path('images/gallery/' . $image->first()->image));
+            //  }
+            // }
+             $projects->delete();
+            return response()->json([
+                 "status" => 'success',
+                 "info"=>'delete successful'
+             ]);
+        return redirect('/admin/project')->with('success', 'Your project has been deleted successfully.');
+        }
 
-//         $town = Town::where('id', $request->town)->first();
-//         if(!$town){
-//             return redirect()->back()->with('error', 'Not found township');
-//         }
+        public function deleteimage($id){
+        $images=Previewimage::findOrFail($id);
+        if (File::exists("images/gallery/".$images->small_img_1)) {
+        File::delete(public_path("images/gallery/".$images->samll_img_1));
+        }
 
-//         $city = City::where('id', $request->city)->first();
-//         if(!$city){
-//             return redirect()->back()->with('error', 'Not found city');
-//         }
+        Previewimage::find($id)->delete();
+        return back();
+        }
 
-//         $amenities = [];
-//         foreach($request->amenity as $am){
-//             $amenity = Amenity::where('id', $am)->first();
-//             if(!$amenity){
-//                 return redirect()->back()->with('error', 'amenity not found');
-//             }
-//             $amenities[] = $amenity->id;
-//         }
-
-
-//         $project_id = $find_project->first()->id;
-//                 if($file = $request->file('small_img_1')){
-//                     $small_img_1 = uniqid() . $file->getClientOriginalName();
-//                     $file->move(public_path('/images/gallery'), $small_img_1);
-//                 }else{
-//                     $small_img_1= $find_project->first()->small_img1;
-//                 }
-
-//         $slug = uniqid() . Str::slug($request->project_name);
-//         $find_project->update([
-//             'slug' => $slug,
-//             'project_name' => $request->project_Id,
-//             'cover' => $file_name,
-//             'gallery' => $file_image,
-//             'category_id' => $category->category_id,
-//             'township_id' => $town->id,
-//             'city_id' => $city->id,
-//             'gmlink'=>$request->map_link,
-//             'progress'=>$request->progress,
-//             'description' => $request->description,
-//             'lower_price' => $request->lower_price,
-//             'upper_price' => $request->upper_price,
-//             'layer' =>$request->layer,
-//             'squre_feet' =>$request->squre_feet,
-//             'hou_no' => $request->hou_no,
-//             'street' => $request->street,
-//             'ward' => $request->ward,
-//             'small_img_1'=>$small_img_1,
-
-//         ]);
-
-//         // $find_image = previewimage::find('project_id',$project_id);
-//         // return $find_image;
-//         // // $find_image->update({
-//         // //         "small_img_1"=>$image_name;
-//         // // });
-//         // // for amenity select
-//         // $project = Project::find($project_id);
-//         // $project->amenity()->sync($amenities);
-
-//         // for images
-//         // if($request->hasFile("small_img_1")){
-//         //     $files=$request->file("small_img_1");
-//         //     foreach($files as $file){
-//         //         $image_name=time().'_'.$file->getClientOriginalName();
-//         //         $request["project_id"]=$project->id;
-//         //         $request["small_img1"]=$image_name;
-//         //         $file->move(\public_path("images/gallery"),$image_name);
-//         //         Previewimage::create($request->all());
-
-//         //     }
-//         // }
-
-//         return redirect(route('project.index', $slug))->with('status', 'Project updated successful.');
-//         }
-
-//         /**
-//      * Remove the specified resource from storage.
-//      *
-//      * @param  int  $id
-//      * @return \Illuminate\Http\Response
-//      */
-//         public function destroy($id)
-//         {
-//             $project = Project::where('id', $id);
-//             Project::find($project->first()->id)->amenity()->sync([]);
-//             $project->delete();
-//                 return response()->json([
-//                     "status" => 'success',
-//                     "info"=>'delete successful'
-//                 ]);
-//             // $projects=Project::findOrFail($id);
-
-//             // if(!$projects->first()){
-//             //     return redirect()->back()->with('error', 'not found project');
-//             // }
-
-//             // Project::find($projects->first()->id)->amenity()->sync([]);
-
-//             // if (File::exists("images/projects/".$projects->cover)) {
-//             // File::delete(public_path('images/projects/' . $projects->cover));
-//             // }
-
-//             // if (File::exists("images/360images/".$projects->gallery)) {
-//             // File::delete(public_path('images/360images/' . $projects->gallery));
-//             // }
-
-//             // $images = Image::where("id",$projects->id)->get();
-//             // foreach($images as $image){
-//             // if (File::exists("images/gallery/".$image->image)) {
-//             // File::delete(public_path('images/gallery/' . $image->first()->image));
-//             // }
-//             // }
-//             // $projects->delete();
-//             // return response()->json([
-//             //     "status" => 'success',
-//             //     "info"=>'delete successful'
-//             // ]);
-//             // return redirect('/admin/project')->with('success', 'Your project has been deleted successfully.');
-//         }
-
-//         public function deleteimage($id){
-//         $images=Previewimage::findOrFail($id);
-//         if (File::exists("images/gallery/".$images->small_img_1)) {
-//         File::delete(public_path("images/gallery/".$images->samll_img_1));
-//         }
-
-//         Previewimage::find($id)->delete();
-//         return back();
-//         }
-
-//         public function deletecover($id){
-//         $cover=Project::findOrFail($id)->cover;
-//         if (File::exists("images/projects/".$cover)) {
-//         File::delete(public_path("images/projects/".$cover));
-//         }
-//         return back();
-//         }
+        public function deletecover($id){
+        $cover=Project::findOrFail($id)->cover;
+        if (File::exists("images/projects/".$cover)) {
+        File::delete(public_path("images/projects/".$cover));
+        }
+        return back();
+        }
 
 //         // $project = Project::where('id', $id);
 //         // if (!$project->first()){
@@ -500,25 +484,14 @@ $small_img_9=null;
 //         // return redirect('/project')->with('success', 'Project deleted successfully');
 
 
-//     // Win Win Maw
-//     public function multiDelProject(Request $request){
-//         $ids = $request->chk;
-//         Project::whereIn('id',$ids)->delete();
-// //        Category::destroy(collect($ids));
-//         return redirect()->back()->with('status','Multiple Delete Successful');
+    // Win Win Maw
+    public function multiDelProject(Request $request){
+        $ids = $request->chk;
+        Project::whereIn('id',$ids)->delete();
+//        Category::destroy(collect($ids));
+        return redirect()->back()->with('status','Multiple Delete Successful');
 
-//          $data=$this->requestupdate($request);
+
      }
 
-    // private function requestUpdate($request){
-
-    //     dd($data->);
-    //     // if(isset ($request->small_img))
-    //     // {
-    //     //     dd("yes");
-    //     // }
-    //     // else{
-    //     //     dd("no");
-    //     // }
-    // }
 }

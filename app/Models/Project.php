@@ -68,7 +68,7 @@ class Project extends Model implements Viewable
 //update preview images
     public function previewimages()
     {
-        return $this->hasMany(Previewimage::class);
+        return $this->hasOne(Previewimage::class);
     }
 
     // public function gallery()

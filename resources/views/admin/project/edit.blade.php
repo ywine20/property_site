@@ -133,7 +133,7 @@
                                                 <option value="">Choose Category</option>
                                                 @foreach ($categories as $c)
                                                     <!-- <option value="{{ $c->category_id }}" @if ($c->category_id == $project->category_id) selected @endif >{{ $c->category_name }}
-                                                                                            </option> -->
+                                                                                                                </option> -->
                                                     <option value="{{ $c->category_id }}"
                                                         {{ $c->category_id == old('category_id', $project->category_id) ? 'selected' : '' }}>
                                                         {{ $c->category_name }}
@@ -412,15 +412,15 @@
                                         </div>
                                         <!-- old images 9 -->
                                         <!-- <div class="mb-3">
-                                                                            <div class="mt-5">
-                                                                                <div class="d-flex justify-content-between align-items-center">
-                                                                                    <label for="gallery_image_files" class="form-label">Gallery Images :</label>
-                                                                                    <small class="text-warning fw-light">
-                                                                                        Choose maximum 9 photo! <br>
-                                                                                        max : 1 MB | width=800 | height=800
-                                                                                    </small>
-                                                                                </div>
-                                                                                {{-- <input type="file" name="images[]" id="gallery_image_files" maxlength="9" class="form-control fs-6 btn-primary create-file @error('images.*') is-invalid @enderror" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
+                                                                                                <div class="mt-5">
+                                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                                        <label for="gallery_image_files" class="form-label">Gallery Images :</label>
+                                                                                                        <small class="text-warning fw-light">
+                                                                                                            Choose maximum 9 photo! <br>
+                                                                                                            max : 1 MB | width=800 | height=800
+                                                                                                        </small>
+                                                                                                    </div>
+                                                                                                    {{-- <input type="file" name="images[]" id="gallery_image_files" maxlength="9" class="form-control fs-6 btn-primary create-file @error('images.*') is-invalid @enderror" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
                                                                         @error('images')
         <div class="invalid-feedback" role="alert">
                                                                                                         <strong>{{ $message }}</strong>
@@ -440,8 +440,8 @@
                                                                             @endforeach
                                                                             @endif
                                                                         </div> --}}
-                                                                            </div>
-                                                                        </div> -->
+                                                                                                </div>
+                                                                                            </div> -->
                                         <!-- end old images 9 -->
                                         <!-- start new images -->
                                         <!-- new 9 images -->
@@ -463,7 +463,7 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            <img src="{{ asset('images/gallery/' . $project->small_img1) }}"
+                                                            <img src="{{ asset('images/gallery/' . $project->previewimages->small_img1) }}"
                                                                 id="sImg1" alt=""
                                                                 class="w-100 h-100 pointer small_img"
                                                                 style="object-fit: cover">
@@ -482,13 +482,18 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            <img src="{{ asset('/images/photoPlaceholderWhite.png') }}"
+                                                            <img src="{{ asset('images/gallery/' . $project->previewimages->small_img2) }}"
                                                                 id="sImg2" alt=""
                                                                 class="w-100 h-100 pointer small_img "
                                                                 style="object-fit: cover">
                                                             <i
                                                                 class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
                                                         </div>
+                                                        @error('small_img_1')
+                                                            <div class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </div>
+                                                        @enderror
                                                     </div>
                                                     <div class="col">
                                                         <input type="file" name="small_img_3"
@@ -496,13 +501,18 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            <img src="{{ asset('/images/photoPlaceholderWhite.png') }}"
+                                                            <img src="{{ asset('images/gallery/' . $project->previewimages->small_img3) }}"
                                                                 id="sImg3" alt=""
                                                                 class="w-100 h-100 pointer small_img "
                                                                 style="object-fit: cover">
                                                             <i
                                                                 class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
                                                         </div>
+                                                        @error('small_img_1')
+                                                            <div class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </div>
+                                                        @enderror
                                                     </div>
                                                     <div class="col">
                                                         <input type="file" name="small_img_4"
@@ -510,13 +520,18 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            <img src="{{ asset('/images/photoPlaceholderWhite.png') }}"
+                                                            <img src="{{ asset('images/gallery/' . $project->previewimages->small_img4) }}"
                                                                 id="sImg4" alt=""
                                                                 class="w-100 h-100 pointer small_img "
                                                                 style="object-fit: cover">
                                                             <i
                                                                 class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
                                                         </div>
+                                                              @error('small_img_1')
+                                                            <div class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </div>
+                                                        @enderror   
                                                     </div>
                                                     <div class="col">
                                                         <input type="file" name="small_img_5"
@@ -524,7 +539,7 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            <img src="{{ asset('/images/photoPlaceholderWhite.png') }}"
+                                                            <img src="{{ asset('images/gallery/' . $project->previewimages->small_img5) }}"
                                                                 id="sImg5" alt=""
                                                                 class="w-100 h-100 pointer small_img "
                                                                 style="object-fit: cover">
@@ -538,7 +553,7 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            <img src="{{ asset('/images/photoPlaceholderWhite.png') }}"
+                                                            <img src="{{ asset('images/gallery/' . $project->previewimages->small_img6) }}"
                                                                 id="sImg6" alt=""
                                                                 class="w-100 h-100 pointer small_img "
                                                                 style="object-fit: cover">
@@ -552,7 +567,7 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            <img src="{{ asset('/images/photoPlaceholderWhite.png') }}"
+                                                            <img src="{{ asset('images/gallery/' . $project->previewimages->small_img7) }}"
                                                                 id="sImg7" alt=""
                                                                 class="w-100 h-100 pointer small_img "
                                                                 style="object-fit: cover">
@@ -566,7 +581,7 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            <img src="{{ asset('/images/photoPlaceholderWhite.png') }}"
+                                                            <img src="{{ asset('images/gallery/' . $project->previewimages->small_img8) }}"
                                                                 id="sImg8" alt=""
                                                                 class="w-100 h-100 pointer small_img "
                                                                 style="object-fit: cover">
@@ -580,7 +595,7 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            <img src="{{ asset('/images/photoPlaceholderWhite.png') }}"
+                                                            <img src="{{ asset('images/gallery/' . $project->previewimages->small_img9) }}"
                                                                 id="sImg9" alt=""
                                                                 class="w-100 h-100 pointer small_img "
                                                                 style="object-fit: cover">
