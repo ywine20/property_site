@@ -54,6 +54,7 @@ return array(
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\City' => $baseDir . '/app/Models/City.php',
     'App\\Models\\Contact' => $baseDir . '/app/Models/Contact.php',
+    'App\\Models\\Customer' => $baseDir . '/app/Models/Customer.php',
     'App\\Models\\Delete' => $baseDir . '/app/Models/Delete.php',
     'App\\Models\\FacebookLink' => $baseDir . '/app/Models/FacebookLink.php',
     'App\\Models\\Gallery' => $baseDir . '/app/Models/Gallery.php',

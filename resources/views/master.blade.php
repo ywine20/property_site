@@ -193,6 +193,7 @@
           <div class="d-flex flex-column w-100">
             <a href="{{route('profile')}}" class="text-decoration-none w-100">
               <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
+
 ">
                 <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
                   <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
@@ -203,6 +204,7 @@
             <div class="rounded px-3 py-3 text-primary w-100 text-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
 ">
               <a href="" class="text-decoration-none">LOG OUT</a>
+
             </div>
 
           </div>
@@ -231,6 +233,7 @@
             </div>
           </button>
           @endauth -->
+
 
 
 
@@ -268,8 +271,10 @@
             </li>
           </ul>
           <div class="bg-primary mx-4 opacity-50" style="width:.1px; height:50px;"></div>
-          <div class="">
-            <div class="profile-dropdown position-relative">
+          <div class="">        
+
+            <!-- @auth
+             <div class="profile-dropdown position-relative">
               <a href="{{url('/profile')}}" class="text-decoration-none  d-flex justify-content-center align-items-center nav-profile ">
                 <span class="text-primary me-2 usernameLargeDevice usernameToShort">Mr.JonhDoe gfdsf fasfa</span>
                 <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
@@ -294,17 +299,11 @@
                 </div>
               </div>
             </div>
-
-            <!-- @auth
-             <a href="{{url('/profile')}}" class="text-decoration-none  d-flex justify-content-center align-items-center ">
-              <span class="text-primary me-2 usernameLargeDevice ">Mr.JonhDoe gfdsf fasfa</span>
-              <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
-                <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
-              </div>
-            </a>
+            
             @else
             <button class="btn btn-link text-decoration-none" onclick="openLoginModal()">Login</button>
             @endauth -->
+
           </div>
         </div>
       </div>
@@ -401,19 +400,28 @@
           <span class="close fs-5 me-2 end-0 position-absolute pointer loginClose" onclick="closeLoginModal()">&times;</span>
           <div class="card-body">
             <h4 class="mb-4">Log In To Sun Myat Tun</h4>
-            <form action="">
+            <form action="{{ url('login') }}" method="POST" enctype="multipart/form-data" class="login-form">
+              @csrf
               <!-- email -->
               <div class="form-floating mb-3">
-                <input type="email" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <input type="email" name="email" class="form-control  @error('email') is-invalid @enderror form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email</label>
-                <span class="invalid-feedback">Username doesn't match.</span>
+                  @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
 
               </div>
               <!-- password -->
               <div class="form-floating mb-3">
-                <input type="password" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <input type="password" name="password" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Password</label>
-                <span class="invalid-feedback">Password doesn't match.</span>
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                 @enderror
               </div>
 
               <!-- login Button -->
@@ -452,7 +460,8 @@
           <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose" onclick="closeRegisterModal()">&times;</span>
           <div class="card-body">
             <h4 class="mb-4">Register To Sun Myat Tun</h4>
-            <form action="">
+            <form action="{{url('/user')}}" method="post">
+              @csrf
               <!-- user name -->
               <div class="form-floating mb-3">
                 <input type="text" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
@@ -461,13 +470,13 @@
               </div>
               <!-- email -->
               <div class="form-floating mb-3">
-                <input type="email" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <input type="text" name="email" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email</label>
                 <span class="invalid-feedback">This field is required.</span>
               </div>
               <!-- password -->
               <div class="form-floating mb-3">
-                <input type="password" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <input type="text" name="password" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="">
                 <label for="floatingInput">Password</label>
                 <span class="invalid-feedback">This field is required.</span>
               </div>
