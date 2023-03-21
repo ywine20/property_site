@@ -18,7 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('tier')->nullable();
+            $table->string('phone');
             $table->string('password');
+            $table->string('profile_img')->nullable();
+            $table->enum('tier',['bronze','silver','gold','platinum','diamond'])->default('bronze');
             $table->rememberToken();
             $table->timestamps();
         });

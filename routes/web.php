@@ -7,6 +7,8 @@ use App\Http\Controllers\ProjectListController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 // use Illuminate\Support\Facades\Session;
 // use App\Http\Controllers\EngagementController;
 
@@ -20,6 +22,17 @@ use App\Http\Controllers\ContactUsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//Login
+Route::get('/login',[AuthController::class,'showlogin']);
+Route::post('/login',[AuthController::class,'login']);
+Route::get('/logout',[AuthController::class,'logout']);
+
+
+//User
+Route::resource('/user',"UserController");
+
+
 
 /*
  Client Site and User View Point Routes
@@ -127,3 +140,11 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
 //     Session::put('message', $message);
 //     // echo Session::get('message');
 // });
+
+
+
+
+//SMT UPDATE 13-March-2023
+
+Route::view('/register','auth/customer/register');
+
