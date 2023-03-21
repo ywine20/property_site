@@ -20969,6 +20969,12 @@ main {
   .side-nav {
     width: 65vw;
   }
+  .side-nav .side-nav-ul .side-nav-item a {
+    font-size: 0.9rem;
+  }
+  .side-nav .usernameSmallDevice {
+    font-size: 0.9rem;
+  }
   .logo-div {
     width: 40px !important;
   }
@@ -21052,6 +21058,9 @@ main {
   }
   .side-nav {
     width: 65vw;
+  }
+  .side-nav .side-nav-ul .side-nav-item a {
+    font-size: 0.7rem;
   }
   .logo-div {
     width: 40px !important;
