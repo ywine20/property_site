@@ -146,5 +146,9 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
 
 //SMT UPDATE 13-March-2023
 
-Route::view('/register','auth/customer/register');
+Route::view('/profile','customer/profile')->name('profile');
+Route::view('/profile/setting','customer/profile-setting')->name('profile-setting');
+Route::view('/redeem','customer/redeem')->name('profile-redeem');
+
+
 

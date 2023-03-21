@@ -89,6 +89,22 @@
       content: '←' !important;
 
     }
+
+
+    /* for profile dropdown */
+    .profile-dropdown-content {
+      position: absolute;
+      right: 0;
+      margin-top: 5px;
+      display: none;
+      transition: all 1s;
+      backdrop-filter: blur(10px);
+      /* display: nonw; */
+    }
+
+    .profile-dropdown:hover .profile-dropdown-content {
+      display: block;
+    }
   </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -173,26 +189,51 @@
       </div>
       <div class="px-2 py-2 d-lg-none position-absolute bottom-0 w-100">
         <div class="d-flex justify-content-start align-items-center">
-          @if(auth()->guard('user')->check())
-          <!-- After Login -->
-          <a href="{{url('/login')}}" class="text-decoration-none w-100">
-            <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
+
+          <div class="d-flex flex-column w-100">
+            <a href="{{route('profile')}}" class="text-decoration-none w-100">
+              <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
+
 ">
-              <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
-                <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
+                <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
+                  <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
+                </div>
+                <span class="text-primary usernameSmallDevice usernameToShort">Mr.John Doe fsfsaf fsd</span>
               </div>
-              <span class="text-primary usernameSmallDevice">{{Auth::guard('user')->user()->name}}</span>
+            </a>
+            <div class="rounded px-3 py-3 text-primary w-100 text-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
+">
+              <a href="" class="text-decoration-none">LOG OUT</a>
+
             </div>
-          </a>
+
+          </div>
+          <!-- @auth
+          <div class="d-flex flex-column w-100">
+            <a href="#" class="text-decoration-none w-100">
+              <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
+">
+                <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
+                  <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
+                </div>
+                <span class="text-primary usernameSmallDevice usernameLargeDevice">Mr.John Doe</span>
+              </div>
+            </a>
+            <div class="rounded px-3 py-3 text-primary w-100 text-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
+">
+              <a href="" class="text-decoration-none">LOG OUT</a>
+            </div>
+
+          </div>
           @else
-          <!-- Before Login -->
           <button class="btn btn-link text-decoration-none w-100 px-0" onclick="openLoginModalInSmallDevice()">
             <div class="rounded px-3 py-3 text-primary w-100 text-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;
 ">
               Login
             </div>
           </button>
-          @endif
+          @endauth -->
+
 
 
 
@@ -230,22 +271,39 @@
             </li>
           </ul>
           <div class="bg-primary mx-4 opacity-50" style="width:.1px; height:50px;"></div>
-          <div class="">
-            @if(auth()->guard('user')->check())
-             <a href="{{url('/login')}}" class="text-decoration-none  d-flex justify-content-center align-items-center ">
-              <span class="text-primary me-2 usernameLargeDevice ">{{Auth::guard('user')->user()->name}}</span>
-              <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
-                <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
+          <div class="">        
+
+            <!-- @auth
+             <div class="profile-dropdown position-relative">
+              <a href="{{url('/profile')}}" class="text-decoration-none  d-flex justify-content-center align-items-center nav-profile ">
+                <span class="text-primary me-2 usernameLargeDevice usernameToShort">Mr.JonhDoe gfdsf fasfa</span>
+                <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
+                  <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
+                </div>
+              </a>
+
+              <div class="profile-dropdown-content card bg-secondary bg-opacity-75 border border-1 border-opacity-25 border-primary">
+                <div class="card-body">
+                  <div class="d-flex flex-row align-items-center gap-3">
+                    <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
+                      <img src="{{asset('image/smtlogo.png')}}" alt="" class="w-100 h-100">
+                    </div>
+                    <div class="">
+                      <a href="{{route('profile')}}" class="text-primary text-decoration-none"><span class="d-block fw-bold usernameLargeDevice usernameToShort text-primary">Mr.JonhDoe gfdsf fasf</span></a>
+                      <a href="{{route('profile')}}" class="text-primary text-decoration-none"><span class="text-primary emailToShort">johndoe@gmail.com</span></a>
+                    </div>
+                  </div>
+                  <div class="w-100 bg-primary text-secondary text-center py-2 mt-3">
+                    <a href="" class="text-secondary text-decoration-none">LOG OUT</a>
+                  </div>
+                </div>
               </div>
-            </a>
-            <a href="{{url('/logout')}}" class="text-decoration-none  d-flex justify-content-center align-items-center ">
-              <span class="text-primary me-2 usernameLargeDevice ">Log out</span>
-              
-            </a>
+            </div>
             
             @else
             <button class="btn btn-link text-decoration-none" onclick="openLoginModal()">Login</button>
-            @endif
+            @endauth -->
+
           </div>
         </div>
       </div>
@@ -406,7 +464,7 @@
               @csrf
               <!-- user name -->
               <div class="form-floating mb-3">
-                <input type="text" name="name" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <input type="text" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">User Name</label>
                 <span class="invalid-feedback">This field is required.</span>
               </div>
@@ -634,15 +692,31 @@
 
 
     //limit username
-    let text = document.querySelector(".usernameLargeDevice").textContent;
-    let maxLength = 10;
-
-    if (text.length > maxLength) {
-      text = text.substring(0, maxLength) + "...";
+    function subName(text, maxLength) {
+      return text.substring(0, maxLength) + "...";
     }
-    document.querySelector(".usernameLargeDevice").textContent = text;
-    document.querySelector(".usernameSmallDevice").textContent = text;
 
+    let userNameLong = document.querySelectorAll(".usernameToShort");
+
+
+    // Username Short
+    for (let i = 0; i <= userNameLong.length; i++) {
+      if (userNameLong[i].innerText.length > 15) {
+        let changeName = subName(userNameLong[i].innerText, 15);
+        userNameLong[i].innerText = changeName;
+      }
+    }
+  </script>
+
+  <script>
+    // Email Short
+    let emailToShort = document.querySelectorAll(".emailToShort");
+    for (let i = 0; i <= emailToShort.length; i++) {
+      if (emailToShort[i].innerText.length > 25) {
+        let changeEmail = subName(emailToShort[i].innerText, 25);
+        emailToShort[i].innerText = changeEmail;
+      }
+    }
   </script>
   @yield('script')
 

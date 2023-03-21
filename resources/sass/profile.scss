@@ -1,0 +1,222 @@
+#profile {
+    .profile-image {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        object-position: center;
+    }
+    .profile-info{
+        .name{
+            font-size: 1.5rem;
+        }
+        .email,.phone{
+            font-size: 1.3rem;
+        }
+    }
+
+    #tier {
+        position: relative;
+        .progress-bg {
+            height: 15px;
+        }
+
+        .progress-percent-bar {
+            height: 15px;
+            width: 25%;
+        }
+
+        .tier {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            position: absolute;
+            // top: 0;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .bronze{
+            left: -3%;
+        }
+        .silver{
+            left: 22%;
+
+        }
+        .gold{
+            left: 47%;
+
+        }
+        .platinum{
+            left: 72%;
+
+        }
+        .diamond{
+            left: 97%;
+
+        }
+    }
+}
+
+#authorize{
+    .authorized-assets-table{
+        .table-responsive{
+            table{
+            thead{
+                tr{
+                    th:nth-child(1){
+                        min-width: 120px;
+                    }
+                    th:nth-child(2){
+                        min-width: 230px;
+                    }
+                    th:nth-child(3){
+                        min-width: 245px;
+                    }
+                }
+            }
+                
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    #profile{
+        .profile-image {
+            width: 150px;
+            height: 150px;
+          
+        }
+        .profile-info{
+            .name{
+                font-size: 1.2rem;
+            }
+            .email,.phone{
+                font-size: 1.1rem;
+            }
+        }
+    }
+    #tier{
+        .progress-bg {
+            height: 10px !important;
+        }
+
+        .progress-percent-bar {
+            height: 10px !important;
+            width: 25% !important;
+        }
+
+        .tier {
+            width: 25px !important;
+            height: 25px !important;
+        }
+    }
+
+    #authorize,#setting,#redeem{
+
+        .nav-tabs{
+            .nav-item{
+                .nav-link{
+                    font-size:.75rem;
+                }
+                .active{
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .table-explain{
+            font-size: .7rem;
+        }
+
+        .authorized-assets-table{
+            .table-responsive{
+                table{
+                thead{
+                    tr{
+                        th{
+                            font-size: .8rem;
+                        }
+                    }
+                }
+                    tbody{
+                        tr{
+                            td{
+                                font-size:.75rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    #profile {
+        .profile-image {
+            width: 200px;
+            height: 200px;
+
+        }
+    }
+    #authorize{
+        
+        .table-explain{
+            font-size: .9rem;
+        }
+        .authorized-assets-table{
+            .table-responsive{
+                table{
+                    thead{
+                        tr{
+                            th{
+                                font-size: 0.95rem;
+                            }
+                        }
+                    }
+                    tbody{
+                        tr{
+                            td{
+                                font-size:.85rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #profile {
+        .profile-image {
+            width: 250px;
+            height: auto;
+           
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #profile {
+        .profile-image {
+            width: 250px;
+            height: auto
+           
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #profile {
+        .profile-image {
+            width: 250px;
+            height: 250px
+           
+        }
+    }
+}
