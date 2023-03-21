@@ -104,8 +104,6 @@ class ProjectController extends Controller
             return redirect()->back()->with('error', 'Not found township');
         }
 
-
-
         $amenities = [];
         foreach($request->amenity as $am){
             $amenity = Amenity::where('id', $am)->first();
@@ -247,8 +245,6 @@ $small_img_9=null;
         return view('admin.project.show',compact('project', 'amenities', 'categories', 'cities', 'towns'));
     }
 
-
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -358,16 +354,9 @@ $small_img_9=null;
             }
             $amenities[] = $amenity->id;
         }
-         $project_id = $find_project->first()->id;
-        if($file = $request->file('small_img_1')){
-            $image1= uniqid() . $file->getClientOriginalName();
-            $file->move(public_path('/images/gallery'), $image1);
-        }else{
-            $image1 = $find_project->first()->previewimages->small_img1;
-        }
+
 
         $slug = uniqid() . Str::slug($request->project_name);
-           dd($request->all());
         $find_project->update([
             'slug' => $slug,
             'project_name' => $request->project_Id,
@@ -386,17 +375,6 @@ $small_img_9=null;
             'hou_no' => $request->hou_no,
             'street' => $request->street,
             'ward' => $request->ward,
-            'small_img_1'=>$image1,
-            // 'small_img_2'=>$small_img_2,
-            // 'small_img_3'=>$small_img_3,
-            // 'small_img_4'=>$small_img_4,
-            // 'small_img_5'=>$small_img_5,
-            // 'small_img_6'=>$small_img_6,
-            // 'small_img_7'=>$small_img_7,
-            // 'small_img_8'=>$small_img_8,
-            // 'small_img_9'=>$small_img_9,
-
-
 
         ]);
 
@@ -405,16 +383,90 @@ $small_img_9=null;
         $project = Project::find($project_id);
         $project->amenity()->sync($amenities);
 
+$small_img_1=null;
+        $image = $request->file('small_img_1');
+            if($image){
+                $small_img_1 = uniqid() .'_'. $image->getClientOriginalName();
+                $image->storeAs('/public/gallery', $small_img_1);
+            }
+
+ $small_img_2=null;
+        $image = $request->file('small_img_2');  //
+                if($image){
+                    $small_img_2 = uniqid() .'_'. $image->getClientOriginalName();
+                    $image->storeAs('public/gallery', $small_img_2);
+                }
+$small_img_3=null;
+                $image=$request->file('small_img_3');
+                if($image){
+                    $small_img_3=uniqid() .'_'. $image->getClientOriginalName();
+                    $image->storeAs('public/images/gallery',$small_img_3);
+                }
+$small_img_4=null;
+                $image=$request->file('small_img_4');
+                if($image){
+                    $small_img_4=uniqid().'_'.$image->getClientOriginalName();
+                    $image->storeAs('public/images/gallery',$small_img_4);
+                }
+$small_img_5=null;
+                $image=$request->file('small_img_5');
+                if($image){
+                    $small_img_5=uniqid().'_'.$image->getClientOriginalName();
+                    $image->storeAs('public/images/gallery',$small_img_5);
+                }
+$small_img_6=null;
+                $image=$request->file('small_img_6');
+                if($image){
+                    $small_img_6=uniqid() .'_'. $image->getClientOriginalName();
+                    $image->storeAs('public/images/gallery',$small_img_6);
+                }
+$small_img_7=null;
+                $image=$request->file('small_img_7');
+                if($image){
+                    $small_img_7=uniqid() .'_'. $image->getClientOriginalName();
+                    $image->storeAs('public/images/gallery',$small_img_7);
+                }
+$small_img_8=null;
+                $image=$request->file('small_img_8');
+                if($image){
+                    $small_img_8=uniqid() .'_'. $image->getClientOriginalName();
+                    $image->storeAs('public/images/gallery',$small_img_8);
+                }
+$small_img_9=null;
+                $image=$request->file('small_img_9');
+                if($image){
+                    $small_img_9=uniqid() .'_'. $image->getClientOriginalName();
+                    $image->storeAs('public/images/gallery',$small_img_9);
+                }
+            $project=Previewimage::create([
+                'project_id'=>$project->id,
+                'small_img1'=>$small_img_1,
+                'small_img2'=>$small_img_2,
+                'small_img3'=>$small_img_3,
+                'small_img4'=>$small_img_4,
+                'small_img5'=>$small_img_5,
+                'small_img6'=>$small_img_6,
+                'small_img7'=>$small_img_7,
+                'small_img8'=>$small_img_8,
+                'small_img9'=>$small_img_9,
+
+
+        ]);
+
+dd($request->all());
+
         return redirect(route('project.index', $slug))->with('status', 'Project updated successful.');
+
         }
 
         /**
+
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-        public function destory($id)
+        public function destroy($id)
         {
             $project = Project::where('id', $id);
             Project::find($project->first()->id)->amenity()->sync([]);
@@ -423,48 +475,76 @@ $small_img_9=null;
                     "status" => 'success',
                     "info"=>'delete successful'
                 ]);
-           $projects=Project::findOrFail($id);
 
-           if(!$projects->first()){
-               return redirect()->back()->with('error', 'not found project');
-          }
+            // $imagePath=Previewimage
+            // $projects=Project::findOrFail($id);
 
-           Project::find($projects->first()->id)->amenity()->sync([]);
-         if (File::exists("images/projects/".$projects->cover)) {
-           File::delete(public_path('images/projects/' . $projects->cover));
-
-         }
-        if (File::exists("images/360images/".$projects->gallery)) {
-            File::delete(public_path('images/360images/' . $projects->gallery));
-             }
-
-             previewimages::where('id',$projects->id)-get();
-             if(File::exists("images/gallery/".$project->previeimages->small_img_1)){
-                    File::delet(public_path("images/gallerry".$project->previewimages->small_img_1));
-             }
-
-            //  $images = Image::where("id",$projects->id)->get();
-            //  foreach($images as $image){
-            //  if (File::exists("images/gallery/".$image->image)) {
-            //  File::delete(public_path('images/gallery/' . $image->first()->image));
-            //  }
+            // if(!$projects->first()){
+            //     return redirect()->back()->with('error', 'not found project');
             // }
-             $projects->delete();
-            return response()->json([
-                 "status" => 'success',
-                 "info"=>'delete successful'
-             ]);
-        return redirect('/admin/project')->with('success', 'Your project has been deleted successfully.');
+
+            // Project::find($projects->first()->id)->amenity()->sync([]);
+
+            // if (File::exists("images/projects/".$projects->cover)) {
+            // File::delete(public_path('images/projects/' . $projects->cover));
+            // }
+
+            // if (File::exists("images/360images/".$projects->gallery)) {
+            // File::delete(public_path('images/360images/' . $projects->gallery));
+            // }
+
+            // $images = Image::where("id",$projects->id)->get();
+            // foreach($images as $image){
+            // if (File::exists("images/gallery/".$image->image)) {
+            // File::delete(public_path('images/gallery/' . $image->first()->image));
+            // }
+            // }
+            // $projects->delete();
+            // return response()->json([
+            //     "status" => 'success',
+            //     "info"=>'delete successful'
+            // ]);
+            // return redirect('/admin/project')->with('success', 'Your project has been deleted successfully.');
         }
 
         public function deleteimage($id){
-        $images=Previewimage::findOrFail($id);
-        if (File::exists("images/gallery/".$images->small_img_1)) {
-        File::delete(public_path("images/gallery/".$images->samll_img_1));
-        }
+            $image1=Previewimage::find($id);
+            Storage::delete('public/images/gallery/'.$image1->small_img1);
 
-        Previewimage::find($id)->delete();
+
+        // public function deleteimage($id){
+        // $image1=Previewimage::findOrFail($id);
+        //     if (File::exists("images/gallery/".$image1->small_img1)) {
+        // File::delete(public_path("images/gallery/".$image1->small_img1));
+        // }
+        // $image2=Previewimage::findOrFail($id);
+        //     if (File::exists("images/gallery/".$image2->small_img2)) {
+        // File::delete(public_path("images/gallery/".$image2->small_img2));
+        // }
+        //  $image3=Previewimage::findOrFail($id);
+        //     if (File::exists("images/gallery/".$image3->small_img3)) {
+        // File::delete(public_path("images/gallery/".$image3->small_img2));
+        // }
+        //  $image4=Previewimage::findOrFail($id);
+        //     if (File::exists("images/gallery/".$image->small_img1)) {
+        // File::delete(public_path("images/gallery/".$images->small_img1));
+        // }
+        //  $image1=Previewimage::findOrFail($id);
+        //     if (File::exists("images/gallery/".$image2->small_img1)) {
+        // File::delete(public_path("images/gallery/".$images->small_img1));
+        // }
+        //  $image1=Previewimage::findOrFail($id);
+        //     if (File::exists("images/gallery/".$image2->small_img1)) {
+        // File::delete(public_path("images/gallery/".$images->small_img1));
+        // }
+        //  $image1=Previewimage::findOrFail($id);
+        //     if (File::exists("images/gallery/".$image2->small_img1)) {
+        // File::delete(public_path("images/gallery/".$images->small_img1));
+        // }
+        
+         Previewimage::find($id)->delete();
         return back();
+
         }
 
         public function deletecover($id){
@@ -475,13 +555,13 @@ $small_img_9=null;
         return back();
         }
 
-//         // $project = Project::where('id', $id);
-//         // if (!$project->first()){
-//         //     return redirect()->back()->with('error', 'Project Not Found');
-//         // }
-//         // File::delete(public_path('images/projects/' . $project->first()->image));
-//         // $project->delete();
-//         // return redirect('/project')->with('success', 'Project deleted successfully');
+        // $project = Project::where('id', $id);
+        // if (!$project->first()){
+        //     return redirect()->back()->with('error', 'Project Not Found');
+        // }
+        // File::delete(public_path('images/projects/' . $project->first()->image));
+        // $project->delete();
+        // return redirect('/project')->with('success', 'Project deleted successfully');
 
 
     // Win Win Maw
@@ -490,8 +570,5 @@ $small_img_9=null;
         Project::whereIn('id',$ids)->delete();
 //        Category::destroy(collect($ids));
         return redirect()->back()->with('status','Multiple Delete Successful');
-
-
-     }
-
+    }
 }
