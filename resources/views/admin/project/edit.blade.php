@@ -430,7 +430,7 @@
                                                         <div id=""
                                                             class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative"
                                                             style="width:100px;height:100px">
-                                                            
+
                                                             <img src="{{ asset('images/gallery/' . $project->previewimages->small_img1) }}"
                                                                 id="sImg1" alt=""
                                                                 class="w-100 h-100 pointer small_img"
@@ -438,10 +438,6 @@
 
                                                             <i
                                                                 class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
-
-
-
-
 
                                                         </div>
                                                         @error('small_img_1')
