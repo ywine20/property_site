@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('profile', 'Home - SMT')
+@section('title', 'Profile - SMT')
 @section('content')
 
 <!-- main -->
@@ -15,9 +15,9 @@
                 </div>
                 <div class="col-9 col-md-4 col-lg-3 d-flex align-items-center justify-content-center justify-content-md-start">
                     <div class="text-center text-md-start  profile-info">
-                        <span class="fw-bold text-primary fs-3">Mr.John Doe</span><br>
-                        <span class=" text-black-50 fs-4">johndoe@gmail.com</span><br>
-                        <span class=" text-black-50 fs-4">09876543211</span>
+                        <span class="fw-bold text-primary name">Mr.John Doe</span><br>
+                        <span class=" text-black-50 email">johndoe@gmail.com</span><br>
+                        <span class=" text-black-50 phone">09876543211</span>
                     </div>
                 </div>
             </div>
@@ -50,21 +50,21 @@
     <section id="authorize">
         <div class="w-100 bg-white">
             <!-- SUB NAV -->
-            <div class="px-5">
-                <ul class="nav nav-tabs">
+            <div class="px-1 px-md-2 px-lg-5">
+            <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active text-secondary" aria-current="page" href="#">Authorize Asset</a>
+                        <a class="nav-link active  text-secondary"  href="{{route('profile')}}">Authorize Asset</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#">Setting</a>
+                        <a class="nav-link text-secondary" href="{{route('profile-setting')}}">Setting</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#">Redeem</a>
+                        <a class="nav-link text-secondary" href="{{route('profile-redeem')}}">Redeem</a>
                     </li>
                 </ul>
             </div>
             <!-- END SUB NAV -->
-            <div class="py-2 px-3 p-md-5 text-center">
+            <div class="py-2 px-3 p-md-5 my-3  mx-lg-3 mx-xl-5 text-center">
                 <div class="text-black-50 text-center table-explain">
                     Lorem ipsum dolor sit aloremmet consectetur adipisicing e
                     lit. Soluta, ab ad. A quam officiis error hic odi
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="authorized-assets-table px-2 px-md-5 mb-5">
+            <div class="authorized-assets-table px-2 px-md-5 mb-5  mx-lg-3 mx-xl-5">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="bg-secndary text-primary">
@@ -110,11 +110,25 @@
                                     <i class="bi bi-x  fs-3 text-danger"></i>
                                 </td>
                                 <td class="text-center">
-                                    <a href="">
+                                    <a href="#">
                                         <i class="bi bi-eye fs-4 text-primary"></i>
                                     </a>
                                 </td>
                             </tr>
+                             <tr>
+                                <td>P0031</td>
+                                <td>No(19/21) lower block, 45 st, Botahtaung Township, Yangon</td>
+                                <td class="site-progress">Lorem ipsum dolor sit amet consectetur adipisicing elit. Disti Lorem ipsum dolor sit amet consectetur adipisicing elit. Disti</td>
+                                <td class="text-center">
+                                <i class="bi bi-check2 fs-3 text-success "></i>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#">
+                                        <i class="bi bi-eye fs-4 text-primary"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                           
                         </tbody>
                     </table>
                 </div>

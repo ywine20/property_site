@@ -5,6 +5,14 @@
         object-fit: cover;
         object-position: center;
     }
+    .profile-info{
+        .name{
+            font-size: 1.5rem;
+        }
+        .email,.phone{
+            font-size: 1.3rem;
+        }
+    }
 
     #tier {
         position: relative;
@@ -51,29 +59,63 @@
     }
 }
 
+#authorize{
+    .authorized-assets-table{
+        .table-responsive{
+            table{
+            thead{
+                tr{
+                    th:nth-child(1){
+                        min-width: 120px;
+                    }
+                    th:nth-child(2){
+                        min-width: 230px;
+                    }
+                    th:nth-child(3){
+                        min-width: 245px;
+                    }
+                }
+            }
+                
+            }
+        }
+    }
+}
 
 
 @media screen and (max-width: 600px) {
     #profile{
-
+        .profile-image {
+            width: 150px;
+            height: 150px;
+          
+        }
+        .profile-info{
+            .name{
+                font-size: 1.2rem;
+            }
+            .email,.phone{
+                font-size: 1.1rem;
+            }
+        }
     }
     #tier{
         .progress-bg {
-            height: 10px;
+            height: 10px !important;
         }
 
         .progress-percent-bar {
-            height: 10px;
-            width: 25%;
+            height: 10px !important;
+            width: 25% !important;
         }
 
         .tier {
-            width: 25px;
-            height: 25px;
+            width: 25px !important;
+            height: 25px !important;
         }
     }
 
-    #authorize{
+    #authorize,#setting,#redeem{
 
         .nav-tabs{
             .nav-item{
@@ -114,6 +156,13 @@
 }
 
 @media screen and (min-width: 600px) {
+    #profile {
+        .profile-image {
+            width: 200px;
+            height: 200px;
+
+        }
+    }
     #authorize{
         
         .table-explain{
@@ -125,14 +174,14 @@
                     thead{
                         tr{
                             th{
-                                font-size: 1rem;
+                                font-size: 0.95rem;
                             }
                         }
                     }
                     tbody{
                         tr{
                             td{
-                                font-size:.9rem;
+                                font-size:.85rem;
                             }
                         }
                     }
@@ -142,8 +191,32 @@
     }
 }
 
-@media screen and (min-width: 768px) {}
+@media screen and (min-width: 768px) {
+    #profile {
+        .profile-image {
+            width: 250px;
+            height: auto;
+           
+        }
+    }
+}
 
-@media screen and (min-width: 992px) {}
+@media screen and (min-width: 992px) {
+    #profile {
+        .profile-image {
+            width: 250px;
+            height: auto
+           
+        }
+    }
+}
 
-@media screen and (min-width: 1200px) {}
+@media screen and (min-width: 1200px) {
+    #profile {
+        .profile-image {
+            width: 250px;
+            height: 250px
+           
+        }
+    }
+}
