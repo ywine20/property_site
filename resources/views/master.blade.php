@@ -391,7 +391,7 @@
             <form action="">
               <!-- user name -->
               <div class="form-floating mb-3">
-                <input type="email" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
+                <input type="text" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">User Name</label>
                 <span class="invalid-feedback">This field is required.</span>
               </div>
