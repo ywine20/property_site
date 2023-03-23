@@ -13,11 +13,11 @@ class CreateAlbumDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('album_documents', function (Blueprint $table) {
+        Schema::create('albumdocuments', function (Blueprint $table) {
             $table->id();
             $table->longText('documents');
-            $table->foreignId('album_id');
-            $table->foreignId("project_id");
+            // $table->foreignId('album_id');
+            // $table->foreignId("project_id");
             $table->dateTime('date');
             $table->dateTime('time');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateAlbumDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('album_documents');
+        Schema::dropIfExists('albumdocuments');
     }
 }

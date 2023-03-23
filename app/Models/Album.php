@@ -11,7 +11,7 @@ class Album extends Model
 {
     use HasFactory;
     protected $fillable=[
-       'title',
+       'documents',
     ];
 
    public function projects()

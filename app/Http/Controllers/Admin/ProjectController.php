@@ -453,14 +453,13 @@ $small_img_9=null;
 
         ]);
 
-// dd($request->all());
+
 
         return redirect(route('project.index', $slug))->with('status', 'Project updated successful.');
 
         }
 
         /**
-
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -526,20 +525,28 @@ $small_img_9=null;
         File::delete(public_path("images/gallery/".$image3->small_img2));
         }
          $image4=Previewimage::findOrFail($id);
-            if (File::exists("images/gallery/".$image->small_img1)) {
-        File::delete(public_path("images/gallery/".$images->small_img1));
+            if (File::exists("images/gallery/".$image4->small_img4)) {
+        File::delete(public_path("images/gallery/".$image4->small_img4));
         }
-         $image1=Previewimage::findOrFail($id);
-            if (File::exists("images/gallery/".$image2->small_img1)) {
-        File::delete(public_path("images/gallery/".$images->small_img1));
+         $image5=Previewimage::findOrFail($id);
+            if (File::exists("images/gallery/".$image5->small_img5)) {
+        File::delete(public_path("images/gallery/".$image5->small_img1));
         }
-         $image1=Previewimage::findOrFail($id);
-            if (File::exists("images/gallery/".$image2->small_img1)) {
-        File::delete(public_path("images/gallery/".$images->small_img1));
+         $image6=Previewimage::findOrFail($id);
+            if (File::exists("images/gallery/".$image6->small_img6)) {
+        File::delete(public_path("images/gallery/".$image6->small_img6));
         }
-         $image1=Previewimage::findOrFail($id);
-            if (File::exists("images/gallery/".$image2->small_img1)) {
-        File::delete(public_path("images/gallery/".$images->small_img1));
+         $image7=Previewimage::findOrFail($id);
+            if (File::exists("images/gallery/".$image7->small_img7)) {
+        File::delete(public_path("images/gallery/".$image7->small_img8));
+        }
+           $image8=Previewimage::findOrFail($id);
+            if (File::exists("images/gallery/".$image8->small_img8)) {
+        File::delete(public_path("images/gallery/".$image8->small_img8));
+        }
+           $image9=Previewimage::findOrFail($id);
+            if (File::exists("images/gallery/".$image9->small_img9)) {
+        File::delete(public_path("images/gallery/".$image9->small_img9));
         }
 
          Previewimage::find($id)->delete();
