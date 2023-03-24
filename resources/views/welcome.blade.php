@@ -72,7 +72,7 @@
                       <div class="col mb-3 mb-md-0 mx-1">
                           <div class="card fb-card border-0 shadow-sm">
                               <a href="{{$f->project_post_link}}" target="_blank">
-                                  <img src="{{asset('images/fb-images/'.$f->picture)}}" class="card-img-top" alt="..." style="height:230px;object-fit:cover;">
+                                  <img src="{{asset('images/fb-images/'.$f->picture)}}" class="card-img-top" alt="..." style="object-fit:cover;">
                               </a>
                               <div class="card-body overflow-hidden" style="max-height:80px;" >
                             <span class= "fb-card-text card-text overflow-hidden">

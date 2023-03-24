@@ -22,9 +22,29 @@
 
         .progress-percent-bar {
             height: 15px;
-            width: 25%;
-        }
+            
+            &.bronze{
+                width: 2%;
+            }
 
+            &.silver{
+                width: 25%;
+    
+            }
+            &.gold{
+                width: 50%;
+    
+            }
+            &.platinum{
+                width: 75%;
+    
+            }
+            &.diamond{
+                width: 100%;
+    
+            }
+        }
+       
         .tier {
             width: 40px;
             height: 40px;

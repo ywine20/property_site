@@ -2,11 +2,8 @@
 
 @section('title', 'Project List - SMT')
 @section('css')
-{{-- <link rel="stylesheet" href="{{asset('css/project-list.css')}}">--}}
-/*
-<link rel="stylesheet" href="/sass/project-list.scss">*/
-/*
-<link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css ">*/
+<!-- {{-- <link rel="stylesheet" href="{{asset('css/project-list.css')}}">--}} -->
+
 @endsection
 
 @section('content')

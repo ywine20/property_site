@@ -1,6 +1,8 @@
 require('./bootstrap');
 
 import VenoBox from 'venobox';
+import axios from 'axios';
+
 
 new VenoBox({
     selector: '.myGallery',

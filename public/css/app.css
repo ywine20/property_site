@@ -20542,7 +20542,21 @@ textarea.form-control-lg {
 }
 #profile #tier .progress-percent-bar {
   height: 15px;
+}
+#profile #tier .progress-percent-bar.bronze {
+  width: 2%;
+}
+#profile #tier .progress-percent-bar.silver {
   width: 25%;
+}
+#profile #tier .progress-percent-bar.gold {
+  width: 50%;
+}
+#profile #tier .progress-percent-bar.platinum {
+  width: 75%;
+}
+#profile #tier .progress-percent-bar.diamond {
+  width: 100%;
 }
 #profile #tier .tier {
   width: 40px;

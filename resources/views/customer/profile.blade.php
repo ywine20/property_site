@@ -10,14 +10,18 @@
             <div class="row d-flex justify-content-center align-items-center w-100 gap-4 gap-md-2">
                 <div class="col-9  col-md-4 col-lg-3 d-flex justify-content-center justify-content-md-end align-items-center">
                     <div class="overflow-hidden rounded rounded-circle border border-4 border-primary profile-image">
-                        <img src="{{asset('/image/smtlogoLarge.png')}}" alt="" class="w-100 h-100">
+                    @if( isset(Auth::guard('user')->user()->profile_img))
+                    <img src="{{asset('images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100">
+                    @else
+                    <img src="{{asset('/images/smtlogoLarge.png')}}" alt="" class="w-100 h-100">
+                    @endif
                     </div>
                 </div>
                 <div class="col-9 col-md-4 col-lg-3 d-flex align-items-center justify-content-center justify-content-md-start">
                     <div class="text-center text-md-start  profile-info">
-                        <span class="fw-bold text-primary name">Mr.John Doe</span><br>
-                        <span class=" text-black-50 email">johndoe@gmail.com</span><br>
-                        <span class=" text-black-50 phone">09876543211</span>
+                        <span class="fw-bold text-primary name">{{$user->name}}</span><br>
+                        <span class=" text-black-50 email">{{$user->email}}</span><br>
+                        <span class=" text-black-50 phone">{{$user->phone}}</span>
                     </div>
                 </div>
             </div>
@@ -25,7 +29,7 @@
                 <div class="col-10 col-md-8 col-lg-6 bg-light d-flex justify-content-center align-items-center px-0">
                     <div id="tier" class="position-relative w-100">
                         <div class="bg-black bg-opacity-10 w-100 progress-bg"></div>
-                        <div class="bg-primary position-absolute start-0 top-0 progress-percent-bar "></div>
+                        <div class="bg-primary position-absolute start-0 top-0 progress-percent-bar {{$user->tier}}  "></div>
                         <div class="overflow-hidden my-1 tier bronze">
                             <img src="{{asset('/image/tier/bronze.png')}}" alt="" class="w-100 h-100" />
                         </div>
@@ -53,7 +57,7 @@
             <div class="px-1 px-md-2 px-lg-5">
             <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active  text-secondary"  href="{{route('profile')}}">Authorize Asset</a>
+                        <a class="nav-link active  text-secondary"  href="{{route('profile-setting')}}">Authorize Asset</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-secondary" href="{{route('profile-setting')}}">Setting</a>

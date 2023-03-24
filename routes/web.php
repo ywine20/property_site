@@ -9,6 +9,9 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerProfileController;
+use App\Models\CustomerProfile;
+
 // use Illuminate\Support\Facades\Session;
 // use App\Http\Controllers\EngagementController;
 
@@ -24,9 +27,9 @@ use App\Http\Controllers\AuthController;
 */
 
 //Login
-Route::get('/login',[AuthController::class,'showlogin']);
-Route::post('/login',[AuthController::class,'login']);
-Route::get('/logout',[AuthController::class,'logout']);
+Route::post('/register',[AuthController::class,'register'])->name('register');
+Route::post('/login',[AuthController::class,'login'])->name('login');
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
 
 //User
@@ -98,57 +101,15 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
 
 
 });
-    // Route::resource('contact', "ContactController");
-    // Route::delete('/deletecover/{id}', "ProjectController@deletecover");
-    //Route::delete('/delete/{id}',[ProjectController::class,'destroy']);
-/******************************************************************************************/
-    // For Gallery Route
-    // Route::get('gallery',[GalleryController::class,'index']);
-    // Route::get('add-photo',[GalleryController::class,'create']);
-    // Route::post('add-photo',[GalleryController::class,'store']);
-    // Route::get('edit-gallery/{id}',[GalleryController::class,'edit']);
-    // Route::put('update-gallery/{id}',[GalleryController::class,'update']);
-    // Route::get('delete-gallery/{id}',[GalleryController::class,'destroy']);
-    // Route::get('show-gallery/{id}',[GalleryController::class,'show']);
-
-    // For Address Route
-    // Route::get('address',[AddressController::class,'index']);
-    // Route::get('add-address',[AddressController::class,'create']);
-    // Route::post('add-address',[AddressController::class,'store']);
-    // Route::get('edit-address/{id}',[AddressController::class,'edit']);
-    // Route::put('update-address/{id}',[AddressController::class,'update']);
-    // Route::get('delete-address/{id}',[AddressController::class,'destory']);
-    // Route::get('show-address/{id}',[AddressController::class,'show']);
-
-    //for Slider
-    // Route::get('slider',[SliderController::class,'index']);
-    // Route::get('add-slider',[SliderController::class,'create']);
-    // Route::post('add-slider',[SliderController::class,'store']);
-    // Route::get('edit-slider/{id}',[SliderController::class,'edit']);
-    // Route::put('update-slider/{id}',[SliderController::class,'update']);
-    // Route::get('show-slider/{id}',[SliderController::class,'show']);
-    // Route::get('delete-slider/{id}',[SliderController::class,'destory']);
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/hello', function(){
-//     // Session::put('message', 0);
-//     $message = Session::get('message');
-//     $message += 1;
-//     Session::put('message', $message);
-//     // echo Session::get('message');
-// });
-
-
+   
 
 
 //SMT UPDATE 13-March-2023
 
-Route::view('/profile','customer/profile')->name('profile');
+Route::get('/profile/{id}',[CustomerProfileController::class,'profile'])->name('profile');
+// Route::view('/profile','customer/profile')->name('profile');
+
 Route::view('/profile/setting','customer/profile-setting')->name('profile-setting');
 Route::view('/redeem','customer/redeem')->name('profile-redeem');
-
 
 
