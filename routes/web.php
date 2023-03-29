@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProductController;
@@ -9,18 +11,13 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PanoramaController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ProjectListController;
-use App\Http\Controllers\AlbumDocumentController;
 
-
-Route::get('/upload',[AlbumDocumentController::class, 'create']);
-Route::post('/upload',[AlbumDocumentController::class, 'store']);
 
 
 
 
 Route::get('/products',[ProductController::class,'index']);
 Route::get('/products/vouchers/{id}',[ProductController::class,'voucher']);
-
 
 /*
  Client Site and User View Point Routes
@@ -49,6 +46,12 @@ Route::post('/contactus', [App\Http\Controllers\ContactController::class, 'store
 */
 Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
+
+
+Route::get('admin/site',[SiteController::class,'siteindex'])->name('save-sitepost-gallery');
+Route::post('admin/site',[SiteController::class, 'sitesave']);
+Route::get('admin/album',[AlbumController::class, 'index'])->name('save-multipel-imgae');
+Route::post('admin/album',[AlbumController::class, 'save']);
 
 Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']], function(){
     Route::get('/', 'PageController@showDashboard');

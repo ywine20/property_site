@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlbumDocumentsTable extends Migration
+class CreateAlbumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateAlbumDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('albumdocuments', function (Blueprint $table) {
+        Schema::create('albums', function (Blueprint $table) {
             $table->id();
-            $table->longText('documents');
-            // $table->foreignId('album_id');
-            // $table->foreignId("project_id");
-            $table->dateTime('date');
-            $table->dateTime('time');
+            $table->string('title')->nullable();
+            $table->Longtext('album')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateAlbumDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('albumdocuments');
+        Schema::dropIfExists('albums');
     }
 }
