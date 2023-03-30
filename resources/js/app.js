@@ -1,7 +1,7 @@
 require('./bootstrap');
 
 import VenoBox from 'venobox';
-import axios from 'axios';
+// import axios from 'axios';
 
 
 new VenoBox({

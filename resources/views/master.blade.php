@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
   <!-- <link rel="icon" href="../../images/smtlogo.png" type="image/png"> -->
@@ -32,7 +33,7 @@
 
 
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 
   <!-- Add the slick-theme.css if you want default styling -->
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -46,9 +47,9 @@
   <!-- animate.style -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-
+  <script src="{{asset('js/app.js')}}"></script>
   <!-- Google Recaptcha -->
-  <script src="https://www.google.com/recaptcha/api.js" async ></script>
+  <script src="https://www.google.com/recaptcha/api.js" async></script>
   @yield('css')
   <style>
     .slick-dots {
@@ -191,30 +192,33 @@
       </div>
       <div class="px-2 py-2 d-lg-none position-absolute bottom-0 w-100">
         <div class="d-flex justify-content-start align-items-center">
-       @if(auth()->guard('user')->check())
+          @if(auth()->guard('user')->check())
 
           <div class="d-flex flex-column w-100">
             <a href="{{route('profile',Auth::guard('user')->user()->id)}}" class="text-decoration-none w-100">
               <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;">
                 <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
                   @if( isset(Auth::guard('user')->user()->profile_img))
-                  <img src="{{asset('images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100">
+                  <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;" style="object-fit:cover;">
                   @else
-                  <img src="{{ asset('images/client-profile/user.png') }}" alt="..." class="w-100 h-100">
+                  <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;" style="object-fit:cover;">
                   @endif
                 </div>
                 <span class="text-primary usernameSmallDevice usernameToShort">{{Auth::guard('user')->user()->name}}</span>
               </div>
             </a>
             <div class="rounded px-3 py-3 text-primary w-100 text-center" style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
-              <a href="{{route('logout')}}" class="text-decoration-none">LOG OUT</a>
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-link text-decoration-none text-primary">LOG OUT</button>
+                <!-- <a href="{{route('logout')}}" class="text-decoration-none">LOG OUT</a> -->
+              </form>
             </div>
 
           </div>
           @else
           <button class="btn btn-link text-decoration-none w-100 px-0" onclick="openLoginModalInSmallDevice()">
-            <div class="rounded px-3 py-3 text-primary w-100 text-center" style="box-shadow: inset 0px 1px 0px #f5cc7a47;
-">
+            <div class="rounded px-3 py-3 text-primary w-100 text-center" style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
               Login
             </div>
           </button>
@@ -260,9 +264,9 @@
                   <span class="text-primary me-2 usernameLargeDevice usernameToShort">{{Auth::guard('user')->user()->name}}</span>
                   <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
                     @if( isset(Auth::guard('user')->user()->profile_img))
-                    <img src="{{asset('images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100">
+                    <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;">
                     @else
-                    <img src="{{ asset('images/client-profile/user.png') }}" alt="..." class="w-100 h-100">
+                    <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
                     @endif
                   </div>
                 </a>
@@ -272,9 +276,9 @@
                     <div class="d-flex flex-row align-items-center gap-3">
                       <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
                         @if( isset(Auth::guard('user')->user()->profile_img))
-                        <img src="{{asset('images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100">
+                        <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;">
                         @else
-                        <img src="{{ asset('images/client-profile/user.png') }}" alt="..." class="w-100 h-100">
+                        <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
                         @endif
                       </div>
                       <div class="">
@@ -283,7 +287,11 @@
                       </div>
                     </div>
                     <div class="w-100 bg-primary text-secondary text-center py-2 mt-3">
-                      <a href="{{route('logout')}}" class="text-secondary text-decoration-none">LOG OUT</a>
+                      <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-secondary btn btn-link text-decoration-none px-0 py-0">LOG OUT</button>
+                        <!-- <a href="{{route('logout')}}" class="text-secondary text-decoration-none">LOG OUT</a> -->
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -297,13 +305,8 @@
     </nav>
     <!-- end nav -->
 
-    @if ($errors->has('password'))
-    <div class="alert alert-danger">
-        {{ $errors->first('password') }}
-    </div>
-@endif
     @yield('content')
-  
+
 
     <!-- footer -->
     <section id="footer">
@@ -382,146 +385,145 @@
       </div>
     </section>
     <!-- end footer -->
+  </div>
 
 
 
-    <!--Customer LOG IN -->
-    <div id="loginModal" class="custom-modal ">
-      <div class="login d-flex justify-content-center w-100 bg-secondary bg-opacity-10 vh-100 py-5">
-        <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
-          <span class="close fs-5 me-2 end-0 position-absolute pointer loginClose" onclick="closeLoginModal()">&times;</span>
-          <div class="card-body">
-            <h4 class="mb-4">Log In To Sun Myat Tun</h4>
-            <form enctype="multipart/form-data" class="login-form">
-              <!-- email -->
-              <div class="form-floating mb-3">
-                <input type="email" name="email" class="form-control form-control-border-bottom" id="floatingInputLoginEmail" placeholder="name@example.com">
-                <label for="floatingInputLoginEmail">Email</label>
-                <small class="error-text login_email_error text-danger"></span>
-              
-              </div>
-              <!-- password -->
-              <div class="form-floating mb-3">
-                <input type="password" name="password" class="form-control form-control-border-bottom @error('email') is-invalid @enderror" id="floatingInputLoginPassword" placeholder="name@example.com">
-                <label for="floatingInputLoginPassword">Password</label>
-                <small class="error-text login_password_error text-danger"></span>
 
-              </div>
+  <!--Customer LOG IN -->
+  <div id="loginModal" class="custom-modal ">
+    <div class="login d-flex justify-content-center w-100 bg-secondary bg-opacity-10 vh-100 py-5">
+      <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
+        <span class="close fs-5 me-2 end-0 position-absolute pointer loginClose" onclick="closeLoginModal()">&times;</span>
+        <div class="card-body">
+          <h4 class="mb-4">Log In To Sun Myat Tun</h4>
+          <form enctype="multipart/form-data" class="login-form">
+            <!-- email -->
+            <div class="form-floating mb-3">
+              <input type="email" name="email" class="form-control form-control-border-bottom" id="floatingInputLoginEmail" placeholder="name@example.com">
+              <label for="floatingInputLoginEmail">Email</label>
+              <small class="error-text login_email_error text-danger"></small>
 
-              <!-- login Button -->
-              <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase mt-2">LOG IN</button>
-
-            </form>
-            <!-- forgot password -->
-            <div class="w-100 text-end mb-3">
-              <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span class="text-primary">Forgot Password?</span></buttonhref=>
             </div>
-            <!-- login with social app -->
-            <div class="text-center w-100 pt-1">
-              <button class="btn rounded-circle border border-secondary mx-1 social-icon">
-                <i class="bi bi-google fa-fw text-secondary fs-5"></i>
-              </button>
-              <button class="btn rounded-circle border border-secondary social-icon">
-                <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
-              </button>
+            <!-- password -->
+            <div class="form-floating mb-3">
+              <input type="password" name="password" class="form-control form-control-border-bottom @error('email') is-invalid @enderror" id="floatingInputLoginPassword" placeholder="name@example.com">
+              <label for="floatingInputLoginPassword">Password</label>
+              <small class="error-text login_password_error text-danger"></small>
+
             </div>
-            <!-- don't have an account -->
-            <div class="text-center w-100 my-3">
-              <small>Don't have an account?
-                <button class="btn btn-link text-primary" onclick="openRegisterModal()">Register</button> Now!
-              </small>
-            </div>
+
+            <!-- login Button -->
+            <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase mt-2">LOG IN</button>
+
+          </form>
+          <!-- forgot password -->
+          <div class="w-100 text-end mb-3">
+            <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span class="text-primary">Forgot Password?</span></buttonhref=>
+          </div>
+          <!-- login with social app -->
+          <div class="text-center w-100 pt-1">
+            <button class="btn rounded-circle border border-secondary mx-1 social-icon">
+              <i class="bi bi-google fa-fw text-secondary fs-5"></i>
+            </button>
+            <button class="btn rounded-circle border border-secondary social-icon">
+              <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
+            </button>
+          </div>
+          <!-- don't have an account -->
+          <div class="text-center w-100 my-3">
+            <small class="d-flex justify-content-center align-items-center">Don't have an account?
+              <button class="btn btn-link text-primary" onclick="openRegisterModal()">Register</button> Now!
+            </small>
           </div>
         </div>
       </div>
-
     </div>
-
-    <!-- Customer Register -->
-    <div id="registerModal" class="custom-modal">
-      <div class="register d-flex justify-content-center w-100 bg-secondary bg-opacity-10 py-5 ">
-        <div class="card bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
-          <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose" onclick="closeRegisterModal()">&times;</span>
-          <div class="card-body">
-            <h4 class="mb-4">Register To Sun Myat Tun</h4>
-            <form action="{{route('register')}}" method="POST">
-              @csrf
-              <!-- user name -->
-              <div class="form-floating mb-3">
-                <input type="text" name="name" class="form-control form-control-border-bottom is-invalid" id="floatingInputName" placeholder="JohnDoe" /> 
-                <label for="floatingInputName">User Name</label>
-                <span class="invalid-feedback">This field is required.</span>
-              </div>
-              <!-- email -->
-              <div class="form-floating mb-3">
-                <input type="text" name="email" class="form-control form-control-border-bottom is-invalid" id="floatingInputEmail" placeholder="name@example.com" />
-                <label for="floatingInputEmail">Email</label>
-                <span class="invalid-feedback">This field is required.</span>
-              </div>
-              <!-- password -->
-              <div class="form-floating mb-3">
-                <input type="text" name="password" class="form-control form-control-border-bottom is-invalid" id="floatingInputPassword" placeholder="" />
-                <label for="floatingInputPassword">Password</label>
-                <span class="invalid-feedback">This field is required.</span>
-              </div>
-              <!--cofirmed password -->
-              <div class="form-floating mb-3">
-                <input type="password" name="password_confirmation" class="form-control form-control-border-bottom is-invalid" id="floatingInputConfirmPassword" placeholder="" />
-                <label for="floatingInputConfirmPassword">Confirm Password</label>
-                <span class="invalid-feedback">Confirm password doesn't match.</span>
-              </div>
-              <!-- registere Button -->
-              <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
-            </form>
-            <!-- register with social app -->
-            <div class="text-center w-100">
-              <button class="btn rounded-circle border border-secondary mx-1 social-icon">
-                <i class="bi bi-google fa-fw text-secondary fs-5"></i>
-              </button>
-              <button class="btn rounded-circle border border-secondary social-icon">
-                <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
-              </button>
-            </div>
-            <!-- Already have an account -->
-            <div class="text-center w-100 my-3">
-              <small>Don't have an account?
-                <button class="btn btn-link text-primary" onclick="openLoginModal()">Log in</button> Now!
-              </small>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!--Customer forgot password -->
-    <div id="forgotPasswordModal" class="custom-modal ">
-      <div class="forgotPassword d-flex justify-content-center w-100 bg-secondary bg-opacity-10 vh-100 py-5">
-        <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
-          <span class="close fs-5 me-2 end-0 position-absolute pointer forgoPasswordCloseButton" onclick="closeforgotPasswordModal()">&times;</span>
-          <div class="card-body">
-            <h5 class="mb-4 fw-bolder">Forgot Password?</h5>
-            <span class="text-black-50 mb-4" style="font-size: .9rem;">Please Enter Your Email Address To Receive A New Password</span>
-            <form action="">
-              <!-- email -->
-              <div class="form-floating mb-5">
-                <input type="email" class="form-control form-control-border-bottom is-invalid" id="floatingInput" placeholder="name@example.com" />
-                <label for="floatingInput">Vertify Email Address</label>
-                <span class="invalid-feedback">Email doesn't match.</span>
-              </div>
-              <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">SEND</button>
-
-            </form>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-
-
 
   </div>
+
+  <!-- Customer Register -->
+  <div id="registerModal" class="custom-modal">
+    <div class="register d-flex justify-content-center w-100 bg-secondary bg-opacity-10 py-5 ">
+      <div class="card bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
+        <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose" onclick="closeRegisterModal()">&times;</span>
+        <div class="card-body">
+          <h4 class="mb-4">Register To Sun Myat Tun</h4>
+          <form action="{{route('register')}}" method="POST" class="register-form">
+            @csrf
+            <!-- user name -->
+            <div class="form-floating mb-3">
+              <input type="text" name="name" class="form-control form-control-border-bottom" id="floatingInputName" placeholder="JohnDoe" />
+              <label for="floatingInputName">User Name</label>
+              <small class="error-text register_name_error text-danger"></small>
+            </div>
+            <!-- email -->
+            <div class="form-floating mb-3">
+              <input type="text" name="email" class="form-control form-control-border-bottom" id="floatingInputEmail" placeholder="name@example.com" />
+              <label for="floatingInputEmail">Email</label>
+              <small class="error-text register_email_error text-danger"></small>
+            </div>
+            <!-- password -->
+            <div class="form-floating mb-3">
+              <input type="password" name="password" class="form-control form-control-border-bottom" id="floatingInputPassword" placeholder="name@example.com" />
+              <label for="floatingInputPassword">Password</label>
+              <small class="error-text register_password_error text-danger"></small>
+            </div>
+            <!-- confirm password -->
+            <div class="form-floating mb-3">
+              <input type="password" name="password_confirmation" class="form-control form-control-border-bottom" id="floatingInputConfirmPassword" placeholder="name@example.com" />
+              <label for="floatingInputConfirmPassword">Confirm Password</label>
+              <small class="error-text register_passwordConfirm_error text-danger"></small>
+            </div>
+            <!-- registere Button -->
+            <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
+          </form>
+          <!-- register with social app -->
+          <div class="text-center w-100">
+            <button class="btn rounded-circle border border-secondary mx-1 social-icon">
+              <i class="bi bi-google fa-fw text-secondary fs-5"></i>
+            </button>
+            <button class="btn rounded-circle border border-secondary social-icon">
+              <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
+            </button>
+          </div>
+          <!-- Already have an account -->
+          <div class="text-center w-100 my-3">
+            <small class="d-flex justify-content-center align-items-center">Don't have an account?
+              <button class="btn btn-link text-primary" onclick="openLoginModal()">Log in</button> Now!
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!--Customer forgot password -->
+  <div id="forgotPasswordModal" class="custom-modal ">
+    <div class="forgotPassword d-flex justify-content-center w-100 bg-secondary bg-opacity-10 vh-100 py-5">
+      <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
+        <span class="close fs-5 me-2 end-0 position-absolute pointer forgoPasswordCloseButton" onclick="closeforgotPasswordModal()">&times;</span>
+        <div class="card-body">
+          <h5 class="mb-4 fw-bolder">Forgot Password?</h5>
+          <span class="text-black-50 mb-4" style="font-size: .9rem;">Please Enter Your Email Address To Receive A New Password</span>
+          <form action="" method="post" id="forgot_password_form">
+        
+            <!-- email -->
+            <div class="form-floating mb-5">
+              <input type="email" name="email" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
+              <label for="floatingInput">Vertify Email Address</label>
+              <small class="text-danger forgotPasswordError"></small>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">SEND</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 
 
 
@@ -691,7 +693,6 @@
       }
     }
   </script>
-
   <script>
     // Email Short
     let emailToShort = document.querySelectorAll(".emailToShort");
@@ -702,53 +703,136 @@
       }
     }
   </script>
-
   <script>
+    //login form with axios
+    const loginForm = document.querySelector('.login-form');
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
 
-//login form with axios
-const loginForm = document.querySelector('.login-form');
-loginForm.addEventListener('submit', e => {
-    e.preventDefault();
-
-    const email = loginForm.elements.email.value;
-    const password = loginForm.elements.password.value;
+      const email = loginForm.elements.email.value;
+      const password = loginForm.elements.password.value;
 
 
-    axios.post('/login', {
-        email: email,
-        password: password
-    })
-    .then(response => {
+      axios.post('/login', {
+          email: email,
+          password: password
+        })
+        .then(response => {
 
-        // localStorage.setItem('token', JSON.stringify(response.data.token));
-        window.location.reload();
-        loginModal.style.display = "none";
-      document.body.classList.remove('backdropShow');
-      
-        // Redirect to dashboard or home page
-    })
-    .catch(err => {
+          localStorage.setItem('token', JSON.stringify(response.data.access_token));
+          window.location.reload();
+          // // console.log(response.data);
+          // loginModal.style.display = "none";
+          // document.body.classList.remove('backdropShow');
 
-      // handle the error response
-    console.log(err.response.data);
-    
-        document.querySelector('.login_email_error').innerText = '';
-        document.querySelector('.login_password_error').innerText = ''; 
-      if (err.response) {
-        const { error } = err.response.data;
-        const emailError = error.email ? error.email[0] : '';
-        const passwordError = error.password ? error.password[0] : '';
-        document.querySelector('.login_email_error').innerText = emailError;
-        document.querySelector('.login_password_error').innerText = passwordError;        
-    } else if (err.request) {
-      console.log('request error',err.request)
-    } else {
-        // Anything else
-        console.log('Error', err.message);
-    }
+          // Redirect to dashboard or home page
+        })
+        .catch(err => {
+
+          // handle the error response
+          console.log(err.response.data);
+
+          document.querySelector('.login_email_error').innerText = '';
+          document.querySelector('.login_password_error').innerText = '';
+          if (err.response) {
+            const {
+              error
+            } = err.response.data;
+            const emailError = error.email ? error.email[0] : '';
+            const passwordError = error.password ? error.password[0] : '';
+            document.querySelector('.login_email_error').innerText = emailError;
+            document.querySelector('.login_password_error').innerText = passwordError;
+          } else if (err.request) {
+            console.log('request error', err.request)
+          } else {
+            // Anything else
+            console.log('Error', err.message);
+          }
+        });
     });
-});
 
+    //register form with axios
+    const registerForm = document.querySelector('.register-form');
+    registerForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = registerForm.elements.name.value;
+      const email = registerForm.elements.email.value;
+      const password = registerForm.elements.password.value;
+      const password_confirmation = registerForm.elements.password_confirmation.value;
+
+
+      axios.post('/register', {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation,
+        })
+        .then(response => {
+          localStorage.setItem('token', JSON.stringify(response.data.access_token));
+          window.location.reload();
+          // // console.log(response.data);
+          // loginModal.style.display = "none";
+          // document.body.classList.remove('backdropShow');          console.log(response.data);
+          // localStorage.setItem('token', JSON.stringify(response.data.token));
+
+        })
+        .catch(err => {
+
+          // handle the error response
+          console.log(err.response.data);
+
+          document.querySelector('.register_name_error').innerText = '';
+          document.querySelector('.register_email_error').innerText = '';
+          document.querySelector('.register_password_error').innerText = '';
+          document.querySelector('.register_passwordConfirm_error').innerText = '';
+
+          if (err.response) {
+            const {
+              error
+            } = err.response.data;
+            const nameError = error.name ? error.name[0] : '';
+            const emailError = error.email ? error.email[0] : '';
+            const passwordError = error.password ? error.password[0] : '';
+            const passwordConfirmError = error.password_confirmation ? error.password_confirmation[0] : '';
+
+            document.querySelector('.register_name_error').innerText = nameError;
+            document.querySelector('.register_email_error').innerText = emailError;
+            document.querySelector('.register_password_error').innerText = passwordError;
+            document.querySelector('.register_passwordConfirm_error').innerText = passwordConfirmError;
+
+          } else if (err.request) {
+            console.log('request error', err.request)
+          } else {
+            // Anything else
+            console.log('Error', err.message);
+          }
+        });
+    });
+
+
+    //forgot password form with axios
+    const forgotPasswordForm = document.querySelector('#forgot_password_form');
+    forgotPasswordForm.addEventListener('submit',(e) => {
+      e.preventDefault();
+      const email = forgotPasswordForm.elements.email.value;
+
+      const forgotPasswordFormData = new FormData();
+      // forgotPasswordFormData.append('email',email)
+      // let userId = document.querySelector('.userId').value;
+
+      axios.post(`/forgotpassword`, {
+        email:email,
+      })
+      .then(response => {
+        console.log(response.data);
+      }).catch(error => {
+        const error = error.response.data.error;
+        console.log('error',error.response.data.error);
+
+        document.querySelector('.forgotPasswordError').innerText = 'has error'
+      })
+
+    })
   </script>
   @yield('script')
 

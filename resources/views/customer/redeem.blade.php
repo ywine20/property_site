@@ -54,13 +54,13 @@
             <div class="px-1 px-md-2 px-lg-5">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link text-secondary" href="{{route('profile')}}">Authorize Asset</a>
+                        <a class="nav-link  text-secondary" href="{{route('profile',Auth::guard('user')->user()->id)}}">Authorize Asset</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-secondary" href="{{route('profile-setting')}}">Setting</a>
+                        <a class="nav-link  text-secondary" href="{{route('profile.setting',Auth::guard('user')->user()->id)}}">Setting</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-secondary" href="{{route('profile-redeem')}}">Redeem</a>
+                        <a class="nav-link active text-secondary" href="{{route('profile.redeem',Auth::guard('user')->user()->id)}}">Redeem</a>
                     </li>
                 </ul>
             </div>
@@ -90,7 +90,7 @@
 
                     <div class="alert alert-success alert-dismissible fade show mt-3 mt-md-5" role="alert">
                         <div class="d-flex flex-column flex-md-row justify-content-start align-items-center text-center text-md-start">
-                        <i class="bi bi-check2 h3 text-success mb-0 fs-bolder d-none d-md-flex me-3"></i>
+                            <i class="bi bi-check2 h3 text-success mb-0 fs-bolder d-none d-md-flex me-3"></i>
                             Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.
                         </div>
 

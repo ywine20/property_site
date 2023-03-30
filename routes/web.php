@@ -29,7 +29,7 @@ use App\Models\CustomerProfile;
 //Login
 Route::post('/register',[AuthController::class,'register'])->name('register');
 Route::post('/login',[AuthController::class,'login'])->name('login');
-Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
 
 //User
@@ -107,6 +107,16 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
 //SMT UPDATE 13-March-2023
 
 Route::get('/profile/{id}',[CustomerProfileController::class,'profile'])->name('profile');
+Route::get('/profile/{id}/setting',[CustomerProfileController::class,'profileSetting'])->name('profile.setting');
+Route::get('/profile/{id}/redeem',[CustomerProfileController::class,'redeem'])->name('profile.redeem');
+Route::post('/profile/{id}/changeProfile',[CustomerProfileController::class,'changeImage'])->name('profile.changeImge');
+Route::patch('/profile/{id}/changeProfileInfo',[CustomerProfileController::class,'changeInfo'])->name('profile.changeInfo');
+Route::patch('/profile/{id}/changePassword',[CustomerProfileController::class,'changePassword'])->name('profile.changePassword');
+Route::post('/forgotpassword',[AuthController::class,'forgotPassword'])->name('forgotPassword');
+
+
+
+
 // Route::view('/profile','customer/profile')->name('profile');
 
 Route::view('/profile/setting','customer/profile-setting')->name('profile-setting');
