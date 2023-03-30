@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SliderController;
@@ -14,6 +15,10 @@ use App\Http\Controllers\ProjectListController;
 
 
 
+
+
+Route::get('/admin/uploaddata','FormController@index');
+Route::post('upload_data','FormController@store');
 
 
 Route::get('/products',[ProductController::class,'index']);
@@ -86,6 +91,7 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::post('/delete-multiple-town',[\App\Http\Controllers\Admin\AddressController::class,'multiDelTown'])->name('town.multi-delete');
     Route::put('city-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'cityUpdate'])->name('address.cityUpdate');
     Route::put('town-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'townUpdate'])->name('address.townUpdate');
+
 
 
 });

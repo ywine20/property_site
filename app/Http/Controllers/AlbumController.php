@@ -26,20 +26,16 @@ class AlbumController extends Controller
             'title'=>'required',
         ]);
 
-
-
-
            $album=array();
            if($files=$request->file('album')){
             foreach($files as $file){
                 $album_name=uniqid();
-
                 $ext=($file->getClientOriginalName());
                 $album_full_name=$album_name.'_'.$ext;              //$ext is getclient and $image_name is uniquid
                 $album_url=$album_full_name;
                 $file->storeAs('/public/album',$album_full_name);   //save in storage
                 $album[]=$album_url;                                           //$image[]=$imagename and $ext
-                
+
             }
 
            }

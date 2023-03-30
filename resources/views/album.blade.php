@@ -38,9 +38,10 @@
                         <button type="submit">Submit</button>
                     </div>
                 </div>
-                {{-- @foreach ($albums as $item)
-                    <img src=" {{ asset('/storage/album' . $item->album) }}" alt="">
-                @endforeach --}}
+                @foreach ($album as $img)
+                    <img src="/public/storage/" alt="Image Alternative text"
+                        title="Image Title" />
+                @endforeach
 
         </form>
 
