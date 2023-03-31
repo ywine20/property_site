@@ -87,37 +87,37 @@ class CustomerProfileController extends Controller
     public function changePassword(Request $request){
 
 
-        // if(!Hash::check($request->get('current-password'),auth()->guard('user')->user()->password)){
-        //     //the password matches
-        //     return redirect()->back()->with('password-error', 'your current password does not matches with the password.');
-        // }
+        if(!Hash::check($request->get('current-password'),auth()->guard('user')->user()->password)){
+            //the password matches
+            return redirect()->back()->with('password-error', 'your current password does not matches with the password.');
+        }
 
-        // if(strcmp($request->get('current-password'),$request->get('new-password')) == 0){
-        //     return redirect()->back()->with('password-error', 'new password cannot be same as your current password');
-        // }
+        if(strcmp($request->get('current-password'),$request->get('new-password')) == 0){
+            return redirect()->back()->with('password-error', 'new password cannot be same as your current password');
+        }
 
-            // return $request;
-        // $request->validate([
-        //     'currentPassword' => ['required', new MatchOldPassword],
-        //     'newPassword' => 'required|string|min:6|max:16',
-        //     'confirmPassword'=>'required|same:new-password'
-        // ]);
+            return $request;
+        $request->validate([
+            'currentPassword' => ['required', new MatchOldPassword],
+            'newPassword' => 'required|string|min:6|max:16',
+            'confirmPassword'=>'required|same:new-password'
+        ]);
 
-            // $auth = auth()->guard('user')->user();
-            // $authPassword = auth()->guard('user')->user()->password;
-            // $currentPassword = $request->currentPassword;
+            $auth = auth()->guard('user')->user();
+            $authPassword = auth()->guard('user')->user()->password;
+            $currentPassword = $request->currentPassword;
 
-            // if(!Hash::check($currentPassword,$authPassword)){
-            //     return response()->json(['status'=>'1','message' => "Current Password doesn't match."],200);
-            // }else{
-            //     return response()->json(['status'=>'1','message' => "Current Password  match."],200);
-            // }               
+            if(!Hash::check($currentPassword,$authPassword)){
+                return response()->json(['status'=>'1','message' => "Current Password doesn't match."],200);
+            }else{
+                return response()->json(['status'=>'1','message' => "Current Password  match."],200);
+            }               
             
-        // return response()->json([
-        //     'auth'=>$auth,
-        //     'authPassword'=>$authPassword,
-        //     'currentPassword'=>$currentPassword,
-        // ],200);
+        return response()->json([
+            'auth'=>$auth,
+            'authPassword'=>$authPassword,
+            'currentPassword'=>$currentPassword,
+        ],200);
 
         $validator = Validator::make($request->all(), [ 
             'currentPassword' => ['required',new MatchOldPassword],
