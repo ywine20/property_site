@@ -40,12 +40,11 @@
   <!-- Add the slick-theme.css if you want default styling -->
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
-  <link rel="stylesheet" href="{{asset('css/app.css')}}">
-  {{-- <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css ">--}}
-  <link rel="stylesheet" href="css/animate.css">
-
   <!-- animate.style -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+  <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
   <script src="{{asset('js/app.js')}}"></script>
   <!-- Google Recaptcha -->
@@ -106,6 +105,10 @@
     .profile-dropdown:hover .profile-dropdown-content {
       display: block;
     }
+
+    #email-send-success-alert{
+      display: none;
+    }
   </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -164,7 +167,7 @@
       <div class="offcanvas-body ">
         <div class="offcanvas-header">
           <div class="d-flex justify-content-between align-items-center w-100 bg-secondary">
-            <img src="./image/smtlogo.png" alt="" style="width:50px;height:auto">
+            <img src="{{asset('image/smtlogo.png')}}" alt="" style="width:50px;height:auto">
             <button class="btn btn-link py-0 px-2" id="slideClose">
               <i class="bi bi-x fs-2 text-primary"></i>
             </button>
@@ -506,17 +509,22 @@
         <span class="close fs-5 me-2 end-0 position-absolute pointer forgoPasswordCloseButton" onclick="closeforgotPasswordModal()">&times;</span>
         <div class="card-body">
           <h5 class="mb-4 fw-bolder">Forgot Password?</h5>
-          <span class="text-black-50 mb-4" style="font-size: .9rem;">Please Enter Your Email Address To Receive A New Password</span>
-          <form action="" method="post" id="forgot_password_form">
-        
+          <span class="text-black-50 mb-5" style="font-size: .9rem;">Please Enter Your Email Address To Receive A New Password</span>
+          <form action="{{route('forgotPassword')}}" id="forgot_password_form" method="POST">
+            @csrf
             <!-- email -->
             <div class="form-floating mb-5">
               <input type="email" name="email" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
               <label for="floatingInput">Vertify Email Address</label>
               <small class="text-danger forgotPasswordError"></small>
             </div>
-            <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">SEND</button>
-
+            <button type="submit" id="send-email-btn" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">SEND</button>
+            <div id="email-send-success-alert" class="alert alert-success my-3 text-center animate__animated animate__slideInDown">
+              Vertify Email Send Successfully.<br> Check Your Email. <br>
+              @if(!(auth()->guard('user')->check()))
+              <button class="btn btn-link text-success" onclick="openLoginModal()">Log in</button>
+              @endif
+            </div>
           </form>
         </div>
       </div>
@@ -530,99 +538,29 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <script src="./js/jquery.waypoints.js"></script>
-  <script src="./js/counter_up.js"></script>
-  <script src="../js/script.js"></script>
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.fb-slider').slick({
-        dots: false,
-        arrows: true,
-        infinite: false,
-        autoplay: false,
-        autoplaySpeed: 2000,
-
-        speed: 300,
-        slidesToShow: 4,
-        slidesToScroll: 2,
-        responsive: [{
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1,
-              infinite: false,
-              dots: false
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1
-            }
-          }
-          // You can unslick at a given breakpoint now by adding:
-          // settings: "unslick"
-          // instead of a settings object
-        ]
-      });
-    });
+  <script src="{{asset('js/counter_up.js')}}"></script>
+  <script src="{{asset('js/jquery.waypoints.js')}}"></script>
+  <script src="{{asset('js/script.js')}}"></script>
+  <!-- <script src="../js/script.js"></script> -->
 
 
-
-    //facebook post slider
-    let disable = 'slick-disabled'
-
-    let slickFun = () => {
-      let slickNext = document.querySelector('.slick-next');
-      let hasDisable = slickNext.classList.contains("slick-disabled");
-      let seeMoreButton = document.querySelector('.seemore-fb');
-
-      // console.log('hie sem more')
-      if (hasDisable) {
-        // console.log('show see more button')
-        seeMoreButton.classList.add('show');
-      } else {
-        // console.log('hide see more')
-        seeMoreButton.classList.remove('show');
-
-      }
-
-    }
-
-    setInterval(slickFun, 500)
-    //end facebook post slider
-  </script>
   <script>
-    //counterUp
-    $('.counter').counterUp({
-      delay: 10,
-      time: 1000
-    });
-
-
     //send message
     let input = document.querySelector('.send-input-tag');
     let sendBtn = document.getElementById('sendBtn');
     let sendMail = document.getElementById('sendMail');
 
-    sendBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      let send = e.target.href;
-      // mailto:test@example.com?subject=SMT Information Website!&body=This is only a test!
-      send = `mailto:salses@sunmyattun.com?subject=SMT Information Website!&body=${input.value}`;
-      sendMail.action = send;
-      sendMail.submit();
-      // console.log(sendMail.action);
-    })
+    if (sendBtn) {
+      sendBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let send = e.target.href;
+        // mailto:test@example.com?subject=SMT Information Website!&body=This is only a test!
+        send = `mailto:salses@sunmyattun.com?subject=SMT Information Website!&body=${input.value}`;
+        sendMail.action = send;
+        sendMail.submit();
+        // console.log(sendMail.action);
+      })
+    }
 
     //end send message
   </script>
@@ -637,6 +575,7 @@
 
     function openLoginModal() {
       registerModal.style.display = "none";
+      forgotPasswordModal.style.display = "none";
       loginModal.style.display = "block";
       document.body.classList.add('backdropShow');
 
@@ -674,6 +613,8 @@
     forgoPasswordCloseButton.onclick = function() {
       forgotPasswordModal.style.display = "none";
       document.body.classList.remove('backdropShow');
+      emailSendSuccessAlert.style.display = 'none';
+      forgotPasswordForm.reset();
     }
 
 
@@ -686,7 +627,7 @@
 
 
     // Username Short
-    for (let i = 0; i <= userNameLong.length; i++) {
+    for (let i = 0; i < userNameLong.length; i++) {
       if (userNameLong[i].innerText.length > 15) {
         let changeName = subName(userNameLong[i].innerText, 15);
         userNameLong[i].innerText = changeName;
@@ -696,7 +637,7 @@
   <script>
     // Email Short
     let emailToShort = document.querySelectorAll(".emailToShort");
-    for (let i = 0; i <= emailToShort.length; i++) {
+    for (let i = 0; i < emailToShort.length; i++) {
       if (emailToShort[i].innerText.length > 25) {
         let changeEmail = subName(emailToShort[i].innerText, 25);
         emailToShort[i].innerText = changeEmail;
@@ -735,7 +676,7 @@
           document.querySelector('.login_email_error').innerText = '';
           document.querySelector('.login_password_error').innerText = '';
           if (err.response) {
-            const {
+            let {
               error
             } = err.response.data;
             const emailError = error.email ? error.email[0] : '';
@@ -812,25 +753,44 @@
 
     //forgot password form with axios
     const forgotPasswordForm = document.querySelector('#forgot_password_form');
-    forgotPasswordForm.addEventListener('submit',(e) => {
+    const emailSendSuccessAlert= document.querySelector('#email-send-success-alert');
+    forgotPasswordForm.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      let sendEmailBtn = document.querySelector('#send-email-btn');
+      // update button appearance to show loading state
+      sendEmailBtn.innerHTML = "Sending...";
+      sendEmailBtn.disabled = true;
+
       const email = forgotPasswordForm.elements.email.value;
+
+
+      // if (!email) {
+      //   console.log('Email is required');
+      //   return;
+      // }
 
       const forgotPasswordFormData = new FormData();
       // forgotPasswordFormData.append('email',email)
       // let userId = document.querySelector('.userId').value;
 
       axios.post(`/forgotpassword`, {
-        email:email,
-      })
-      .then(response => {
-        console.log(response.data);
-      }).catch(error => {
-        const error = error.response.data.error;
-        console.log('error',error.response.data.error);
-
-        document.querySelector('.forgotPasswordError').innerText = 'has error'
-      })
+          email: email,
+        })
+        .then(response => {
+          console.log(response.data);
+          document.querySelector('.forgotPasswordError').innerText = '';
+          sendEmailBtn.innerHTML = "Send";
+          sendEmailBtn.style.display = 'none';
+          emailSendSuccessAlert.style.display = 'block';
+          // sendEmailBtn.disabled = ;
+        }).catch(error => {
+          let passwordError = error.response.data.error;
+          console.log(error.response);
+          document.querySelector('.forgotPasswordError').innerText = passwordError.email ? passwordError.email[0] : '';
+          sendEmailBtn.innerHTML = "Send";
+          sendEmailBtn.disabled = false ;
+        })
 
     })
   </script>

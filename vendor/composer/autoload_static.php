@@ -574,6 +574,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Http\\Requests\\UpdateCategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateCategoryRequest.php',
         'App\\Http\\Requests\\UpdateCustomerProfileRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateCustomerProfileRequest.php',
         'App\\Http\\Requests\\UpdateDeleteRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateDeleteRequest.php',
+        'App\\Mail\\SendPasswordMail' => __DIR__ . '/../..' . '/app/Mail/SendPasswordMail.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Amenity' => __DIR__ . '/../..' . '/app/Models/Amenity.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',

@@ -11,6 +11,7 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerProfileController extends Controller
@@ -36,14 +37,27 @@ class CustomerProfileController extends Controller
     }
 
     public function changeImage(Request $request){
+
         $user = Auth::guard('user')->user();
+        $userProfile = $user->profile_img;
+        $uploadFileName = $request->file('profile_img')->getClientOriginalName();
+
+
+    
+
+        if($request->hasFile('profile_img')){
+                if($userProfile != 'user.png'){
+                    Storage::delete('public/images/client-profile/'.$user->profile_img);
+                }
+        }
+        
         $profileImg = $request->file('profile_img');
         $profileImgName = "profile_".uniqid()."_".$profileImg->getClientOriginalName();
         $profileImgPath = $profileImg->storeAs('public/images/client-profile',$profileImgName);
         $user->profile_img = $profileImgName;
         $user->save();
     
-        return response()->json(['message' => 'Profile image updated successfully','request'=>$profileImg]);
+        return response()->json(['message' => 'Profile image updated successfully','request'=> $userProfile,'filename'=>$uploadFileName]);
     }
 
     public function changeInfo(Request $request){

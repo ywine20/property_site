@@ -55,6 +55,7 @@ return array(
     'App\\Http\\Requests\\UpdateCategoryRequest' => $baseDir . '/app/Http/Requests/UpdateCategoryRequest.php',
     'App\\Http\\Requests\\UpdateCustomerProfileRequest' => $baseDir . '/app/Http/Requests/UpdateCustomerProfileRequest.php',
     'App\\Http\\Requests\\UpdateDeleteRequest' => $baseDir . '/app/Http/Requests/UpdateDeleteRequest.php',
+    'App\\Mail\\SendPasswordMail' => $baseDir . '/app/Mail/SendPasswordMail.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Amenity' => $baseDir . '/app/Models/Amenity.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',

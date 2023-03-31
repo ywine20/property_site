@@ -215,7 +215,7 @@
             axios.post(`/profile/${userId}/changeProfile`, formData)
                 .then(response => {
 
-                    window.location.reload();
+                    // window.location.reload();
                     console.log(response.data);
                 })
                 .catch(error => {
