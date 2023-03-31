@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Project;
 
 class Album extends Model
 {
@@ -13,4 +14,8 @@ class Album extends Model
       'album',
     ];
 
+   public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'legaldocuments');
+    }
 }

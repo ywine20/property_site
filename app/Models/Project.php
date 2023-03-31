@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use App\Models\City;
+use App\Models\Town;
+use App\Models\Image;
+use App\Modles\Album;
+use App\Models\Amenity;
+use App\Models\Category;
+use App\Models\SiteGallery;
+use App\Models\FacebookLink;
+use App\Models\AlbumDocument;
+use Illuminate\Database\Eloquent\Model;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Image;
-use App\Models\Category;
-use App\Models\Amenity;
-// use App\Models\Gallery;
-use App\Models\FacebookLink;
-use App\Models\Town;
-use App\Models\City;
-use App\Modles\Album;
-use App\Models\AlbumDocument;
 
 class Project extends Model implements Viewable
 {
@@ -71,11 +71,6 @@ class Project extends Model implements Viewable
         return $this->hasOne(Previewimage::class);
     }
 
-    // public function gallery()
-    // {
-    //     return $this->hasMany(Gallery::class);
-    // }
-
     public function towns()
     {
         return $this->belongsTo(Town::class);
@@ -85,9 +80,13 @@ class Project extends Model implements Viewable
     {
         return $this->belongsTo(City::class);
     }
-// add document/albums file 16/3/23 ..
-  public function album()
+    public function albums()
     {
-        return $this->belongsToMany(Amenity::class, 'album_documents');
+        return $this->belongToMany(Album::class , 'legaldocuments');
+    }
+
+      public function site_galleries()
+    {
+        return $this->belongToMany(SiteGallery::class, 'siteprogresses');
     }
 }

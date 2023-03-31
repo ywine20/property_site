@@ -38,10 +38,10 @@
                         <button type="submit">Submit</button>
                     </div>
                 </div>
-                @foreach ($album as $img)
+                {{-- @foreach ($album as $img)
                     <img src="/public/storage/" alt="Image Alternative text"
                         title="Image Title" />
-                @endforeach
+                @endforeach --}}
 
         </form>
 

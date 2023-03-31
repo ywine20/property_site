@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SiteGallery extends Model
 {
@@ -13,4 +14,7 @@ class SiteGallery extends Model
       'description',
       'gallery',
     ];
+public function projects(){
+        return $this->belongsToMany(Project::class ,'siteprogresses' );
+    }
 }
