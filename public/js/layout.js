@@ -1,4 +1,4 @@
-<!--  start  aside and nav responsive design-->
+// <!--  start  aside and nav responsive design-->
 let aside = document.querySelector('aside');
 let menuList = document.querySelector('.menu-list');
 let backdrop = document.querySelector('#backdrop');
@@ -19,7 +19,7 @@ menuList.addEventListener('click',(e)=>{
 //end aside and nav responsive design
 //start add/remove active
 let sideLink = document.querySelectorAll('.side-link');
-for(let i=0;i <= sideLink.length; i++){
+for(let i=0;i < sideLink.length; i++){
     sideLink[i].addEventListener('click',(e)=>{
         let currentClick = e.currentTarget;
         sideLink.forEach(function(link) {

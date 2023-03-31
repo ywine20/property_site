@@ -108,7 +108,7 @@
     const subText = (text) => {
         return text.substring(0, 80) + '...';
     }
-    for (let i = 0; i <= siteProgress.length; i++) {
+    for (let i = 0; i < siteProgress.length; i++) {
         let realText = siteProgress[i].innerText;
         let changeText = subText(realText);
         siteProgress[i].innerText = changeText;
