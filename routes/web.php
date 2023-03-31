@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerProfileController;
+use App\Http\Controllers\RedeemCodeController;
 use App\Models\CustomerProfile;
 
 // use Illuminate\Support\Facades\Session;
@@ -112,7 +113,7 @@ Route::get('/profile/{id}/redeem',[CustomerProfileController::class,'redeem'])->
 Route::post('/profile/{id}/changeProfile',[CustomerProfileController::class,'changeImage'])->name('profile.changeImge');
 Route::patch('/profile/{id}/changeProfileInfo',[CustomerProfileController::class,'changeInfo'])->name('profile.changeInfo');
 Route::patch('/profile/{id}/changePassword',[CustomerProfileController::class,'changePassword'])->name('profile.changePassword');
-Route::post('/forgotpassword',[AuthController::class,'forgotPassword'])->name('forgotPassword');
+Route::post('/',[AuthController::class,'forgotPassword'])->name('forgotPassword');
 
 
 
@@ -123,3 +124,6 @@ Route::view('/profile/setting','customer/profile-setting')->name('profile-settin
 Route::view('/redeem','customer/redeem')->name('profile-redeem');
 
 
+//for redeem code
+Route::get('/redeemCodes/page', [RedeemCodeController::class,'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
+Route::post('/redeemCodes', [RedeemCodeController::class,'generateRedeemCode'])->name('profile.generateRedeemCode');

@@ -27,8 +27,6 @@ class AuthController extends Controller
          if ($validator->fails()) {
             return response()->json(['status'=>'0','error' => $validator->errors()->toArray(),'request'=>$request->all()], 422);
         }else{
-             
-
             $user = new User();
             $user->name = ucwords($request->name);
             $user->email = $request->email;
