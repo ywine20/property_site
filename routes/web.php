@@ -125,5 +125,7 @@ Route::view('/redeem','customer/redeem')->name('profile-redeem');
 
 
 //for redeem code
+Route::get('/redeemList/page', [RedeemCodeController::class,'redeemList'])->name('profile.redeemListPage');
 Route::get('/redeemCodes/page', [RedeemCodeController::class,'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
 Route::post('/redeemCodes', [RedeemCodeController::class,'generateRedeemCode'])->name('profile.generateRedeemCode');
+Route::post('/customer/redeemCodes', [RedeemCodeController::class,'customerRedeemCodes'])->name('profile.customerRedeemCodes');

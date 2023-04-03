@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
        \App\Models\Category::factory(5)->create();
        \App\Models\City::factory(5)->create();
        \App\Models\Town::factory(5)->create();
-       \App\Models\Project::factory(50)->create();
+       \App\Models\Project::factory(10)->create();
        Amenity::factory(5)->create();
 	  Visitor::factory(0)->create();
 	  Slider::factory(7)->create();

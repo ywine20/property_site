@@ -84,6 +84,7 @@ class CustomerProfileController extends Controller
 
     }
 
+
     public function changePassword(Request $request){
 
 
@@ -137,6 +138,8 @@ class CustomerProfileController extends Controller
 
          return response()->json(['status'=>'1','message' => 'Password updated successfully']);
         }
+
+        
         
     }
       

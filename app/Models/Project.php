@@ -22,6 +22,8 @@ class Project extends Model implements Viewable
     protected $fillable=[
         'slug',
         'project_name',
+        'site_progress_id',
+        'legal_document_id',
         'description',
         'cover',
         'gallery',

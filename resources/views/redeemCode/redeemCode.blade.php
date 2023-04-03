@@ -27,13 +27,14 @@
 
             <div id="projectName">
                 <label for="">Project Name :</label>
-                <select name="projectName" id="projectNames">
-                    <option value="">Choose Project Name</option>
-                    <option value="firstProject">First Project</option>
-                    <option value="secondProject">Second Project</option>
-                    <option value="thirdProject">Third Project</option>
+                <select name="projectId" id="projectNames">
+                    
+                    @foreach ($projects as $project)
+                        <option value="{{ $project->id }}">{{ $project->project_name }}</option>
+                    @endforeach
                 </select>
             </div>
+            
 
 
             <div  id="progresses">
@@ -130,32 +131,6 @@
     });
 
 </script>
-
-{{-- <script>
-    $(document).ready(function () {
-        $('#redeem-code-form').submit(function (event) {
-            event.preventDefault();
-            var form = $(this);
-            var formData = form.serialize(); // serialize the form data
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'POST',
-                url: 'http://127.0.0.1:8000/redeemCodes',
-                data: formData, // pass the serialized form data to the server
-                success: function (data) {
-                    $('#redeem-code').text(data.code); // access the code property of the data object
-                    $('#redeem-modal').modal('show');
-                },
-                error: function () {
-                    alert('An error occurred while generating the redeem code.');
-                }
-            });
-        });
-    });
-</script> --}}
-    
 
 @endsection
 @push('clientScript')

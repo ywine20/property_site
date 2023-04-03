@@ -75,12 +75,13 @@
                     <div class="">
                         <p class="mb-3 mb-md-5 redeem-explain text-black-50">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid non perferendis consequuntur, et impedit officia. Sit fugit commodi labore perferendis ipsa debitis culpa nam, asperiores odit quibusdam neque possimus vero! </p>
                     </div>
-                    <form action="">
+                    <form action="{{ route('profile.customerRedeemCodes') }}" method="POST">
+                        @csrf
                         <div class="my-3">
                             <label for="" class="mb-2 text-secondary">Enter Your Redeem Code</label>
                             <div class="d-flex flex-column flex-md-row justify-content-center align-items-baseline ">
                                 <div class="w-100">
-                                    <input type="text" name="code" maxlength="16" class="form-control form-control-lg is-invalid" placeholder="S34DFGH5HJ77YHFG" require>
+                                    <input type="text" name="code" maxlength="50" class="form-control form-control-lg is-invalid" placeholder="S34DFGH5HJ77YHFG" require>
                                     <span class="text-danger invalid-feedback">Sorry! Your code is not valid. Please try again.</span>
                                 </div>
                                 <button type="submit" class="btn btn-secondary btn-lg rounded rounded-1 text-primary fw-bold ms-0 ms-md-3 mt-3 mt-md-0 redeemSubmitBtn">Submit</button>
