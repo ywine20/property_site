@@ -106,7 +106,7 @@
       display: block;
     }
 
-    #email-send-success-alert{
+    #email-send-success-alert {
       display: none;
     }
   </style>
@@ -202,7 +202,7 @@
               <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;">
                 <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
                   @if( isset(Auth::guard('user')->user()->profile_img))
-                  <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;" style="object-fit:cover;">
+                  <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;" style="object-fit:cover;">
                   @else
                   <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;" style="object-fit:cover;">
                   @endif
@@ -267,7 +267,7 @@
                   <span class="text-primary me-2 usernameLargeDevice usernameToShort">{{Auth::guard('user')->user()->name}}</span>
                   <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
                     @if( isset(Auth::guard('user')->user()->profile_img))
-                    <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;">
+                    <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;">
                     @else
                     <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
                     @endif
@@ -279,7 +279,7 @@
                     <div class="d-flex flex-row align-items-center gap-3">
                       <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
                         @if( isset(Auth::guard('user')->user()->profile_img))
-                        <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;">
+                        <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;">
                         @else
                         <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
                         @endif
@@ -514,7 +514,11 @@
             @csrf
             <!-- email -->
             <div class="form-floating mb-5">
-              <input type="email" name="email" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
+              @if(auth()->guard('user')->check())
+              <input type="email" name="email" value="{{Auth::guard('user')->user()->email}}" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
+              @else
+              <input type="email" name="email" value="" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
+              @endif
               <label for="floatingInput">Vertify Email Address</label>
               <small class="text-danger forgotPasswordError"></small>
             </div>
@@ -534,12 +538,13 @@
 
 
 
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="{{asset('js/counter_up.js')}}"></script>
   <script src="{{asset('js/jquery.waypoints.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
   <script src="{{asset('js/script.js')}}"></script>
   <!-- <script src="../js/script.js"></script> -->
 
@@ -671,7 +676,7 @@
         .catch(err => {
 
           // handle the error response
-          console.log(err.response.data);
+          // console.log(err.response.data);
 
           document.querySelector('.login_email_error').innerText = '';
           document.querySelector('.login_password_error').innerText = '';
@@ -753,7 +758,7 @@
 
     //forgot password form with axios
     const forgotPasswordForm = document.querySelector('#forgot_password_form');
-    const emailSendSuccessAlert= document.querySelector('#email-send-success-alert');
+    const emailSendSuccessAlert = document.querySelector('#email-send-success-alert');
     forgotPasswordForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -789,11 +794,13 @@
           console.log(error.response);
           document.querySelector('.forgotPasswordError').innerText = passwordError.email ? passwordError.email[0] : '';
           sendEmailBtn.innerHTML = "Send";
-          sendEmailBtn.disabled = false ;
+          sendEmailBtn.disabled = false;
         })
 
     })
   </script>
+
+
   @yield('script')
 
   @stack('clientScript')
