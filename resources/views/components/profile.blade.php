@@ -5,9 +5,9 @@
                 <div class="col-9  col-md-4 col-lg-3 d-flex justify-content-center justify-content-md-end align-items-center">
                     <div class="overflow-hidden rounded rounded-circle border border-4 border-primary profile-image">
                     @if( isset(Auth::guard('user')->user()->profile_img))
-                    <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;" >
+                    <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" id='profile_img_large' style="object-fit:cover;" >
                     @else
-                    <img src="{{asset('storage/images/client-profile/user.png')}}" alt="" class="w-100 h-100" style="object-fit:cover;">
+                    <img src="{{asset('storage/images/client-profile/user.png')}}" alt="" class="w-100 h-100 " style="object-fit:cover;">
                     @endif
                     </div>
                 </div>

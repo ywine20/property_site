@@ -3,8 +3,11 @@
 @section('title', 'Setting - SMT')
 @section('css')
 <style>
-    #password-change-success{
+    #password-change-success,
+    #info-change-success {
         display: none;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>
 @endsection
@@ -47,21 +50,30 @@
                                 <input type="text" name="userId" class="d-none userId" value="{{$user->id}}" />
                                 <input type="file" name="profile_img" class="d-none" id="profileImageInput" />
                                 <div class=" overflow-hidden rounded rounded-circle bg-black bg-opacity-10 shadow-sm" style="width:100px;height:100px;">
-                                    <img id="setting-profile-img" src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;">
+                                    <img id="setting-profile-img" src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 shadow" style="object-fit:cover;">
                                 </div>
                                 <button id="uploadBtn" class="btn btn-md bg-black bg-opacity-10 text-black ms-4">Change</button>
                             </div>
+                            <small class="error-text profileImgError text-danger"></small>
+
                         </form>
                     </div>
-                    <form action="{{route('profile.changeInfo',$user->id)}}" method="post">
+                    <form action="{{route('profile.changeInfo',$user->id)}}" method="post" id="change_info_form">
                         @csrf
                         @method('PATCH')
+                        <div class="alert alert-success animate__animated animate__slideInDown justify-content-between align-items-center" id="info-change-success" role="alert">
+                            <span>Profile Info Updated Successfully.</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
                         <!-- Username -->
                         <div class="mb-3">
                             <label for="" class="mb-2">Username</label>
                             <div class="d-flex align-items-center justify-content-start">
                                 <input type="text" onkeydown="checkChanges()" onkeyup="checkChanges()" id="username-input" name="username" class="form-control" placeholder="John Doe" value="{{$user->name}}" require />
                             </div>
+                            <small class="error-text usernameError text-danger"></small>
+
                             @error('username')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -74,6 +86,7 @@
                             <div class="d-flex align-items-center justify-content-start">
                                 <input type="email" onkeydown="checkChanges()" onkeyup="checkChanges()" id="email-input" name="email" class="form-control" placeholder="johndoe@gmail.com" value="{{$user->email}}" />
                             </div>
+                            <small class="error-text emailError text-danger"></small>
                             @error('email')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -85,21 +98,15 @@
                             <div class="d-flex align-items-center justify-content-start">
                                 <input type="text" onkeydown="checkChanges()" onkeyup="checkChanges()" id="phone-input" name="phone" class="form-control" placeholder="09xxxxxxxxx" value="{{$user->phone}}" />
                             </div>
+                            <small class="error-text phoneError text-danger"></small>
                             @error('phone')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <!-- Password
-                        <div class="mb-3">
-                            <label for="" class="mb-2">Password</label>
-                            <div class="d-flex align-items-center justify-content-start">
-                                <input type="password" id="password-input" name="password" class="form-control" placeholder="" value="">
-                            </div>
-                        </div> -->
 
                         <!-- Button -->
                         <div class="mt-4 mt-md-5 mb-3 mb-md-2 mb-lg-0">
-                            <button type="submit" id="save-btn" class="btn btn-secondary btn-lg rounded rounded-1 text-primary fw-bold  form-control saveBtn">Save</button>
+                            <button type="submit" id="save-btn" class="btn btn-secondary btn-lg rounded rounded-1 text-primary fw-bold w-100 saveBtn">Save</button>
                         </div>
 
                     </form>
@@ -107,7 +114,7 @@
 
                     <!-- action="{{route('profile.changePassword',$user->id)}}" -->
                     <form action="" id="change_password_form">
-                        @csrf 
+                        @csrf
                         @method('PATCH')
 
                         <!-- @method('PATCH') -->
@@ -115,17 +122,20 @@
                         <div class="">
                             <h5 class="head-title mb-2 mb-md-3 mb-xl-3">Change Password</h5>
                         </div>
-                        @if(Session::has('client-success'))
-                        <div class="alert alert-success">
+                        <!-- @if(Session::has('client-success'))
+                        <div class="alert alert-success d-flex justify-content-between align-items-center">
                             {{ Session::get('client-success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
                             @php
                             Session::forget('client-success');
                             @endphp
                         </div>
-                        @endif
+                        @endif -->
 
-                        <div class="alert alert-success animate__animated animate__slideInDown" id="password-change-success"  >
-                            password updated
+                        <div class="alert alert-success justify-content-between align-items-center animate__animated animate__slideInDown" id="password-change-success" role="alert">
+                            <span>Password updated successfully.</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         <!-- old password -->
                         <div class="mb-3">
@@ -134,10 +144,6 @@
                                 <input type="password" onkeydown="checkChanges()" onkeyup="checkChanges()" id="current-password-input" name="currentPassword" class="form-control" value="{{old('current-password')}}" require />
                             </div>
                             <small class="error-text currentPasswordError text-danger"></small>
-                            <!-- 
-                            @error('currentPassword')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror -->
                         </div>
                         <!-- new password -->
                         <div class="mb-3">
@@ -190,7 +196,12 @@
 </main>
 @endsection
 @push('clientScript')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
+
     //Change Profile Image
     const profileImageInput = document.getElementById('profileImageInput');
     const uploadBtn = document.getElementById('uploadBtn');
@@ -214,12 +225,41 @@
 
             axios.post(`/profile/${userId}/changeProfile`, formData)
                 .then(response => {
+                    document.querySelector('.profileImgError').innerText = '';
 
-                    // window.location.reload();
-                    console.log(response.data);
+                    let userProfile = document.querySelectorAll('.user-profile');
+                    for (let i = 0; i < userProfile.length; i++) {
+                        userProfile[i].src = profileImage.src;
+                    }
+                    document.querySelector('#profile_img_large').src = profileImage.src;
+                    //sweetalert box show if success
+                  if (response.data.status == '1') {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            showConfirmButton: false,
+                            showCloseButton: true,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            background: 'white',
+                            color: 'green',
+                            position: 'top',
+                            title: response.data.message,
+                        })
+                    }
                 })
                 .catch(error => {
-                    console.log(error);
+                    if (error.response) {
+                        let profileImgError = error.response.data.error;
+                        console.log(profileImgError);
+                        document.querySelector('.profileImgError').innerText = profileImgError.profile_img ? profileImgError.profile_img : '';
+                    }
                 });
         }
         reader.readAsDataURL(file);
@@ -246,6 +286,68 @@
     }
     checkChanges();
 
+    //change info with axios
+    let changeInfoForm = document.querySelector('#change_info_form');
+
+    changeInfoForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const changeInfoFormData = new FormData();
+        const username = changeInfoForm.elements.username.value;
+        const email = changeInfoForm.elements.email.value;
+        const phone = changeInfoForm.elements.phone.value;
+
+        document.querySelector('#info-change-success').style.display = 'none';
+
+
+        axios.patch(`/profile/${userId}/changeProfileInfo`, {
+                username: username,
+                email: email,
+                phone: phone,
+            })
+            .then(response => {
+                document.querySelector('.usernameError').innerText = '';
+                document.querySelector('.emailError').innerText = '';
+                document.querySelector('.phoneError').innerText = '';
+                saveBtn.disabled = true;
+                // document.querySelector('#info-change-success').style.display = 'flex';
+
+                  //sweetalert box show if success
+                  if (response.data.status == '1') {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            showConfirmButton: false,
+                            showCloseButton: true,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            background: 'white',
+                            color: 'green',
+                            position: 'top',
+                            title: response.data.message,
+                        })
+                    }
+
+            }).catch(error => {
+                document.querySelector('.usernameError').innerText = '';
+                document.querySelector('.emailError').innerText = '';
+                document.querySelector('.phoneError').innerText = '';
+                if (error.response) {
+                    let infoError = error.response.data.error;
+                    document.querySelector('.usernameError').innerText = infoError.username ? infoError.username : '';
+                    document.querySelector('.emailError').innerText = infoError.email ? infoError.email : '';
+                    document.querySelector('.phoneError').innerText = infoError.phone ? infoError.phone : '';
+                }
+
+            })
+
+    })
+
 
 
     //change password with axios
@@ -254,12 +356,12 @@
 
     changePasswordForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const changePasswordFromData = new FormData();
+            const changePasswordFormData = new FormData();
             const currentPassword = changePasswordForm.elements.currentPassword.value;
             const newPassword = changePasswordForm.elements.newPassword.value;
             const confirmPassword = changePasswordForm.elements.confirmPassword.value;
 
-            document.querySelector('#password-change-success').style.display = 'none';
+            // document.querySelector('#password-change-success').style.display = 'none';
 
 
             axios.patch(`/profile/${userId}/changePassword`, {
@@ -271,12 +373,32 @@
                     document.querySelector('.currentPasswordError').innerText = '';
                     document.querySelector('.newPasswordError').innerText = '';
                     document.querySelector('.confirmPasswordError').innerText = '';
-                    
-                    document.querySelector('#password-change-success').innerText = response.data.message;
-                    document.querySelector('#password-change-success').style.display = 'block';
-                    
-                    changePasswordForm.reset();
 
+                    // document.querySelector('#password-change-success').innerText = response.data.message;
+                    // document.querySelector('#password-change-success').style.display = 'flex';
+
+                    changePasswordForm.reset();
+                    //sweetalert box show if success
+                    if (response.data.status == '1') {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            showConfirmButton: false,
+                            showCloseButton: true,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            background: 'white',
+                            color: 'green',
+                            position: 'top',
+                            title: response.data.message,
+                        })
+                    }
                 })
                 .catch(error => {
 
@@ -300,11 +422,6 @@
         }
 
     )
-
-
-
-//forgot password with axios
-</script>
 
 </script>
 @endpush

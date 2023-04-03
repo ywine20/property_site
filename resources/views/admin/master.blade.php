@@ -228,13 +228,13 @@
             color:'#fff',
             // title: 'Oops...',
             text: "{{session('error')}}",
-{{--            text: JSON.stringify({{session('error')}}),--}}
+// {{--            text: JSON.stringify({{session('error')}}),--}}
         })
 
     </script>
 @endif
 
-@if(session('null'))
+<!-- @if(session('null'))
     <script>
         Swal.fire({
             icon: 'warning',
@@ -244,7 +244,7 @@
         })
 
     </script>
-@endif
+@endif -->
 </body>
 </html>
 
