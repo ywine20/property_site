@@ -97,7 +97,7 @@ class CustomerProfileController extends Controller
     }
 
     public function changePassword(Request $request){
-
+      
         $validator = Validator::make($request->all(), [ 
             'currentPassword' => ['required',new MatchOldPassword],
             'newPassword' => 'required|string|min:6|max:16',
