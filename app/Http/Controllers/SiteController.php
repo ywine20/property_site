@@ -8,31 +8,32 @@ use Illuminate\Http\Request;
 class SiteController extends Controller
 {
     //
-     public function siteindex(){
-
+    public function siteindex()
+    {
+        $sitegalleries = SiteGallery::all();
         return view('site');
     }
-    public function sitesave(Request $request){
 
-       $gallery=array();
-           if($files=$request->file('gallery')){
-            foreach($files as $file){
-                $gallery_name=uniqid();
-                $ext=($file->getClientOriginalName());
-                $gallery_full_name=$gallery_name.'_'.$ext;      //$ext is getclient and $image_name is uniquid
-                $gallery_url=$gallery_full_name;
-                $file->storeAs('/public/album',$gallery_full_name); //save in storage
-                $gallery[]=$gallery_url;                     //$image[]=$imagename and $ext
+    public function sitesave(Request $request)
+    {
+        $request->validate([
+            'galleries.*' => 'required',
+            'title' => 'required',
+            'description'=>'required',
+        ]);
 
+        if ($request->hasFile('galleries')) {
+            foreach ($request->file('galleries') as $file) {
+                $site_gallery_name = uniqid() . '_' . $file->getClientOriginalName();
+                $file->storeAs('/public/site_gallery', $site_gallery_name);
+                SiteGallery::create([
+                    'title' => $request->title,
+                    'description'=>$request->description,
+                    'galleries' => $site_gallery_name,
+                ]);
             }
+        }
 
-           }
-           SiteGallery::create([
-                'gallery'=>implode('|',$gallery),
-                'description'=>$request->description,
-                'title'=>$request->title
-           ]);
-
-           return back();
+        return back()->with('success', 'Albums saved successfully.');
     }
 }

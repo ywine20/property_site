@@ -14,17 +14,13 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ProjectListController;
 
 
-// Route::get('/profile/{lang}',function ($lang){
+// Route::get('/{lang}',function ($lang){
 //     App::setlocale($lang);
-//     return view('profile');
+//     return view('master');
 // });
 
 Route::get('lang/home', [LangController::class, 'index']);
 Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
-
-Route::get('/admin/uploaddata','FormController@index');
-Route::post('upload_data','FormController@store');
-
 
 Route::get('/products',[ProductController::class,'index']);
 Route::get('/products/vouchers/{id}',[ProductController::class,'voucher']);

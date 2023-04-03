@@ -11,9 +11,9 @@
 
 </head>
 
+
 <body class=bg-dark>
     <div class=" bg-primary py-3">
-
         <form action="{{ route('save-multipel-imgae') }}" enctype="multipart/form-data" method="POST">
             @csrf
             <div class="card-body">
@@ -28,7 +28,7 @@
                     </label>
                     <div class="input-group m-4">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="album[]" multiple
+                            <input type="file" class="custom-file-input" name="albums[]" multiple
                                 id='exampleInputFile'>
                             <label class="custom-file-label" for="exampleInputFile"></label>
                         </div>
@@ -38,13 +38,21 @@
                         <button type="submit">Submit</button>
                     </div>
                 </div>
-                {{-- @foreach ($album as $img)
-                    <img src="/public/storage/" alt="Image Alternative text"
-                        title="Image Title" />
-                @endforeach --}}
-
         </form>
-
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach ($albums as $album)
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img class="card-img-top" src="{{ asset('storage/album/' . $album->album) }}">
+                        <div class="card-body">
+                            <p class="card-text">{{ $album->title }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
