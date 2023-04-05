@@ -12,49 +12,65 @@
 </head>
 
 
-<body class=bg-dark>
-    <div class=" bg-primary py-3">
+<body class="bg-dark">
+    <div class="bg-primary py-3">
         <form action="{{ route('save-multipel-imgae') }}" enctype="multipart/form-data" method="POST">
             @csrf
+
             <div class="card-body">
                 <h1>Album document</h1>
-                <div class="form-group m-3 ">
-                    <label for="emxampleInputEmail">Title</label>
-                    <input type="text" name="title" class="form-control" placeholder="Title">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputFile">
-                        Upload Image
-                    </label>
-                    <div class="input-group m-4">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="albums[]" multiple
-                                id='exampleInputFile'>
-                            <label class="custom-file-label" for="exampleInputFile"></label>
-                        </div>
-                        <div class="input-group-append">
 
-                        </div>
-                        <button type="submit">Submit</button>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <div class="form-group m-3">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Title"
+                        value="{{ old('title') }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="albums">Upload Images</label>
+                    <div class="input-group m-4">
+                        <input type="file" name="albums[]" class="form-control" multiple accept="gallery/*">
                     </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Save Albums</button>
+            </div>
         </form>
-    </div>
-    <div class="container">
-        <div class="row">
-            @foreach ($albums as $album)
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="card-img-top" src="{{ asset('storage/album/' . $album->album) }}">
-                        <div class="card-body">
-                            <p class="card-text">{{ $album->title }}</p>
+        @if (count($albums))
+            <div class="row">
+                @foreach ($albums as $album)
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="{{ asset('storage/album/' . $album->album) }}" class="card-img-top"
+                                alt="{{ $album->title }}">
+                            <div class="card-body">
+                                <p class="card-text">{{ $album->title }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
+        @else
+            <p>No albums found.</p>
+        @endif
     </div>
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous">
 </script>

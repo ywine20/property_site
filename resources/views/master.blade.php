@@ -181,7 +181,7 @@
         <!-- end offcanvas -->
 
         <!----language--->
-        <div class="container">
+        {{-- <div class="container">
             <h1>How to Create Multi Language Website in Laravel - ItSolutionStuff.com</h1>
             <div class="row">
                 <div class="col-md-2 col-md-offset-6 text-right">
@@ -198,119 +198,119 @@
                 </div>
             </div>
             <h1>{{ __('master.home') }}</h1>
-            <!--language-->
+            <!--language--> --}}
 
-        </div>
-        <nav class="navbar navbar-expand-lg px-2 px-md-0 py-0 fixed-top">
-            <div class="container d-flex align-item-center px-0 py-md-1 py-lg-0">
-                <a href="{{ url('/') }}"
-                    class="logo-div text-decoration-none fs-1 text-gold bg-secondary d-flex justify-content-center align-items-center"
-                    style="height: auto;">
-                    <img src="{{ asset('image/smtlogo_copy.png') }}" alt="" style="width:100%;height:100%">
-                </a>
+    </div>
+    <nav class="navbar navbar-expand-lg px-2 px-md-0 py-0 fixed-top">
+        <div class="container d-flex align-item-center px-0 py-md-1 py-lg-0">
+            <a href="{{ url('/') }}"
+                class="logo-div text-decoration-none fs-1 text-gold bg-secondary d-flex justify-content-center align-items-center"
+                style="height: auto;">
+                <img src="{{ asset('image/smtlogo_copy.png') }}" alt="" style="width:100%;height:100%">
+            </a>
 
-                <div class="pe-md-0 d-lg-none text-primary" id="sideNavButton">
-                    <i class="bi bi-list fs-3 text-primary"></i>
-                </div>
-                <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-                <div class="d-none d-lg-block py-1" tabindex="-1" id="offcanvasNavbar">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3 " aria-current="page"
-                                href="{{ url('/') }}">{{ __('master.home') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
-                                href="{{ url('projectlist') }}">{{ __('master.project') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
-                                href="{{ url('aboutus') }}">{{ __('master.about') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
-                                href="{{ url('contactus') }}">{{ __('master.contact') }}</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="pe-md-0 d-lg-none text-primary" id="sideNavButton">
+                <i class="bi bi-list fs-3 text-primary"></i>
             </div>
-        </nav>
-        <!-- end nav -->
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+            <div class="d-none d-lg-block py-1" tabindex="-1" id="offcanvasNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link pe-0 ps-4 py-3 " aria-current="page"
+                            href="{{ url('/') }}">{{ __('master.home') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
+                            href="{{ url('projectlist') }}">{{ __('master.project') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
+                            href="{{ url('aboutus') }}">{{ __('master.about') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
+                            href="{{ url('contactus') }}">{{ __('master.contact') }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end nav -->
 
 
-        @yield('content')
+    @yield('content')
 
-        <!-- footer -->
-        <section id="footer">
-            <div class="container-fluid bg-secondary py-3 overflow-hidden">
-                <div class="container">
-                    <div
-                        class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
-                        <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
-                            <h5 class="fw-bold text-gold text-uppercase">Contact Us</h5>
-                            <div
-                                class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
-                                <div class="">
-                                    <ul class="list-group">
-                                        <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                            <a href="tel:+959777700111" class="text-decoration-none text-nowrap ">
-                                                <i class="bi bi-telephone-fill"></i>
-                                                09777700111,
-                                            </a>
-                                            &nbsp;
-                                            <a href="tel:+959777700222" class="text-decoration-none text-nowrap ">
-                                                09777700222
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                            <a href="mailto:sales@sunmyattun.com" target="_blank"
-                                                class="text-decoration-none text-nowrap">
-                                                <i class="bi bi-envelope"></i>
-                                                sales@sunmyattun.com
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                            <a href="https://www.facebook.com/Sunmyattun" target="_blank"
-                                                class="text-decoration-none text-nowrap ">
-                                                <i class="bi bi-facebook"></i>
-                                                Sun Myat Tun Construction Co.,Ltd
-                                            </a>
-                                        </li>
+    <!-- footer -->
+    <section id="footer">
+        <div class="container-fluid bg-secondary py-3 overflow-hidden">
+            <div class="container">
+                <div
+                    class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
+                    <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
+                        <h5 class="fw-bold text-gold text-uppercase">Contact Us</h5>
+                        <div
+                            class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
+                            <div class="">
+                                <ul class="list-group">
+                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                        <a href="tel:+959777700111" class="text-decoration-none text-nowrap ">
+                                            <i class="bi bi-telephone-fill"></i>
+                                            09777700111,
+                                        </a>
+                                        &nbsp;
+                                        <a href="tel:+959777700222" class="text-decoration-none text-nowrap ">
+                                            09777700222
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                        <a href="mailto:sales@sunmyattun.com" target="_blank"
+                                            class="text-decoration-none text-nowrap">
+                                            <i class="bi bi-envelope"></i>
+                                            sales@sunmyattun.com
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                        <a href="https://www.facebook.com/Sunmyattun" target="_blank"
+                                            class="text-decoration-none text-nowrap ">
+                                            <i class="bi bi-facebook"></i>
+                                            Sun Myat Tun Construction Co.,Ltd
+                                        </a>
+                                    </li>
 
-                                    </ul>
-                                </div>
-                                <div class=" ms-md-4">
-                                    <div class="d-flex ">
-                                        <div class="d-none d-md-block"
-                                            style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
-                                        </div>
-                                        <div class="ms-md-3">
-                                            <ul class="list-group">
-                                                <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                                    <a href="{{ url('faq') }}" class="text-decoration-none ">
-                                                        FAQs
-                                                    </a>
-                                                </li>
-                                                <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                                    <a href="{{ url('termcondition') }}"
-                                                        class="text-decoration-none text-nowrap ">
-                                                        Terms And Conditions
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                </ul>
+                            </div>
+                            <div class=" ms-md-4">
+                                <div class="d-flex ">
+                                    <div class="d-none d-md-block"
+                                        style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
+                                    </div>
+                                    <div class="ms-md-3">
+                                        <ul class="list-group">
+                                            <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                                <a href="{{ url('faq') }}" class="text-decoration-none ">
+                                                    FAQs
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                                <a href="{{ url('termcondition') }}"
+                                                    class="text-decoration-none text-nowrap ">
+                                                    Terms And Conditions
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-md-3  col-lg-2 col-xl-2 bg-danger px-0 footer-logo">
-                            <img src="/image/smtlogoLarge.png" alt="" class="img-fluid">
-                        </div>
+                    </div>
+                    <div class="col-6 col-md-3  col-lg-2 col-xl-2 bg-danger px-0 footer-logo">
+                        <img src="/image/smtlogoLarge.png" alt="" class="img-fluid">
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- end footer -->
+        </div>
+    </section>
+    <!-- end footer -->
 
     </div>
 

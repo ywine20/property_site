@@ -22,7 +22,7 @@ class AlbumController extends Controller
     public function save(Request $request)
     {
         $request->validate([
-            'albums.*' => 'required',
+            'albums.*' => 'required|mimes:jpeg,png,pdf,docx',
             'title' => 'required',
         ]);
 
@@ -38,7 +38,10 @@ class AlbumController extends Controller
         }
 
         return back()->with('success', 'Albums saved successfully.');
+
     }
 
+
 }
+
 
