@@ -139,69 +139,88 @@
                         <!-- 360* images -->
 
                         <!-- preview Image -->
+                        @if($project->previewimages->small_img1)
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->previewimages->small_img1 }}" class="myGallery"
+                            <a href="/storage/images/gallery/{{ $project->previewimages->small_img1 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img1) }}"
+                                <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img1) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
+                        @endif
+                        @if($project->previewimages->small_img2)
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->previewimages->small_img2 }}" class="myGallery"
+                            <a href="/storage/images/gallery/{{ $project->previewimages->small_img2 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img2) }}"
+                                <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img2) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
+                        @endif
+                        @if($project->previewimages->small_img3)
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->previewimages->small_img3 }}" class="myGallery"
+                            <a href="/storage/images/gallery/{{ $project->previewimages->small_img3 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img3) }}"
+                                <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img3) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
+                        @endif
+                        @if($project->previewimages->small_img4)
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->previewimages->small_img4 }}" class="myGallery"
+                            <a href="/storage/images/gallery/{{ $project->previewimages->small_img4 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img4) }}"
+                                <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img4) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
+                        @endif
+                        @if($project->previewimages->small_img5)
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->previewimages->small_img5 }}" class="myGallery"
+                            <a href="/storage/images/gallery/{{ $project->previewimages->small_img5 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img5) }}"
+                                <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img5) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
+                        @endif
+                        @if($project->previewimages->small_img6)
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->previewimages->small_img6 }}" class="myGallery"
+                            <a href="/storage/images/gallery/{{ $project->previewimages->small_img6 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img6) }}"
+                                <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img6) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
+                        @endif
+                        @if($project->previewimages->small_img7)
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->previewimages->small_img7 }}" class="myGallery"
+                            <a href="/storage/images/gallery/{{ $project->previewimages->small_img7 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img7) }}"
+                                <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img7) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
+                        @endif
+                        @if($project->previewimages->small_img8)
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->previewimages->small_img8 }}" class="myGallery"
+                            <a href="/storage/images/gallery/{{ $project->previewimages->small_img8 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img8) }}"
+                                <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img8) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
+                        @endif
+                        @if($project->previewimages->small_img9)
                         <div class="col" style="aspect-ratio: 1;">
-                            <a href="/images/gallery/{{ $project->previewimages->small_img9 }}" class="myGallery"
+                            <a href="/storage/images/gallery/{{ $project->previewimages->small_img9 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                                <img src="{{ asset('images/gallery/' . $project->previewimages->small_img9) }}"
+                                <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img9) }}"
                                     style="width: 100%;height:100%;object-fit:cover;" alt="">
                             </a>
                         </div>
+                        @endif
+
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\SiteController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PanoramaController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\PreviewImageController;
 use App\Http\Controllers\ProjectListController;
 
 
@@ -97,6 +99,9 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::post('/delete-multiple-town',[\App\Http\Controllers\Admin\AddressController::class,'multiDelTown'])->name('town.multi-delete');
     Route::put('city-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'cityUpdate'])->name('address.cityUpdate');
     Route::put('town-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'townUpdate'])->name('address.townUpdate');
+
+    Route::delete('/previewImages/{name}/{fieldName}',[AdminPreviewImageController::class,'delete'])->name('previewImage.delete');
+
 
 
 

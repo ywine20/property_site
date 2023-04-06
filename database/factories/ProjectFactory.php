@@ -34,7 +34,7 @@ class ProjectFactory extends Factory
             'street' => $this->faker->text($maxNbChars = 20),
             'ward' => $this->faker->text($maxNbChars = 20),
             'progress' => $this->faker->randomDigit(),
-            'gmlink' => $this->faker->paragraph(),
+            'gmlink' =>'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15281.235374842701!2d96.16330505!3d16.761303200000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smm!4v1680500643968!5m2!1sen!2smm',
             'category_id' => Category::all()->random()->category_id,
             'city_id' => City::all()->random()->id,
             'township_id' => Town::all()->random()->id,

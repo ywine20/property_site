@@ -11,6 +11,8 @@ use App\Models\Town;
 use App\Models\Amenity;
 use App\Models\Previewimage;
 use App\Models\City;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -76,15 +78,15 @@ class ProjectController extends Controller
             'ward' => "required|string",
             'town_slug' => "required",
             'city_slug' => "required",
-            'small_img_1'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_2'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_3'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_4'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_5'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_6'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_7'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_8'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_9'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_1'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_2'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_3'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_4'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_5'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_6'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_7'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_8'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_9'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
 
         ]);
 
@@ -152,61 +154,70 @@ class ProjectController extends Controller
 
 // start preview images
 
-$small_img_1=null;
-        $image = $request->file('small_img_1');
-            if($image){
-                $small_img_1 = uniqid() .'_'. $image->getClientOriginalName();
-                $image->move(public_path('/images/gallery/'), $small_img_1);
-            }
-
- $small_img_2=null;
-        $image = $request->file('small_img_2');  //
+                $small_img_1=null;
+                $image = $request->file('small_img_1');
                 if($image){
-                    $small_img_2 = uniqid() .'_'. $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery/'), $small_img_2);
+                    $small_img_1 ='smallImg1_'.$project->project_name. uniqid() .'.'. $image->getClientOriginalExtension();
+                    $image->storeAs('/public/images/gallery', $small_img_1);
                 }
-$small_img_3=null;
+
+                $small_img_2=null;
+                $image = $request->file('small_img_2');  //
+                if($image){
+                    $small_img_2 ='smallImg2_'.$project->project_name. uniqid() .'.'. $image->getClientOriginalExtension();
+                    $image->storeAs('/public/images/gallery', $small_img_2);
+                }
+
+                $small_img_3=null;
                 $image=$request->file('small_img_3');
                 if($image){
-                    $small_img_3=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$small_img_3);
+                    $small_img_3 ='smallImg3_'.$project->project_name. uniqid() .'.'. $image->getClientOriginalExtension();
+                    $image->storeAs('/public/images/gallery', $small_img_3);
                 }
-$small_img_4=null;
+
+                $small_img_4=null;
                 $image=$request->file('small_img_4');
                 if($image){
-                    $small_img_4=uniqid().'_'.$image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$small_img_4);
+                    $small_img_4 ='smallImg4_'.$project->project_name. uniqid() .'.'. $image->getClientOriginalExtension();
+                    $image->storeAs('/public/images/gallery', $small_img_4);
                 }
-$small_img_5=null;
+
+                $small_img_5=null;
                 $image=$request->file('small_img_5');
                 if($image){
-                    $small_img_5=uniqid().'_'.$image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$small_img_5);
+                    $small_img_5 ='smallImg5_'.$project->project_name. uniqid() .'.'. $image->getClientOriginalExtension();
+                    $image->storeAs('/public/images/gallery', $small_img_5);
                 }
-$small_img_6=null;
+
+                $small_img_6=null;
                 $image=$request->file('small_img_6');
                 if($image){
-                    $small_img_6=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$small_img_6);
+                    $small_img_6='smallImg6_'.$project->project_name. uniqid() .'.'. $image->getClientOriginalExtension();
+                    $image->storeAs('/public/images/gallery', $small_img_6);
                 }
-$small_img_7=null;
+
+                $small_img_7=null;
                 $image=$request->file('small_img_7');
                 if($image){
-                    $small_img_7=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$small_img_7);
+                    $small_img_7 ='smallImg7_'.$project->project_name. uniqid() .'.'. $image->getClientOriginalExtension();
+                    $image->storeAs('/public/images/gallery', $small_img_7);
                 }
-$small_img_8=null;
+
+                $small_img_8=null;
                 $image=$request->file('small_img_8');
                 if($image){
-                    $small_img_8=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$small_img_8);
+                    $small_img_8 ='smallImg8_'.$project->project_name. uniqid() .'.'. $image->getClientOriginalExtension();
+                    $image->storeAs('/public/images/gallery', $small_img_8);
                 }
-$small_img_9=null;
+
+                $small_img_9=null;
                 $image=$request->file('small_img_9');
                 if($image){
-                    $small_img_9=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->move(public_path('/images/gallery'),$small_img_9);
+                    $small_img_9 ='smallImg9_'.$project->project_name. uniqid() .'.'. $image->getClientOriginalExtension();
+                    $image->storeAs('/public/images/gallery', $small_img_9);
                 }
+
+
             $project=Previewimage::create([
                 'project_id'=>$project->id,
                 'small_img1'=>$small_img_1,
@@ -218,8 +229,6 @@ $small_img_9=null;
                 'small_img7'=>$small_img_7,
                 'small_img8'=>$small_img_8,
                 'small_img9'=>$small_img_9,
-
-
         ]);
 //end preview image
 
@@ -294,15 +303,15 @@ $small_img_9=null;
             'hou_no' => "required|string",
             'street' => "required|string",
             'ward' => "required|string",
-            'small_img_1'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_2'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_3'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_4'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_5'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_6'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_7'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_8'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
-            'small_img_9'=>'nullable|mimes:jpeg,png',// |max:1024|dimensions:width=800,height=800
+            'small_img_1'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',// |max:1024|dimensions:width=800,height=800
+            'small_img_2'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',// |max:1024|dimensions:width=800,height=800
+            'small_img_3'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',// |max:1024|dimensions:width=800,height=800
+            'small_img_4'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',// |max:1024|dimensions:width=800,height=800
+            'small_img_5'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',// |max:1024|dimensions:width=800,height=800
+            'small_img_6'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',// |max:1024|dimensions:width=800,height=800
+            'small_img_7'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',// |max:1024|dimensions:width=800,height=800
+            'small_img_8'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',// |max:1024|dimensions:width=800,height=800
+            'small_img_9'=>'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',// |max:1024|dimensions:width=800,height=800
 
         ]);
 
@@ -313,6 +322,7 @@ $small_img_9=null;
         }
 
         $project_id = $find_project->first()->id;
+        
         if($file = $request->file('cover')){
             $file_name = uniqid() . $file->getClientOriginalName();
             $file->move(public_path('/images/projects'), $file_name);
@@ -380,80 +390,85 @@ $small_img_9=null;
 
 
          // for amenity select
-        $project = Project::find($project_id);
-        $project->amenity()->sync($amenities);
+         $project = Project::find($project_id);
+         $project->amenity()->sync($amenities);
 
-$small_img_1=null;
-        $image = $request->file('small_img_1');
-            if($image){
-                $small_img_1 = uniqid() .'_'. $image->getClientOriginalName();
-                $image->storeAs('/public/gallery', $small_img_1);
+        //  return redirect(route('project.index', $slug))->with('status', 'Project updated successful.');
+
+        //  preview image update
+        $previewImage = Previewimage::where('project_id', $project_id)->first();
+
+         $image1 = $request->file('small_img_1');
+            if( $image1){
+                Storage::delete('public/images/gallery/'.$previewImage->small_img_1);
+                $small_img_1 ='smallImg1_'.$project->project_name. uniqid() .'.'. $image1->getClientOriginalExtension();
+                $image1->storeAs('/public/images/gallery', $small_img_1);
+                Previewimage::where('project_id', $project_id)->update(['small_img1' => $small_img_1]);
             }
 
- $small_img_2=null;
-        $image = $request->file('small_img_2');  //
-                if($image){
-                    $small_img_2 = uniqid() .'_'. $image->getClientOriginalName();
-                    $image->storeAs('public/gallery', $small_img_2);
-                }
-$small_img_3=null;
-                $image=$request->file('small_img_3');
-                if($image){
-                    $small_img_3=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->storeAs('public/images/gallery',$small_img_3);
-                }
-$small_img_4=null;
-                $image=$request->file('small_img_4');
-                if($image){
-                    $small_img_4=uniqid().'_'.$image->getClientOriginalName();
-                    $image->storeAs('public/images/gallery',$small_img_4);
-                }
-$small_img_5=null;
-                $image=$request->file('small_img_5');
-                if($image){
-                    $small_img_5=uniqid().'_'.$image->getClientOriginalName();
-                    $image->storeAs('public/images/gallery',$small_img_5);
-                }
-$small_img_6=null;
-                $image=$request->file('small_img_6');
-                if($image){
-                    $small_img_6=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->storeAs('public/images/gallery',$small_img_6);
-                }
-$small_img_7=null;
-                $image=$request->file('small_img_7');
-                if($image){
-                    $small_img_7=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->storeAs('public/images/gallery',$small_img_7);
-                }
-$small_img_8=null;
-                $image=$request->file('small_img_8');
-                if($image){
-                    $small_img_8=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->storeAs('public/images/gallery',$small_img_8);
-                }
-$small_img_9=null;
-                $image=$request->file('small_img_9');
-                if($image){
-                    $small_img_9=uniqid() .'_'. $image->getClientOriginalName();
-                    $image->storeAs('public/images/gallery',$small_img_9);
-                }
-            $project=Previewimage::create([
-                'project_id'=>$project->id,
-                'small_img1'=>$small_img_1,
-                'small_img2'=>$small_img_2,
-                'small_img3'=>$small_img_3,
-                'small_img4'=>$small_img_4,
-                'small_img5'=>$small_img_5,
-                'small_img6'=>$small_img_6,
-                'small_img7'=>$small_img_7,
-                'small_img8'=>$small_img_8,
-                'small_img9'=>$small_img_9,
+         $image2 = $request->file('small_img_2');
+            if( $image2){
+                Storage::delete('public/images/gallery/'.$previewImage->small_img_2);
+                $small_img_2 ='smallImg2_'.$project->project_name. uniqid() .'.'. $image2->getClientOriginalExtension();
+                $image2->storeAs('/public/images/gallery', $small_img_2);
+                Previewimage::where('project_id', $project_id)->update(['small_img2' => $small_img_2]);
+            }
 
+            $image3 = $request->file('small_img_3');
+                if( $image3){
+                    Storage::delete('public/images/gallery/'.$previewImage->small_img_3);
+                    $small_img_3 ='smallImg3_'.$project->project_name. uniqid() .'.'. $image3->getClientOriginalExtension();
+                    $image3->storeAs('/public/images/gallery', $small_img_3);
+                    Previewimage::where('project_id', $project_id)->update(['small_img3' => $small_img_3]);
+                }
 
-        ]);
+                $image4 = $request->file('small_img_4');
+                if( $image4){
+                    Storage::delete('public/images/gallery/'.$previewImage->small_img_4);
+                    $small_img_4 ='smallImg4_'.$project->project_name. uniqid() .'.'. $image4->getClientOriginalExtension();
+                    $image4->storeAs('/public/images/gallery', $small_img_4);
+                    Previewimage::where('project_id', $project_id)->update(['small_img4' => $small_img_4]);
+                }
 
+                $image5 = $request->file('small_img_5');
+                if( $image5){
+                    Storage::delete('public/images/gallery/'.$previewImage->small_img_5);
+                    $small_img_5 ='smallImg5_'.$project->project_name. uniqid() .'.'. $image5->getClientOriginalExtension();
+                    $image5->storeAs('/public/images/gallery', $small_img_5);
+                    Previewimage::where('project_id', $project_id)->update(['small_img5' => $small_img_5]);
+                }
 
+                $image6 = $request->file('small_img_6');
+                if( $image6){
+                    Storage::delete('public/images/gallery/'.$previewImage->small_img_6);
+                    $small_img_6 ='smallImg6_'.$project->project_name. uniqid() .'.'. $image6->getClientOriginalExtension();
+                    $image6->storeAs('/public/images/gallery', $small_img_6);
+                    Previewimage::where('project_id', $project_id)->update(['small_img6' => $small_img_6]);
+                }
+
+                $image7 = $request->file('small_img_7');
+                if( $image7){
+                    Storage::delete('public/images/gallery/'.$previewImage->small_img_7);
+                    $small_img_7 ='smallImg7_'.$project->project_name. uniqid() .'.'. $image7->getClientOriginalExtension();
+                    $image7->storeAs('/public/images/gallery', $small_img_7);
+                    Previewimage::where('project_id', $project_id)->update(['small_img7' => $small_img_7]);
+                }
+
+                $image8 = $request->file('small_img_8');
+                if( $image8){
+                    Storage::delete('public/images/gallery/'.$previewImage->small_img_8);
+                    $small_img_8 ='smallImg8_'.$project->project_name. uniqid() .'.'. $image8->getClientOriginalExtension();
+                    $image8->storeAs('/public/images/gallery', $small_img_8);
+                    Previewimage::where('project_id', $project_id)->update(['small_img8' => $small_img_8]);
+                }
+
+                $image9 = $request->file('small_img_9');
+                if( $image9){
+                    Storage::delete('public/images/gallery/'.$previewImage->small_img_9);
+                    $small_img_9 ='smallImg9_'.$project->project_name. uniqid() .'.'. $image9->getClientOriginalExtension();
+                    $image9->storeAs('/public/images/gallery', $small_img_9);
+                    Previewimage::where('project_id', $project_id)->update(['small_img9' => $small_img_9]);
+                }
 
         return redirect(route('project.index', $slug))->with('status', 'Project updated successful.');
 
