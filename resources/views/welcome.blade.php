@@ -3,33 +3,33 @@
 @section('title', 'Home - SMT')
 @section('content')
 <!-- main -->
-<main class="main">
-  <!-- slider -->
-  <section id="slider bg-success">
-    <div class="slider-first-div overflow-hidden bg-secondary">
-      <div class="container-fluid px-0 h-100">
-        <div id="carouselExampleInterval" class="carousel slide h-100" data-bs-ride="carousel">
-          <div class="carousel-inner h-100">
-            @foreach($slider as $sl)
-            <div class="carousel-item h-100 @if($loop->first) active @endif" data-bs-interval="4000">
-              {{-- <div class="slider-image text-center">--}}
-              <img src="{{  asset('uploads/slider/'.$sl->image) }}" class="d-block w-100 h-100" alt="{{ $sl->image }}">
-              {{-- </div>--}}
-            </div>
-            @endforeach
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-    </div>
 
+            <main class="main">
+    <!-- slider -->
+              <section id="slider bg-success">
+                  <div class="slider-first-div overflow-hidden bg-secondary">
+                    <div class="container-fluid px-0 h-100">
+                      <div id="carouselExampleInterval" class="carousel slide h-100" data-bs-ride="carousel">
+                        <div class="carousel-inner h-100">
+                          @foreach($slider as $sl)
+                                <div class="carousel-item h-100 @if($loop->first) active @endif" data-bs-interval="4000">
+{{--                                    <div class="slider-image text-center">--}}
+                                        <img src="{{  asset('storage/images/slider/'.$sl->image) }}" class="d-block w-100 h-100" alt="{{ $sl->image }}">
+{{--                                    </div>--}}
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
   </section>
   <!-- end slider -->
   <!-- counting -->
@@ -64,51 +64,51 @@
   </section>
   <!-- end counting -->
 
-  <!-- facebook post -->
-  <section id="facebook-post">
-    <div class="container p-1 pt-0 pb-0 pt-md-5 pb-md-3 p-md-2 p-lg-2 p-xl-5 position-relative">
-      <div class="row px-1 px-md-2 px-lg-5 pt-5 pb-0 py-md-3 pt-lg-5 pb-lg-3 fb-slider ">
-        @foreach($facebooklinks as $f)
-        <div class="col mb-3 mb-md-0 mx-1">
-          <div class="card fb-card border-0 shadow-sm">
-            <a href="{{$f->project_post_link}}" target="_blank">
-              <img src="{{asset('images/fb-images/'.$f->picture)}}" class="card-img-top" alt="..." style="object-fit:cover;">
-            </a>
-            <div class="card-body overflow-hidden" style="max-height:80px;">
-              <span class="fb-card-text card-text overflow-hidden">
-                <small>
-                  <a href="{{$f->project_post_link}}" target="_blank" class="text-decoration-none">
-                    {{$f->description}}
-                  </a>
-                </small>
-              </span>
-            </div>
-            <span class="fw-light w-100 px-2 py-2">
-              {{-- <a href="#" class="text-white-50 text-decoration-none text-truncate page-link"><small> Sun Myat Tun Construction Co.,Ltd Jobs in Myanmar </small></a>--}}
-              {{-- </a>--}}
-            </span>
-            <div class="position-absolute px-1 bg-secondary shadow" style="border-radius: 0 0 60% 0%;">
-              <a href="{{$f->project_post_link}}" target="_blank">
-                <i class="bi bi-facebook fa-2x text-primary"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        @endforeach
-      </div>
-      <div class="seemore-fb justify-content-center align-items-center px-2 px-xl-3 py-1 py-xl-2 rounded rounded-pill">
-        <a href="https://www.facebook.com/Sunmyattun" target="_blank" class="text-decoration-none text-black-50 ">
-          See More &nbsp;<i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-      <div class="text-end px-3 d-md-none">
-        <a href="https://www.facebook.com/Sunmyattun" target="_blank">
-          <span class="text-secondary go-to-arrow">
-            Go To Facebook Page
-          </span>
-        </a>
-      </div>
-    </div>
+    <!-- facebook post -->
+        <section id="facebook-post">
+            <div class="container p-1 pt-0 pb-0 pt-md-5 pb-md-3 p-md-2 p-lg-2 p-xl-5 position-relative" >
+              <div class="row px-1 px-md-2 px-lg-5 pt-5 pb-0 py-md-3 pt-lg-5 pb-lg-3 fb-slider ">
+                      @foreach($facebooklinks as $f)
+                      <div class="col mb-3 mb-md-0 mx-1">
+                          <div class="card fb-card border-0 shadow-sm">
+                              <a href="{{$f->project_post_link}}" target="_blank">
+                                  <img src="{{asset('storage/images/fbImages/'.$f->picture)}}" class="card-img-top" alt="..." style="object-fit:contain;">
+                              </a>
+                              <div class="card-body overflow-hidden" style="max-height:80px;" >
+                            <span class= "fb-card-text card-text overflow-hidden">
+                              <small>
+                                  <a href="{{$f->project_post_link}}" target="_blank" class="text-decoration-none">
+                                      {{$f->description}}
+                                  </a>
+                              </small>
+                            </span>
+                              </div>
+                              <span class="fw-light w-100 px-2 py-2">
+{{--                                <a href="#" class="text-white-50 text-decoration-none text-truncate page-link"><small> Sun Myat Tun Construction Co.,Ltd Jobs in Myanmar </small></a>--}}
+                                  {{--                                  </a>--}}
+                            </span>
+                              <div class="position-absolute px-1 bg-secondary shadow" style="border-radius: 0 0 60% 0%;">
+                                  <a href="{{$f->project_post_link}}" target="_blank" >
+                                      <i class="bi bi-facebook fa-2x text-primary"></i>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                      @endforeach
+                  </div>
+                    <div class="seemore-fb justify-content-center align-items-center px-2 px-xl-3 py-1 py-xl-2 rounded rounded-pill" >
+                      <a href="https://www.facebook.com/Sunmyattun" target="_blank" class="text-decoration-none text-black-50 ">
+                          See More &nbsp;<i class="bi bi-arrow-right"></i>
+                      </a>
+                    </div>
+                    <div class="text-end px-3 d-md-none">
+                      <a href="https://www.facebook.com/Sunmyattun" target="_blank">
+                        <span class="text-secondary go-to-arrow">
+                            Go To Facebook Page
+                        </span>
+                      </a>
+                    </div>
+                </div>
 
 
   </section>
@@ -125,18 +125,19 @@
       <div class="row row-cols-1 row-cols-md-2 g-2 g-md-3 g-lg-4 mb-0 mb-lg-3 mb-xl-5 pb-4 pb-md-5  pb-lg-3 pb-xl-5 px-3 px-lg-0">
 
 
-        @foreach($projects as $p)
-        <div class="col">
-          <a href="{{ url('detail/'.$p->id) }}" class="text-decoration-none">
-            <div class="project-card card mb-2 mb-md-3 d-flex justify-content-center align-items-center overflow-hidden border-0 shadow">
-              <div class="row row-cols-1 h-100 w-100 g-0">
-                <div class="col-5 ">
-                  <img src="{{ asset('images/projects/'.$p->cover) }}" class="rounded-start project-img" alt="..." style="width:100%;height:100%;">
-                </div>
-                <div class="col-7 bg-secondary">
-                  <div class="card-body  text-primary px-2 px-md-2 px-lg-4 my-0 my-lg-4">
-                    <h5 class="card-title text-primary addressTitle">
-                      No({{$p->hou_no}}), {{$p->street}} Street, {{$p->ward}} Ward,
+
+                @foreach($projects as $p)
+                  <div class="col">
+                    <a href="{{ url('detail/'.$p->id) }}" class="text-decoration-none">
+                    <div class="project-card card mb-2 mb-md-3 d-flex justify-content-center align-items-center overflow-hidden border-0 shadow">
+                      <div class="row row-cols-1 h-100 w-100 g-0">
+                        <div class="col-5 ">
+                          <img src="{{ asset('storage/images/cover/'.$p->cover) }}" class="rounded-start project-img" alt="..." style="width:100%;height:100%;">
+                        </div>
+                        <div class="col-7 bg-secondary">
+                          <div class="card-body  text-primary px-2 px-md-2 px-lg-4 my-0 my-lg-4" >
+                            <h5 class="card-title text-primary addressTitle">
+                              No({{$p->hou_no}}), {{$p->street}} Street, {{$p->ward}} Ward,
 
                       @foreach ($towns as $t)
                       @if($t->id==$p->township_id)

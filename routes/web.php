@@ -1,31 +1,39 @@
 <?php
 
+use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SliderController;
-use App\Http\Controllers\PanoramaController;
-use App\Http\Controllers\ProjectListController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PanoramaController;
 use App\Http\Controllers\ContactUsController;
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\RedeemCodeController;
 use App\Models\CustomerProfile;
-
 // use Illuminate\Support\Facades\Session;
 // use App\Http\Controllers\EngagementController;
+use App\Http\Controllers\PreviewImageController;
+use App\Http\Controllers\ProjectListController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+// Route::get('/{lang}',function ($lang){
+//     App::setlocale($lang);
+//     return view('master');
+// });
+
+Route::get('lang/home', [LangController::class, 'index']);
+Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
+
+Route::get('/products',[ProductController::class,'index']);
+Route::get('/products/vouchers/{id}',[ProductController::class,'voucher']);
 
 //Login
 Route::post('/register',[AuthController::class,'register'])->name('register');
@@ -66,6 +74,17 @@ Route::post('/contactus', [App\Http\Controllers\ContactController::class, 'store
 Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
 
+
+Route::get('admin/site',[SiteController::class,'siteindex'])->name('save-sitepost-gallery');
+Route::post('admin/site',[SiteController::class, 'sitesave']);
+Route::delete('/site-gallery/{id}', [SiteController::class,'sitedelete'])->name('delete-site-gallery');
+
+Route::get('admin/album',[AlbumController::class, 'index'])->name('save-multipel-imgae');
+Route::post('admin/album',[AlbumController::class, 'save']);
+
+
+
+
 Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']], function(){
     Route::get('/', 'PageController@showDashboard');
     Route::post('/logout', 'PageController@logout');
@@ -100,9 +119,12 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::put('city-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'cityUpdate'])->name('address.cityUpdate');
     Route::put('town-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'townUpdate'])->name('address.townUpdate');
 
+    Route::delete('/previewImages/{name}/{fieldName}',[AdminPreviewImageController::class,'delete'])->name('previewImage.delete');
 
-});
-   
+
+
+
+});   
 
 
 //SMT UPDATE 13-March-2023
@@ -127,3 +149,48 @@ Route::view('/redeem','customer/redeem')->name('profile-redeem');
 //for redeem code
 Route::get('/redeemCodes/page', [RedeemCodeController::class,'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
 Route::post('/redeemCodes', [RedeemCodeController::class,'generateRedeemCode'])->name('profile.generateRedeemCode');
+=======
+
+
+    // Route::resource('contact', "ContactController");
+    // Route::delete('/deletecover/{id}', "ProjectController@deletecover");
+    //Route::delete('/delete/{id}',[ProjectController::class,'destroy']);
+/******************************************************************************************/
+    // For Gallery Route
+    // Route::get('gallery',[GalleryController::class,'index']);
+    // Route::get('add-photo',[GalleryController::class,'create']);
+    // Route::post('add-photo',[GalleryController::class,'store']);
+    // Route::get('edit-gallery/{id}',[GalleryController::class,'edit']);
+    // Route::put('update-gallery/{id}',[GalleryController::class,'update']);
+    // Route::get('delete-gallery/{id}',[GalleryController::class,'destroy']);
+    // Route::get('show-gallery/{id}',[GalleryController::class,'show']);
+
+    // For Address Route
+    // Route::get('address',[AddressController::class,'index']);
+    // Route::get('add-address',[AddressController::class,'create']);
+    // Route::post('add-address',[AddressController::class,'store']);
+    // Route::get('edit-address/{id}',[AddressController::class,'edit']);
+    // Route::put('update-address/{id}',[AddressController::class,'update']);
+    // Route::get('delete-address/{id}',[AddressController::class,'destory']);
+    // Route::get('show-address/{id}',[AddressController::class,'show']);
+
+    //for Slider
+    // Route::get('slider',[SliderController::class,'index']);
+    // Route::get('add-slider',[SliderController::class,'create']);
+    // Route::post('add-slider',[SliderController::class,'store']);
+    // Route::get('edit-slider/{id}',[SliderController::class,'edit']);
+    // Route::put('update-slider/{id}',[SliderController::class,'update']);
+    // Route::get('show-slider/{id}',[SliderController::class,'show']);
+    // Route::get('delete-slider/{id}',[SliderController::class,'destory']);
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/hello', function(){
+//     // Session::put('message', 0);
+//     $message = Session::get('message');
+//     $message += 1;
+//     Session::put('message', $message);
+//     // echo Session::get('message');
+// });

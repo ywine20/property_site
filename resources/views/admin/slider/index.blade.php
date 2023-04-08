@@ -54,7 +54,7 @@
                                                         <th scope="row" class="text-center">{{$item->id}}</th>
                                                         <td class="d-flex justify-content-center align-items-center">
                                                             <div class="slider-photo rounded overflow-hidden">
-                                                                <img src="{{asset('uploads/slider/'.$item->image)}}" alt="">
+                                                                <img src="{{asset('storage/images/slider/'.$item->image)}}" alt="">
                                                             </div>
                                                         </td>
                                                         <td >

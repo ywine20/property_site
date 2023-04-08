@@ -110,11 +110,53 @@
       display: none;
     }
   </style>
+
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136018131-1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
+
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-136018131-1');
+</script>
+
+<body>
+    <!--Start Messenger -->
+
+    <!-- Messenger Chat Plugin Code -->
+
+    <!-- Messenger Chat plugin Code -->
+    <div id="fb-root"></div> <!-- Your Chat plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat"> </div>
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "353690388313896");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script> <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v15.0'
+            });
+        };
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- End Messenger -->
+
 
   function gtag() {
     dataLayer.push(arguments);
@@ -309,62 +351,74 @@
     <!-- end nav -->
 
     @yield('content')
-
+    @yield('content')
 
     <!-- footer -->
     <section id="footer">
-      <div class="container-fluid bg-secondary  pt-3 overflow-hidden">
-        <div class="container bg-secondary">
-          <div class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
-            <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
-              <h5 class="fw-bold text-gold text-uppercase">Contact Us</h5>
-              <div class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
-                <div class="">
-                  <ul class="list-group">
-                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                      <a href="tel:+959777700111" class="text-decoration-none text-nowrap ">
-                        <i class="bi bi-telephone-fill"></i>
-                        09777700111,
-                      </a>
-                      &nbsp;
-                      <a href="tel:+959777700222" class="text-decoration-none text-nowrap ">
-                        09777700222
-                      </a>
-                    </li>
-                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                      <a href="mailto:sales@sunmyattun.com" target="_blank" class="text-decoration-none text-nowrap">
-                        <i class="bi bi-envelope"></i>
-                        sales@sunmyattun.com
-                      </a>
-                    </li>
-                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                      <a href="https://www.facebook.com/Sunmyattun" target="_blank" class="text-decoration-none text-nowrap ">
-                        <i class="bi bi-facebook"></i>
-                        Sun Myat Tun Construction Co.,Ltd
-                      </a>
-                    </li>
+        <div class="container-fluid bg-secondary py-3 overflow-hidden">
+            <div class="container">
+                <div
+                    class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
+                    <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
+                        <h5 class="fw-bold text-gold text-uppercase">Contact Us</h5>
+                        <div
+                            class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
+                            <div class="">
+                                <ul class="list-group">
+                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                        <a href="tel:+959777700111" class="text-decoration-none text-nowrap ">
+                                            <i class="bi bi-telephone-fill"></i>
+                                            09777700111,
+                                        </a>
+                                        &nbsp;
+                                        <a href="tel:+959777700222" class="text-decoration-none text-nowrap ">
+                                            09777700222
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                        <a href="mailto:sales@sunmyattun.com" target="_blank"
+                                            class="text-decoration-none text-nowrap">
+                                            <i class="bi bi-envelope"></i>
+                                            sales@sunmyattun.com
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                        <a href="https://www.facebook.com/Sunmyattun" target="_blank"
+                                            class="text-decoration-none text-nowrap ">
+                                            <i class="bi bi-facebook"></i>
+                                            Sun Myat Tun Construction Co.,Ltd
+                                        </a>
+                                    </li>
 
-                  </ul>
-                </div>
-                <div class=" ms-md-4">
-                  <div class="d-flex ">
-                    <div class="d-none d-md-block" style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
+                                </ul>
+                            </div>
+                            <div class=" ms-md-4">
+                                <div class="d-flex ">
+                                    <div class="d-none d-md-block"
+                                        style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
+                                    </div>
+                                    <div class="ms-md-3">
+                                        <ul class="list-group">
+                                            <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                                <a href="{{ url('faq') }}" class="text-decoration-none ">
+                                                    FAQs
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                                <a href="{{ url('termcondition') }}"
+                                                    class="text-decoration-none text-nowrap ">
+                                                    Terms And Conditions
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ms-md-3">
-                      <ul class="list-group">
-                        <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                          <a href="{{url('faq')}}" class="text-decoration-none ">
-                            FAQs
-                          </a>
-                        </li>
-                        <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                          <a href="{{url('termcondition')}}" class="text-decoration-none text-nowrap ">
-                            Terms And Conditions
-                          </a>
-                        </li>
-                      </ul>
+                    <div class="col-6 col-md-3  col-lg-2 col-xl-2 bg-danger px-0 footer-logo">
+                        <img src="/image/smtlogoLarge.png" alt="" class="img-fluid">
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -756,6 +810,7 @@
     });
 
 
+
     //forgot password form with axios
     const forgotPasswordForm = document.querySelector('#forgot_password_form');
     const emailSendSuccessAlert = document.querySelector('#email-send-success-alert');
@@ -770,6 +825,7 @@
       const email = forgotPasswordForm.elements.email.value;
 
 
+       //end send message
       // if (!email) {
       //   console.log('Email is required');
       //   return;
@@ -803,8 +859,9 @@
 
   @yield('script')
 
-  @stack('clientScript')
+            <
+            /body>
 
-</body>
 
-</html>
+            <
+            /html>

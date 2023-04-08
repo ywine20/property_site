@@ -4,6 +4,7 @@
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
         'reference' => '2c717ce66b66bad70a585a4bcac674394da82bfb',
+
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -16,6 +17,15 @@
             'reference' => '73e5b88775c64ccc0b84fb60836b30dc9d92ac4a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../asm89/stack-cors',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'beyondcode/laravel-vouchers' => array(
+            'pretty_version' => '2.0.0',
+            'version' => '2.0.0.0',
+            'reference' => '5c0a2fd49b7c55c048076edd7813973cc1c49339',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../beyondcode/laravel-vouchers',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -415,7 +425,9 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+
             'reference' => '2c717ce66b66bad70a585a4bcac674394da82bfb',
+
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

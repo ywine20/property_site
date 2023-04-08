@@ -173,6 +173,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'BeyondCode\\Vouchers\\' => 20,
         ),
         'A' => 
         array (
@@ -504,6 +505,10 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
+        'BeyondCode\\Vouchers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src',
+        ),
         'Asm89\\Stack\\' => 
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src',
@@ -540,27 +545,39 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Http\\Controllers\\Admin\\ProjectController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProjectController.php',
         'App\\Http\\Controllers\\Admin\\SliderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SliderController.php',
         'App\\Http\\Controllers\\Admin\\TownController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TownController.php',
+
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
+
+        'App\\Http\\Controllers\\AlbumController' => __DIR__ . '/../..' . '/app/Http/Controllers/AlbumController.php',
+
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
-        'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\ContactController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContactController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CustomerProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/CustomerProfileController.php',
         'App\\Http\\Controllers\\DeleteController' => __DIR__ . '/../..' . '/app/Http/Controllers/DeleteController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\LangController' => __DIR__ . '/../..' . '/app/Http/Controllers/LangController.php',
+        'App\\Http\\Controllers\\LocalizationController' => __DIR__ . '/../..' . '/app/Http/Controllers/LocalizationController.php',
         'App\\Http\\Controllers\\PanoramaController' => __DIR__ . '/../..' . '/app/Http/Controllers/PanoramaController.php',
-        'App\\Http\\Controllers\\ProjectListController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProjectListController.php',
+        'App\\Http\\Controllers\\Photo' => __DIR__ . '/../..' . '/app/Http/Controllers/Photo.php',
+        'App\\Http\\Controllers\\PhotoController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhotoController.php',
+        'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
+
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
+
+        'App\\Http\\Controllers\\SiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/SiteController.php',
+
         'App\\Http\\Controllers\\WelcomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/WelcomeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CustomerAuthenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/CustomerAuthenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\LanguageManager' => __DIR__ . '/../..' . '/app/Http/Middleware/LanguageManager.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\Setting' => __DIR__ . '/../..' . '/app/Http/Middleware/Setting.php',
@@ -576,6 +593,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Http\\Requests\\UpdateDeleteRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateDeleteRequest.php',
         'App\\Mail\\SendPasswordMail' => __DIR__ . '/../..' . '/app/Mail/SendPasswordMail.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
+        'App\\Models\\Album' => __DIR__ . '/../..' . '/app/Models/Album.php',
         'App\\Models\\Amenity' => __DIR__ . '/../..' . '/app/Models/Amenity.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',
@@ -583,10 +601,15 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Models\\CustomerProfile' => __DIR__ . '/../..' . '/app/Models/CustomerProfile.php',
         'App\\Models\\Delete' => __DIR__ . '/../..' . '/app/Models/Delete.php',
         'App\\Models\\FacebookLink' => __DIR__ . '/../..' . '/app/Models/FacebookLink.php',
-        'App\\Models\\Gallery' => __DIR__ . '/../..' . '/app/Models/Gallery.php',
         'App\\Models\\Image' => __DIR__ . '/../..' . '/app/Models/Image.php',
+        'App\\Models\\Post' => __DIR__ . '/../..' . '/app/Models/Post.php',
+        'App\\Models\\Previewimage' => __DIR__ . '/../..' . '/app/Models/Previewimage.php',
+        'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\Project' => __DIR__ . '/../..' . '/app/Models/Project.php',
+
         'App\\Models\\RedeemCode' => __DIR__ . '/../..' . '/app/Models/RedeemCode.php',
+        'App\\Models\\SiteGallery' => __DIR__ . '/../..' . '/app/Models/SiteGallery.php',
+
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\Town' => __DIR__ . '/../..' . '/app/Models/Town.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -603,6 +626,18 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'BeyondCode\\Vouchers\\Events\\VoucherRedeemed' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Events/VoucherRedeemed.php',
+        'BeyondCode\\Vouchers\\Exceptions\\VoucherAlreadyRedeemed' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Exceptions/VoucherAlreadyRedeemed.php',
+        'BeyondCode\\Vouchers\\Exceptions\\VoucherExpired' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Exceptions/VoucherExpired.php',
+        'BeyondCode\\Vouchers\\Exceptions\\VoucherIsInvalid' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Exceptions/VoucherIsInvalid.php',
+        'BeyondCode\\Vouchers\\Facades\\Vouchers' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Facades/Vouchers.php',
+        'BeyondCode\\Vouchers\\Models\\Voucher' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Models/Voucher.php',
+        'BeyondCode\\Vouchers\\Rules\\Voucher' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Rules/Voucher.php',
+        'BeyondCode\\Vouchers\\Traits\\CanRedeemVouchers' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Traits/CanRedeemVouchers.php',
+        'BeyondCode\\Vouchers\\Traits\\HasVouchers' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Traits/HasVouchers.php',
+        'BeyondCode\\Vouchers\\VoucherGenerator' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/VoucherGenerator.php',
+        'BeyondCode\\Vouchers\\Vouchers' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/Vouchers.php',
+        'BeyondCode\\Vouchers\\VouchersServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-vouchers/src/VouchersServiceProvider.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -735,6 +770,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'Database\\Factories\\CustomerProfileFactory' => __DIR__ . '/../..' . '/database/factories/CustomerProfileFactory.php',
         'Database\\Factories\\DeleteFactory' => __DIR__ . '/../..' . '/database/factories/DeleteFactory.php',
         'Database\\Factories\\FacebookLinkFactory' => __DIR__ . '/../..' . '/database/factories/FacebookLinkFactory.php',
+        'Database\\Factories\\ProductFactory' => __DIR__ . '/../..' . '/database/factories/ProductFactory.php',
         'Database\\Factories\\ProjectFactory' => __DIR__ . '/../..' . '/database/factories/ProjectFactory.php',
         'Database\\Factories\\SliderFactory' => __DIR__ . '/../..' . '/database/factories/SliderFactory.php',
         'Database\\Factories\\TownFactory' => __DIR__ . '/../..' . '/database/factories/TownFactory.php',

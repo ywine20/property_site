@@ -160,7 +160,7 @@
               <div class="project-list-card card mb-2 mb-md-0 d-flex justify-content-center align-items-center overflow-hidden border-0 shadow">
                 <div class="row row-cols-1 h-100 w-100 g-0">
                   <div class="col-5 project-list-img">
-                    <img src="{{ asset('images/projects/'.$p->cover) }}" class="rounded-start" alt="..." style="width:100%;height:100%;object-fit: cover;">
+                    <img src="{{ asset('storage/images/cover/'.$p->cover) }}" class="rounded-start" alt="..." style="width:100%;height:100%;object-fit: cover;">
                   </div>
                   <div class="col-7 bg-secondary">
                     <div class="card-body  text-primary px-2 px-md-2 px-lg-2 my-0 my-lg-0">
