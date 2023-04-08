@@ -1,25 +1,31 @@
 <?php
 
+use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SliderController;
-use App\Http\Controllers\PanoramaController;
-use App\Http\Controllers\ProjectListController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PanoramaController;
 use App\Http\Controllers\ContactUsController;
-// use Illuminate\Support\Facades\Session;
-// use App\Http\Controllers\EngagementController;
+use App\Http\Controllers\PreviewImageController;
+use App\Http\Controllers\ProjectListController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+// Route::get('/{lang}',function ($lang){
+//     App::setlocale($lang);
+//     return view('master');
+// });
+
+Route::get('lang/home', [LangController::class, 'index']);
+Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
+
+Route::get('/products',[ProductController::class,'index']);
+Route::get('/products/vouchers/{id}',[ProductController::class,'voucher']);
 
 /*
  Client Site and User View Point Routes
@@ -48,6 +54,17 @@ Route::post('/contactus', [App\Http\Controllers\ContactController::class, 'store
 */
 Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
+
+
+Route::get('admin/site',[SiteController::class,'siteindex'])->name('save-sitepost-gallery');
+Route::post('admin/site',[SiteController::class, 'sitesave']);
+Route::delete('/site-gallery/{id}', [SiteController::class,'sitedelete'])->name('delete-site-gallery');
+
+Route::get('admin/album',[AlbumController::class, 'index'])->name('save-multipel-imgae');
+Route::post('admin/album',[AlbumController::class, 'save']);
+
+
+
 
 Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']], function(){
     Route::get('/', 'PageController@showDashboard');
@@ -83,8 +100,14 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::put('city-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'cityUpdate'])->name('address.cityUpdate');
     Route::put('town-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'townUpdate'])->name('address.townUpdate');
 
+    Route::delete('/previewImages/{name}/{fieldName}',[AdminPreviewImageController::class,'delete'])->name('previewImage.delete');
+
+
+
 
 });
+
+
     // Route::resource('contact', "ContactController");
     // Route::delete('/deletecover/{id}', "ProjectController@deletecover");
     //Route::delete('/delete/{id}',[ProjectController::class,'destroy']);
