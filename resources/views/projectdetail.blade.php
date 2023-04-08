@@ -33,7 +33,7 @@
                         class="col-7 col-md-5 col-lg-4 d-flex justify-content-center justify-content-lg-end mx-auto main-image">
                         <div class="main-image-div bg-red rounded rounded-2 overflow-hidden shadow">
                             <!-- https://source.unsplash.com/random/300x400/?building,project,apartments -->
-                            <img src="{{ asset('images/projects/' . $project->cover) }}" class="" alt="">
+                            <img src="{{ asset('storage/images/cover/'.$project->cover) }}" class="" alt="">
                         </div>
                     </div>
                     <div class="col-12 col-md-7 col-lg-8 ps-0 ps-md-3 ps-lg-4 pe-0">
@@ -127,11 +127,11 @@
                     <div class="row row-cols-2 row-cols-md-5 row-cols-xl-5 g-lg-3 g-md-2 g-1">
 
                         <!-- 360* images -->
-                        @if ($project->gallery != '')
+                        @if ($project->three_sixty_image != '')
                             <div class="col" style="aspect-ratio: 1;">
                                 <a data-vbtype="iframe" href="{{ url('panorama/' . $project->id) }}" class="myGallery"
                                     data-gall="myGallery" data-maxwidth="1000px" data-overlay="#423e3ddf">
-                                    <img src="{{ asset('images/360images/' . $project->gallery) }}"
+                                    <img src="{{ asset('storage/images/360Images/' . $project->three_sixty_image) }}"
                                         style="width: 100%;height:100%;object-fit:cover;" alt="">
                                 </a>
                             </div>

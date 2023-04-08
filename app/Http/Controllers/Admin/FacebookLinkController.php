@@ -7,6 +7,8 @@ use App\Models\Amenity;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\FacebookLink;
+use Illuminate\Support\Facades\Storage;
+
 // use App\Models\Project;
 
 class FacebookLinkController extends Controller
@@ -48,21 +50,19 @@ class FacebookLinkController extends Controller
             'description' => "required|string"
         ]);
 
-        $image = $request->file('picture');
-        $image_name = uniqid() . $image->getClientOriginalName();
-        $image->move(public_path('/images/fb-images/'), $image_name);
 
-        // $project = Project::where('id', $request->id)->first();
-        // if(!$project){
-        //     return redirect()->back()->with('error', 'Not found project');
-        // }
+        $image = $request->file('picture');
+        $image_name = 'facebookCover_'. uniqid() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('/public/images/fbImages', $image_name);
 
         $facebooklink = FacebookLink::create([
             'project_post_link' => $request->project_post_link,
             'description' => $request->description,
             'picture' => $image_name,
         ]);
+
         $facebooklink->save();
+
         return redirect('/admin/facebooklink')->with('status', 'FacebookLink created successfully.');
     }
 
@@ -118,32 +118,20 @@ class FacebookLinkController extends Controller
 
         ]);
 
-        $facebooklink = FacebookLink::where('id', $id);
-        if(!$facebooklink->first()){
-            return redirect()->back()->with('error', 'not found facebooklink');
-        }
+        $facebooklink = FacebookLink::where('id', $id)->first();
+       
+        if($image = $request->file('picture')){
 
-        // $project = Project::where('id', $request->id)->first();
-        // if(!$project){
-        //     return redirect()->back()->with('error', 'not found project');
-        // }
+            Storage::delete('public/images/fbImages/' . $facebooklink->picture);
+            $image_name = 'facebookCover_'. uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('/public/images/fbImages', $image_name);
 
-        if($file = $request->file('picture')){
-            $destination='images/fb-images/'.$facebooklink->picture;
-
-            $delFiles = new \Illuminate\Filesystem\Filesystem();
-            if($delFiles->exists($destination)){
-              $delFiles->delete($destination);
-            }
-
-            $file_name = uniqid() . $file->getClientOriginalName();
-            $file->move(public_path('/images/fb-images'), $file_name);
         }else{
-            $file_name = $facebooklink->first()->picture;
+            $image_name = $facebooklink->first()->picture;
         }
 
         $facebooklink->update([
-            'picture' => $file_name,
+            'picture' => $image_name,
             'project_post_link' => $request->project_post_link,
             'description' => $request->description,
         ]);
@@ -158,12 +146,12 @@ class FacebookLinkController extends Controller
      */
     public function destroy($id)
     {
-        $facebooklink = FacebookLink::where('id', $id);
-        if(!$facebooklink){
-            return redirect()->back()->with('error', 'not found facebooklink');
-        }
-        File::delete(public_path('images/fb-images/' . $facebooklink->first()->picture));
+        $facebooklink = FacebookLink::where('id', $id)->first();
+
+        Storage::delete('public/images/fbImages/' . $facebooklink->picture);
+
         $facebooklink->delete();
+
        return response()->json([
             'status' => 'success',
             'info' => 'delete successful'
@@ -173,8 +161,24 @@ class FacebookLinkController extends Controller
 
     public function multiDelFacebookLink(Request $request){
         $ids = $request->chk;
+
+
+        if (empty($ids)) {
+            return response()->json(['message' => 'No IDs provided.'], 400);
+        }
+
+        $facebooklinks =  FacebookLink::whereIn('id',$ids)->get();
+
+        foreach($facebooklinks as $facebooklink)
+        {
+            $localPhoto = $facebooklink->picture;
+            if($localPhoto){
+                Storage::delete('public/images/fbImages/' . $localPhoto);
+            }
+        }
+
         FacebookLink::whereIn('id',$ids)->delete();
-//        Category::destroy(collect($ids));
+
         return redirect()->back()->with('status','Multiple Delete Successful');
     }
 }

@@ -18,8 +18,8 @@ class CreateProjectsTable extends Migration
             $table->string('slug')->unique();
             $table->string('project_name');
             $table->longText('description');
-            $table->string('cover');
-            $table->string('gallery')->nullable();
+            $table->text('cover');
+            $table->text('three_sixty_image')->nullable();
             $table->string('lower_price');
             $table->string('upper_price');
             $table->integer('layer');
@@ -46,4 +46,5 @@ class CreateProjectsTable extends Migration
     {
         Schema::dropIfExists('projects');
     }
+
 }

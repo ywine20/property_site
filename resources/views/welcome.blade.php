@@ -13,7 +13,7 @@
                           @foreach($slider as $sl)
                                 <div class="carousel-item h-100 @if($loop->first) active @endif" data-bs-interval="4000">
 {{--                                    <div class="slider-image text-center">--}}
-                                        <img src="{{  asset('uploads/slider/'.$sl->image) }}" class="d-block w-100 h-100" alt="{{ $sl->image }}">
+                                        <img src="{{  asset('storage/images/slider/'.$sl->image) }}" class="d-block w-100 h-100" alt="{{ $sl->image }}">
 {{--                                    </div>--}}
                                 </div>
                             @endforeach
@@ -72,7 +72,7 @@
                       <div class="col mb-3 mb-md-0 mx-1">
                           <div class="card fb-card border-0 shadow-sm">
                               <a href="{{$f->project_post_link}}" target="_blank">
-                                  <img src="{{asset('images/fb-images/'.$f->picture)}}" class="card-img-top" alt="..." style="height:230px;object-fit:cover;">
+                                  <img src="{{asset('storage/images/fbImages/'.$f->picture)}}" class="card-img-top" alt="..." style="object-fit:contain;">
                               </a>
                               <div class="card-body overflow-hidden" style="max-height:80px;" >
                             <span class= "fb-card-text card-text overflow-hidden">
@@ -131,7 +131,7 @@
                     <div class="project-card card mb-2 mb-md-3 d-flex justify-content-center align-items-center overflow-hidden border-0 shadow">
                       <div class="row row-cols-1 h-100 w-100 g-0">
                         <div class="col-5 ">
-                          <img src="{{ asset('images/projects/'.$p->cover) }}" class="rounded-start project-img" alt="..." style="width:100%;height:100%;">
+                          <img src="{{ asset('storage/images/cover/'.$p->cover) }}" class="rounded-start project-img" alt="..." style="width:100%;height:100%;">
                         </div>
                         <div class="col-7 bg-secondary">
                           <div class="card-body  text-primary px-2 px-md-2 px-lg-4 my-0 my-lg-4" >

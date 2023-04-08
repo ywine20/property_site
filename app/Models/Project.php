@@ -21,12 +21,26 @@ class Project extends Model implements Viewable
     use HasFactory;
     use InteractsWithViews;
 
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Use the deleting event hook to remove related records from project_amenity table
+        static::deleting(function ($project) {
+            $project->amenity()->detach();
+        });
+    }
+
+
+
+
     protected $fillable=[
         'slug',
         'project_name',
         'description',
         'cover',
-        'gallery',
+        'three_sixty_image',
         'lower_price',
         'upper_price',
         'category_id',
