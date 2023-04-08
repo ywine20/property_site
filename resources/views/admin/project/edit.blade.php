@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-12 ">
-                        <form action="{{ route('project.update', $project->slug) }}" method="POST" enctype="multipart/form-data" class="create-form">
+                        <form action="{{ route('project.update', $project->id) }}" method="POST" enctype="multipart/form-data" class="create-form">
                             @csrf
                             @method('PATCH')
                             <div class="row gx-3 d-flex flex-column flex-md-row justify-content-start align-items-start">
@@ -323,7 +323,7 @@
                                                         :</label>
                                                     <input type="file" name="cover" class="form-control d-none" value="{{ $project->cover }}" id="project_cover_input">
                                                     <div id="cover-preview" class="bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview @error('cover') border border-danger @enderror" style="height:300px;">
-                                                        <img src="{{ asset('images/projects/' . $project->cover) }}" id="cover_img" alt="" class="w-100 h-100" style="object-fit: cover">
+                                                        <img src="{{ asset('storage/images/cover/'.$project->cover) }}" id="cover_img" alt="" class="w-100 h-100" style="object-fit: cover">
                                                         <!--                                                                <i class="bi bi-camera-fill fa-fw fa-3x text-secondary"></i>-->
                                                     </div>
                                                     <small class="text-warning fw-light">
@@ -340,15 +340,15 @@
                                                 <div class="project-cover-preview w-100 overflow-hidden">
                                                     <label for="project_360_input" class="form-label">360 Image
                                                         :</label>
-                                                    <input type="file" class="form-control d-none" value="{{ $project->gallery }}" name="gallery" id="project_360_input">
-                                                    <div id="360-preview" class="three-preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview  @error('gallery') border border-danger @enderror" style="height:300px;">
-                                                        <img src="{{ asset('images/360images/' . $project->gallery) }}" id="360_img" alt="" class="w-100 h-100" style="object-fit: cover">
+                                                    <input type="file" class="form-control d-none" value="{{ $project->threeSixtyImage }}" name="threeSixtyImage" id="project_360_input">
+                                                    <div id="360-preview" class="three-preview bg-secondary bg-opacity-50 cursor-pointer d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview  @error('threeSixtyImage') border border-danger @enderror" style="height:300px;">
+                                                    <img src="{{ $project->three_sixty_image ?  asset('storage/images/360Images/'.$project->three_sixty_image) : asset('/images/photoPlaceholderWhite.png') }}" id="360_img" alt="" class="w-100 h-100" style="object-fit: cover">
                                                         <!--                                                                <i class="bi bi-camera-fill fa-fw fa-3x text-secondary"></i>-->
                                                     </div>
                                                     <small class="text-warning fw-light">
                                                         max : 2.5 MB
                                                     </small>
-                                                    @error('gallery')
+                                                    @error('threeSixtyImage')
                                                     <div class="text-danger" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </div>
@@ -406,7 +406,7 @@
                                                 <div class="col">
                                                     <input type="file" name="small_img_1" class="form-control d-none small_file" id="small_img_input_1">
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
-                                                        <img src="{{ $project->previewimages->small_img1 ? asset('storage/images/gallery/'.$project->previewimages->small_img1) : asset('storage/images/gallery/photoPlaceholderWhite.png') }}" id="sImg1" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+                                                        <img src="{{ $project->previewimages->small_img1 ? asset('storage/images/gallery/'.$project->previewimages->small_img1) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg1" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
 
                                                         <button type="submit" form="del_small_img_1_form" class="{{$project->previewimages->small_img1 ? '':'none'}}" id="del_small_img_1_btn">
                                                             <!-- del -->
@@ -418,7 +418,7 @@
                                                 <div class="col">
                                                     <input type="file" name="small_img_2" class="form-control d-none small_file" id="small_img_input_2" value="{{$project->previewimages->small_img2}}">
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
-                                                        <img src="{{ $project->previewimages->small_img2 ? asset('storage/images/gallery/'.$project->previewimages->small_img2) : asset('storage/images/gallery/photoPlaceholderWhite.png') }}" id="sImg2" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+                                                        <img src="{{ $project->previewimages->small_img2 ? asset('storage/images/gallery/'.$project->previewimages->small_img2) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg2" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                         <button type="submit" form="del_small_img_2_form" class="{{$project->previewimages->small_img2 ? '':'none'}}" id="del_small_img_2_btn">
                                                             <!-- del -->
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
@@ -429,7 +429,7 @@
                                                 <div class="col">
                                                     <input type="file" name="small_img_3" class="form-control d-none small_file" id="small_img_input_3" value="{{$project->previewimages->small_img3}}">
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
-                                                        <img src="{{ $project->previewimages->small_img3 ? asset('storage/images/gallery/'.$project->previewimages->small_img3) : asset('storage/images/gallery/photoPlaceholderWhite.png') }}" id="sImg3" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+                                                        <img src="{{ $project->previewimages->small_img3 ? asset('storage/images/gallery/'.$project->previewimages->small_img3) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg3" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                         <button type="submit" form="del_small_img_3_form" class="{{$project->previewimages->small_img3 ? '':'none'}}" id="del_small_img_3_btn">
                                                             <!-- del -->
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
@@ -440,7 +440,7 @@
                                                 <div class="col">
                                                     <input type="file" name="small_img_4" class="form-control d-none small_file" id="small_img_input_4" value="{{$project->previewimages->small_img4}}" />
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
-                                                        <img src="{{ $project->previewimages->small_img4 ? asset('storage/images/gallery/'.$project->previewimages->small_img4) : asset('storage/images/gallery/photoPlaceholderWhite.png') }}" id="sImg4" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+                                                        <img src="{{ $project->previewimages->small_img4 ? asset('storage/images/gallery/'.$project->previewimages->small_img4) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg4" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                         <button type="submit" form="del_small_img_4_form" class="{{$project->previewimages->small_img4 ? '':'none'}}" id="del_small_img_4_btn">
                                                             <!-- del -->
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
@@ -452,7 +452,7 @@
                                                 <div class="col">
                                                     <input type="file" name="small_img_5" class="form-control d-none small_file" id="small_img_input_5" value="{{$project->previewimages->small_img3}}">
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
-                                                        <img src="{{ $project->previewimages->small_img5 ? asset('storage/images/gallery/'.$project->previewimages->small_img5) : asset('storage/images/gallery/photoPlaceholderWhite.png') }}" id="sImg5" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+                                                        <img src="{{ $project->previewimages->small_img5 ? asset('storage/images/gallery/'.$project->previewimages->small_img5) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg5" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                         <button type="submit" form="del_small_img_5_form" class="{{$project->previewimages->small_img5 ? '':'none'}}" id="del_small_img_5_btn">
                                                             <!-- del -->
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
@@ -464,7 +464,7 @@
                                                 <div class="col">
                                                     <input type="file" name="small_img_6" class="form-control d-none small_file" id="small_img_input_6" value="{{$project->previewimages->small_img6}}">
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
-                                                        <img src="{{ $project->previewimages->small_img6 ? asset('storage/images/gallery/'.$project->previewimages->small_img6) : asset('storage/images/gallery/photoPlaceholderWhite.png') }}" id="sImg6" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+                                                        <img src="{{ $project->previewimages->small_img6 ? asset('storage/images/gallery/'.$project->previewimages->small_img6) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg6" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                         <button type="submit" form="del_small_img_6_form" class="{{$project->previewimages->small_img6 ? '':'none'}}" id="del_small_img_6_btn">
                                                             <!-- del -->
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
@@ -476,7 +476,7 @@
                                                 <div class="col">
                                                     <input type="file" name="small_img_7" class="form-control d-none small_file" id="small_img_input_7" value="{{$project->previewimages->small_img7}}">
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
-                                                        <img src="{{ $project->previewimages->small_img7 ? asset('storage/images/gallery/'.$project->previewimages->small_img7) : asset('storage/images/gallery/photoPlaceholderWhite.png') }}" id="sImg7" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+                                                        <img src="{{ $project->previewimages->small_img7 ? asset('storage/images/gallery/'.$project->previewimages->small_img7) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg7" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                         <button type="submit" form="del_small_img_7_form" class="{{$project->previewimages->small_img7 ? '':'none'}}" id="del_small_img_7_btn">
                                                             <!-- del -->
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
@@ -488,7 +488,7 @@
                                                 <div class="col">
                                                     <input type="file" name="small_img_8" class="form-control d-none small_file" id="small_img_input_8" value="{{$project->previewimages->small_img8}}">
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
-                                                        <img src="{{ $project->previewimages->small_img8 ? asset('storage/images/gallery/'.$project->previewimages->small_img8) : asset('storage/images/gallery/photoPlaceholderWhite.png') }}" id="sImg8" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+                                                        <img src="{{ $project->previewimages->small_img8 ? asset('storage/images/gallery/'.$project->previewimages->small_img8) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg8" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                         <button type="submit" form="del_small_img_8_form" class="{{$project->previewimages->small_img8 ? '':'none'}}" id="del_small_img_8_btn">
                                                             <!-- del -->
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
@@ -500,7 +500,7 @@
                                                 <div class="col">
                                                     <input type="file" name="small_img_9" class="form-control d-none small_file" id="small_img_input_9" value="{{$project->previewimages->small_img9}}">
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
-                                                        <img src="{{ $project->previewimages->small_img9 ? asset('storage/images/gallery/'.$project->previewimages->small_img9) : asset('storage/images/gallery/photoPlaceholderWhite.png') }}" id="sImg9" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+                                                        <img src="{{ $project->previewimages->small_img9 ? asset('storage/images/gallery/'.$project->previewimages->small_img9) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg9" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                         <button type="submit" form="del_small_img_9_form" class="{{$project->previewimages->small_img9 ? '':'none'}}" id="del_small_img_9_btn">
                                                             <!-- del -->
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>

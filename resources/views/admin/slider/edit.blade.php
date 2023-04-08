@@ -37,7 +37,7 @@
                                    
                                     <input  id="slider-image-input" name="image" class="d-none form-control" type="file" accept="image/png,image/gif,image/jpeg" value="{{$slider->image}}" >
                                     <div id="slider-image-preview" class=" rounded overflow-hidden pointer " >
-                                        <img  id="slider-image"  src="{{asset('uploads/slider/'.$slider->image)}}" alt="">
+                                        <img  id="slider-image"  src="{{asset('storage/images/slider/'.$slider->image)}}" alt="">
                                     </div>
                                     @error('image')
                                         <div class="text-danger" role="alert">

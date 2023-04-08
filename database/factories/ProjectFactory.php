@@ -22,7 +22,7 @@ class ProjectFactory extends Factory
             'project_name' =>  'A'.rand(1000,3000),
             'description' => $this->faker->paragraph(),
             'cover' => $this->faker->text($maxNbChars = 10),
-            'gallery' => $this->faker->text($maxNbChars = 10),
+            'three_sixty_image' => $this->faker->text($maxNbChars = 10),
             'lower_price' => $this->faker->numberBetween($min = 100, $max = 4000),
             'upper_price' => $this->faker->numberBetween($min = 1000, $max = 5000),
 //            'layer' => $this->faker->stateAbbr(),

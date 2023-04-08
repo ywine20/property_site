@@ -59,7 +59,7 @@
                                                         <th scope="row" class="text-center">{{++$keys}}</th>
                                                         <td class="d-flex justify-content-center align-items-center">
                                                             <div class="facebook-photo">
-                                                                <img src="{{asset('images/fb-images/'.$f->picture)}}" alt="">
+                                                                <img src="{{asset('storage/images/fbImages/'.$f->picture)}}" alt="">
                                                             </div>
                                                         </td>
                                                         <td class="">

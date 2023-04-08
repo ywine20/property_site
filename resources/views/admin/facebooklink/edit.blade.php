@@ -74,7 +74,7 @@
                                                         <label for="facebook_description" class="form-label text-white">Facebook Preview Image  :</label>
                                                         <input type="file" value="{{$facebooklink->picture}}" accept="image/png, image/gif, image/jpeg" name="picture" class="form-control d-none" id="facebook-image-input">
                                                         <div id="facebook-image-preview" class="bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid " style="">
-                                                            <img src="{{asset('images/fb-images/'.$facebooklink->picture)}}" id="fb-img"  alt="" >
+                                                            <img src="{{asset('storage/images/fbImages/'.$facebooklink->picture)}}" id="fb-img"  alt="" >
                                                             <!--                                                                <i class="bi bi-camera-fill fa-fw fa-3x text-secondary"></i>-->
                                                         </div>
                                                         <small class="text-warning fw-light">
