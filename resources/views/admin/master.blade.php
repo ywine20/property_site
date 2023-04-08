@@ -18,7 +18,6 @@
 
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="../../css/datatable.css">
 
     <!--    sweetalert2-->
     <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
@@ -186,12 +185,11 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<script src="../node_modules/bootstrap/dist/js/bootstrap.js "></script>
+<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.js "></script> -->
 <!--<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js "></script>-->
 <script src="{{asset('js/layout.js')}}"></script>
-<script src="../../js/app.js"></script>
-{{--<script src="{{asset('js/appp.js')}}"></script>--}}
-{{--<script src="../../js/layout.js"></script>--}}
+<script src="{{asset('js/app.js')}}"></script>
+<!-- {{--<script src="{{asset('js/appp.js')}}"></script>--}} -->
 @yield('script')
 @stack('customScript')
 
@@ -219,23 +217,25 @@
 @endif
 
 @if(session('error'))
-    <script>
-        Swal.fire({
-            icon: 'error',
-            background:'#423e3d',
-            confirmButtonColor: '#F5CC7A',
-            cancelButtonColor: '#f36565',
-            color:'#fff',
-            // title: 'Oops...',
-            text: "{{session('error')}}",
-{{--            text: JSON.stringify({{session('error')}}),--}}
-        })
 
+    <script>
+//         Swal.fire({
+//             icon: 'error',
+//             background:'#423e3d',
+//             confirmButtonColor: '#F5CC7A',
+//             cancelButtonColor: '#f36565',
+//             color:'#fff',
+//             // title: 'Oops...',
+//             text: "{{session('error')}}",
+// {{--            text: JSON.stringify({{session('error')}}),--}}
+//         })
+
+    alert('something wrong')
     </script>
 @endif
 
 @if(session('null'))
-    <script>
+    <!-- <script>
         Swal.fire({
             icon: 'warning',
             // title: 'Oops...',
@@ -243,7 +243,7 @@
             // footer: '<a href="">Why do I have this issue?</a>'
         })
 
-    </script>
+    </script> -->
 @endif
 </body>
 </html>

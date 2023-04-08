@@ -9,6 +9,7 @@ use App\Models\Visitor;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 use App\Models\Admin;
+use App\Models\Product;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,13 +36,15 @@ class DatabaseSeeder extends Seeder
         //     'role' => 'Dev',
         //     'image' => "my-image.jpg"
         // ]);
-//        \App\Models\Category::factory(5)->create();
-//        \App\Models\City::factory(5)->create();
-//        \App\Models\Town::factory(5)->create();
+       \App\Models\Category::factory(5)->create();
+       \App\Models\City::factory(5)->create();
+       \App\Models\Town::factory(5)->create();
     //    \App\Models\Project::factory(50)->create();
-//        Amenity::factory(5)->create();
-	  Visitor::factory(0)->create();
+       Amenity::factory(5)->create();
+	//   Visitor::factory(0)->create();
 	  Slider::factory(7)->create();
+    //   Product::factory(10)->create();
+
 //        FacebookLink::factory(12)->create();
     }
 }
