@@ -242,7 +242,6 @@
             text: '{{session('null')}}',
             // footer: '<a href="">Why do I have this issue?</a>'
         })
-
     </script> -->
 @endif
 </body>

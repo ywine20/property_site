@@ -2,11 +2,8 @@
 
 @section('title', 'Project List - SMT')
 @section('css')
-{{-- <link rel="stylesheet" href="{{asset('css/project-list.css')}}">--}}
-/*
-<link rel="stylesheet" href="/sass/project-list.scss">*/
-/*
-<link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css ">*/
+<!-- {{-- <link rel="stylesheet" href="{{asset('css/project-list.css')}}">--}} -->
+
 @endsection
 
 @section('content')
@@ -234,9 +231,7 @@
 @endsection
 
 @section('script')
-<script src="/js/project-list.js"></script>
-<script src="./js/script.js"></script>
-{{-- <script src="./js/script.js"></script> --}}
+<script src="{{asset('js/project-list.js')}}"></script>
 <script>
   const subText = (text) => {
     return text.substring(0, 50) + '...';
@@ -245,7 +240,7 @@
 
   let listEntity = document.querySelectorAll('.list-entity');
   //  console.log(listEntity.length);
-  for (let i = 0; i <= listEntity.length; i++) {
+  for (let i = 0; i < listEntity.length; i++) {
     let realText = listEntity[i].innerText;
     let changeText = subText(realText);
     listEntity[i].innerText = changeText;
@@ -260,7 +255,7 @@
   const addressSubText = (text) => {
     return text.substring(0, 65) + '...';
   }
-  for (let i = 0; i <= address.length; i++) {
+  for (let i = 0; i < address.length; i++) {
     let realAddress = address[i].innerText;
     if (realAddress.length > 65) {
       let changeAddress = addressSubText(realAddress);

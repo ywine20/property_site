@@ -15,7 +15,7 @@ class FacebookLinkFactory extends Factory
     {
         return [
             'project_post_link'=>'https://www.facebook.com/Sunmyattun',
-            'picture'=>'https://source.unsplash.com/random/1200x500/?portrait',
+            'picture'=>'fb-img-example.jpg',
             'description'=>$this->faker->text(),
         ];
     }

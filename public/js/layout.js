@@ -1,4 +1,4 @@
-<!--  start  aside and nav responsive design-->
+// <!--  start  aside and nav responsive design-->
 let aside = document.querySelector('aside');
 let menuList = document.querySelector('.menu-list');
 let backdrop = document.querySelector('#backdrop');

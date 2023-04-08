@@ -1,7 +1,12 @@
 window._ = require('lodash');
 
+
 try {
     window.bootstrap = require('bootstrap');
+    window.axios = require('axios');
+    
+
+    // window.Swal = require('sweetalert2');
 } catch (e) {}
 
 /**

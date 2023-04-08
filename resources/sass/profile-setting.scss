@@ -1,0 +1,82 @@
+#setting{
+    .setting-card{
+        width: 28%;
+    }
+    .divided{
+        width: 50%;
+        opacity: 0.2;
+        margin:1rem auto 1rem 3rem;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    #setting{
+        .setting-card{
+            width: 100%;
+
+            .head-title{
+                font-size: 1.1rem;
+            }
+
+            label{
+                font-size: .7rem;
+            }
+            input{
+                font-size: .9rem;
+            }
+           
+        }
+        .divided{
+            width: 80%;
+            margin:1rem auto;
+        }
+        .logoutBtn{
+            font-size:1rem;
+        }
+
+        
+    }
+}
+
+@media screen and (min-width: 600px) {
+    #setting{
+        .setting-card{
+            width: 80%;
+        }
+        .divided{
+            width: 80%;
+            margin:1rem auto 1rem 1rem;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #setting{
+        .setting-card{
+            width: 50%;
+        }
+        .divided{
+            width: 50%;
+            margin:1rem auto 1rem 3rem;
+        }
+       
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #setting{
+        .setting-card{
+            width: 40%;
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #setting{
+        .setting-card{
+            width: 28%;
+        }
+        
+    }
+}

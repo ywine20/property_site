@@ -20432,6 +20432,317 @@ textarea.form-control-lg {
        object-fit: cover;
   }
 }
+.login .form-control-border-bottom,
+.register .form-control-border-bottom, .forgotPassword .form-control-border-bottom {
+  border: none;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3137254902);
+}
+.login .form-control:focus,
+.register .form-control:focus, .forgotPassword .form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #fae6bd;
+  outline: 0;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3137254902);
+}
+.login :focus-visible,
+.register :focus-visible, .forgotPassword :focus-visible {
+  /* outline: -webkit-focus-ring-color auto 1px;
+  outline-color: ;
+  outline-style: ;
+  outline-width: ; */
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3137254902);
+  outline: none;
+}
+.login input:-webkit-autofill,
+.register input:-webkit-autofill, .forgotPassword input:-webkit-autofill {
+  -webkit-box-shadow: 0px 1px 0 0px rgba(0, 0, 0, 0.2509803922);
+  -webkit-text-fill-color: #333;
+  background-color: rgba(255, 0, 0, 0) !important;
+}
+.login input:-internal-autofill-selected,
+.register input:-internal-autofill-selected, .forgotPassword input:-internal-autofill-selected {
+  -webkit-appearance: menulist-button;
+     -moz-appearance: menulist-button;
+          appearance: menulist-button;
+  background-image: none !important;
+  background-color: white !important;
+  color: fieldtext !important;
+}
+.login .was-validated .form-control:invalid:focus,
+.login .form-control.is-invalid:focus,
+.register .was-validated .form-control:invalid:focus,
+.register .form-control.is-invalid:focus, .forgotPassword .was-validated .form-control:invalid:focus,
+.forgotPassword .form-control.is-invalid:focus {
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3137254902);
+}
+
+.custom-modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  /* The Close Button */
+}
+.custom-modal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.custom-modal .close:hover,
+.custom-modal .close:focus {
+  color: 423000D;
+  text-decoration: none;
+  cursor: pointer;
+}
+.custom-modal .social-icon {
+  transition: all 0.4s;
+}
+.custom-modal .social-icon:hover {
+  background-color: #F5CC7A;
+}
+
+#profile .profile-image {
+  width: 250px;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+#profile .profile-info .name {
+  font-size: 1.5rem;
+}
+#profile .profile-info .email, #profile .profile-info .phone {
+  font-size: 1.3rem;
+}
+#profile #tier {
+  position: relative;
+}
+#profile #tier .progress-bg {
+  height: 15px;
+}
+#profile #tier .progress-percent-bar {
+  height: 15px;
+}
+#profile #tier .progress-percent-bar.bronze {
+  width: 2%;
+}
+#profile #tier .progress-percent-bar.silver {
+  width: 25%;
+}
+#profile #tier .progress-percent-bar.gold {
+  width: 50%;
+}
+#profile #tier .progress-percent-bar.platinum {
+  width: 75%;
+}
+#profile #tier .progress-percent-bar.diamond {
+  width: 100%;
+}
+#profile #tier .tier {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: absolute;
+}
+#profile #tier .tier img {
+  width: 100%;
+  height: 100%;
+}
+#profile #tier .bronze {
+  left: -3%;
+}
+#profile #tier .silver {
+  left: 22%;
+}
+#profile #tier .gold {
+  left: 47%;
+}
+#profile #tier .platinum {
+  left: 72%;
+}
+#profile #tier .diamond {
+  left: 97%;
+}
+
+#authorize .authorized-assets-table .table-responsive table thead tr th:nth-child(1) {
+  min-width: 120px;
+}
+#authorize .authorized-assets-table .table-responsive table thead tr th:nth-child(2) {
+  min-width: 230px;
+}
+#authorize .authorized-assets-table .table-responsive table thead tr th:nth-child(3) {
+  min-width: 245px;
+}
+
+@media screen and (max-width: 600px) {
+  #profile .profile-image {
+    width: 150px;
+    height: 150px;
+  }
+  #profile .profile-info .name {
+    font-size: 1.2rem;
+  }
+  #profile .profile-info .email, #profile .profile-info .phone {
+    font-size: 1.1rem;
+  }
+  #tier .progress-bg {
+    height: 10px !important;
+  }
+  #tier .progress-percent-bar {
+    height: 10px !important;
+    width: 25% !important;
+  }
+  #tier .tier {
+    width: 25px !important;
+    height: 25px !important;
+  }
+  #authorize .nav-tabs .nav-item .nav-link, #setting .nav-tabs .nav-item .nav-link, #redeem .nav-tabs .nav-item .nav-link {
+    font-size: 0.75rem;
+  }
+  #authorize .nav-tabs .nav-item .active, #setting .nav-tabs .nav-item .active, #redeem .nav-tabs .nav-item .active {
+    font-weight: bold;
+  }
+  #authorize .table-explain, #setting .table-explain, #redeem .table-explain {
+    font-size: 0.7rem;
+  }
+  #authorize .authorized-assets-table .table-responsive table thead tr th, #setting .authorized-assets-table .table-responsive table thead tr th, #redeem .authorized-assets-table .table-responsive table thead tr th {
+    font-size: 0.8rem;
+  }
+  #authorize .authorized-assets-table .table-responsive table tbody tr td, #setting .authorized-assets-table .table-responsive table tbody tr td, #redeem .authorized-assets-table .table-responsive table tbody tr td {
+    font-size: 0.75rem;
+  }
+}
+@media screen and (min-width: 600px) {
+  #profile .profile-image {
+    width: 200px;
+    height: 200px;
+  }
+  #authorize .table-explain {
+    font-size: 0.9rem;
+  }
+  #authorize .authorized-assets-table .table-responsive table thead tr th {
+    font-size: 0.95rem;
+  }
+  #authorize .authorized-assets-table .table-responsive table tbody tr td {
+    font-size: 0.85rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  #profile .profile-image {
+    width: 250px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 992px) {
+  #profile .profile-image {
+    width: 250px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #profile .profile-image {
+    width: 250px;
+    height: 250px;
+  }
+}
+#setting .setting-card {
+  width: 28%;
+}
+#setting .divided {
+  width: 50%;
+  opacity: 0.2;
+  margin: 1rem auto 1rem 3rem;
+}
+
+@media screen and (max-width: 600px) {
+  #setting .setting-card {
+    width: 100%;
+  }
+  #setting .setting-card .head-title {
+    font-size: 1.1rem;
+  }
+  #setting .setting-card label {
+    font-size: 0.7rem;
+  }
+  #setting .setting-card input {
+    font-size: 0.9rem;
+  }
+  #setting .divided {
+    width: 80%;
+    margin: 1rem auto;
+  }
+  #setting .logoutBtn {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 600px) {
+  #setting .setting-card {
+    width: 80%;
+  }
+  #setting .divided {
+    width: 80%;
+    margin: 1rem auto 1rem 1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  #setting .setting-card {
+    width: 50%;
+  }
+  #setting .divided {
+    width: 50%;
+    margin: 1rem auto 1rem 3rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  #setting .setting-card {
+    width: 40%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #setting .setting-card {
+    width: 28%;
+  }
+}
+#redeem .redeem-explain {
+  font-size: 0.9rem;
+}
+#redeem label {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  #redeem .redeem-explain {
+    font-size: 0.7rem;
+  }
+  #redeem label {
+    font-size: 1rem;
+  }
+  #redeem input {
+    font-size: 0.8rem;
+  }
+  #redeem .redeemSubmitBtn {
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 10px;
+  }
+  #redeem .alert {
+    font-size: 0.8rem;
+    padding: 10px 5px;
+  }
+}
 :root {
   --light: #fff;
   --primary-dark:#423E3D;
@@ -20664,6 +20975,12 @@ main {
   .side-nav {
     width: 65vw;
   }
+  .side-nav .side-nav-ul .side-nav-item a {
+    font-size: 0.9rem;
+  }
+  .side-nav .usernameSmallDevice {
+    font-size: 0.9rem;
+  }
   .logo-div {
     width: 40px !important;
   }
@@ -20747,6 +21064,9 @@ main {
   }
   .side-nav {
     width: 65vw;
+  }
+  .side-nav .side-nav-ul .side-nav-item a {
+    font-size: 0.7rem;
   }
   .logo-div {
     width: 40px !important;
