@@ -61,7 +61,7 @@ class CustomerProfileController extends Controller
             }
             
             $profileImg = $request->file('profile_img');
-            $profileImgName = "profile_".uniqid()."_".$profileImg->getClientOriginalName();
+            $profileImgName = "profile_".uniqid().".".$profileImg->getClientOriginalExtension();
             $profileImgPath = $profileImg->storeAs('public/images/client-profile',$profileImgName);
             $user->profile_img = $profileImgName;
             $user->save();
@@ -91,7 +91,7 @@ class CustomerProfileController extends Controller
               $user->email = $request->email;
               $user->phone = $request->phone;
               $user->save();
-              return response()->json(['status'=>'1','message' => 'Profile Info updated successfully'],200);
+              return response()->json(['status'=>'1','message' => 'Profile Info updated successfully','userInfo'=>$user],200);
 
         }
     }

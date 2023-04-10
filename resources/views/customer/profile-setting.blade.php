@@ -330,7 +330,12 @@
                             color: 'green',
                             position: 'top',
                             title: response.data.message,
-                        })
+                        });
+
+                        console.log(response.data.userInfo['name']);
+                        document.querySelector('.name').innerHTML = response.data.userInfo['name'];
+                        document.querySelector('.email').innerHTML = response.data.userInfo['email'];
+                        document.querySelector('.phone').innerHTML = response.data.userInfo['phone'];
                     }
 
             }).catch(error => {

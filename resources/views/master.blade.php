@@ -126,46 +126,6 @@
 </script>
 
 <body>
-    <!--Start Messenger -->
-
-    <!-- Messenger Chat Plugin Code -->
-
-    <!-- Messenger Chat plugin Code -->
-    <div id="fb-root"></div> <!-- Your Chat plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat"> </div>
-    <script>
-        var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "353690388313896");
-        chatbox.setAttribute("attribution", "biz_inbox");
-    </script> <!-- Your SDK code -->
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml: true,
-                version: 'v15.0'
-            });
-        };
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-
-    <!-- End Messenger -->
-
-
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
-  gtag('config', 'UA-136018131-1');
-</script>
-
-<body>
   <!--Start Messenger -->
 
   <!-- Messenger Chat Plugin Code -->
@@ -237,6 +197,7 @@
       </div>
       <div class="px-2 py-2 d-lg-none position-absolute bottom-0 w-100">
         <div class="d-flex justify-content-start align-items-center">
+
           @if(auth()->guard('user')->check())
 
           <div class="d-flex flex-column w-100">
@@ -256,7 +217,6 @@
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-link text-decoration-none text-primary">LOG OUT</button>
-                <!-- <a href="{{route('logout')}}" class="text-decoration-none">LOG OUT</a> -->
               </form>
             </div>
 
@@ -351,10 +311,9 @@
     <!-- end nav -->
 
     @yield('content')
-    @yield('content')
 
     <!-- footer -->
-    <section id="footer">
+    <section id="footer" class="bg-secondary">
         <div class="container-fluid bg-secondary py-3 overflow-hidden">
             <div class="container">
                 <div
@@ -422,12 +381,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 col-md-3  col-lg-2 col-xl-2 px-0 footer-logo">
-              <img src="/image/smtlogoLarge.png" alt="" class="img-fluid">
-            </div>
-          </div>
-        </div>
-        <div class="row">
+
+            <div class="row">
           <div class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
             <div class="pointer mx-2">
               <img src="{{asset('image/EnglishFlag.jpg')}}" alt="" class="rounded" style="width:40px;height:30px">
@@ -439,6 +394,9 @@
             </div>
           </div>
         </div>
+          </div>
+        </div>
+       
       </div>
     </section>
     <!-- end footer -->
@@ -858,10 +816,9 @@
 
 
   @yield('script')
-
-            <
-            /body>
+  @stack('clientScript')
 
 
-            <
-            /html>
+</body>
+</html>
+

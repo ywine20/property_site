@@ -149,7 +149,6 @@ Route::view('/redeem','customer/redeem')->name('profile-redeem');
 //for redeem code
 Route::get('/redeemCodes/page', [RedeemCodeController::class,'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
 Route::post('/redeemCodes', [RedeemCodeController::class,'generateRedeemCode'])->name('profile.generateRedeemCode');
-=======
 
 
     // Route::resource('contact', "ContactController");
