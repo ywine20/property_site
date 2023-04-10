@@ -31,7 +31,16 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'phone' => '09497777701',
             'role' => 'SuperAdmin',
-            'image' => 'userPlaceholder.png',
+            'image' => null,
+        ]);
+
+        Admin::create([
+            'name' => 'Admin3',
+            'email' => 'admin3@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '09497777701',
+            'role' => 'SuperAdmin',
+            'image' => null,
         ]);
 
        \App\Models\Category::factory(5)->create();

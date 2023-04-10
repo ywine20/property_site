@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -74,11 +75,16 @@ class AdminController extends Controller
             'phone' => 'required|max:15',
             'password' => 'required|same:confirm-password|min:8',
             'role' => 'required|string|max:50',
-            'image' => 'required|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif',
         ]);
-         $image = $request->file('image');
-         $image_name = uniqid() . $image->getClientOriginalName();
-         $image->move(public_path('/images/admin/'), $image_name);
+         
+         if($image = $request->file('image')){
+            $image_name = 'admin_'.uniqid() .'.'. $image->getClientOriginalExtension();
+            $image = $image->storeAs('public/images/admin',$image_name);
+         }else{
+            $image_name = null;
+         }
+       
 
          $admin = Admin::create([
             'name' => $request->name,
@@ -138,11 +144,18 @@ class AdminController extends Controller
 
         $input = $request->all();
 
+        $admin = Admin::find($id);
+
+
          if ($image = $request->file('image')) {
-            $destinationPath = 'images/admin/';
-            $productImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $productImage);
-            $input['image'] = "$productImage";
+               
+            Storage::delete('public/images/admin/'.$admin->image);
+
+            $image = $request->file('image');
+            $image_name = 'admin_'.uniqid() .'.'. $image->getClientOriginalExtension();
+            $image = $image->storeAs('public/images/admin',$image_name);
+   
+            $input['image'] = "$image_name";
         }else{
             unset($input['image']);
         }
@@ -153,7 +166,6 @@ class AdminController extends Controller
             $input = Arr::except($input,array('password'));
         }
 
-        $admin = Admin::find($id);
         $admin->update($input);
         return redirect('admin/setting')->with('success', 'you has updated');
     }
@@ -166,12 +178,16 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $admin = Admin::where('id', $id);
-        if (!$admin->first()){
+        $admin = Admin::where('id', $id)->first();
+
+        if (!$admin){
             return redirect()->back()->with('error', 'Admin Not Found');
+        }else{
+            Storage::delete('public/images/admin/' . $admin->image);
         }
-        File::delete(public_path('images/admin/' . $admin->first()->image));
+
         $admin->delete();
+        
         return response()->json([
             'status' => 'success',
             'info' => 'delete successful'

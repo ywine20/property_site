@@ -128,7 +128,8 @@
                             <div class="profile d-flex align-items-center pe-2 text-primary" style="min-width: max-content;">
                                 <div class="overflow-hidden rounded rounded-circle  dropdown-toggle border border-primary border-opacity-50" data-bs-toggle="dropdown" data-bs-offset="20,20" style="width:50px;height:50px">
                                     @auth('admin')
-                                    <img src="{{ url('images/admin/' . Auth::guard('admin')->user()->image ?? '../no_image.jpg') }}" alt="" style="width: 100%;height: 100%;object-fit: cover">
+                                    <!-- <img src="{{ url('images/admin/' . Auth::guard('admin')->user()->image ?? '../no_image.jpg') }}" alt="" style="width: 100%;height: 100%;object-fit: cover"> -->
+                                    <img src="{{Auth::guard('admin')->user()->image ?  asset('storage/images/admin/'.Auth::guard('admin')->user()->image) :  asset('/images/user.png')  }}" alt="" style="width: 100%;height: 100%;object-fit: cover">
                                     @endauth
                                 </div>
                                 <div class="dropdown-menu dropdown-menu-end bg-secondary text-primary py-0">
@@ -146,7 +147,7 @@
                                                 <div class="overflow-hidden rounded rounded-circle border border-primary " style="width:100px;height:100px">
                                                     @auth('admin')
                                                     <a href="">
-                                                        <img src="{{ url('images/admin/' . Auth::guard('admin')->user()->image ?? '../no_image.jpg') }}" alt="" style="width: 100%;height: 100%;object-fit: cover">
+                                                        <img src="{{Auth::guard('admin')->user()->image ?  asset('storage/images/admin/'.Auth::guard('admin')->user()->image) :  asset('/images/user.png')  }}" alt="" style="width: 100%;height: 100%;object-fit: cover">
                                                     </a>
                                                     @endauth
                                                 </div>
