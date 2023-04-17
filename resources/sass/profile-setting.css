@@ -1,0 +1,58 @@
+#setting .setting-card {
+  width: 28%;
+}
+#setting .divided {
+  width: 50%;
+  opacity: 0.2;
+  margin: 1rem auto 1rem 3rem;
+}
+
+@media screen and (max-width: 600px) {
+  #setting .setting-card {
+    width: 100%;
+  }
+  #setting .setting-card .head-title {
+    font-size: 1.1rem;
+  }
+  #setting .setting-card label {
+    font-size: 0.7rem;
+  }
+  #setting .setting-card input {
+    font-size: 0.9rem;
+  }
+  #setting .divided {
+    width: 80%;
+    margin: 1rem auto;
+  }
+  #setting .logoutBtn {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 600px) {
+  #setting .setting-card {
+    width: 80%;
+  }
+  #setting .divided {
+    width: 80%;
+    margin: 1rem auto 1rem 1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  #setting .setting-card {
+    width: 50%;
+  }
+  #setting .divided {
+    width: 50%;
+    margin: 1rem auto 1rem 3rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  #setting .setting-card {
+    width: 40%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #setting .setting-card {
+    width: 28%;
+  }
+}/*# sourceMappingURL=profile-setting.css.map */

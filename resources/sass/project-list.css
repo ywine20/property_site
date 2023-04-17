@@ -1,0 +1,390 @@
+.page-link.active, .active > .page-link {
+  z-index: 3;
+  color: #423e3d !important;
+  font-weight: bold;
+  background-color: var(--bs-pagination-active-bg);
+  border-color: var(--bs-pagination-active-border-color);
+}
+
+#search .form-control {
+  border: 1px solid #423e3d;
+  color: #423e3d;
+}
+#search .form-control:focus {
+  border-color: #423e3d;
+}
+
+#filter input[type=number]::-webkit-outer-spin-button,
+#filter input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+#filter .form-control, #filter .form-select {
+  border: 1px solid #423e3d;
+  color: #423e3d;
+}
+#filter .form-control:focus, #filter .form-select:focus {
+  border-color: #423e3d;
+  box-shadow: none;
+}
+#filter .slider {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: #ddd;
+  position: relative;
+}
+#filter .slider .progress {
+  height: 10px;
+  left: 20%;
+  right: 41%;
+  position: absolute;
+  border-radius: 5px;
+  background: var(--gold);
+}
+#filter .range-input {
+  position: relative;
+}
+#filter .range-input input {
+  position: absolute;
+  top: -8px;
+  height: 5px;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+#filter .range-input input[type=range]::-webkit-slider-thumb {
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  border: none;
+  pointer-events: auto;
+  -webkit-appearance: none;
+          appearance: none;
+  background: var(--primary-dark);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+#filter .range-input input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+#filter .range-input input[type=range]::-moz-range-thumb {
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  border: none;
+  pointer-events: auto;
+  -moz-appearance: none;
+       appearance: none;
+  background: var(--primary-dark);
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+#filter .range-input input[type=range]::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+#filter .filter-btn {
+  width: 100% !important;
+}
+
+#result .result-count .result-text {
+  font-size: 1.25rem;
+}
+#result .result-card .project-list-card {
+  width: 100%;
+  transition: 0.4s;
+}
+#result .result-card .project-list-card .card-title {
+  font-size: 1rem;
+}
+#result .result-card .project-list-card .range {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+#result .result-card .project-list-card .project-card-table tbody > tr > td {
+  font-size: 0.8rem;
+  padding: 0;
+  color: var(--gold) !important;
+}
+#result .result-card .project-list-card .list-entity {
+  font-size: 0.8rem;
+}
+#result .result-card .project-list-card a {
+  background-color: black;
+}
+#result .result-card .project-list-card:hover {
+  transform: scale(1.03);
+}
+#result .pagination-div .pagination .page-item {
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#result .pagination-div .pagination .page-item:first-child .page-link {
+  padding: 0;
+  margin: 0 15px;
+  font-size: 1.5rem;
+  border: none;
+}
+#result .pagination-div .pagination .page-item:last-child .page-link {
+  padding: 0;
+  margin: 0 15px;
+  font-size: 1.5rem;
+  border: none;
+}
+#result .pagination-div .pagination .page-item .page-link {
+  font-size: 1rem;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+  border: 1px solid var(--primary-dark);
+}
+#result .pagination-div .pagination .page-item .page-link:focus {
+  box-shadow: none !important;
+}
+
+@media screen and (max-width: 374px) {
+  #filter .filter-btn {
+    width: 100%;
+  }
+  #result .result-count .result-text {
+    font-size: 0.9rem;
+  }
+  #result .result-card .project-list-card {
+    width: 100%;
+  }
+  #result .result-card .project-list-card .card-title {
+    font-size: 0.8rem;
+  }
+  #result .result-card .project-list-card .range {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  #result .result-card .project-list-card .project-card-table tbody > tr > td {
+    font-size: 0.6rem;
+    padding: 0;
+  }
+  #result .result-card .project-list-card .list-entity {
+    font-size: 0.6rem;
+  }
+  #result .pagination-div .pagination .page-item {
+    margin-left: 2px !important;
+    margin-right: 2px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #result .pagination-div .pagination .page-item:first-child .page-link {
+    padding: 0;
+    margin: 0 !important;
+    font-size: 1.2rem;
+    border: none;
+  }
+  #result .pagination-div .pagination .page-item:last-child .page-link {
+    padding: 0;
+    margin: 0 !important;
+    font-size: 1.2rem;
+    border: none;
+  }
+  #result .pagination-div .pagination .page-item .page-link {
+    font-size: 1rem;
+    width: auto;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    border: 1px solid var(--primary-dark);
+  }
+  #result .pagination-div .pagination .page-item .page-link:focus {
+    box-shadow: none !important;
+  }
+}
+@media screen and (min-width: 375px) and (max-width: 424px) {
+  #filter .filter-btn {
+    width: 100%;
+  }
+  #result .result-count .result-text {
+    font-size: 0.9rem;
+  }
+  #result .result-card .project-list-card .card-title {
+    font-size: 1rem;
+  }
+  #result .result-card .project-list-card .range {
+    font-size: 1.2rem;
+  }
+  #result .result-card .project-list-card .project-card-table tbody > tr > td {
+    font-size: 0.9rem;
+  }
+  #result .result-card .project-list-card .list-entity {
+    font-size: 0.9rem;
+  }
+  #result .pagination-div .pagination .page-item {
+    margin-left: 2px !important;
+    margin-right: 2px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #result .pagination-div .pagination .page-item:first-child .page-link {
+    padding: 0;
+    margin: 0 !important;
+    font-size: 1.2rem;
+    border: none;
+  }
+  #result .pagination-div .pagination .page-item:last-child .page-link {
+    padding: 0;
+    margin: 0 !important;
+    font-size: 1.2rem;
+    border: none;
+  }
+  #result .pagination-div .pagination .page-item .page-link {
+    font-size: 1rem;
+    width: auto;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    border: 1px solid var(--primary-dark);
+  }
+  #result .pagination-div .pagination .page-item .page-link:focus {
+    box-shadow: none !important;
+  }
+}
+@media screen and (min-width: 425px) and (max-width: 489px) {
+  #filter .filter-btn {
+    width: 100%;
+  }
+  #result .result-count .result-text {
+    font-size: 0.9rem;
+  }
+  #result .result-card .project-list-card .card-title {
+    font-size: 1rem;
+  }
+  #result .result-card .project-list-card .range {
+    font-size: 1.3rem;
+  }
+  #result .result-card .project-list-card .project-card-table tbody > tr > td {
+    font-size: 0.9rem;
+  }
+  #result .result-card .project-list-card .list-entity {
+    font-size: 0.9rem;
+  }
+  #result .pagination-div .pagination .page-item {
+    margin-left: 2px !important;
+    margin-right: 2px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #result .pagination-div .pagination .page-item:first-child .page-link {
+    padding: 0;
+    margin: 0 !important;
+    font-size: 1.2rem;
+    border: none;
+  }
+  #result .pagination-div .pagination .page-item:last-child .page-link {
+    padding: 0;
+    margin: 0 !important;
+    font-size: 1.2rem;
+    border: none;
+  }
+  #result .pagination-div .pagination .page-item .page-link {
+    font-size: 1rem;
+    width: auto;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    border: 1px solid var(--primary-dark);
+  }
+  #result .pagination-div .pagination .page-item .page-link:focus {
+    box-shadow: none !important;
+  }
+}
+@media screen and (min-width: 490px) and (max-width: 767px) {
+  #filter .filter-btn {
+    width: 100%;
+  }
+  #result .result-count .result-text {
+    font-size: 0.9rem;
+  }
+  #result .result-card .project-list-card .card-title {
+    font-size: 1.2rem;
+  }
+  #result .result-card .project-list-card .range {
+    font-size: 1.5rem;
+  }
+  #result .result-card .project-list-card .project-card-table {
+    margin-bottom: 10px !important;
+  }
+  #result .result-card .project-list-card .project-card-table tbody > tr > td {
+    font-size: 1rem;
+  }
+  #result .result-card .project-list-card .list-entity {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 993px) {
+  #filter .filter-btn {
+    width: 100%;
+  }
+  #result .result-card .project-list-card .card-title {
+    font-size: 1rem;
+  }
+  #result .result-card .project-list-card .range {
+    font-size: 1.3rem;
+  }
+  #result .result-card .project-list-card .project-card-table tbody > tr > td {
+    font-size: 0.9rem;
+  }
+  #result .result-card .project-list-card .list-entity {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (min-width: 993px) and (max-width: 1439px) {
+  #result .result-card .project-list-card .card-title {
+    font-size: 1.1rem;
+  }
+  #result .result-card .project-list-card .range {
+    font-size: 1.5rem;
+  }
+  #result .result-card .project-list-card .project-card-table tbody > tr > td {
+    font-size: 1rem;
+  }
+  #result .result-card .project-list-card .list-entity {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1440px) and (max-width: 2559px) {
+  #filter .price-input .price-min-row {
+    margin-left: -9px;
+  }
+  #result .result-count .result-text {
+    font-size: 1.25rem;
+  }
+  #result .result-card .project-list-card .card-title {
+    font-size: 1.1rem;
+  }
+  #result .result-card .project-list-card .range {
+    font-size: 1.5rem;
+  }
+  #result .result-card .project-list-card .project-card-table tbody > tr > td {
+    font-size: 1rem;
+  }
+  #result .result-card .project-list-card .list-entity {
+    font-size: 1rem;
+  }
+}/*# sourceMappingURL=project-list.css.map */

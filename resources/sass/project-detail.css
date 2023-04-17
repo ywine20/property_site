@@ -1,0 +1,422 @@
+.main .back {
+  padding-left: 100px;
+  font-size: 1rem;
+  background-color: #fbf7ee;
+}
+.main .back .backBtn {
+  cursor: pointer;
+}
+.main .project-detail-card .main-image-div {
+  width: 90%;
+}
+.main .project-detail-card .main-image-div img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.main .project-detail-card .detail-text-div .category {
+  font-size: 1.6rem;
+}
+.main .project-detail-card .detail-text-div .finished-badge {
+  font-size: 1.6rem;
+}
+.main .project-detail-card .detail-text-div .price-range {
+  font-size: 3.8rem;
+  font-weight: bold;
+}
+.main .project-detail-card .detail-text-div .address {
+  font-size: 1.8rem;
+}
+.main .project-detail-card .detail-text-div .facts .table {
+  width: 75%;
+}
+.main .project-detail-card .detail-text-div .facts td {
+  font-size: 1.5rem;
+  padding: 0 !important;
+}
+.main .project-detail-card .detail-text-div .entity .amenity-head {
+  font-size: 1.4rem;
+}
+.main .project-detail-card .detail-text-div .entity span {
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+.main .project-map .map .iframe-map {
+  height: 400px !important;
+  border: none;
+}
+
+@media screen and (max-width: 374px) {
+  .main .back {
+    padding-left: 5%;
+    font-size: 0.9rem;
+  }
+  .main .back .backBtn {
+    cursor: pointer;
+  }
+  .main .project-detail-card .main-image-div {
+    width: 100%;
+  }
+  .main .project-detail-card .main-image-div img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .main .project-detail-card .detail-text-div .category {
+    font-size: 0.9rem;
+  }
+  .main .project-detail-card .detail-text-div .finished-badge {
+    font-size: 0.9rem;
+  }
+  .main .project-detail-card .detail-text-div .price-range {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  .main .project-detail-card .detail-text-div .address {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .main .project-detail-card .detail-text-div .facts .table {
+    width: 100%;
+  }
+  .main .project-detail-card .detail-text-div .facts td {
+    font-size: 0.8rem;
+    padding: 0 !important;
+  }
+  .main .project-detail-card .detail-text-div .entity .amenity-head {
+    font-size: 0.9rem;
+  }
+  .main .project-detail-card .detail-text-div .entity span {
+    font-size: 0.8rem;
+  }
+  .main .project-gallery {
+    /* custom scrollbar */
+  }
+  .main .project-gallery .gallery .row {
+    flex-wrap: nowrap !important;
+    overflow-x: scroll;
+  }
+  .main .project-gallery ::-webkit-scrollbar {
+    width: 20px;
+  }
+  .main .project-gallery ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  .main .project-gallery ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+  .main .project-gallery ::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+  .main .project-map .map .iframe-map {
+    height: 250px !important;
+    border: none;
+  }
+}
+@media screen and (min-width: 374px) and (max-width: 424px) {
+  .main .back {
+    padding-left: 5%;
+    font-size: 0.9rem;
+  }
+  .main .back .backBtn {
+    cursor: pointer;
+  }
+  .main .project-detail-card .main-image-div {
+    width: 100%;
+  }
+  .main .project-detail-card .main-image-div img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .main .project-detail-card .detail-text-div .category {
+    font-size: 1rem;
+  }
+  .main .project-detail-card .detail-text-div .finished-badge {
+    font-size: 1rem;
+  }
+  .main .project-detail-card .detail-text-div .price-range {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .main .project-detail-card .detail-text-div .address {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+  .main .project-detail-card .detail-text-div .facts .table {
+    width: 100%;
+  }
+  .main .project-detail-card .detail-text-div .facts td {
+    font-size: 1rem;
+    padding: 1px 0 !important;
+  }
+  .main .project-detail-card .detail-text-div .entity .amenity-head {
+    font-size: 1.1rem !important;
+  }
+  .main .project-detail-card .detail-text-div .entity span {
+    font-size: 1rem;
+  }
+  .main .project-gallery {
+    /* custom scrollbar */
+  }
+  .main .project-gallery .gallery .row {
+    flex-wrap: nowrap !important;
+    overflow-x: scroll;
+  }
+  .main .project-gallery ::-webkit-scrollbar {
+    width: 20px;
+  }
+  .main .project-gallery ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  .main .project-gallery ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+  .main .project-gallery ::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+  .main .project-map .map .iframe-map {
+    height: 250px !important;
+    border: none;
+  }
+}
+@media screen and (min-width: 424px) and (max-width: 768px) {
+  .main .back {
+    padding-left: 5%;
+    font-size: 0.9rem;
+  }
+  .main .back .backBtn {
+    cursor: pointer;
+  }
+  .main .project-detail-card .main-image-div {
+    width: 100%;
+  }
+  .main .project-detail-card .main-image-div img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .main .project-detail-card .detail-text-div .category {
+    font-size: 1rem;
+  }
+  .main .project-detail-card .detail-text-div .finished-badge {
+    font-size: 1rem;
+  }
+  .main .project-detail-card .detail-text-div .price-range {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .main .project-detail-card .detail-text-div .address {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+  .main .project-detail-card .detail-text-div .facts .table {
+    width: 100%;
+  }
+  .main .project-detail-card .detail-text-div .facts td {
+    font-size: 1rem;
+    padding: 1px 0 !important;
+  }
+  .main .project-detail-card .detail-text-div .entity .amenity-head {
+    font-size: 1.1rem;
+  }
+  .main .project-detail-card .detail-text-div .entity span {
+    font-size: 1rem;
+  }
+  .main .project-gallery {
+    /* custom scrollbar */
+  }
+  .main .project-gallery .gallery .row {
+    flex-wrap: nowrap !important;
+    overflow-x: scroll;
+  }
+  .main .project-gallery ::-webkit-scrollbar {
+    width: 20px;
+  }
+  .main .project-gallery ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  .main .project-gallery ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+  .main .project-gallery ::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+  .main .project-map .map .iframe-map {
+    height: 250px !important;
+    border: none;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .main .back {
+    padding-left: 5%;
+    font-size: 0.9rem;
+  }
+  .main .back .backBtn {
+    cursor: pointer;
+  }
+  .main .project-detail-card .main-image {
+    padding-left: 15px;
+  }
+  .main .project-detail-card .main-image-div {
+    width: 100%;
+  }
+  .main .project-detail-card .main-image-div img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .main .project-detail-card .detail-text-div .category {
+    font-size: 1rem;
+  }
+  .main .project-detail-card .detail-text-div .finished-badge {
+    font-size: 1rem;
+  }
+  .main .project-detail-card .detail-text-div .price-range {
+    font-size: 2.2rem;
+    font-weight: bold;
+  }
+  .main .project-detail-card .detail-text-div .address {
+    font-size: 1.5rem;
+  }
+  .main .project-detail-card .detail-text-div .facts td {
+    font-size: 1.1rem;
+    padding: 0 !important;
+  }
+  .main .project-detail-card .detail-text-div .entity .amenity-head {
+    font-size: 1.2rem;
+  }
+  .main .project-detail-card .detail-text-div .entity span {
+    font-size: 1.1rem;
+  }
+  .main .project-gallery {
+    /* custom scrollbar */
+  }
+  .main .project-gallery .gallery .row {
+    flex-wrap: nowrap !important;
+    overflow-x: scroll;
+  }
+  .main .project-gallery ::-webkit-scrollbar {
+    width: 20px;
+  }
+  .main .project-gallery ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  .main .project-gallery ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+  .main .project-gallery ::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+  .main .project-map .map .iframe-map {
+    height: 300px !important;
+    border: none;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+  .main .back {
+    padding-left: 5%;
+    font-size: 0.9rem;
+  }
+  .main .back .backBtn {
+    cursor: pointer;
+  }
+  .main .project-detail-card .main-image-div {
+    width: 90%;
+  }
+  .main .project-detail-card .main-image-div img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .main .project-detail-card .detail-text-div .category {
+    font-size: 1.4rem;
+  }
+  .main .project-detail-card .detail-text-div .finished-badge {
+    font-size: 1.4rem;
+  }
+  .main .project-detail-card .detail-text-div .price-range {
+    font-size: 2.6rem;
+    font-weight: bold;
+  }
+  .main .project-detail-card .detail-text-div .address {
+    font-size: 1.5rem;
+  }
+  .main .project-detail-card .detail-text-div .facts td {
+    font-size: 1.2rem;
+    padding: 0 !important;
+  }
+  .main .project-detail-card .detail-text-div .entity .amenity-head {
+    font-size: 1.3rem;
+  }
+  .main .project-detail-card .detail-text-div .entity span {
+    font-size: 1.2rem;
+  }
+  .main .project-map .map .iframe-map {
+    height: 400px !important;
+    border: none;
+  }
+}
+@media screen and (min-width: 1365px) and (max-width: 1439px) {
+  .main .back {
+    padding-left: 120px;
+    font-size: 0.9rem;
+  }
+  .main .back .backBtn {
+    cursor: pointer;
+  }
+  .main .project-detail-card .main-image-div {
+    width: 90%;
+  }
+  .main .project-detail-card .main-image-div img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .main .project-detail-card .detail-text-div .category {
+    font-size: 1.4rem;
+  }
+  .main .project-detail-card .detail-text-div .finished-badge {
+    font-size: 1.4rem;
+  }
+  .main .project-detail-card .detail-text-div .price-range {
+    font-size: 2.6rem;
+    font-weight: bold;
+  }
+  .main .project-detail-card .detail-text-div .address {
+    font-size: 1.5rem;
+  }
+  .main .project-detail-card .detail-text-div .facts td {
+    font-size: 1.2rem;
+    padding: 0 !important;
+  }
+  .main .project-detail-card .detail-text-div .entity .amenity-head {
+    font-size: 1.3rem;
+  }
+  .main .project-detail-card .detail-text-div .entity span {
+    font-size: 1.2rem;
+  }
+  .main .project-map .map .iframe-map {
+    height: 400px !important;
+    border: none;
+  }
+}/*# sourceMappingURL=project-detail.css.map */

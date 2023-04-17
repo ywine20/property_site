@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\SiteController;
@@ -91,6 +92,7 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::get('/user', 'PageController@profile');
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
+    Route::get('project/{id}/detail/',[AdminProjectController::class,'detail'])->name('project.detail');
     Route::resource('amenity', "AmenityController");
     Route::resource('facebooklink', "FacebookLinkController");
     Route::resource('citystate', "CityStateController");
@@ -149,6 +151,11 @@ Route::view('/redeem','customer/redeem')->name('profile-redeem');
 //for redeem code
 Route::get('/redeemCodes/page', [RedeemCodeController::class,'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
 Route::post('/redeemCodes', [RedeemCodeController::class,'generateRedeemCode'])->name('profile.generateRedeemCode');
+
+//winwinmaw
+Route::get('/redeemCode', [RedeemCodeController::class,'generateCode'])->name('profile.generateCode');
+Route::post('/code', [RedeemCodeController::class,'code'])->name('profile.code');
+Route::view('/multiple-selected','test');
 
 
     // Route::resource('contact', "ContactController");

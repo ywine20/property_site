@@ -1,0 +1,92 @@
+.dataTables_wrapper {
+  color: #fff !important;
+}
+.dataTables_wrapper ::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.2em;
+}
+.dataTables_wrapper ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.dataTables_wrapper ::-webkit-scrollbar-thumb {
+  background-color: #605f5f;
+  outline: 1px solid #363636;
+}
+.dataTables_wrapper .dataTables_length {
+  margin-bottom: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.dataTables_wrapper .dataTables_length :focus-visible {
+  outline: none;
+}
+.dataTables_wrapper .dataTables_length select {
+  background-color: transparent;
+  color: white;
+}
+.dataTables_wrapper .dataTables_length select option {
+  color: #2c3034;
+  background-color: #F5CC7A;
+}
+.dataTables_wrapper .dataTables_filter {
+  margin-bottom: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.dataTables_wrapper .dataTables_filter label {
+  color: #423e3d;
+}
+.dataTables_wrapper .dataTables_filter label input[type=search] {
+  background-color: rgb(80, 80, 80);
+  color: #fff;
+  border: none;
+  background-image: url("https://www.pngall.com/wp-content/uploads/8/Magnifying-Glass-Search-PNG-Transparent-HD-Photo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+.dataTables_wrapper .dataTables_filter :focus-visible {
+  outline: none;
+  background-image: none !important;
+}
+.dataTables_wrapper .dataTables_info {
+  margin-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.dataTables_wrapper .dataTables_paginate {
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  min-width: 1em;
+  padding: 0em 0.5em;
+  color: #F5CC7A !important;
+}
+.dataTables_wrapper .dataTables_paginate .current {
+  border-color: #F5CC7A !important;
+  color: #F5CC7A !important;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .dataTables_wrapper .dataTables_filter {
+    margin-bottom: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .dataTables_wrapper .dataTables_filter label {
+    color: #fff;
+  }
+  .dataTables_wrapper .dataTables_filter label input[type=search] {
+    background-color: rgb(80, 80, 80);
+    color: #fff;
+    border: none;
+    background-image: none;
+  }
+  .dataTables_wrapper .dataTables_filter :focus-visible {
+    outline: none;
+    background-image: none !important;
+  }
+}/*# sourceMappingURL=data-table.css.map */

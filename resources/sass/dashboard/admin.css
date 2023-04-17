@@ -1,0 +1,125 @@
+.trash-icon, .edit-icon, .info-icon {
+  transition: 0.4s;
+  border-radius: 100%;
+}
+.trash-icon:hover, .edit-icon:hover, .info-icon:hover {
+  background-color: rgba(128, 128, 128, 0.173);
+}
+.trash-icon:first-child:active, .edit-icon:first-child:active, .info-icon:first-child:active {
+  background-color: rgba(128, 128, 128, 0.173);
+  border: none;
+}
+.trash-icon:active, .edit-icon:active, .info-icon:active {
+  transform: scale(1.1);
+}
+.trash-icon:disabled, .edit-icon:disabled, .info-icon:disabled {
+  border: none !important;
+}
+
+.trash-icon-disable {
+  opacity: 0.5 !important;
+  cursor: none !important;
+}
+.trash-icon-disable:hover {
+  background: none !important;
+}
+
+.create-form label {
+  color: #bebebe !important;
+  margin-bottom: 0;
+}
+.create-form .form-create-btn {
+  letter-spacing: 1px;
+}
+.create-form .form-reset-btn {
+  border: 1px solid #bebebe;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.create-form .form-reset-btn:hover {
+  border: 1px solid #bebebe;
+  background-color: rgba(190, 190, 190, 0.3);
+  color: #fff;
+}
+.create-form .error-text {
+  font-size: 0.8rem;
+}
+
+.create-btn {
+  transition: 0.4s;
+}
+.create-btn:hover {
+  background-color: rgba(128, 128, 128, 0.173);
+}
+.create-btn:active {
+  transform: scale(1.1);
+}
+
+a:hover {
+  color: var(--bs-link-color);
+}
+
+.card, .card-body {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.table-dark {
+  --bs-table-bg:#4d4a49;
+}
+
+.table-hover > tbody > tr:hover > * {
+  background-color: #505050;
+  color: var(--gold);
+}
+
+.table {
+  border-color: #565453;
+}
+.table thead {
+  background-color: #423e3d !important;
+  color: white;
+}
+.table tbody tr {
+  background-color: #4d4a49 !important;
+  color: white;
+}
+.modal .modal-dialog .modal-content {
+  background-color: #423e3d;
+}
+.modal .modal-dialog .modal-content .modal-header .btn-close {
+  background-image: none;
+}
+.modal .modal-dialog .modal-content .modal-body {
+  background-color: #565252;
+}
+.modal .modal-dialog .modal-content .modal-footer {
+  background-color: #565252;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .breadcrumb .breadcrumb-item {
+    font-size: 0.8rem !important;
+  }
+  .form-create-btn {
+    font-size: 1.1rem !important;
+    padding: 0.3rem 0.5rem !important;
+  }
+  .form-reset-btn {
+    font-size: 1.1rem !important;
+    padding: 0.3rem 0.5rem !important;
+  }
+  .create .header {
+    font-size: calc(1rem + 0.3vw);
+  }
+  .create .create-input, .create .create-select {
+    background: #423E3D;
+    outline: none;
+    border: none;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up) *//*# sourceMappingURL=admin.css.map */

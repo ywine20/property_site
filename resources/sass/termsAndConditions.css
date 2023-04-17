@@ -1,0 +1,36 @@
+* {
+  color: var(--primary-dark);
+}
+
+#termsAndCondition {
+  letter-spacing: 0.09rem;
+}
+#termsAndCondition .container {
+  z-index: 4;
+}
+#termsAndCondition .container p {
+  font-size: 1rem;
+}
+#termsAndCondition .bgTermsAndCondition {
+  width: 100%;
+  height: 400px;
+  z-index: 3;
+  opacity: 0.06;
+}
+#termsAndCondition .bgTermsAndCondition img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media screen and (max-width: 600px) {
+  #termsAndCondition .container p {
+    font-size: 0.8rem;
+  }
+  #termsAndCondition .bgTermsAndCondition {
+    height: 300px;
+  }
+  #termsAndCondition .bgTermsAndCondition img {
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}/*# sourceMappingURL=termsAndConditions.css.map */

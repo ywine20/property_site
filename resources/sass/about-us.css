@@ -1,0 +1,418 @@
+* {
+  color: var(--primary-dark);
+}
+
+#our-story {
+  color: var(--primary-dark);
+}
+#our-story .group-image {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 5px;
+}
+#our-story .group-image .img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#our-story .ourStory-text .ourStory-Title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#our-story .ourStory-text .ourStory-Title div:first-child {
+  width: 40%;
+}
+#our-story .ourStory-text .ourStory-Title .title {
+  font-size: 2.5rem;
+}
+#our-story .ourStory-text .text {
+  font-size: 1.2rem;
+}
+
+#our-vision-mission .our-vision {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  color: var(--gold) !important;
+}
+#our-vision-mission .our-vision .card {
+  width: 75%;
+  border: 0;
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.031372549);
+  color: var(--gold) !important;
+}
+#our-vision-mission .our-vision .card h4 {
+  color: var(--gold) !important;
+}
+#our-vision-mission .our-vision .card p {
+  font-size: 1.1rem;
+  color: var(--gold) !important;
+}
+#our-vision-mission .our-mission {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+#our-vision-mission .our-mission .card {
+  width: 75%;
+  border: 0;
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.031372549);
+}
+#our-vision-mission .our-mission .card h4 {
+  color: var(--gold) !important;
+}
+#our-vision-mission .our-mission .card p {
+  font-size: 1.1rem;
+  color: var(--gold) !important;
+}
+
+.achievement-awards {
+  /* custom scrollbar */
+}
+.achievement-awards .awards-row .col img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.achievement-awards ::-webkit-scrollbar {
+  width: 20px;
+}
+.achievement-awards ::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.achievement-awards ::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+.achievement-awards ::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+
+#event-activities .second-col img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+#brand-partnership .second-col .col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#brand-partnership .second-col .col div:first-child {
+  width: 50%;
+}
+#brand-partnership .second-col img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  #our-story .ourStory-text .ourStory-Title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #our-story .ourStory-text .ourStory-Title div:first-child {
+    width: 65%;
+  }
+  #our-story .ourStory-text .ourStory-Title .title {
+    font-size: 2rem;
+    margin-bottom: 1.8px;
+  }
+  #our-story .ourStory-text .text {
+    font-size: 1rem;
+  }
+  #our-vision-mission .our-vision {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  #our-vision-mission .our-vision .card {
+    width: 95%;
+    padding: 20px;
+  }
+  #our-vision-mission .our-vision .card h4 {
+    font-size: 1.125rem !important;
+  }
+  #our-vision-mission .our-vision .card p {
+    font-size: 0.9rem;
+  }
+  #our-vision-mission .our-mission {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #our-vision-mission .our-mission .card {
+    width: 95%;
+    padding: 20px;
+  }
+  #our-vision-mission .our-mission .card h4 {
+    font-size: 1.125rem !important;
+  }
+  #our-vision-mission .our-mission .card p {
+    font-size: 0.9rem;
+  }
+  #company-timeLine .title {
+    font-size: 1.3rem;
+  }
+  .achievement-awards .title {
+    font-size: 1.3rem;
+  }
+  .achievement-awards .awards-row {
+    flex-wrap: nowrap !important;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  #organization-chart .title {
+    font-size: 1.3rem;
+  }
+  #event-activities .title {
+    font-size: 1.3rem;
+  }
+  #brand-partnership .title {
+    font-size: 1.3rem;
+  }
+  #brand-partnership .second-col .col div:first-child {
+    width: 75%;
+  }
+  #brand-partnership .second-col img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  #our-story .ourStory-text .ourStory-Title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #our-story .ourStory-text .ourStory-Title div:first-child {
+    width: 65%;
+  }
+  #our-story .ourStory-text .ourStory-Title .title {
+    font-size: 2rem;
+    margin-bottom: 1.8px;
+  }
+  #our-story .ourStory-text .text {
+    font-size: 1rem;
+  }
+  #our-vision-mission .our-vision {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  #our-vision-mission .our-vision .card {
+    width: 95%;
+    padding: 20px;
+  }
+  #our-vision-mission .our-vision .card p {
+    font-size: 1rem;
+  }
+  #our-vision-mission .our-mission {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #our-vision-mission .our-mission .card {
+    width: 95%;
+    padding: 20px;
+  }
+  #our-vision-mission .our-mission .card p {
+    font-size: 1rem;
+  }
+  .achievement-awards .awards-row {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  #uNayLinTun .text .fs-5 {
+    font-size: 1.1rem !important;
+  }
+  #brand-partnership .second-col .col div:first-child {
+    width: 75%;
+  }
+  #brand-partnership .second-col img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  #our-story .ourStory-text .ourStory-Title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #our-story .ourStory-text .ourStory-Title div:first-child {
+    width: 50%;
+  }
+  #our-story .ourStory-text .ourStory-Title .title {
+    font-size: 2rem;
+    margin-bottom: 1.8px;
+  }
+  #our-story .ourStory-text .text {
+    font-size: 1rem;
+  }
+  #our-vision-mission .our-vision {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #our-vision-mission .our-vision .card {
+    width: 90%;
+    padding: 20px;
+  }
+  #our-vision-mission .our-vision .card p {
+    font-size: 1rem;
+  }
+  #our-vision-mission .our-mission {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #our-vision-mission .our-mission .card {
+    width: 90%;
+    padding: 20px;
+  }
+  #our-vision-mission .our-mission .card p {
+    font-size: 1rem;
+  }
+  .achievement-awards .awards-row {
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+  #brand-partnership .second-col .col div:first-child {
+    width: 75%;
+  }
+  #brand-partnership .second-col img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  #our-story .ourStory-text .ourStory-Title div:first-child {
+    width: 40%;
+  }
+  #our-story .ourStory-text .ourStory-Title .title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  #our-story .ourStory-text .text {
+    font-size: 1rem;
+  }
+  #our-vision-mission .our-vision {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 0px;
+  }
+  #our-vision-mission .our-vision .card {
+    width: 90%;
+    padding: 10px;
+  }
+  #our-vision-mission .our-vision .card p {
+    font-size: 1rem;
+  }
+  #our-vision-mission .our-mission {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  #our-vision-mission .our-mission .card {
+    width: 90%;
+    padding: 10px;
+  }
+  #our-vision-mission .our-mission .card p {
+    font-size: 1rem;
+  }
+  #brand-partnership .second-col .col div:first-child {
+    width: 65%;
+  }
+  #brand-partnership .second-col img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  #our-story .group-image {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  #our-story .group-image .img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  #our-story .ourStory-text .ourStory-Title div:first-child {
+    width: 40%;
+  }
+  #our-story .ourStory-text .ourStory-Title .title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  #our-story .ourStory-text .text {
+    font-size: 1.1rem;
+  }
+  #our-vision-mission {
+    color: var(--gold);
+  }
+  #our-vision-mission .our-vision {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+  #our-vision-mission .our-vision .card {
+    width: 75%;
+    border: 0;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.031372549);
+  }
+  #our-vision-mission .our-vision .card p {
+    font-size: 1.05rem;
+  }
+  #our-vision-mission .our-mission {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  #our-vision-mission .our-mission .card {
+    width: 75%;
+    border: 0;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.031372549);
+  }
+  #our-vision-mission .our-mission .card p {
+    font-size: 1.05rem;
+  }
+}/*# sourceMappingURL=about-us.css.map */

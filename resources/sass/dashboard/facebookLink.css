@@ -1,0 +1,43 @@
+.facebook-photo {
+  width: 65px;
+  height: 45px;
+  overflow: hidden;
+  background: var(--grey);
+  border-radius: 5px;
+}
+.facebook-photo img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.facebook-preview {
+  transition: all 1s;
+}
+.facebook-preview #facebook-image-preview {
+  width: 250px;
+  height: 200px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.6s;
+}
+.facebook-preview #facebook-image-preview img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.facebook-preview #facebook-image-preview:hover {
+  filter: brightness(1.2);
+}
+.facebook-preview #facebook-image-preview:active {
+  tansform: scale(0.95);
+  border: 2px solid red;
+}
+
+/* Extra small devices (phones, 600px and down) */
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up) *//*# sourceMappingURL=facebookLink.css.map */

@@ -254,6 +254,21 @@ class ProjectController extends Controller
         return view('admin.project.show', compact('project', 'amenities', 'categories', 'cities', 'towns'));
     }
 
+    public function detail($id)
+    {
+        // return $id;
+        $towns = Town::all();
+        $cities = City::all();
+        $amenity = Amenity::all();
+        $categories = Category::all();
+        $project = Project::where('id', $id)->first();
+        if (!$project) {
+            return redirect()->back()->with('error', 'Project not found');
+        }
+        return view('admin.project.detail', compact('project', 'amenity', 'categories', 'cities', 'towns'));
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
