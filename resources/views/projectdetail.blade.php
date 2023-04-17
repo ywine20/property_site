@@ -204,6 +204,7 @@
                         @endif
                         @if($project->previewimages->small_img8)
                         <div class="col" style="aspect-ratio: 1;">
+                                
                             <a href="/storage/images/gallery/{{ $project->previewimages->small_img8 }}" class="myGallery"
                                 data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
                                 <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img8) }}"
@@ -242,11 +243,9 @@
             <!-- Project Detail -->
             <div class="pb-3 pb-md-4 pb-lg-5 project-about">
                 <div class="row">
-                    <div class="col-12 text-center text-md-start">
-                        <h3 class="text-uppercase">Project Details</h3>
-                        <pre>
-                {{ $project->description }}
-              </pre>
+                    <div class="col-12 text-start text-md-start"  >
+                        <h3 class="text-uppercase">Project Details</h3>                        
+                        <small class=" lh-lg" style="white-space:pre-wrap">{{ $project->description }}</small>
                     </div>
                 </div>
             </div>

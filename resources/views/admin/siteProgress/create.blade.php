@@ -79,15 +79,13 @@
                         </div>
                         @endif
 
-                        <form method="POST" action="{{ route('siteProgress.update', ['projectId' => $siteProgress->project_id, 'id' => $siteProgress->id]) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('siteProgress.store','$porjectId') }}" enctype="multipart/form-data">
                             @csrf
-                            @method('PATCH')
 
-
-                            <input type="number" name="project_id" value="{{$siteProgress->project_id}}" hidden>
+                            <input type="text" name="project_id" value="{{$projectId}}" hidden>
                             <div class="form-group mb-3">
                                 <label for="title" class="form-label text-white-50">Title :</label>
-                                <input type="text" name="title" class="create-input form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title',$siteProgress->title) }}" required>
+                                <input type="text" name="title" class="create-input form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title') }}" required>
                                 @error('title')
                                 <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -95,7 +93,21 @@
 
                             <div class="form- mb-3">
                                 <label for="description" class="form-label text-white-50">Description :</label>
-                                <textarea type="text" name="description" rows="20" class="create-input form-control @error('description') is-invalid @enderror" id="description" required>{{old('description',$siteProgress->description)}}</textarea>
+                                <textarea type="text" name="description" rows="20" class="create-input form-control @error('description') is-invalid @enderror" id="description" value="{{ old('description') }}" required>Dear [Customer],
+
+We are pleased to update you on the progress of your construction project. As of [insert date], we can report that the building site is currently in [insert situation].
+
+Our team has been working diligently to ensure that the project is moving along smoothly and efficiently. We have completed [insert completed tasks], and we are currently [insert ongoing tasks]. We are on track to meet the project timeline and budget.
+
+Additionally, we have implemented strict safety measures on the building site to ensure the well-being of our workers and anyone else who may enter the site. We are committed to maintaining a safe and secure environment for all involved in this project.
+
+We will continue to keep you updated on the progress of your project as it unfolds. If you have any questions or concerns, please do not hesitate to contact us.
+
+Thank you for entrusting us with your construction project. We look forward to delivering a successful outcome.
+
+Sincerely,
+[Your Name]
+[Your Company]</textarea>
                                 @error('description')
                                 <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -114,11 +126,7 @@
                                 @enderror
 
                                 <div id="output" class="row row-cols-4 g-2">
-                                    @foreach ($images as $image)
-                                    <div class="col overflow-hidden" style="height:180px">
-                                        <img src="{{ asset('storage/images/siteProgress/'.$image) }}" alt=""class="w-100 h-100" style="object-fit: fill;">
-                                    </div>
-                                    @endforeach
+                                    
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg w-100">Post</button>
@@ -169,5 +177,73 @@
             alert("Your browser does not support File API");
         }
     });
+</script>
+
+
+<!-- With local storage -->
+<script>
+//  function previewImages() {
+//         var preview = document.querySelector('#preview');
+//         var files = document.querySelector('input[type=file]').files;
+
+//         function readAndPreview(file) {
+//   // Make sure `file.type` matches the desired image types
+//   if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+//     var reader = new FileReader();
+
+//     reader.addEventListener("load", function () {
+//       var image = new Image();
+//       image.height = 200;
+//       image.title = file.name;
+//       image.src = this.result;
+
+//       var removeButton = document.createElement("button");
+//       removeButton.textContent = "Remove";
+//       removeButton.type = "button";
+//       removeButton.className = 'removeBtn'
+//       removeButton.addEventListener("click", function() {
+//         var index = Array.from(preview.childNodes).indexOf(image);
+//         removeImage(index);
+//       });
+
+//       var preview = document.querySelector('#preview');
+//       preview.appendChild(image);
+//       preview.appendChild(removeButton);
+
+//       // Store the uploaded images in localStorage
+//       var storedImages = localStorage.getItem('uploadedImages') ? JSON.parse(localStorage.getItem('uploadedImages')) : [];
+//       storedImages.push(this.result);
+//       localStorage.setItem('uploadedImages', JSON.stringify(storedImages));
+//     }, false);
+
+//     reader.readAsDataURL(file);
+//   }
+// }
+
+//         if (files) {
+//             [].forEach.call(files, readAndPreview);
+//         }
+//     }
+
+//     // Check if there are any stored images in localStorage and display them on page load
+//     window.onload = function() {
+//         var storedImages = localStorage.getItem('uploadedImages') ? JSON.parse(localStorage.getItem('uploadedImages')) : [];
+//         var preview = document.querySelector('#preview');
+//         storedImages.forEach(function(imageSrc) {
+//             var image = new Image();
+//             image.height = 200;
+//             image.src = imageSrc;
+//             preview.appendChild(image);
+//         });
+//     }
+
+//     document.querySelector('input[type=file]').addEventListener("change", previewImages);
+
+// function removeImage(index) {
+//   var images = JSON.parse(localStorage.getItem("images"));
+//   images.splice(index, 1);
+//   localStorage.setItem("images", JSON.stringify(images));
+//   document.getElementById("output").innerHTML = generateImages(images);
+// }
 </script>
 @endsection

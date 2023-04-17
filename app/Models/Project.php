@@ -103,4 +103,8 @@ class Project extends Model implements Viewable
     {
         return $this->belongToMany(SiteGallery::class, 'siteprogresses');
     }
+
+    public function siteProgresses(){
+        return $this->hasMany(siteProgress::class,'project_id');
+    }
 }

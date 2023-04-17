@@ -23,7 +23,7 @@ use App\Models\CustomerProfile;
 // use App\Http\Controllers\EngagementController;
 use App\Http\Controllers\PreviewImageController;
 use App\Http\Controllers\ProjectListController;
-
+use App\Http\Controllers\SiteProgressController;
 
 // Route::get('/{lang}',function ($lang){
 //     App::setlocale($lang);
@@ -93,6 +93,16 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
     Route::get('project/{id}/detail/',[AdminProjectController::class,'detail'])->name('project.detail');
+    // Route::resource('siteProgress','SiteProgressController');
+    Route::get('project/{id}/site-progess/create',[SiteProgressController::class,'create'])->name('siteProgress.create');
+    Route::get('project/{projectId}/site-progess/{id}',[SiteProgressController::class,'show'])->name('siteProgress.show');
+    Route::post('project/{id}/site-progess/store',[SiteProgressController::class,'store'])->name('siteProgress.store');
+    Route::get('project/{projectId}/site-progess/{id}/edit',[SiteProgressController::class,'edit'])->name('siteProgress.edit');
+    Route::patch('project/{projectId}/site-progess/{id}/update',[SiteProgressController::class,'update'])->name('siteProgress.update');
+    Route::delete('project/{projectId}/site-progess/{id}/delete',[SiteProgressController::class,'destroy'])->name('siteProgress.destory');
+
+
+
     Route::resource('amenity', "AmenityController");
     Route::resource('facebooklink', "FacebookLinkController");
     Route::resource('citystate', "CityStateController");

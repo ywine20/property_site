@@ -261,7 +261,16 @@ class ProjectController extends Controller
         $cities = City::all();
         $amenity = Amenity::all();
         $categories = Category::all();
-        $project = Project::where('id', $id)->first();
+        $project = Project::with('siteProgresses')->where('id', $id)->first();
+
+        foreach ($project->siteProgresses as $siteProgress) {
+            $images = unserialize($siteProgress->images);
+            foreach ($images as &$image) {
+                $image = Storage::url('images/siteProgress/'.$image);
+            }
+            $siteProgress->images = $images;
+        }
+        
         if (!$project) {
             return redirect()->back()->with('error', 'Project not found');
         }

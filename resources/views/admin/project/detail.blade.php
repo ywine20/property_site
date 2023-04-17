@@ -461,48 +461,58 @@
                     <div class="col-12">
                         <div class="mb-4 d-flex align-items-center justify-content-between">
                             <h5 class="text-primary">Site Progress</h5>
-                            <button class="btn btn-sm btn-outline-primary">
+                            <a href="{{route('siteProgress.create',$project->id)}}" class="btn btn-sm btn-outline-primary">
                                 <i class="bi bi-plus "></i>
                                 Create Progress
-                            </button>
+                            </a>
                         </div>
 
+                        @foreach ($project->siteProgresses as $siteProgress)
                         <div class="row row-cols-auto g-5  mb-3 ">
                             <div class="col-12 px-5">
-                                <div class="row progressCard bg-secondary d-flex flex-row rounded rounded-3 overflow-hidden">
+                                <div class="row progressCard bg-secondary d-flex flex-row rounded rounded-3 overflow-hidden" style="height:150px;">
                                     <div class="col-2 px-0">
-                                        <div id="siteprogressId" class="siteprogressImage1 bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative " style="width:100%;height:auto;cursor:pointer">
-                                            <img src="{{asset('storage/images/360Images/'.$project->three_sixty_image)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
+                                        <div id="siteprogressId" class="siteprogressImage1 bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative h-100 " style="width:100%;cursor:pointer">
+                                            @if ($siteProgress->images && is_array($siteProgress->images))
+                                            @php
+                                            $imagesCount = count($siteProgress->images);
+                                            if ($imagesCount > 0) {
+                                            $lastImage = $siteProgress->images[0];
+                                            echo '<img src="'.$lastImage.'" id="" alt="" class="w-100 h-100" style="object-fit: fill">';
+                                            }
+                                            @endphp
+                                            @endif
+
                                         </div>
                                     </div>
-                                    <div class="col-10 d-flex py-2">
-                                        <div class="d-flex flex-column justify-content-center align-items-start">
-                                            <div class="time align-self-end text-muted mb-1 ">
 
-                                                @php
-                                                $time = today();
-                                                @endphp
-                                                <small>
-                                                    <i class="bi bi-clock"></i>
-                                                    {{$time}}
-                                                </small>
+                                    <div class="col-10 d-flex align-items-baseline justify-content-start py-2">
+
+                                        <div class="d-flex flex-column justify-content-center align-items-start w-100">
+                                            <div class="W-100 align-self-end">
+                                                <div class="time  text-muted mb-1 ">
+                                                    <small>
+                                                        <i class="bi bi-clock"></i>
+                                                        {{$siteProgress->created_at->format('j F, Y')}}
+                                                    </small>
+                                                </div>
                                             </div>
-                                            <div class="card-title fw-bold text-primary mb-3">
-                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                                Voluptas illo numquam, praesentium quisquam vero tempore quas tempora
-                                                aperiam necessitatibus similique voluptatum sit repellendus obcaecati
+                                            <div class="card-title fw-bold text-primary mb-3" style="min-height:50px;max-height:50px;">
+                                                {{$siteProgress->title}}
                                             </div>
                                             <div class="d-flex justify-content-start align-items-center">
-                                                <a href="" class="btn btn-sm btn-outline-primary me-2">
+                                                <a href="{{route('siteProgress.show',['projectId' => $siteProgress->project_id, 'id' => $siteProgress->id])}}" class="btn btn-sm btn-outline-primary me-2">
                                                     <i class="bi bi-eye"></i>
                                                     Show Detail
                                                 </a>
-                                                <a href="" class="btn btn-sm btn-outline-primary me-2">
+                                                <a href="{{route('siteProgress.edit',['projectId' => $siteProgress->project_id, 'id' => $siteProgress->id])}}" class="btn btn-sm btn-outline-primary me-2">
                                                     <i class="bi bi-pencil "></i>
                                                     Edit
                                                 </a>
-                                                <form action="">
-                                                    <button class="btn btn-sm btn-outline-danger">
+                                                <form method="post" action="{{route('siteProgress.destory',['projectId' => $siteProgress->project_id, 'id' => $siteProgress->id])}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
                                                         <i class="bi bi-trash "></i>
                                                         Delete
                                                     </button>
@@ -513,53 +523,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row row-cols-auto g-5 mb-3 ">
-                            <div class="col-12 px-5">
-                                <div class="row progressCard bg-secondary d-flex flex-row rounded rounded-3 overflow-hidden">
-                                    <div class="col-2 px-0">
-                                        <div id="siteprogressId" class="siteprogressImage1 bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative " style="width:100%;height:auto;cursor:pointer">
-                                            <img src="{{asset('storage/images/360Images/'.$project->three_sixty_image)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                        </div>
-                                    </div>
-                                    <div class="col-10 d-flex py-2">
-                                        <div class="d-flex flex-column justify-content-center align-items-start">
-                                            <div class="time align-self-end text-muted mb-1 ">
-
-                                                @php
-                                                $time = today();
-                                                @endphp
-                                                <small>
-                                                    <i class="bi bi-clock"></i>
-                                                    {{$time}}
-                                                </small>
-                                            </div>
-                                            <div class="card-title fw-bold text-primary mb-3">
-                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                                Voluptas illo numquam, praesentium quisquam vero tempore quas tempora
-                                                aperiam necessitatibus similique voluptatum sit repellendus obcaecati
-                                            </div>
-                                            <div class="d-flex justify-content-start align-items-center">
-                                                <a href="" class="btn btn-sm btn-outline-primary me-2">
-                                                    <i class="bi bi-eye"></i>
-                                                    Show Detail
-                                                </a>
-                                                <a href="" class="btn btn-sm btn-outline-primary me-2">
-                                                    <i class="bi bi-pencil "></i>
-                                                    Edit
-                                                </a>
-                                                <form action="">
-                                                    <button class="btn btn-sm btn-outline-danger">
-                                                        <i class="bi bi-trash "></i>
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                     <div class="py-5"></div>
