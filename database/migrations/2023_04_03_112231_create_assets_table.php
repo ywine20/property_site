@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRedeemCodesTable extends Migration
+class CreateAssetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateRedeemCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('redeem_codes', function (Blueprint $table) {
+        Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->string("random_code");
-            $table->integer("project_id")->nullable();
-            $table->boolean("site_progress")->nullable();
-            $table->boolean("album")->nullable();
-            $table->string("tier");
+            $table->integer("customer_id")->nullable();
+            $table->string("project_id")->nullable();
+            $table->string("site_progress")->nullable();
+            $table->string("legal_document")->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateRedeemCodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('redeem_codes');
+        Schema::dropIfExists('assets');
     }
 }

@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CustomerProfile;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCustomerProfileRequest;
-use App\Http\Requests\UpdateCustomerProfileRequest;
 use App\Models\User;
-use App\Rules\MatchOldPassword;
+use App\Models\Assets;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Models\CustomerProfile;
+use App\Rules\MatchOldPassword;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreCustomerProfileRequest;
+use App\Http\Requests\UpdateCustomerProfileRequest;
 
 class CustomerProfileController extends Controller
 {
@@ -22,21 +24,48 @@ class CustomerProfileController extends Controller
         // $this->middleware('customer.auth');
     }
 
-    public function profile($id){
+    public function profile($id)
+    {
         $user = User::findOrFail($id);
-        return view("customer.profile",["user"=>$user]);
-    }
-    public function profileSetting($id){
-        $user = User::findOrFail($id);
-        return view("customer.profile-setting",["user"=>$user]);
+        $assets = Assets::where('customer_id', $id)->get();
+      
+        if (isset($assets) && count($assets) > 0) {
+            $projectIds = [];
+            foreach ($assets as $asset) {
+                $projectId = $asset->project_id;
+                array_push($projectIds, $projectId);
+            }
+            $customerProjects = collect();
+            foreach ($projectIds as $projectId) {
+                $project = Project::where('id', $projectId)
+                    ->with('town', 'city', 'assets')->first();
+                if ($project) {
+                    $customerProjects->push($project);
+                }
+            }
+            // dd($customerProjects->toArray());
+            return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets]);
+            // return view('customer.profile')->with('redeemSuccess', 'Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.');
+        } else {
+            return view("customer.profile", ["user" => $user, 'assets' => $assets]);
+        }
+        
     }
 
-    public function redeem($id){
+    public function profileSetting($id)
+    {
         $user = User::findOrFail($id);
-        return view("customer.redeem",["user"=>$user]);
+        return view("customer.profile-setting", ["user" => $user]);
     }
 
-    public function changeImage(Request $request){
+    public function redeem($id)
+    {
+        $user = User::findOrFail($id);
+        return view("customer.redeem", ["user" => $user]);
+    }
+
+    public function changeImage(Request $request)
+    {
 
         $user = Auth::guard('user')->user();
         $validator = Validator::make($request->all(),[
@@ -72,11 +101,12 @@ class CustomerProfileController extends Controller
     
     }
 
-    public function changeInfo(Request $request){
+    public function changeInfo(Request $request)
+    {
 
 
         $user = Auth::guard('user')->user();
-        $validator = Validator::make($request->all(),[
+          $validator = Validator::make($request->all(),[
             "username"=>"required|min:3|max:50|",
             "email" => "required|email|unique:users,email,".$user->id,
             "phone"=>"nullable",
@@ -99,9 +129,9 @@ class CustomerProfileController extends Controller
     public function changePassword(Request $request){
       
         $validator = Validator::make($request->all(), [ 
-            'currentPassword' => ['required',new MatchOldPassword],
+            'currentPassword' => ['required',new MatchOldPassword],     
             'newPassword' => 'required|string|min:6|max:16',
-            'confirmPassword'=>'required|same:newPassword'
+            'confirmPassword' => 'required|same:newPassword'
         ]);
 
         if ($validator->fails()) {
@@ -114,9 +144,11 @@ class CustomerProfileController extends Controller
 // add data to the session
          return response()->json(['status'=>'1','message' => 'Password updated successfully']);
         }
-        
     }
-      
 
-    
+    //  return redirect()->to(url()->previous()."#change_password_form")->with('client-success','Password is Updated');
+
+    // return redirect()->route('profile.setting',$user->id)->with('client-success','Password is Updated');
+
+
 }

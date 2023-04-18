@@ -63,9 +63,14 @@
                             Projects
                         </li>
                     </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/category*') ? 'active': '' }}" href="{{ route('profile.generateRedeemCodePage') }}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Redeem Code
+                        </li>
+                    </a>
                     <a class="side-link  w-100 {{ Request::is('admin/category*') ? 'active': '' }}" href="{{url('admin/category')}}" style="text-decoration: none;">
                         <li class="py-3 side-item px-3">
-                            Cateogries
+                            Categories
                         </li>
                     </a>
                     <a class="side-link  w-100 {{ Request::is('admin/amenity*') ? 'active': '' }}" href="{{url('admin/amenity')}}" style="text-decoration: none;">

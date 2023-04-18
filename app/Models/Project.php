@@ -20,8 +20,6 @@ class Project extends Model implements Viewable
 {
     use HasFactory;
     use InteractsWithViews;
-
-
     protected static function boot()
     {
         parent::boot();
@@ -32,12 +30,11 @@ class Project extends Model implements Viewable
         });
     }
 
-
-
-
-    protected $fillable=[
+    protected $fillable = [
         'slug',
         'project_name',
+        'site_progress_id',
+        'legal_document_id',
         'description',
         'cover',
         'three_sixty_image',
@@ -79,20 +76,19 @@ class Project extends Model implements Viewable
         return $this->hasOne(FacebookLink::class);
     }
 
-//update preview images
     public function previewimages()
     {
         return $this->hasOne(Previewimage::class);
     }
 
-    public function towns()
-    {
-        return $this->belongsTo(Town::class);
-    }
-
     public function cities()
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function towns()
+    {
+        return $this->belongsTo(Town::class, 'township_id');
     }
     public function albums()
     {

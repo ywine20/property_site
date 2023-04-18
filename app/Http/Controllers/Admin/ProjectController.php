@@ -90,7 +90,6 @@ class ProjectController extends Controller
 
         ]);
 
-
         $category = Category::where('category_id', $request->category)->first();
         if (!$category) {
             return redirect()->back()->with('error', 'Not found category');
@@ -127,6 +126,7 @@ class ProjectController extends Controller
         if ($threeSixtyImage) {
             $threeSixtyImage_name = '360_' . $request->project_Id . '_' . uniqid() . '.' . $threeSixtyImage->getClientOriginalExtension();
             $threeSixtyImage->storeAs('/public/images/360Images', $threeSixtyImage_name);
+
         }
 
         $project = Project::create([
@@ -144,6 +144,7 @@ class ProjectController extends Controller
             'upper_price' => $request->upper_price,
             'layer' => $request->layer,
             'squre_feet' => $request->squre_feet,
+
             'hou_no' => $request->hou_no,
             'street' => $request->street,
             'ward' => $request->ward,
@@ -232,6 +233,7 @@ class ProjectController extends Controller
         ]);
         //end preview image
 
+
         return redirect('/admin/project')->with('status', 'Project created successful.');
     }
 
@@ -241,13 +243,13 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         $towns = Town::all();
         $cities = City::all();
         $amenities = Amenity::all();
         $categories = Category::all();
-        $project = Project::where('slug', $id)->first();
+        $project = Project::where('slug', $slug)->first();
         if (!$project) {
             return redirect()->back()->with('error', 'Project not found');
         }
@@ -287,7 +289,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $towns = Town::all();
-        $categories = Category::all();
+        $ategories = Category::all();
         $cities = City::all();
         $amenity = Amenity::all();
         $project = Project::where('slug', $id)
@@ -296,7 +298,6 @@ class ProjectController extends Controller
         if (!$project) {
             return redirect()->back()->with('error', 'Project Not found');
         }
-
         return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'));
     }
     /**
@@ -344,10 +345,7 @@ class ProjectController extends Controller
         //     return redirect()->back()->with('error', 'not found project');
         // }
 
-        // return $find_project;
-
-
-
+        // return $find_project
 
         $category = Category::where('category_id', $request->category_id)->first();
         if (!$category) {
@@ -410,6 +408,7 @@ class ProjectController extends Controller
             'description' => $request->description,
             'lower_price' => $request->lower_price,
             'upper_price' => $request->upper_price,
+
             'layer' => $request->layer,
             'squre_feet' => $request->squre_feet,
             'hou_no' => $request->hou_no,
@@ -513,11 +512,12 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+
         $project = Project::where('id', $id)->first();
         // Project::find($project->first()->id)->amenity()->sync([]);
 
         // Delete related records from project_amenity table
-        Project::find($id)->amenity()->detach();
+        Project::find($id)->amenity()->detach();    
 
         //delete cover from local
         Storage::delete('public/images/cover/' . $project->cover);

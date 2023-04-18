@@ -18,22 +18,32 @@
                 <label for="">Tier :</label>
                 <select name="tier" id="">
                     <option value="bronze">Bronze</option>
-                    <option value="sliver">Sliver</option>
+                    <option value="silver">Silver</option>
                     <option value="gold">Gold</option>
                     <option value="platinum">Platinum</option>
                     <option value="diamond">Diamond</option>
                 </select>
             </div>
 
-            <div id="projectName">
+            <div id="projects" >
                 <label for="">Project Name :</label>
-                <select name="projectName" id="projectNames">
-                    <option value="">Choose Project Name</option>
-                    <option value="firstProject">First Project</option>
-                    <option value="secondProject">Second Project</option>
-                    <option value="thirdProject">Third Project</option>
+                <select name="projectIds[]" id="projectNames" multiple>
+                    <option value="allProjects">All Projects</option>
+                    @foreach ($projects as $project)
+                        <option value="{{ $project->id }}">{{ $project->project_name }}</option>
+                    @endforeach
                 </select>
             </div>
+
+                {{-- <label for="projects">Select projects:</label>
+                <select name="projects[]" id="projects" multiple>
+                    @foreach ($projects as $project)
+                        <option value="{{ $project->id }}">{{ $project->name }}</option>
+                    @endforeach
+                </select>
+                <button type="submit">Submit</button> --}}
+            
+            
 
 
             <div  id="progresses">
@@ -72,6 +82,9 @@
                 </div>
             </div>
 
+            <div id="error-message" class="text-danger"></div>
+
+
             <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#redeem-modal">Generate</button>
 
         </form>
@@ -85,9 +98,10 @@
                 </div>
                 <div class="modal-body">
                     <p id="redeem-code"></p>
+                    <button class="btn btn-secondary" onclick="copyCode()">Copy</button>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
@@ -105,6 +119,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+    function copyCode() {
+        var code = $('#redeem-code').text();
+        navigator.clipboard.writeText(code);
+    }
+
     $(document).ready(function () {
         $('#redeem-code-form').submit(function (event) {
             event.preventDefault();
@@ -116,46 +135,21 @@
                 },
                 dataType : 'json',
                 type: 'POST',
-                url: 'http://127.0.0.1:8000/redeemCodes',
+                url: 'http://127.0.0.1:8000/admin/redeemCodes',
                 data : formData,
                 success: function (data) {
                     $('#redeem-code').text(data.code);
                     $('#redeem-modal').modal('show');
                 },
-                error: function () {
-                    alert('An error occurred while generating the redeem code.');
+                
+                error: function (xhr, status, error) {
+                    $('#error-message').text(xhr.responseJSON.error);
                 }
             });
         });
     });
 
 </script>
-
-{{-- <script>
-    $(document).ready(function () {
-        $('#redeem-code-form').submit(function (event) {
-            event.preventDefault();
-            var form = $(this);
-            var formData = form.serialize(); // serialize the form data
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'POST',
-                url: 'http://127.0.0.1:8000/redeemCodes',
-                data: formData, // pass the serialized form data to the server
-                success: function (data) {
-                    $('#redeem-code').text(data.code); // access the code property of the data object
-                    $('#redeem-modal').modal('show');
-                },
-                error: function () {
-                    alert('An error occurred while generating the redeem code.');
-                }
-            });
-        });
-    });
-</script> --}}
-    
 
 @endsection
 @push('clientScript')

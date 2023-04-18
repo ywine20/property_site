@@ -39,6 +39,8 @@ class ProjectFactory extends Factory
             'city_id' => City::all()->random()->id,
             'township_id' => Town::all()->random()->id,
             'viewer'=>rand(0,50),
+            'site_progress_id' =>rand(1,10),
+            'legal_document_id' =>rand(1,10)
 //            'created_at'=>Carbon::today()->subDays(rand(0, 15))->addSeconds(rand(0, 86400)),
 //            'updated_at'=>Carbon::today()->subDays(rand(0, 15))->addSeconds(rand(0, 86400)),
 

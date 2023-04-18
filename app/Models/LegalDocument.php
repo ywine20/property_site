@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RedeemCode extends Model
+class LegalDocument extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'random_code',
+        'documents',
+        'album_id',
         'project_id',
-        'site_progress',
-        'album',
-        'tier',
     ];
 }
