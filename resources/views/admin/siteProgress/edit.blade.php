@@ -18,10 +18,12 @@
         transition: all .6s;
         box-shadow: 1px 1px 6px gray
     }
-    img{
-        position: relative;        
+
+    img {
+        position: relative;
     }
-    .removeBtn{
+
+    .removeBtn {
         position: absolute;
         width: 150px;
         height: 50px;
@@ -55,7 +57,7 @@
             <div class="py-3 px-3">
                 <div class="row create">
                     <div class="col-12">
-                        <h4 class="mb-3 text-primary header">Create Site Progress</h4>
+                        <h4 class="mb-3 text-primary header">Edit Site Progress</h4>
                     </div>
 
                     <div class="col-12">
@@ -115,8 +117,12 @@
 
                                 <div id="output" class="row row-cols-4 g-2">
                                     @foreach ($images as $image)
-                                    <div class="col overflow-hidden" style="height:180px">
-                                        <img src="{{ asset('storage/images/siteProgress/'.$image) }}" alt=""class="w-100 h-100" style="object-fit: fill;">
+                                    <div class="col overflow-hidden position-relative" style="height:180px">
+                                        <img src="{{ asset('storage/images/siteProgress/'.$image) }}" alt="" class="w-100 h-100" style="object-fit: fill;">
+                                        <button type="submit" form="delImag{{$image}}" class="" id="delImageBtn{{$image}}">
+                                            <!-- del -->
+                                            <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg fs-4"></i>
+                                        </button>
                                     </div>
                                     @endforeach
                                 </div>
@@ -130,6 +136,17 @@
     </div>
 </div>
 <!--                end content-->
+
+<!-- Images delete form -->
+<div>
+@foreach ($images as $image)
+        <form action="" method="post" id="delImag{{$image}}">
+            @csrf
+            @method('delete')
+        </form>                      
+@endforeach
+
+</div>
 @endsection
 
 @section('script')
