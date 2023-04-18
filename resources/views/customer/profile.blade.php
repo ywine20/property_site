@@ -1,4 +1,3 @@
-
 @extends('master')
 
 @section('title', 'Profile- SMT')
@@ -12,9 +11,9 @@
         <div class="w-100 bg-white">
             <!-- SUB NAV -->
             <div class="px-1 px-md-2 px-lg-5">
-            <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active  text-secondary"  href="{{route('profile',Auth::guard('user')->user()->id)}}">Authorize Asset</a>
+                        <a class="nav-link active  text-secondary" href="{{route('profile',Auth::guard('user')->user()->id)}}">Authorize Asset</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-secondary" href="{{route('profile.setting',Auth::guard('user')->user()->id)}}">Setting</a>
@@ -49,39 +48,47 @@
                                 <th scope="col" class="text-primary text-center text-nowrap">Action</th>
                             </tr>
                         </thead>
-                        
 
-                            <tbody>
-                                                            
-                                @if (count($assets) > 0)
-                                @foreach ($customerProjects as $customerProject)
-                                    <tr>
-                                        <td>{{ $customerProject->project_name }}</td>
-                                        <td>No.({{ $customerProject->hou_no }}), {{ $customerProject->street }}.Street, {{ $customerProject->ward }}.Ward, {{ $customerProject->town->name }} Township, {{ $customerProject->city->name }}. </td>
-                                        <td class="site-progress">
-                                            @if ( $customerProject->assets()->latest()->first()->site_progress )
-                                                <p>Latest progress</p>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            @if ( $customerProject->assets()->latest()->first()->legal_document )
-                                                <i class="bi bi-check2 fs-3 text-success "></i>
-                                            @else   
-                                                <i class="bi bi-x-lg fs-3 text-danger"></i>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="">
-                                                <i class="bi bi-eye fs-4 text-primary"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                 @else
-                                 <tr ><td colspan='5'>No projects found.</td></tr>
-                                @endif
-                                
-                            </tbody>                       
+
+                        <tbody>
+
+                            @if (count($assets) > 0)
+                            @foreach ($customerProjects as $customerProject)
+                            <tr>
+                                <td>{{ $customerProject->project_name }}</td>
+                                <td>No.({{ $customerProject->hou_no }}), {{ $customerProject->street }}.Street,
+                                    {{ $customerProject->ward }}.Ward, {{ $customerProject->town->name }} Township,
+                                    {{ $customerProject->city->name }}.
+                                </td>
+                                <td class="">
+                                    @if ( $customerProject->assets()->latest()->first()->site_progress )
+                                    <p class="site-progress">Latest progress</p>
+                                    @else
+                                    <span class="badge text-bg-danger bg-opacity-50">
+                                        Not Allow</span>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if ( $customerProject->assets()->latest()->first()->legal_document )
+                                    <i class="bi bi-check2 fs-3 text-success "></i>
+                                    @else
+                                    <i class="bi bi-x-lg fs-3 text-danger"></i>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    <a href="">
+                                        <i class="bi bi-eye fs-4 text-primary"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                            @else
+                            <tr>
+                                <td colspan='5'>No projects found.</td>
+                            </tr>
+                            @endif
+
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -96,13 +103,16 @@
     const subText = (text) => {
         return text.substring(0, 80) + '...';
     }
+
     for (let i = 0; i < siteProgress.length; i++) {
         let realText = siteProgress[i].innerText;
-        let changeText = subText(realText);
-        siteProgress[i].innerText = changeText;
+        if (realText.length > 80) {
+            let changeText = subText(realText);
+            siteProgress[i].innerText = changeText;
+        } else {
+            siteProgress[i].innerText = realText;
+        }
     }
-
-  
 </script>
 
 @endpush

@@ -5,23 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class siteProgress extends Model
+class SiteProgress extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['title', 'description', 'images'];
-
-    protected $casts = [
-        'images' => 'array',
+    protected $fillable = [
+        'description',
+        'project_id',
+        'site_gallery_id',
+        'cover_image',
     ];
-
-    // public function setFilenamesAttribute($value)
-    // {
-    //     $this->attributes['filenames'] = json_encode($value);
-    // }
-
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
 }

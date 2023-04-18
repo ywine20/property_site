@@ -56,6 +56,21 @@ class Project extends Model implements Viewable
         'ward',
     ];
 
+    public function assets()
+    {
+        return $this->hasMany(Assets::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function town()
+    {
+        return $this->belongsTo(Town::class, 'township_id');
+    }
+
     public function categories()
     {
         return $this->belongsTo(Category::class);
@@ -92,15 +107,16 @@ class Project extends Model implements Viewable
     }
     public function albums()
     {
-        return $this->belongToMany(Album::class , 'legaldocuments');
+        return $this->belongToMany(Album::class, 'legaldocuments');
     }
 
-      public function site_galleries()
+    public function site_galleries()
     {
         return $this->belongToMany(SiteGallery::class, 'siteprogresses');
     }
 
-    public function siteProgresses(){
-        return $this->hasMany(siteProgress::class,'project_id');
+    public function siteProgresses()
+    {
+        return $this->hasMany(siteProgress::class, 'project_id');
     }
 }

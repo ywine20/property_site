@@ -43,27 +43,26 @@ class DatabaseSeeder extends Seeder
             'image' => null,
         ]);
 
-       \App\Models\Category::factory(5)->create();
-       \App\Models\City::factory(5)->create();
-       \App\Models\Town::factory(5)->create();
-       \App\Models\Project::factory(10)->create();
-       Amenity::factory(5)->create();
+        \App\Models\Category::factory(5)->create();
+        \App\Models\City::factory(5)->create();
+        \App\Models\Town::factory(5)->create();
+        \App\Models\Project::factory(50)->create();
+        Amenity::factory(5)->create();
 
-	  Visitor::factory(10)->create();
-	  Slider::factory(7)->create();
+        Visitor::factory(10)->create();
+        Slider::factory(7)->create();
 
-       FacebookLink::factory(12)->create();
+        FacebookLink::factory(12)->create();
 
-    // Get all the project ids in ascending order
-    $projectIds = Project::orderBy('id', 'asc')->pluck('id')->toArray();
-    // Seed the previewimages table with project_id in series
-    Previewimage::factory()->count(50)->create([
+        // Get all the project ids in ascending order
+        $projectIds = Project::orderBy('id', 'asc')->pluck('id')->toArray();
+        // Seed the previewimages table with project_id in series
+        Previewimage::factory()->count(50)->create([
 
-        'project_id' => function () use (&$projectIds) {
-            // Take the first id in the array and remove it
-            return array_shift($projectIds);
-        },
-    ]);
-    
+            'project_id' => function () use (&$projectIds) {
+                // Take the first id in the array and remove it
+                return array_shift($projectIds);
+            },
+        ]);
     }
 }
