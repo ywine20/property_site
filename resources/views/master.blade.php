@@ -106,21 +106,23 @@
       display: block;
     }
 
-    #email-send-success-alert{
+    #email-send-success-alert {
       display: none;
     }
   </style>
+
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136018131-1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
 
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
-  gtag('config', 'UA-136018131-1');
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-136018131-1');
 </script>
 
 <body>
@@ -195,6 +197,7 @@
       </div>
       <div class="px-2 py-2 d-lg-none position-absolute bottom-0 w-100">
         <div class="d-flex justify-content-start align-items-center">
+
           @if(auth()->guard('user')->check())
 
           <div class="d-flex flex-column w-100">
@@ -202,7 +205,7 @@
               <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;">
                 <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
                   @if( isset(Auth::guard('user')->user()->profile_img))
-                  <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;" style="object-fit:cover;">
+                  <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;" style="object-fit:cover;">
                   @else
                   <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;" style="object-fit:cover;">
                   @endif
@@ -214,7 +217,6 @@
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-link text-decoration-none text-primary">LOG OUT</button>
-                <!-- <a href="{{route('logout')}}" class="text-decoration-none">LOG OUT</a> -->
               </form>
             </div>
 
@@ -267,7 +269,7 @@
                   <span class="text-primary me-2 usernameLargeDevice usernameToShort">{{Auth::guard('user')->user()->name}}</span>
                   <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
                     @if( isset(Auth::guard('user')->user()->profile_img))
-                    <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;">
+                    <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;">
                     @else
                     <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
                     @endif
@@ -279,7 +281,7 @@
                     <div class="d-flex flex-row align-items-center gap-3">
                       <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
                         @if( isset(Auth::guard('user')->user()->profile_img))
-                        <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100" style="object-fit:cover;">
+                        <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;">
                         @else
                         <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
                         @endif
@@ -310,70 +312,77 @@
 
     @yield('content')
 
-
     <!-- footer -->
-    <section id="footer">
-      <div class="container-fluid bg-secondary  pt-3 overflow-hidden">
-        <div class="container bg-secondary">
-          <div class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
-            <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
-              <h5 class="fw-bold text-gold text-uppercase">Contact Us</h5>
-              <div class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
-                <div class="">
-                  <ul class="list-group">
-                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                      <a href="tel:+959777700111" class="text-decoration-none text-nowrap ">
-                        <i class="bi bi-telephone-fill"></i>
-                        09777700111,
-                      </a>
-                      &nbsp;
-                      <a href="tel:+959777700222" class="text-decoration-none text-nowrap ">
-                        09777700222
-                      </a>
-                    </li>
-                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                      <a href="mailto:sales@sunmyattun.com" target="_blank" class="text-decoration-none text-nowrap">
-                        <i class="bi bi-envelope"></i>
-                        sales@sunmyattun.com
-                      </a>
-                    </li>
-                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                      <a href="https://www.facebook.com/Sunmyattun" target="_blank" class="text-decoration-none text-nowrap ">
-                        <i class="bi bi-facebook"></i>
-                        Sun Myat Tun Construction Co.,Ltd
-                      </a>
-                    </li>
+    <section id="footer" class="bg-secondary">
+        <div class="container-fluid bg-secondary py-3 overflow-hidden">
+            <div class="container">
+                <div
+                    class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
+                    <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
+                        <h5 class="fw-bold text-gold text-uppercase">Contact Us</h5>
+                        <div
+                            class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
+                            <div class="">
+                                <ul class="list-group">
+                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                        <a href="tel:+959777700111" class="text-decoration-none text-nowrap ">
+                                            <i class="bi bi-telephone-fill"></i>
+                                            09777700111,
+                                        </a>
+                                        &nbsp;
+                                        <a href="tel:+959777700222" class="text-decoration-none text-nowrap ">
+                                            09777700222
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                        <a href="mailto:sales@sunmyattun.com" target="_blank"
+                                            class="text-decoration-none text-nowrap">
+                                            <i class="bi bi-envelope"></i>
+                                            sales@sunmyattun.com
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                        <a href="https://www.facebook.com/Sunmyattun" target="_blank"
+                                            class="text-decoration-none text-nowrap ">
+                                            <i class="bi bi-facebook"></i>
+                                            Sun Myat Tun Construction Co.,Ltd
+                                        </a>
+                                    </li>
 
-                  </ul>
-                </div>
-                <div class=" ms-md-4">
-                  <div class="d-flex ">
-                    <div class="d-none d-md-block" style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
+                                </ul>
+                            </div>
+                            <div class=" ms-md-4">
+                                <div class="d-flex ">
+                                    <div class="d-none d-md-block"
+                                        style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
+                                    </div>
+                                    <div class="ms-md-3">
+                                        <ul class="list-group">
+                                            <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                                <a href="{{ url('faq') }}" class="text-decoration-none ">
+                                                    FAQs
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                                                <a href="{{ url('termcondition') }}"
+                                                    class="text-decoration-none text-nowrap ">
+                                                    Terms And Conditions
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ms-md-3">
-                      <ul class="list-group">
-                        <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                          <a href="{{url('faq')}}" class="text-decoration-none ">
-                            FAQs
-                          </a>
-                        </li>
-                        <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                          <a href="{{url('termcondition')}}" class="text-decoration-none text-nowrap ">
-                            Terms And Conditions
-                          </a>
-                        </li>
-                      </ul>
+                    <div class="col-6 col-md-3  col-lg-2 col-xl-2 bg-danger px-0 footer-logo">
+                        <img src="/image/smtlogoLarge.png" alt="" class="img-fluid">
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-6 col-md-3  col-lg-2 col-xl-2 px-0 footer-logo">
-              <img src="/image/smtlogoLarge.png" alt="" class="img-fluid">
-            </div>
-          </div>
-        </div>
-        <div class="row">
+
+            <div class="row">
           <div class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
             <div class="pointer mx-2">
               <img src="{{asset('image/EnglishFlag.jpg')}}" alt="" class="rounded" style="width:40px;height:30px">
@@ -385,6 +394,9 @@
             </div>
           </div>
         </div>
+          </div>
+        </div>
+       
       </div>
     </section>
     <!-- end footer -->
@@ -514,7 +526,11 @@
             @csrf
             <!-- email -->
             <div class="form-floating mb-5">
-              <input type="email" name="email" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
+              @if(auth()->guard('user')->check())
+              <input type="email" name="email" value="{{Auth::guard('user')->user()->email}}" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
+              @else
+              <input type="email" name="email" value="" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
+              @endif
               <label for="floatingInput">Vertify Email Address</label>
               <small class="text-danger forgotPasswordError"></small>
             </div>
@@ -534,12 +550,13 @@
 
 
 
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="{{asset('js/counter_up.js')}}"></script>
   <script src="{{asset('js/jquery.waypoints.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
   <script src="{{asset('js/script.js')}}"></script>
   <!-- <script src="../js/script.js"></script> -->
 
@@ -671,7 +688,7 @@
         .catch(err => {
 
           // handle the error response
-          console.log(err.response.data);
+          // console.log(err.response.data);
 
           document.querySelector('.login_email_error').innerText = '';
           document.querySelector('.login_password_error').innerText = '';
@@ -751,9 +768,10 @@
     });
 
 
+
     //forgot password form with axios
     const forgotPasswordForm = document.querySelector('#forgot_password_form');
-    const emailSendSuccessAlert= document.querySelector('#email-send-success-alert');
+    const emailSendSuccessAlert = document.querySelector('#email-send-success-alert');
     forgotPasswordForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -765,6 +783,7 @@
       const email = forgotPasswordForm.elements.email.value;
 
 
+       //end send message
       // if (!email) {
       //   console.log('Email is required');
       //   return;
@@ -789,15 +808,17 @@
           console.log(error.response);
           document.querySelector('.forgotPasswordError').innerText = passwordError.email ? passwordError.email[0] : '';
           sendEmailBtn.innerHTML = "Send";
-          sendEmailBtn.disabled = false ;
+          sendEmailBtn.disabled = false;
         })
 
     })
   </script>
-  @yield('script')
 
+
+  @yield('script')
   @stack('clientScript')
 
-</body>
 
+</body>
 </html>
+

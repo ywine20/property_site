@@ -28,7 +28,7 @@
                                             <div class="col-12 col-md-4 col-lg-4 col-xl-3 d-flex flex-column justify-content-center align-items-center justify-content-lg-start">
                                                 <div class="user-img-div d-flex justify-content-center align-items-center rounded-circle border border-primary overflow-hidden @error('image') border border-danger @enderror" >
                                                     <input type="file" name="image" class="form-control d-none" accept="image/*"  value="{{old('image',$admin->image)}}" id="user_input">
-                                                    <img src="{{asset('images/admin/'.$admin->image)}}" id="user-img" alt="" style="height:300px; width:300px;">
+                                                    <img src="{{$admin->image ?  asset('storage/images/admin/'.$admin->image) :  asset('/images/user.png')  }}" id="user-img" alt="" style="height:300px; width:300px;">
                                                     <!--                                                                <i class="bi bi-camera-fill fa-fw fa-3x text-secondary"></i>-->
                                                 </div>
                                                 @error('image')

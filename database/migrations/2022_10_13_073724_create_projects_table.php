@@ -20,21 +20,17 @@ class CreateProjectsTable extends Migration
             $table->string('site_progress_id');
             $table->string('legal_document_id');
             $table->longText('description');
-            $table->string('cover');
-            $table->string('gallery')->nullable();
+            $table->text('cover');
+            $table->text('three_sixty_image')->nullable();
             $table->string('lower_price');
             $table->string('upper_price');
             $table->integer('layer');
             $table->integer('squre_feet');
-            // $table->bigInteger('project_id_number');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('township_id');
             $table->unsignedBigInteger('city_id');
-            // $table->longText('amenity');
             $table->longText('gmlink');
             $table->string('progress');
-            // $table->double('longitude')->nullable();
-            // $table->double('latitude',)->nullable();
             $table->string('hou_no');
             $table->string('street');
             $table->string('ward');
@@ -52,4 +48,5 @@ class CreateProjectsTable extends Migration
     {
         Schema::dropIfExists('projects');
     }
+
 }

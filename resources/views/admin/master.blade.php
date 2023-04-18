@@ -18,7 +18,6 @@
 
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="../../css/datatable.css">
 
     <!--    sweetalert2-->
     <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
@@ -134,7 +133,8 @@
                             <div class="profile d-flex align-items-center pe-2 text-primary" style="min-width: max-content;">
                                 <div class="overflow-hidden rounded rounded-circle  dropdown-toggle border border-primary border-opacity-50" data-bs-toggle="dropdown" data-bs-offset="20,20" style="width:50px;height:50px">
                                     @auth('admin')
-                                    <img src="{{ url('images/admin/' . Auth::guard('admin')->user()->image ?? '../no_image.jpg') }}" alt="" style="width: 100%;height: 100%;object-fit: cover">
+                                    <!-- <img src="{{ url('images/admin/' . Auth::guard('admin')->user()->image ?? '../no_image.jpg') }}" alt="" style="width: 100%;height: 100%;object-fit: cover"> -->
+                                    <img src="{{Auth::guard('admin')->user()->image ?  asset('storage/images/admin/'.Auth::guard('admin')->user()->image) :  asset('/images/user.png')  }}" alt="" style="width: 100%;height: 100%;object-fit: cover">
                                     @endauth
                                 </div>
                                 <div class="dropdown-menu dropdown-menu-end bg-secondary text-primary py-0">
@@ -152,7 +152,7 @@
                                                 <div class="overflow-hidden rounded rounded-circle border border-primary " style="width:100px;height:100px">
                                                     @auth('admin')
                                                     <a href="">
-                                                        <img src="{{ url('images/admin/' . Auth::guard('admin')->user()->image ?? '../no_image.jpg') }}" alt="" style="width: 100%;height: 100%;object-fit: cover">
+                                                        <img src="{{Auth::guard('admin')->user()->image ?  asset('storage/images/admin/'.Auth::guard('admin')->user()->image) :  asset('/images/user.png')  }}" alt="" style="width: 100%;height: 100%;object-fit: cover">
                                                     </a>
                                                     @endauth
                                                 </div>
@@ -191,12 +191,11 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<script src="../node_modules/bootstrap/dist/js/bootstrap.js "></script>
+<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.js "></script> -->
 <!--<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js "></script>-->
 <script src="{{asset('js/layout.js')}}"></script>
-<script src="../../js/app.js"></script>
-{{--<script src="{{asset('js/appp.js')}}"></script>--}}
-{{--<script src="../../js/layout.js"></script>--}}
+<script src="{{asset('js/app.js')}}"></script>
+<!-- {{--<script src="{{asset('js/appp.js')}}"></script>--}} -->
 @yield('script')
 @stack('customScript')
 
@@ -224,31 +223,32 @@
 @endif
 
 @if(session('error'))
-    <script>
-        Swal.fire({
-            icon: 'error',
-            background:'#423e3d',
-            confirmButtonColor: '#F5CC7A',
-            cancelButtonColor: '#f36565',
-            color:'#fff',
-            // title: 'Oops...',
-            text: "{{session('error')}}",
-{{--            text: JSON.stringify({{session('error')}}),--}}
-        })
 
+    <script>
+//         Swal.fire({
+//             icon: 'error',
+//             background:'#423e3d',
+//             confirmButtonColor: '#F5CC7A',
+//             cancelButtonColor: '#f36565',
+//             color:'#fff',
+//             // title: 'Oops...',
+//             text: "{{session('error')}}",
+// {{--            text: JSON.stringify({{session('error')}}),--}}
+//         })
+
+    alert('something wrong')
     </script>
 @endif
 
 @if(session('null'))
-    <script>
+    <!-- <script>
         Swal.fire({
             icon: 'warning',
             // title: 'Oops...',
             text: '{{session('null')}}',
             // footer: '<a href="">Why do I have this issue?</a>'
         })
-
-    </script>
+    </script> -->
 @endif
 </body>
 </html>

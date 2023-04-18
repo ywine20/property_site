@@ -29,6 +29,10 @@ class RedeemCodeController extends Controller
         return view('redeemCode.redeemCode', compact('projects'));
     }
 
+    public function generateCode(){
+        return view('admin.tier.generate-code');
+    }
+
     // generate redeem code
     public function generateRedeemCode(Request $request)
     {
@@ -76,6 +80,10 @@ class RedeemCodeController extends Controller
         }
 
         return response()->json(['code' => $code]);
+    }
+
+    public function code(Request $request){
+        return $request->all();
     }
 
 

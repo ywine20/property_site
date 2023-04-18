@@ -94,7 +94,7 @@
                                                         <td >
                                                             <div class="d-flex justify-content-center align-items-center">
                                                                 <div class="mx-1">
-                                                                    <a href="{{ route('project.show',$p->slug) }}"  class="  info-icon px-2 py-1">
+                                                                    <a href="{{ route('project.detail',$p->id) }}"  class="  info-icon px-2 py-1">
                                                                         <i class="bi bi-info-circle text-info fa-fw"></i>
                                                                     </a>
                                                                 </div>
@@ -166,7 +166,7 @@
 
 @section('script')
 <script>
-    <!--  start  aside and nav responsive design-->
+    // <!--  start  aside and nav responsive design-->
     let aside = document.querySelector('aside');
     let menuList = document.querySelector('.menu-list');
     let backdrop = document.querySelector('#backdrop');
@@ -245,7 +245,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
             axios.delete('project/'+id).then(function (response) {
-                // console.log(response.data);
+                console.log(response.data);
                 if(response.data.status=='success'){
                     const Toast = Swal.mixin({
                     toast: true,
@@ -270,6 +270,7 @@
                 document.getElementById('row'+id).remove();
                 }
                 else{
+                    console.log(response);
                     Swal.fire({
                     background:'#423e3d',
                     position: 'top',

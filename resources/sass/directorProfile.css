@@ -1,0 +1,31 @@
+* {
+  color: var(--primary-dark);
+}
+
+#experiences-list .list-group .list-group-item {
+  display: flex !important;
+  justify-content: start !important;
+  align-items: start !important;
+}
+#experiences-list .list-group .list-group-item .bi-circle-fill {
+  font-size: 0.7rem;
+  margin-bottom: 0 !important;
+  margin-top: 0.3rem;
+}
+#experiences-list .list-group .list-group-item p {
+  margin-bottom: 0 !important;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  #uNayLinTun .text .fs-5 {
+    font-size: 1.1rem !important;
+  }
+  #experiences-list .list-group .list-group-item p {
+    font-size: 0.9rem;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up) *//*# sourceMappingURL=directorProfile.css.map */

@@ -1,0 +1,37 @@
+.form-control:focus, .form-select:focus {
+  box-shadow: none !important;
+}
+
+.create .header {
+  font-size: calc(1.2rem + 0.3vw);
+}
+.create .create-input, .create .create-select, .create .create-file {
+  background: rgba(122, 117, 116, 0.568627451);
+  outline: none;
+  border: none;
+  color: white;
+}
+.create .create-textarea {
+  background: rgba(122, 117, 116, 0.568627451);
+  outline: none;
+  border: none;
+  color: white !important;
+}
+.create .image-preview {
+  background: rgba(122, 117, 116, 0.568627451);
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .create .header {
+    font-size: calc(1rem + 0.3vw);
+  }
+  .create .create-input {
+    background: #423E3D;
+    outline: none;
+    border: none;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up) *//*# sourceMappingURL=category.css.map */

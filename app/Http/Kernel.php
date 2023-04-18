@@ -6,6 +6,7 @@ use App\Http\Middleware\Admin;
 use App\Http\Middleware\CustomerAuthenticate;
 use App\Http\Middleware\Setting;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\LanguageManager;
 
 class Kernel extends HttpKernel
 {
@@ -24,6 +25,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+          LanguageManager::class,
     ];
 
     /**

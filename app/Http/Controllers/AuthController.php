@@ -43,6 +43,11 @@ class AuthController extends Controller
             $time = Carbon::now();
             $token = Hash::make("$userId|$time|$secret");
 
+            $user->remember_token = $token;
+            $user->save();
+
+            session()->put('remember_token',  $user->remember_token);
+
             $credentials = $request->only('email', 'password');
             auth()->guard('user')->attempt($credentials);
             return response()->json(['status' => '1', 'user' => $user, 'access_token' => $token], 200);
@@ -72,6 +77,12 @@ class AuthController extends Controller
 
 
                 $token = Hash::make("$userId|$time|$secret");
+                
+                $user->remember_token = $token;
+                $user->save();
+    
+                session()->put('remember_token',  $user->remember_token);
+    
 
                 return response()->json([
                     'access_token' => $token,
@@ -89,7 +100,10 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // $user = Auth::guard('user')->user();
+        $user = Auth::guard('user')->user();
+        $user->remember_token = null;
+        $user->save();
+        session()->forget('remember_token');
         auth()->guard('user')->logout();
         return redirect('/');
     }
@@ -103,11 +117,16 @@ class AuthController extends Controller
             'email' => 'required|email|exists:users',
         ]);
 
+
         if ($validator->fails()) {
             return response()->json(['status' => '0', 'error' => $validator->errors()->toArray(), 'request' => $request->all()], 422);
         } else {
 
-            $user = User::where('email', $request->email)->first();
+            $user = auth()->guard('user')->user();
+
+            $email = $user ? $user->email : $request->email;
+
+            $user = User::where('email', $email)->first();
 
             if ($user) {
                 $newPassword = random_int(100000, 9999999); // Replace this with your random password generation code.

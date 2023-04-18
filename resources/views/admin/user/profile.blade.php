@@ -27,7 +27,7 @@
                                                 <div class="col-12 col-md-4 col-lg-4 col-xl-3 d-flex justify-content-center align-items-center justify-content-lg-start">
                                                     <div class="user-img-div d-flex justify-content-center align-items-center rounded-circle border border-primary overflow-hidden shadow " >
                                                         <input type="file" class="form-control d-none" id="user_input">
-                                                        <img src="{{ url('images/admin/' . Auth::guard('admin')->user()->image ?? '../no_image.jpg') }}" alt="" style="width: 400px;height: 300px;">
+                                                        <img src="{{Auth::guard('admin')->user()->image ?  asset('storage/images/admin/'.Auth::guard('admin')->user()->image) :  asset('/images/user.png')  }}" alt="" style="width: 400px;height: 300px;">
                                                         <!--                                                                <i class="bi bi-camera-fill fa-fw fa-3x text-secondary"></i>-->
                                                     </div>
                                                 </div>

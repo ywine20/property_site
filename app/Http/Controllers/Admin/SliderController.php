@@ -28,12 +28,12 @@ class SliderController extends Controller
        $slider=new Slider;
         if($request->hasfile('image'))
         {
-          $file=$request->file('image');
-          $extention=$file->getClientOriginalExtension();
-          $filename=time().'.'.$extention;
-          $file->move('uploads/slider/',$filename);
-          $slider->image=$filename;
+          $image=$request->file('image');
+          $image_name = 'slider_'. uniqid() . '.' . $image->getClientOriginalExtension();
+          $image->storeAs('/public/images/slider', $image_name);
+          $slider->image=$image_name;
         }
+
         $slider->save();
 
        return redirect('/admin/slider')->with('status','Slider Image Added Successfully!');
@@ -57,21 +57,13 @@ class SliderController extends Controller
 
         if($request->hasfile('image'))
         {
-          $destination='uploads/slider/'.$slider->image;
-          $files = new \Illuminate\Filesystem\Filesystem();
-          if($files->exists($destination)){
-            $files->delete($destination);
 
-          }
-        //   if(File::exits($destination))
-        //   {
-        //      File::delete($destination);
-        //   }
-          $file=$request->file('image');
-          $extention=$file->getClientOriginalExtension();
-          $filename=time().'.'.$extention;
-          $file->move('uploads/slider/',$filename);
-          $slider->image=$filename;
+          Storage::delete('public/images/slider/' . $slider->image);
+
+          $image=$request->file('image');
+          $image_name = 'slider_'. uniqid() . '.' . $image->getClientOriginalExtension();
+          $image->storeAs('/public/images/slider', $image_name);
+          $slider->image=$image_name;
         }
 
         $slider->update();
@@ -88,12 +80,9 @@ class SliderController extends Controller
     public function destroy($id)
     {
         $slider=Slider::find($id);
-        $destination='uploads/slider/'.$slider->image;
-        $files = new \Illuminate\Filesystem\Filesystem();
-          if($files->exists($destination)){
-            $files->delete($destination);
+        
+        Storage::delete('public/images/slider/' . $slider->image);
 
-          }
         $slider->delete();
         return redirect('/admin/slider')->with('status','Slider Image Deleted Successfully!');
 
