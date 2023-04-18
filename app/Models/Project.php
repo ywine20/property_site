@@ -19,7 +19,7 @@ class Project extends Model implements Viewable
     use HasFactory;
     use InteractsWithViews;
 
-    protected $fillable=[
+    protected $fillable = [
         'slug',
         'project_name',
         'site_progress_id',
@@ -70,18 +70,28 @@ class Project extends Model implements Viewable
         return $this->hasMany(Image::class);
     }
 
+    public function assets()
+    {
+        return $this->hasMany(Assets::class);
+    }
+
     // public function gallery()
     // {
     //     return $this->hasMany(Gallery::class);
     // }
 
-    public function towns()
-    {
-        return $this->belongsTo(Town::class);
-    }
+    // public function towns()
+    // {
+    //     return $this->belongsTo(Town::class);
+    // }
 
-    public function cities()
+    public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function town()
+    {
+        return $this->belongsTo(Town::class, 'township_id');
     }
 }

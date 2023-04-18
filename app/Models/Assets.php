@@ -14,4 +14,9 @@ class Assets extends Model
         'site_progress',
         'legal_document',
     ];
+
+    public function project(){
+        return $this->belongsTo(Project::class);
+    }
 }
+

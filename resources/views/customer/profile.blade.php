@@ -49,55 +49,43 @@
                                 <th scope="col" class="text-primary text-center text-nowrap">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>P0031</td>
-                                <td>No(19/21) lower block, 45 st, Botahtaung Township, Yangon</td>
-                                <td class="site-progress">Lorem ipsum dolor sit amet consectetur adipisicing elit. Disti Lorem ipsum dolor sit amet consectetur adipisicing elit. Disti</td>
-                                <td class="text-center">
-                                    <i class="bi bi-check2 fs-3 text-success "></i>
-                                </td>
-                                <td class="text-center">
-                                    <a href="">
-                                        <i class="bi bi-eye fs-4 text-primary"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>P0031</td>
-                                <td>No(19/21) lower block, 45 st, Botahtaung Township, Yangon</td>
-                                <td class="site-progress">Lorem ipsum dolor sit amet consectetur adipisicing elit. Disti Lorem ipsum dolor sit amet consectetur adipisicing elit. Disti</td>
-                                <td class="text-center">
-                                    <i class="bi bi-x  fs-3 text-danger"></i>
-                                </td>
-                                <td class="text-center">
-                                    <a href="#">
-                                        <i class="bi bi-eye fs-4 text-primary"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                             <tr>
-                                <td>P0031</td>
-                                <td>No(19/21) lower block, 45 st, Botahtaung Township, Yangon</td>
-                                <td class="site-progress">Lorem ipsum dolor sit amet consectetur adipisicing elit. Disti Lorem ipsum dolor sit amet consectetur adipisicing elit. Disti</td>
-                                <td class="text-center">
-                                <i class="bi bi-check2 fs-3 text-success "></i>
-                                </td>
-                                <td class="text-center">
-                                    <a href="#">
-                                        <i class="bi bi-eye fs-4 text-primary"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                           
-                        </tbody>
+                        
+
+                            <tbody>
+                                                            
+                                @if (count($assets) > 0)
+                                @foreach ($customerProjects as $customerProject)
+                                    <tr>
+                                        <td>{{ $customerProject->project_name }}</td>
+                                        <td>No.({{ $customerProject->hou_no }}), {{ $customerProject->street }}.Street, {{ $customerProject->ward }}.Ward, {{ $customerProject->town->name }} Township, {{ $customerProject->city->name }}. </td>
+                                        <td class="site-progress">
+                                            @if ( $customerProject->assets()->latest()->first()->site_progress )
+                                                <p>Latest progress</p>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            @if ( $customerProject->assets()->latest()->first()->legal_document )
+                                                <i class="bi bi-check2 fs-3 text-success "></i>
+                                            @else   
+                                                <i class="bi bi-x-lg fs-3 text-danger"></i>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="">
+                                                <i class="bi bi-eye fs-4 text-primary"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                 @else
+                                 <tr ><td colspan='5'>No projects found.</td></tr>
+                                @endif
+                                
+                            </tbody>                       
                     </table>
                 </div>
             </div>
         </div>
-
-
-
     </section>
 </main>
 @endsection
@@ -113,8 +101,8 @@
         let changeText = subText(realText);
         siteProgress[i].innerText = changeText;
     }
+
   
 </script>
 
-</script>
 @endpush

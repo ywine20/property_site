@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRedeemCodesTable extends Migration
+class CreateAlbumProgressAllowancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateRedeemCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('redeem_codes', function (Blueprint $table) {
+        Schema::create('album_progress_allowances', function (Blueprint $table) {
             $table->id();
-            $table->string("random_code");
             $table->integer("project_id")->nullable();
-            $table->boolean("site_progress")->nullable();
-            $table->boolean("album")->nullable();
-            $table->string("tier");
+            $table->string("site_progress")->nullable();
+            $table->string("album")->nullable();
+            $table->integer("site_progress_id")->nullable();
+            $table->integer("album_id")->nullable();
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
@@ -31,6 +32,6 @@ class CreateRedeemCodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('redeem_codes');
+        Schema::dropIfExists('album_progress_allowances');
     }
 }

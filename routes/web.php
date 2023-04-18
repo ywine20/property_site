@@ -28,13 +28,13 @@ use App\Models\CustomerProfile;
 */
 
 //Login
-Route::post('/register',[AuthController::class,'register'])->name('register');
-Route::post('/login',[AuthController::class,'login'])->name('login');
-Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 //User
-Route::resource('/user',"UserController");
+Route::resource('/user', "UserController");
 
 
 
@@ -66,7 +66,7 @@ Route::post('/contactus', [App\Http\Controllers\ContactController::class, 'store
 Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
 
-Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']], function(){
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Admin']], function () {
     Route::get('/', 'PageController@showDashboard');
     Route::post('/logout', 'PageController@logout');
     Route::get('/user', 'PageController@profile');
@@ -91,41 +91,41 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::delete('cont-show/cont-delete/{id}', 'ContactController@delete');
 
     //winwinmawModify
-    Route::post('/delete-multiple-category',[\App\Http\Controllers\Admin\CategoryController::class,'multiDelCategory'])->name('category.multi-delete');
-    Route::post('/delete-multiple-amenity',[\App\Http\Controllers\Admin\AmenityController::class,'multiDelAmenity'])->name('amenity.multi-delete');
-    Route::post('/delete-multiple-project',[\App\Http\Controllers\Admin\ProjectController::class,'multiDelProject'])->name('project.multi-delete');
-    Route::post('/delete-multiple-facebookLink',[\App\Http\Controllers\Admin\FacebookLinkController::class,'multiDelFacebookLink'])->name('facebookLink.multi-delete');
-    Route::post('/delete-multiple-city',[\App\Http\Controllers\Admin\AddressController::class,'multiDelCity'])->name('city.multi-delete');
-    Route::post('/delete-multiple-town',[\App\Http\Controllers\Admin\AddressController::class,'multiDelTown'])->name('town.multi-delete');
-    Route::put('city-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'cityUpdate'])->name('address.cityUpdate');
-    Route::put('town-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'townUpdate'])->name('address.townUpdate');
+    Route::post('/delete-multiple-category', [\App\Http\Controllers\Admin\CategoryController::class, 'multiDelCategory'])->name('category.multi-delete');
+    Route::post('/delete-multiple-amenity', [\App\Http\Controllers\Admin\AmenityController::class, 'multiDelAmenity'])->name('amenity.multi-delete');
+    Route::post('/delete-multiple-project', [\App\Http\Controllers\Admin\ProjectController::class, 'multiDelProject'])->name('project.multi-delete');
+    Route::post('/delete-multiple-facebookLink', [\App\Http\Controllers\Admin\FacebookLinkController::class, 'multiDelFacebookLink'])->name('facebookLink.multi-delete');
+    Route::post('/delete-multiple-city', [\App\Http\Controllers\Admin\AddressController::class, 'multiDelCity'])->name('city.multi-delete');
+    Route::post('/delete-multiple-town', [\App\Http\Controllers\Admin\AddressController::class, 'multiDelTown'])->name('town.multi-delete');
+    Route::put('city-update/{id}', [\App\Http\Controllers\Admin\AddressController::class, 'cityUpdate'])->name('address.cityUpdate');
+    Route::put('town-update/{id}', [\App\Http\Controllers\Admin\AddressController::class, 'townUpdate'])->name('address.townUpdate');
 
-
+    //for redeem code
+    Route::get('/redeemList/page', [RedeemCodeController::class, 'redeemList'])->name('profile.redeemListPage');
+    Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
+    Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('profile.generateRedeemCode');
 });
-   
+
 
 
 //SMT UPDATE 13-March-2023
 
-Route::get('/profile/{id}',[CustomerProfileController::class,'profile'])->name('profile');
-Route::get('/profile/{id}/setting',[CustomerProfileController::class,'profileSetting'])->name('profile.setting');
-Route::get('/profile/{id}/redeem',[CustomerProfileController::class,'redeem'])->name('profile.redeem');
-Route::post('/profile/{id}/changeProfile',[CustomerProfileController::class,'changeImage'])->name('profile.changeImge');
-Route::patch('/profile/{id}/changeProfileInfo',[CustomerProfileController::class,'changeInfo'])->name('profile.changeInfo');
-Route::patch('/profile/{id}/changePassword',[CustomerProfileController::class,'changePassword'])->name('profile.changePassword');
-Route::post('/',[AuthController::class,'forgotPassword'])->name('forgotPassword');
+Route::get('/profile/{id}', [CustomerProfileController::class, 'profile'])->name('profile');
+Route::get('/profile/{id}/setting', [CustomerProfileController::class, 'profileSetting'])->name('profile.setting');
+Route::get('/profile/{id}/redeem', [CustomerProfileController::class, 'redeem'])->name('profile.redeem');
+Route::post('/profile/{id}/changeProfile', [CustomerProfileController::class, 'changeImage'])->name('profile.changeImge');
+Route::patch('/profile/{id}/changeProfileInfo', [CustomerProfileController::class, 'changeInfo'])->name('profile.changeInfo');
+Route::patch('/profile/{id}/changePassword', [CustomerProfileController::class, 'changePassword'])->name('profile.changePassword');
+Route::post('/', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 
 
 
 
 // Route::view('/profile','customer/profile')->name('profile');
 
-Route::view('/profile/setting','customer/profile-setting')->name('profile-setting');
-Route::view('/redeem','customer/redeem')->name('profile-redeem');
+Route::view('/profile/setting', 'customer/profile-setting')->name('profile-setting');
+Route::view('/redeem', 'customer/redeem')->name('profile-redeem');
 
+// Redeem Code for customemr
+Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRedeemCodes'])->name('profile.customerRedeemCodes');
 
-//for redeem code
-Route::get('/redeemList/page', [RedeemCodeController::class,'redeemList'])->name('profile.redeemListPage');
-Route::get('/redeemCodes/page', [RedeemCodeController::class,'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
-Route::post('/redeemCodes', [RedeemCodeController::class,'generateRedeemCode'])->name('profile.generateRedeemCode');
-Route::post('/customer/redeemCodes', [RedeemCodeController::class,'customerRedeemCodes'])->name('profile.customerRedeemCodes');

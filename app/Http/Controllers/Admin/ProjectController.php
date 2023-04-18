@@ -71,8 +71,8 @@ class ProjectController extends Controller
             'layer' => "required|string|min:1|max:255",
             'squre_feet' => "required|string|min:1|max:255",
             // 'project_id_number' => "required|integer",
-            'map_link'=>"required|string",
-            'progress'=>"required|string",
+            'map_link' => "required|string",
+            'progress' => "required|string",
             'amenity.*' => "required|string",
             'hou_no' => "required|string",
             'street' => "required|string",
@@ -80,30 +80,30 @@ class ProjectController extends Controller
             'town_slug' => "required",
             'city_slug' => "required",
             // 'images'=> 'required|mimes:jpeg,bmp,png|max:1024',
-            'images.*'=> 'required|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'images.*' => 'required|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
         ]);
 
         $image = $request->file('cover');
-        if($image){
+        if ($image) {
             $image_name = uniqid() . $image->getClientOriginalName();
-            $image->move(public_path('/images/projects/'), $image_name);    
+            $image->move(public_path('/images/projects/'), $image_name);
         }
 
-      
-       
+
+
 
         $category = Category::where('category_id', $request->category)->first();
-        if(!$category){
+        if (!$category) {
             return redirect()->back()->with('error', 'Not found category');
         }
 
         $city = City::where('slug', $request->city_slug)->first();
-        if(!$city){
+        if (!$city) {
             return redirect()->back()->with('error', 'Not found city');
         }
 
         $town = Town::where('slug', $request->town_slug)->first();
-        if(!$town){
+        if (!$town) {
             return redirect()->back()->with('error', 'Not found township');
         }
 
@@ -123,16 +123,16 @@ class ProjectController extends Controller
         // }
 
         $amenities = [];
-        foreach($request->amenity as $am){
+        foreach ($request->amenity as $am) {
             $amenity = Amenity::where('id', $am)->first();
-            if(!$amenity){
+            if (!$amenity) {
                 return redirect()->back()->with('error', 'amenity not found');
             }
             $amenities[] = $amenity->id;
         }
 
         $image_file = '';
-        if($request->hasFile('gallery')){
+        if ($request->hasFile('gallery')) {
             $image = $request->file('gallery');
             $image_file = uniqid() . $image->getClientOriginalName();
             $image->move(public_path('/images/360images/'), $image_file);
@@ -140,25 +140,25 @@ class ProjectController extends Controller
         }
 
         $project = Project::create([
-            'slug' => Str::slug($request->project_name).uniqid(),
+            'slug' => Str::slug($request->project_name) . uniqid(),
             'project_name' => $request->project_Id,
             'cover' => $image_name,
             'gallery' => $image_file,
             'category_id' => $category->category_id,
             'township_id' => $town->id,
             'city_id' => $city->id,
-            'gmlink'=>$request->map_link,
-            'progress'=>$request->progress,
+            'gmlink' => $request->map_link,
+            'progress' => $request->progress,
             // 'amenity_id' => $amenity->amenity_id,
             'description' => $request->description,
             'lower_price' => $request->lower_price,
             'upper_price' => $request->upper_price,
             // 'longitude' => $request->longitude,
             // 'latitude' => $request->latitude,
-            'layer' =>$request->layer,
-            'squre_feet' =>$request->squre_feet,
+            'layer' => $request->layer,
+            'squre_feet' => $request->squre_feet,
             // 'project_id_number' => $request->project_id_number,
-            
+
             'hou_no' => $request->hou_no,
             'street' => $request->street,
             'ward' => $request->ward,
@@ -168,21 +168,20 @@ class ProjectController extends Controller
         $p->amenity()->sync($amenities);
 
 
-       
 
-        if($request->hasFile("images")){
-                $files=$request->file("images");
-                foreach($files as $file){
-                    $image_name=time().'_'.$file->getClientOriginalName();
-                    $request['project_id']=$project->id;
-                    $request['image']=$image_name;
-                    $file->move(\public_path("/images/gallery/"),$image_name);
-                    Image::create($request->all());
 
-                }
+        if ($request->hasFile("images")) {
+            $files = $request->file("images");
+            foreach ($files as $file) {
+                $image_name = time() . '_' . $file->getClientOriginalName();
+                $request['project_id'] = $project->id;
+                $request['image'] = $image_name;
+                $file->move(\public_path("/images/gallery/"), $image_name);
+                Image::create($request->all());
             }
+        }
 
-        
+
 
         return redirect('/admin/project')->with('status', 'Project created successful.');
     }
@@ -193,17 +192,17 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         $towns = Town::all();
         $cities = City::all();
         $amenities = Amenity::all();
         $categories = Category::all();
-        $project = Project::where('slug', $id)->first();
-        if(!$project) {
+        $project = Project::where('slug', $slug)->first();
+        if (!$project) {
             return redirect()->back()->with('error', 'Project not found');
         }
-        return view('admin.project.show',compact('project', 'amenities', 'categories', 'cities', 'towns'));
+        return view('admin.project.show', compact('project', 'amenities', 'categories', 'cities', 'towns'));
     }
 
     /**
@@ -215,16 +214,16 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $towns = Town::all();
-        $categories = Category::all();
+        $ategories = Category::all();
         $cities = City::all();
         $amenity = Amenity::all();
         // $galleries = Gallery::all();
         $project = Project::where('slug', $id)
             ->with('categories', 'amenity', 'towns', 'cities')
             ->first();
-            if(!$project){
-                return redirect()->back()->with('error', 'Project Not found');
-            }
+        if (!$project) {
+            return redirect()->back()->with('error', 'Project Not found');
+        }
         return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'));
     }
 
@@ -238,7 +237,7 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-           
+
             'project_Id' => "required|string|min:3|max:255",
             'cover' => "nullable|mimes:jpeg,png,jpg,gif|max:2048|dimensions:width=600,height=900",
             'gallery' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
@@ -252,51 +251,51 @@ class ProjectController extends Controller
             'layer' => "required|string|min:1|max:255",
             'squre_feet' => "required|string|min:1|max:255",
             // 'project_id_number' => "required|integer",
-            'map_link'=>"required|string",
-            'progress'=>"required|string",
+            'map_link' => "required|string",
+            'progress' => "required|string",
             'amenity.*' => "required|string",
-             'town' => "required",
+            'town' => "required",
             'city' => "required",
             'hou_no' => "required|string",
             'street' => "required|string",
             'ward' => "required|string",
-            'images.*'=> 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'images.*' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
 
         ]);
 
         $find_project = Project::where('slug', $id);
-        if(!$find_project->first()){
+        if (!$find_project->first()) {
             return redirect()->back()->with('error', 'not found project');
         }
 
         $project_id = $find_project->first()->id;
-        if($file = $request->file('cover')){
+        if ($file = $request->file('cover')) {
             $file_name = uniqid() . $file->getClientOriginalName();
             $file->move(public_path('/images/projects'), $file_name);
-        }else{
+        } else {
             $file_name = $find_project->first()->cover;
         }
 
         // $project_id = $find_project->first()->id;
-        if($file = $request->file('gallery')){
+        if ($file = $request->file('gallery')) {
             $file_image = uniqid() . $file->getClientOriginalName();
             $file->move(public_path('/images/360images'), $file_image);
-        }else{
+        } else {
             $file_image = $find_project->first()->gallery;
         }
 
         $category = Category::where('category_id', $request->category_id)->first();
-        if(!$category){
+        if (!$category) {
             return redirect()->back()->with('error', 'Not found category');
         }
 
         $town = Town::where('id', $request->town)->first();
-        if(!$town){
+        if (!$town) {
             return redirect()->back()->with('error', 'Not found township');
         }
 
         $city = City::where('id', $request->city)->first();
-        if(!$city){
+        if (!$city) {
             return redirect()->back()->with('error', 'Not found city');
         }
 
@@ -316,9 +315,9 @@ class ProjectController extends Controller
         // }
 
         $amenities = [];
-        foreach($request->amenity as $am){
+        foreach ($request->amenity as $am) {
             $amenity = Amenity::where('id', $am)->first();
-            if(!$amenity){
+            if (!$amenity) {
                 return redirect()->back()->with('error', 'amenity not found');
             }
             $amenities[] = $amenity->id;
@@ -333,16 +332,16 @@ class ProjectController extends Controller
             'category_id' => $category->category_id,
             'township_id' => $town->id,
             'city_id' => $city->id,
-            'gmlink'=>$request->map_link,
-            'progress'=>$request->progress,
+            'gmlink' => $request->map_link,
+            'progress' => $request->progress,
             // 'amenity_id' => $amenity->amenity_id,
             'description' => $request->description,
             'lower_price' => $request->lower_price,
             'upper_price' => $request->upper_price,
             // 'longitude' => $request->longitude,
             // 'latitude' => $request->latitude,
-            'layer' =>$request->layer,
-            'squre_feet' =>$request->squre_feet,
+            'layer' => $request->layer,
+            'squre_feet' => $request->squre_feet,
             'hou_no' => $request->hou_no,
             'street' => $request->street,
             'ward' => $request->ward,
@@ -352,15 +351,14 @@ class ProjectController extends Controller
         $project->amenity()->sync($amenities);
 
         // for images
-        if($request->hasFile("images")){
-            $files=$request->file("images");
-            foreach($files as $file){
-                $image_name=time().'_'.$file->getClientOriginalName();
-                $request["project_id"]=$project->id;
-                $request["image"]=$image_name;
-                $file->move(\public_path("images/gallery"),$image_name);
+        if ($request->hasFile("images")) {
+            $files = $request->file("images");
+            foreach ($files as $file) {
+                $image_name = time() . '_' . $file->getClientOriginalName();
+                $request["project_id"] = $project->id;
+                $request["image"] = $image_name;
+                $file->move(\public_path("images/gallery"), $image_name);
                 Image::create($request->all());
-
             }
         }
 
@@ -373,77 +371,80 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-        public function destroy($id)
-        {
-            $project = Project::where('id', $id);
-            Project::find($project->first()->id)->amenity()->sync([]);
-            $project->delete();
-                return response()->json([
-                    "status" => 'success',
-                    "info"=>'delete successful'
-                ]);
-            // $projects=Project::findOrFail($id);
+    public function destroy($id)
+    {
+        $project = Project::where('id', $id);
+        Project::find($project->first()->id)->amenity()->sync([]);
+        $project->delete();
+        return response()->json([
+            "status" => 'success',
+            "info" => 'delete successful'
+        ]);
+        // $projects=Project::findOrFail($id);
 
-            // if(!$projects->first()){
-            //     return redirect()->back()->with('error', 'not found project');
-            // }
+        // if(!$projects->first()){
+        //     return redirect()->back()->with('error', 'not found project');
+        // }
 
-            // Project::find($projects->first()->id)->amenity()->sync([]);
+        // Project::find($projects->first()->id)->amenity()->sync([]);
 
-            // if (File::exists("images/projects/".$projects->cover)) {
-            // File::delete(public_path('images/projects/' . $projects->cover));
-            // }
+        // if (File::exists("images/projects/".$projects->cover)) {
+        // File::delete(public_path('images/projects/' . $projects->cover));
+        // }
 
-            // if (File::exists("images/360images/".$projects->gallery)) {
-            // File::delete(public_path('images/360images/' . $projects->gallery));
-            // }
+        // if (File::exists("images/360images/".$projects->gallery)) {
+        // File::delete(public_path('images/360images/' . $projects->gallery));
+        // }
 
-            // $images = Image::where("id",$projects->id)->get();
-            // foreach($images as $image){
-            // if (File::exists("images/gallery/".$image->image)) {
-            // File::delete(public_path('images/gallery/' . $image->first()->image));
-            // }
-            // }
-            // $projects->delete();
-            // return response()->json([
-            //     "status" => 'success',
-            //     "info"=>'delete successful'
-            // ]);
-            // return redirect('/admin/project')->with('success', 'Your project has been deleted successfully.');
-        }
+        // $images = Image::where("id",$projects->id)->get();
+        // foreach($images as $image){
+        // if (File::exists("images/gallery/".$image->image)) {
+        // File::delete(public_path('images/gallery/' . $image->first()->image));
+        // }
+        // }
+        // $projects->delete();
+        // return response()->json([
+        //     "status" => 'success',
+        //     "info"=>'delete successful'
+        // ]);
+        // return redirect('/admin/project')->with('success', 'Your project has been deleted successfully.');
+    }
 
-        public function deleteimage($id){
-        $images=Image::findOrFail($id);
-        if (File::exists("images/gallery/".$images->image)) {
-        File::delete(public_path("images/gallery/".$images->image));
+    public function deleteimage($id)
+    {
+        $images = Image::findOrFail($id);
+        if (File::exists("images/gallery/" . $images->image)) {
+            File::delete(public_path("images/gallery/" . $images->image));
         }
 
         Image::find($id)->delete();
         return back();
-        }
+    }
 
-        public function deletecover($id){
-        $cover=Project::findOrFail($id)->cover;
-        if (File::exists("images/projects/".$cover)) {
-        File::delete(public_path("images/projects/".$cover));
+    public function deletecover($id)
+    {
+        $cover = Project::findOrFail($id)->cover;
+        if (File::exists("images/projects/" . $cover)) {
+            File::delete(public_path("images/projects/" . $cover));
         }
         return back();
-        }
+    }
 
-        // $project = Project::where('id', $id);
-        // if (!$project->first()){
-        //     return redirect()->back()->with('error', 'Project Not Found');
-        // }
-        // File::delete(public_path('images/projects/' . $project->first()->image));
-        // $project->delete();
-        // return redirect('/project')->with('success', 'Project deleted successfully');
+    // $project = Project::where('id', $id);
+    // if (!$project->first()){
+    //     return redirect()->back()->with('error', 'Project Not Found');
+    // }
+    // File::delete(public_path('images/projects/' . $project->first()->image));
+    // $project->delete();
+    // return redirect('/project')->with('success', 'Project deleted successfully');
 
 
     // Win Win Maw
-    public function multiDelProject(Request $request){
+    public function multiDelProject(Request $request)
+    {
         $ids = $request->chk;
-        Project::whereIn('id',$ids)->delete();
-//        Category::destroy(collect($ids));
-        return redirect()->back()->with('status','Multiple Delete Successful');
+        Project::whereIn('id', $ids)->delete();
+        //        Category::destroy(collect($ids));
+        return redirect()->back()->with('status', 'Multiple Delete Successful');
     }
 }

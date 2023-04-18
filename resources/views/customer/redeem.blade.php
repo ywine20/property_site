@@ -80,25 +80,28 @@
                         <div class="my-3">
                             <label for="" class="mb-2 text-secondary">Enter Your Redeem Code</label>
                             <div class="d-flex flex-column flex-md-row justify-content-center align-items-baseline ">
-                                <div class="w-100">
-                                    <input type="text" name="code" maxlength="50" class="form-control form-control-lg is-invalid" placeholder="S34DFGH5HJ77YHFG" require>
-                                    <span class="text-danger invalid-feedback">Sorry! Your code is not valid. Please try again.</span>
+                                <div class="w-100" id="redeemInput">
+                                    <input type="text" name="code" maxlength="50" class="form-control form-control-lg @if(session('InvalidCode')) is-invalid @endif" placeholder="S34DFGH5HJ77YHFG" require>
+                                    @if(session('InvalidCode'))
+                                        <div class="text-danger invalid-feedback">
+                                            {{ session('InvalidCode') }}
+                                        </div>
+                                    @endif
                                 </div>
                                 <button type="submit" class="btn btn-secondary btn-lg rounded rounded-1 text-primary fw-bold ms-0 ms-md-3 mt-3 mt-md-0 redeemSubmitBtn">Submit</button>
                             </div>
                         </div>
                     </form>
 
-                    <div class="alert alert-success alert-dismissible fade show mt-3 mt-md-5" role="alert">
-                        <div class="d-flex flex-column flex-md-row justify-content-start align-items-center text-center text-md-start">
-                            <i class="bi bi-check2 h3 text-success mb-0 fs-bolder d-none d-md-flex me-3"></i>
-                            Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.
+                    @if(session('redeemSuccess'))
+                        <div class="alert alert-success alert-dismissible show mt-3 mt-md-5 animate__animated animate__fadeInDown" role="alert">
+                            <div class="d-flex flex-column flex-md-row justify-content-start align-items-center text-center text-md-start">
+                                <i class="bi bi-check2 h3 text-success mb-0 fs-bolder d-none d-md-flex me-3"></i>
+                                {{ session('redeemSuccess') }}
+                            </div>
                         </div>
-
-                        <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
-                    </div>
+                    @endif
+                   
                 </div>
             </div>
 
@@ -134,5 +137,4 @@
     });
 </script>
 
-</script>
 @endpush
