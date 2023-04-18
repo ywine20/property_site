@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/layout.css": "/css/layout.css",
+    "/css/multipleSelect.css": "/css/multipleSelect.css",
     "/css/dashboard.css": "/css/dashboard.css"
 }
