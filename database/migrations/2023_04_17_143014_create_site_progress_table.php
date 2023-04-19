@@ -18,7 +18,7 @@ class CreateSiteProgressTable extends Migration
             $table->foreignId('project_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('title');
             $table->longText('description');
-            $table->json('images')->nullable();
+            //  $table->json('images')->nullable();
             $table->timestamps();
         });
     }

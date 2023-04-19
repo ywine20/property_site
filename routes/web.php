@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
-use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\SiteController;
@@ -9,7 +9,7 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProjectController;
+// use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PanoramaController;
 use App\Http\Controllers\ContactUsController;
@@ -23,7 +23,7 @@ use App\Models\CustomerProfile;
 // use App\Http\Controllers\EngagementController;
 use App\Http\Controllers\PreviewImageController;
 use App\Http\Controllers\ProjectListController;
-use App\Http\Controllers\SiteProgressController;
+use App\Http\Controllers\Admin\SiteProgressController;
 
 // Route::get('/{lang}',function ($lang){
 //     App::setlocale($lang);
@@ -92,7 +92,7 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::get('/user', 'PageController@profile');
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
-    Route::get('project/{id}/detail/',[AdminProjectController::class,'detail'])->name('project.detail');
+    Route::get('project/{id}/detail/',[ProjectController::class,'detail'])->name('project.detail');
     // Route::resource('siteProgress','SiteProgressController');
     Route::get('project/{id}/site-progess/create',[SiteProgressController::class,'create'])->name('siteProgress.create');
     Route::get('project/{projectId}/site-progess/{id}',[SiteProgressController::class,'show'])->name('siteProgress.show');
@@ -136,7 +136,7 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
 
 
 
-});   
+});
 
 
 //SMT UPDATE 13-March-2023
