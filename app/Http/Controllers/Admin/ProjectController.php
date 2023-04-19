@@ -126,7 +126,6 @@ class ProjectController extends Controller
         if ($threeSixtyImage) {
             $threeSixtyImage_name = '360_' . $request->project_Id . '_' . uniqid() . '.' . $threeSixtyImage->getClientOriginalExtension();
             $threeSixtyImage->storeAs('/public/images/360Images', $threeSixtyImage_name);
-
         }
 
         $project = Project::create([
@@ -268,11 +267,11 @@ class ProjectController extends Controller
         foreach ($project->siteProgresses as $siteProgress) {
             $images = unserialize($siteProgress->images);
             foreach ($images as &$image) {
-                $image = Storage::url('images/siteProgress/'.$image);
+                $image = Storage::url('images/siteProgress/' . $image);
             }
             $siteProgress->images = $images;
         }
-        
+
         if (!$project) {
             return redirect()->back()->with('error', 'Project not found');
         }
@@ -289,7 +288,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $towns = Town::all();
-        $ategories = Category::all();
+        $categories = Category::all();
         $cities = City::all();
         $amenity = Amenity::all();
         $project = Project::where('slug', $id)
@@ -517,7 +516,7 @@ class ProjectController extends Controller
         // Project::find($project->first()->id)->amenity()->sync([]);
 
         // Delete related records from project_amenity table
-        Project::find($id)->amenity()->detach();    
+        Project::find($id)->amenity()->detach();
 
         //delete cover from local
         Storage::delete('public/images/cover/' . $project->cover);
@@ -553,36 +552,34 @@ class ProjectController extends Controller
             return response()->json(['message' => 'No IDs provided.'], 400);
         }
 
-        $projects = Project::whereIn('id',$ids)->get();
+        $projects = Project::whereIn('id', $ids)->get();
 
         //Delete Cover Photo
-        foreach($projects as $project){
+        foreach ($projects as $project) {
             $cover = $project->cover;
-           if($cover){
-            Storage::delete('public/images/cover/' . $cover);
-           }
-
+            if ($cover) {
+                Storage::delete('public/images/cover/' . $cover);
+            }
         }
 
         //Delete 360 Image
-        foreach($projects as $project){
+        foreach ($projects as $project) {
             $threeSixty = $project->three_sixty_image;
-           if($threeSixty){
-            Storage::delete('public/images/360Images/' . $threeSixty);
-           }
-
+            if ($threeSixty) {
+                Storage::delete('public/images/360Images/' . $threeSixty);
+            }
         }
 
-           // delete small image form local
-           $previewImage = Previewimage::whereIn('project_id', $ids)->get();
-           foreach($previewImage as $smallImage){
-               for ($i = 1; $i <= 9; $i++) {
-               $name = 'small_img' . $i;
-               if ($smallImage->$name) {
-                   Storage::delete('public/images/gallery/' . $smallImage->$name);
-               }
+        // delete small image form local
+        $previewImage = Previewimage::whereIn('project_id', $ids)->get();
+        foreach ($previewImage as $smallImage) {
+            for ($i = 1; $i <= 9; $i++) {
+                $name = 'small_img' . $i;
+                if ($smallImage->$name) {
+                    Storage::delete('public/images/gallery/' . $smallImage->$name);
+                }
             }
-           }
+        }
 
         Previewimage::whereIn('project_id', $ids)->delete();
         Project::whereIn('id', $ids)->delete();
