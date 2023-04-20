@@ -529,6 +529,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\DeleteOldRedeemCodes' => __DIR__ . '/../..' . '/app/Console/Commands/DeleteOldRedeemCodes.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AboutUsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AboutUsController.php',
