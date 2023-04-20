@@ -119,4 +119,10 @@ class Project extends Model implements Viewable
     {
         return $this->hasMany(siteProgress::class, 'project_id');
     }
+
+    public function unitprice()
+    {
+        return $this->hasMany(UnitPrice::class);
+    }
+
 }

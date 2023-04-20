@@ -56,7 +56,7 @@
 
                     <div class="col-12 col-md-12 col-lg-12 ">
 
-                        <form action="{{route('profile.code')}}" method="POST" enctype="multipart/form-data" class="create-form">
+                        <form action="{{ route("admin.generateRedeemCode") }}" method="POST" enctype="multipart/form-data" class="create-form" id="redeem-code-form">
                             @csrf
                             <div class="row flex-column">
                                 <!--Choose Tier -->
@@ -96,53 +96,22 @@
                                                     <input type="text" id="search" placeholder="Search..." class="form-control d-block w-100 mb-2 " autocomplete="off">
 
                                                     <label>
-                                                        <input type="checkbox" name="projectName[]" value="all_projectName" class="ckkBox all form-check-input" />
+                                                        <input type="checkbox" name="projectIds[]" value="allProjects" class="ckkBox all form-check-input" />
                                                         <span class="text-white">All Project</span>
                                                     </label>
 
-                                                    <label>
-                                                        <input type="checkbox" name="projectName[]" value="laravel" checked class="ckkBox val form-check-input " />
-                                                        <span class="text-white">laravel</span>
-                                                    </label>
-
-                                                    <label>
-                                                        <input type="checkbox" name="projectName[]" value="php" class="ckkBox val form-check-input " />
-                                                        <span class="text-white">php</span>
-                                                    </label>
-                                                    <label>
-                                                        <input type="checkbox" name="projectName[]" value="html" class="ckkBox val form-check-input " />
-                                                        <span class="text-white">html</span>
-                                                    </label>
-                                                    <label>
-                                                        <input type="checkbox" name="projectName[]" value="css" class="ckkBox val form-check-input " />
-                                                        <span class="text-white">css</span>
-                                                    </label>
-                                                    <label>
-                                                        <input type="checkbox" name="projectName[]" value="js" class="ckkBox val form-check-input " />
-                                                        <span class="text-white">js</span>
-                                                    </label>
-                                                    <label>
-                                                        <input type="checkbox" name="projectName[]" value="laracast" class="ckkBox val form-check-input " />
-                                                        <span class="text-white">laracast</span>
-                                                    </label>
+                                                    @foreach ($projects as $project)
+                                                        <label>
+                                                            <input type="checkbox" name="projectIds[]" value="{{ $project->id }}" class="ckkBox val form-check-input " />
+                                                            <span class="text-white">{{ $project->project_name }}</span>
+                                                        </label>
+                                                    @endforeach
 
                                                     <label class="notFound none text-white-50">Not found result</label>
 
                                                     <div class="py-2"></div>
                                                 </div>
                                             </div>
-
-                                            @error('projectName')
-                                            <div class=" text-danger" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </div>
-                                            @enderror
-
-                                            @error('projectName.*')
-                                            <div class=" text-danger" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </div>
-                                            @enderror
                                         </div>
 
 
@@ -181,8 +150,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Generate Code Button -->
+                                
+                                
+                                <div id="error-message" class="text-danger"></div>
 
+                                <!-- Generate Code Button -->
                                 <div class="col-12 col-lg-4 ">
                                     <button type="submit" class="btn btn-primary w-100" data-toggle="modal" data-target="#redeem-modal">Generate</button>
                                 </div>
@@ -198,8 +170,9 @@
                                         <h5 class="modal-title" id="redeem-modal-label">Generated Redeem Code</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body d-flex justify-content-between">
                                         <p id="redeem-code"></p>
+                                        <button class="btn btn-secondary" onclick="copyCode()"><i class="bi bi-clipboard"></i></button>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK </button>
@@ -216,7 +189,7 @@
         </div>
     </div>
 </div>
-<!--                end content-->
+<!--end content-->
 @endsection
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
@@ -228,6 +201,39 @@
 
 <!-- this is for multiple select -->
 <script>
+    //generate redeem code with modal
+    $(document).ready(function () {
+        $('#redeem-code-form').submit(function (event) {
+            event.preventDefault();
+            var form = $(this);
+            var formData = form.serialize(); // serialize the form data
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType : 'json',
+                type: 'POST',
+                url: 'http://127.0.0.1:8000/admin/redeemCodes',
+                data : formData,
+                success: function (data) {
+                    $('#redeem-code').text(data.code);
+                    $('#redeem-modal').modal('show');
+                },
+                
+                error: function (xhr, status, error) {
+                    $('#error-message').text(xhr.responseJSON.error);
+                }
+            });
+        });
+    });
+
+    //copy code
+    function copyCode() {
+        var code = $('#redeem-code').text();
+        navigator.clipboard.writeText(code);
+    }
+
+
     const toggleNext = document.querySelector('.toggle-next');
     const checkBoxesContainer = document.querySelector('.checkboxes');
     const checkAll = document.querySelector('.all');

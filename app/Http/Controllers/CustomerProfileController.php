@@ -43,7 +43,6 @@ class CustomerProfileController extends Controller
                     $customerProjects->push($project);
                 }
             }
-            // dd($customerProjects->toArray());
             return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets]);
             // return view('customer.profile')->with('redeemSuccess', 'Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.');
         } else {

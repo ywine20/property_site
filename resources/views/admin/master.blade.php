@@ -63,7 +63,7 @@
                             Projects
                         </li>
                     </a>
-                    <a class="side-link  w-100 {{ Request::is('admin/category*') ? 'active': '' }}" href="{{ route('profile.generateRedeemCodePage') }}" style="text-decoration: none;">
+                    <a class="side-link  w-100 {{ Request::is('admin/category*') ? 'active': '' }}" href="{{ route('admin.generateRedeemCodePage') }}" style="text-decoration: none;">
                         <li class="py-3 side-item px-3">
                             Redeem Code
                         </li>

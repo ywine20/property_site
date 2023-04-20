@@ -133,13 +133,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
 
 
     //for redeem code
-    Route::get('/redeemList/page', [RedeemCodeController::class, 'redeemList'])->name('profile.redeemListPage');
-    Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
-    Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('profile.generateRedeemCode');
+    Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('admin.generateRedeemCodePage');
+    Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('admin.generateRedeemCode');
 });
-
-
-
 
 //SMT UPDATE 13-March-2023
 
@@ -151,9 +147,6 @@ Route::patch('/profile/{id}/changeProfileInfo', [CustomerProfileController::clas
 Route::patch('/profile/{id}/changePassword', [CustomerProfileController::class, 'changePassword'])->name('profile.changePassword');
 Route::post('/', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 
-
-
-
 // Route::view('/profile','customer/profile')->name('profile');
 
 Route::view('/profile/setting', 'customer/profile-setting')->name('profile-setting');
@@ -161,10 +154,6 @@ Route::view('/redeem', 'customer/redeem')->name('profile-redeem');
 
 // Redeem Code for customemr
 Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRedeemCodes'])->name('profile.customerRedeemCodes');
-
-//for redeem code
-Route::get('/redeemCodes/page', [RedeemCodeController::class,'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
-Route::post('/redeemCodes', [RedeemCodeController::class,'generateRedeemCode'])->name('profile.generateRedeemCode');
 
 //winwinmaw
 Route::get('/redeemCode', [RedeemCodeController::class,'generateCode'])->name('profile.generateCode');

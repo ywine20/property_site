@@ -124,7 +124,6 @@ class ProjectListController extends Controller
                                  ->orWhere('hou_no','LIKE',"%" .$request->search. "%")
                                  ->orWhere('street','LIKE',"%" .$request->search. "%")
                                  ->orWhere('ward','LIKE',"%" .$request->search. "%");
-
 //                                 ->orWhere('project_id_number','LIKE', "%".$request->search ."%");
         }
 
@@ -137,25 +136,26 @@ class ProjectListController extends Controller
         $findSearch = $request->get('search');
 
         if( $request->min_price && $request->max_price ){
-           $min_price = (int) $request->min_price;
-           $max_price = (int) $request->max_price;
+           $minPrice  = (int) $request->min_price;
+           $maxPrice  = (int) $request->max_price;
 
-            
-            $min_projects = $projects->whereBetween('lower_price',[$min_price,$max_price])->get();
-            $max_projects = $projects->whereBetween('upper_price',[$min_price,$max_price])->get();
+           $projects = $projects->whereHas('unitprice', function ($query) use ($minPrice, $maxPrice) {
+            $query->where('price', '>=', $minPrice)
+                  ->where('price', '<=', $maxPrice);
+        })->get();
+
+        // dd($projects->toArray());
+
+            // $min_projects = $projects->whereBetween('lower_price',[$min_price,$max_price])->get();
+            // $max_projects = $projects->whereBetween('upper_price',[$min_price,$max_price])->get();
 
             // $min_projects = $projects->where('lower_price','>=',$request->min_price)->get();
             // $max_projects = $projects->where('upper_price','<=',$request->max_price)->get();
-
             // $projects =   [...$min_projects,...$max_projects];
-            $collection = collect($min_projects,$max_projects);
-            $unique = $collection->unique();
-            $projects = $unique->values()->all();
-            return view('projectListAdvance', compact('projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro','findSearch',));
-
-
-            
-           
+            // $collection = collect($min_projects,$max_projects);
+            // $unique = $collection->unique();
+            // $projects = $unique->values()->all();
+            return view('projectListAdvance', compact('projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro','findSearch',));             
         }    
       
 
