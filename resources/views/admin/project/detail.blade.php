@@ -220,7 +220,9 @@
                                                 Amenities :
                                                 <select id="amenity" class="amenity-multiple form-select create-select w-100" name="amenity[]" multiple="multiple" style="width: 100%" disabled>
                                                     @foreach ($amenity as $key => $am)
-                                                    <option value="{{ $am->id }}" @if (old('amenity')) {{ collect(old('amenity'))->contains($am->id) ? 'selected' : '' }}>{{ $am->amenity }}</option>
+                                                    <option value="{{ $am->id }}" @if (old('amenity')) {{ collect(old('amenity'))->contains($am->id) ? 'selected' : '' }}>
+                                                        {{ $am->amenity }}
+                                                    </option>
                                                     @else
                                                     @foreach ($project->amenity as $pm)
                                                     @if ($pm->id == $am->id)
@@ -381,77 +383,25 @@
                         <div class="row row-cols-auto g-4 ">
                             <!-- small image 1 -->
                             <div class="col text-center">
-                                <a href="{{route('project.create')}}">
+                                <a href="{{route('albumTest.create',$project->id)}}">
                                     <div id="album_create" class="album bg-white bg-opacity-10 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer;">
                                         <img src="{{asset('/images/addPlaceholder.png')}}" id="" alt="" class="w-100 h-100" style="object-fit: cover;filter:invert(1)">
                                     </div>
                                     <span class="text-white">Create Album</span>
                                 </a>
                             </div>
+                            @foreach ($project->albumTests as $album)
                             <div class="col text-center">
-                                <a href="{{route('project.detail',$project->id)}}">
+                                <a href="{{route('albumTest.show',['projectId' => $project->id, 'id' => $album->id])}}">
                                     <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
-                                        <img src="{{asset('storage/images/cover/'.$project->cover)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
+                                        <img src="{{asset('storage/images/album/'.$album->albumTestImages->last()->image)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
                                     </div>
-                                    <span class="text-white">Title</span>
+                                    <span class="text-white">{{$album->title}}</span>
                                 </a>
                             </div>
-                            <div class="col text-center">
-                                <a href="{{route('project.detail',$project->id)}}">
-                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
-                                        <img src="{{asset('storage/images/cover/'.$project->cover)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                    </div>
-                                    <span class="text-white">Title</span>
-                                </a>
-                            </div>
-                            <div class="col text-center">
-                                <a href="{{route('project.detail',$project->id)}}">
-                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
-                                        <img src="{{asset('storage/images/cover/'.$project->cover)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                    </div>
-                                    <span class="text-white">Title</span>
-                                </a>
-                            </div>
-                            <div class="col text-center">
-                                <a href="{{route('project.detail',$project->id)}}">
-                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
-                                        <img src="{{asset('storage/images/cover/'.$project->cover)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                    </div>
-                                    <span class="text-white">Title</span>
-                                </a>
-                            </div>
-                            <div class="col text-center">
-                                <a href="{{route('project.detail',$project->id)}}">
-                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
-                                        <img src="{{asset('storage/images/cover/'.$project->cover)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                    </div>
-                                    <span class="text-white">Title</span>
-                                </a>
-                            </div>
-                            <div class="col text-center">
-                                <a href="{{route('project.detail',$project->id)}}">
-                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
-                                        <img src="{{asset('storage/images/cover/'.$project->cover)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                    </div>
-                                    <span class="text-white">Title</span>
-                                </a>
-                            </div>
-                            <div class="col text-center">
-                                <a href="{{route('project.detail',$project->id)}}">
-                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
-                                        <img src="{{asset('storage/images/cover/'.$project->cover)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                    </div>
-                                    <span class="text-white">Title</span>
-                                </a>
-                            </div>
-                            <div class="col text-center">
-                                <a href="{{route('project.detail',$project->id)}}">
-                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
-                                        <img src="{{asset('storage/images/cover/'.$project->cover)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                    </div>
-                                    <span class="text-white">Title</span>
-                                </a>
-                            </div>
+
+                            @endforeach
+
                         </div>
                     </div>
 

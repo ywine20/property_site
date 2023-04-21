@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\AlbumTestController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProductController;
@@ -24,6 +25,7 @@ use App\Models\CustomerProfile;
 use App\Http\Controllers\PreviewImageController;
 use App\Http\Controllers\ProjectListController;
 use App\Http\Controllers\SiteProgressController;
+use App\Http\Controllers\TestController;
 
 // Route::get('/{lang}',function ($lang){
 //     App::setlocale($lang);
@@ -33,8 +35,8 @@ use App\Http\Controllers\SiteProgressController;
 Route::get('lang/home', [LangController::class, 'index']);
 Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
 
-Route::get('/products',[ProductController::class,'index']);
-Route::get('/products/vouchers/{id}',[ProductController::class,'voucher']);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/vouchers/{id}', [ProductController::class, 'voucher']);
 
 //Login
 Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -76,12 +78,12 @@ Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
 
 
-Route::get('admin/site',[SiteController::class,'siteindex'])->name('save-sitepost-gallery');
-Route::post('admin/site',[SiteController::class, 'sitesave']);
-Route::delete('/site-gallery/{id}', [SiteController::class,'sitedelete'])->name('delete-site-gallery');
+Route::get('admin/site', [SiteController::class, 'siteindex'])->name('save-sitepost-gallery');
+Route::post('admin/site', [SiteController::class, 'sitesave']);
+Route::delete('/site-gallery/{id}', [SiteController::class, 'sitedelete'])->name('delete-site-gallery');
 
-Route::get('admin/album',[AlbumController::class, 'index'])->name('save-multipel-imgae');
-Route::post('admin/album',[AlbumController::class, 'save']);
+Route::get('admin/album', [AlbumController::class, 'index'])->name('save-multipel-imgae');
+Route::post('admin/album', [AlbumController::class, 'save']);
 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Admin']], function () {
@@ -90,14 +92,35 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::get('/user', 'PageController@profile');
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
-    Route::get('project/{id}/detail/',[AdminProjectController::class,'detail'])->name('project.detail');
+    Route::get('project/{id}/detail/', [AdminProjectController::class, 'detail'])->name('project.detail');
     // Route::resource('siteProgress','SiteProgressController');
-    Route::get('project/{id}/site-progess/create',[SiteProgressController::class,'create'])->name('siteProgress.create');
-    Route::get('project/{projectId}/site-progess/{id}',[SiteProgressController::class,'show'])->name('siteProgress.show');
-    Route::post('project/{id}/site-progess/store',[SiteProgressController::class,'store'])->name('siteProgress.store');
-    Route::get('project/{projectId}/site-progess/{id}/edit',[SiteProgressController::class,'edit'])->name('siteProgress.edit');
-    Route::patch('project/{projectId}/site-progess/{id}/update',[SiteProgressController::class,'update'])->name('siteProgress.update');
-    Route::delete('project/{projectId}/site-progess/{id}/delete',[SiteProgressController::class,'destroy'])->name('siteProgress.destory');
+    Route::get('project/{id}/site-progess/create', [SiteProgressController::class, 'create'])->name('siteProgress.create');
+    Route::get('project/{projectId}/site-progess/{id}', [SiteProgressController::class, 'show'])->name('siteProgress.show');
+    Route::post('project/{id}/site-progess/store', [SiteProgressController::class, 'store'])->name('siteProgress.store');
+    Route::get('project/{projectId}/site-progess/{id}/edit', [SiteProgressController::class, 'edit'])->name('siteProgress.edit');
+    Route::patch('project/{projectId}/site-progess/{id}/update', [SiteProgressController::class, 'update'])->name('siteProgress.update');
+    Route::delete('project/{projectId}/site-progess/{id}/delete', [SiteProgressController::class, 'destroy'])->name('siteProgress.destory');
+
+    // Album
+    Route::get('project/{projectId}/album/create', [TestController::class, 'create'])->name('albumTest.create');
+    Route::post('project/{projectId}/album', [TestController::class, 'store'])->name('albumTest.store');
+    Route::get('project/{projectId}/album/{id}', [TestController::class, 'show'])->name('albumTest.show');
+    Route::patch('project/{projectId}/album/{id}', [TestController::class, 'update'])->name('albumTest.update');
+    Route::delete('album/{albumId}/images/{imageName}', [TestController::class, 'imageDelete'])->name('albumImage.delete');
+
+
+
+
+    // Route::resource('test', "AlbumTestController::class");
+
+    // Route::get('test', [AlbumTestController::class, 'create'])->name('test');
+
+    // Route::get('project/{$projectId}/test', [AlbumTestController::class, 'create'])->name('test2.create');
+    // Route::post('project/{$porjectId}/test', [AlbumTestController::class, 'store2'])->name('test2.store');
+
+
+    // Route::post('test', [AlbumTestController::class, 'store'])->name('test.store');
+
 
 
 
@@ -128,8 +151,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::post('/delete-multiple-town', [\App\Http\Controllers\Admin\AddressController::class, 'multiDelTown'])->name('town.multi-delete');
     Route::put('city-update/{id}', [\App\Http\Controllers\Admin\AddressController::class, 'cityUpdate'])->name('address.cityUpdate');
     Route::put('town-update/{id}', [\App\Http\Controllers\Admin\AddressController::class, 'townUpdate'])->name('address.townUpdate');
-    
-    Route::delete('/previewImages/{name}/{fieldName}',[AdminPreviewImageController::class,'delete'])->name('previewImage.delete');
+
+    Route::delete('/previewImages/{name}/{fieldName}', [AdminPreviewImageController::class, 'delete'])->name('previewImage.delete');
 
 
     //for redeem code
@@ -163,12 +186,10 @@ Route::view('/redeem', 'customer/redeem')->name('profile-redeem');
 Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRedeemCodes'])->name('profile.customerRedeemCodes');
 
 //for redeem code
-Route::get('/redeemCodes/page', [RedeemCodeController::class,'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
-Route::post('/redeemCodes', [RedeemCodeController::class,'generateRedeemCode'])->name('profile.generateRedeemCode');
+Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
+Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('profile.generateRedeemCode');
 
 //winwinmaw
-Route::get('/redeemCode', [RedeemCodeController::class,'generateCode'])->name('profile.generateCode');
-Route::post('/code', [RedeemCodeController::class,'code'])->name('profile.code');
-Route::view('/multiple-selected','test');
-
-
+Route::get('/redeemCode', [RedeemCodeController::class, 'generateCode'])->name('profile.generateCode');
+Route::post('/code', [RedeemCodeController::class, 'code'])->name('profile.code');
+Route::view('/multiple-selected', 'test');

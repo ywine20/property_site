@@ -262,7 +262,8 @@ class ProjectController extends Controller
         $cities = City::all();
         $amenity = Amenity::all();
         $categories = Category::all();
-        $project = Project::with('siteProgresses')->where('id', $id)->first();
+        $project = Project::with('siteProgresses', 'albumTests.albumTestImages')->where('id', $id)->first();
+        // return $project;
 
         foreach ($project->siteProgresses as $siteProgress) {
             $images = unserialize($siteProgress->images);
@@ -498,6 +499,9 @@ class ProjectController extends Controller
             $image9->storeAs('/public/images/gallery', $small_img_9);
             $previewImage->update(['small_img9' => $small_img_9]);
         }
+
+
+
 
         return redirect(route('project.index', $id))->with('status', 'Project updated successful.');
     }

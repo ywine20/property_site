@@ -70,7 +70,7 @@ img {
 
                         @if(Session::has('success'))
                         <div
-                            class="alert alert-success d-flex justify-content-between align-items-center animate__animated animate__fadeInDown my-2">
+                            class="alert alert-success d-flex justify-content-between align-items-center animate__animated animate__fadeInDown">
                             {{Session::get('success')}}
                             <div class="text-end">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -82,20 +82,18 @@ img {
                         <div class="row">
                             <div class="col-4 bg-white bg-opacity-10 vh-100">
                                 <div class="p-2">
-                                    <h4 class="text-primary header">Edit Album</h4>
+                                    <h4 class="text-primary header">Create Album</h4>
                                 </div>
                                 <div class="px-3 py-3">
-                                    <form method="POST"
-                                        action="{{ route('albumTest.update',['projectId' => $albums->project_id , 'id' => $albums->id]) }}"
+                                    <form method="POST" action="{{ route('albumTest.store','$projectId') }}"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        @method('PATCH')
-                                        <input type="text" name="project_id" value="{{$albums->project_id}}" hidden>
+                                        <input type="text" name="project_id" value="{{$projectId}}" hidden>
                                         <div class="form-group mb-3">
                                             <label for="album" class="form-label text-white-50">Album Name :</label>
                                             <input type="text" name="albumName"
                                                 class="create-input form-control @error('albumName') is-invalid @enderror"
-                                                id="album" value="{{ old('album',$albums->title) }}" required>
+                                                id="album" value="{{ old('album') }}" required>
                                             @error('albumName')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
@@ -116,24 +114,8 @@ img {
                                 </div>
                             </div>
                             <div class="col-8">
-                                <div id="output" class="row row-cols-4 g-2 py-2">
-                                    @foreach($albums->albumTestImages as $album)
-                                    <div class="col img-div position-relative">
-                                        <img class="thumbnail" src="{{asset('storage/images/album/'.$album->image)}}">
-                                        <form
-                                            action="{{route('albumImage.delete',['albumId'=>$albums->id,'imageName'=>$album->image])}}"
-                                            method="post" class="position-absolute top-0 end-0 me-1 pointer delImg">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger btn-sm"
-                                                id="delImageBtn{{$album->image}}">
-                                                <!-- del -->
-                                                <i class="bi bi-x-circle-fill fw-bolder  fs-4"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    @endforeach
-
+                                <div id="output" class="row row-cols-4 g-2">
+                                    <!-- <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" frameBorder="0" scrolling="auto" height="100%" width="100%"></embed> -->
                                 </div>
                             </div>
                         </div>
@@ -156,14 +138,14 @@ fileInput.addEventListener("change", (e) => {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         // CODE TO PREVIEW IMAGE
         const files = e.target.files;
-        const limit = 30;
+        const limit = 9;
 
         if (files.length > limit) {
             alert("you can select max " + limit + " images");
             fileInput.value = null;
         } else {
             const output = document.querySelector("#output");
-            // output.innerHTML = "";
+            output.innerHTML = "";
             for (let i = 0; i < files.length; i++) {
                 if (!files[i].type.match("image")) continue;
                 const imgReader = new FileReader();

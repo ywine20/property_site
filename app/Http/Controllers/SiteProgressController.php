@@ -67,7 +67,7 @@ class SiteProgressController extends Controller
      * @param  \App\Models\siteProgress  $siteProgress
      * @return \Illuminate\Http\Response
      */
-    public function show(siteProgress $siteProgress, $projectId ,$siteProgressId)
+    public function show(siteProgress $siteProgress, $projectId, $siteProgressId)
     {
 
         $siteProgress = siteProgress::findorfail($siteProgressId);
@@ -78,7 +78,7 @@ class SiteProgressController extends Controller
         return view('admin.siteProgress.show', [
             'siteProgress' => $siteProgress,
             'images' => $images,
-            
+
         ]);
     }
 
@@ -88,7 +88,7 @@ class SiteProgressController extends Controller
      * @param  \App\Models\siteProgress  $siteProgress
      * @return \Illuminate\Http\Response
      */
-    public function edit(siteProgress $siteProgress,$projectId,$siteProgressId)
+    public function edit(siteProgress $siteProgress, $projectId, $siteProgressId)
     {
         $siteProgress = siteProgress::find($siteProgressId);
         // unserialize the images
@@ -98,7 +98,7 @@ class SiteProgressController extends Controller
         return view('admin.siteProgress.edit', [
             'siteProgress' => $siteProgress,
             'images' => $images,
-            
+
         ]);
     }
 
@@ -120,7 +120,7 @@ class SiteProgressController extends Controller
      * @param  \App\Models\siteProgress  $siteProgress
      * @return \Illuminate\Http\Response
      */
-    public function destroy(siteProgress $siteProgress,$projectId,$siteProgressId)
+    public function destroy(siteProgress $siteProgress, $projectId, $siteProgressId)
     {
         return $siteProgressId;
     }

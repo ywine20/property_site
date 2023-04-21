@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Album as ModelsAlbum;
 use App\Models\City;
 use App\Models\Town;
 use App\Models\Image;
@@ -118,5 +119,15 @@ class Project extends Model implements Viewable
     public function siteProgresses()
     {
         return $this->hasMany(siteProgress::class, 'project_id');
+    }
+
+    public function albumTests()
+    {
+        return $this->hasMany(albumTest::class, 'project_id');
+    }
+
+    public function albumTestsImage()
+    {
+        return $this->hasManyThrough(AlbumTestImage::class, albumTest::class, 'project_id', 'album_tests_id', 'id', 'id');
     }
 }
