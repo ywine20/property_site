@@ -106,6 +106,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::post('project/{projectId}/album', [TestController::class, 'store'])->name('albumTest.store');
     Route::get('project/{projectId}/album/{id}', [TestController::class, 'show'])->name('albumTest.show');
     Route::patch('project/{projectId}/album/{id}', [TestController::class, 'update'])->name('albumTest.update');
+    Route::delete('album/{id}', [TestController::class, 'albumDelete'])->name('album.delete');
     Route::delete('album/{albumId}/images/{imageName}', [TestController::class, 'imageDelete'])->name('albumImage.delete');
 
 

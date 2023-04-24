@@ -81,6 +81,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Spatie\\PdfToImage\\' => 18,
         ),
         'R' => 
         array (
@@ -305,6 +306,10 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Spatie\\PdfToImage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/pdf-to-image/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -547,6 +552,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Http\\Controllers\\Admin\\TownController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TownController.php',
         'App\\Http\\Controllers\\AlbumController' => __DIR__ . '/../..' . '/app/Http/Controllers/AlbumController.php',
         'App\\Http\\Controllers\\AlbumTestController' => __DIR__ . '/../..' . '/app/Http/Controllers/AlbumTestController.php',
+        'App\\Http\\Controllers\\AlbumTestImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/AlbumTestImageController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -584,11 +590,13 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\StoreAlbumTestImageRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreAlbumTestImageRequest.php',
         'App\\Http\\Requests\\StoreCategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreCategoryRequest.php',
         'App\\Http\\Requests\\StoreCustomerProfileRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreCustomerProfileRequest.php',
         'App\\Http\\Requests\\StoreDeleteRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreDeleteRequest.php',
         'App\\Http\\Requests\\StorealbumTestRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StorealbumTestRequest.php',
         'App\\Http\\Requests\\StoresiteProgressRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoresiteProgressRequest.php',
+        'App\\Http\\Requests\\UpdateAlbumTestImageRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateAlbumTestImageRequest.php',
         'App\\Http\\Requests\\UpdateCategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateCategoryRequest.php',
         'App\\Http\\Requests\\UpdateCustomerProfileRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateCustomerProfileRequest.php',
         'App\\Http\\Requests\\UpdateDeleteRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateDeleteRequest.php',
@@ -620,6 +628,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Visitor' => __DIR__ . '/../..' . '/app/Models/Visitor.php',
         'App\\Models\\albumTest' => __DIR__ . '/../..' . '/app/Models/albumTest.php',
+        'App\\Policies\\AlbumTestImagePolicy' => __DIR__ . '/../..' . '/app/Policies/AlbumTestImagePolicy.php',
         'App\\Policies\\AlbumTestPolicy' => __DIR__ . '/../..' . '/app/Policies/AlbumTestPolicy.php',
         'App\\Policies\\CustomerProfilePolicy' => __DIR__ . '/../..' . '/app/Policies/CustomerProfilePolicy.php',
         'App\\Policies\\DeletePolicy' => __DIR__ . '/../..' . '/app/Policies/DeletePolicy.php',
@@ -790,6 +799,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'Database\\Factories\\TownFactory' => __DIR__ . '/../..' . '/database/factories/TownFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Factories\\VisitorFactory' => __DIR__ . '/../..' . '/database/factories/VisitorFactory.php',
+        'Database\\Seeders\\AlbumTestImageSeeder' => __DIR__ . '/../..' . '/database/seeders/AlbumTestImageSeeder.php',
         'Database\\Seeders\\AlbumTestSeeder' => __DIR__ . '/../..' . '/database/seeders/AlbumTestSeeder.php',
         'Database\\Seeders\\CustomerProfileSeeder' => __DIR__ . '/../..' . '/database/seeders/CustomerProfileSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
@@ -4812,6 +4822,10 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/type/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/type/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Spatie\\PdfToImage\\Exceptions\\InvalidFormat' => __DIR__ . '/..' . '/spatie/pdf-to-image/src/Exceptions/InvalidFormat.php',
+        'Spatie\\PdfToImage\\Exceptions\\PageDoesNotExist' => __DIR__ . '/..' . '/spatie/pdf-to-image/src/Exceptions/PageDoesNotExist.php',
+        'Spatie\\PdfToImage\\Exceptions\\PdfDoesNotExist' => __DIR__ . '/..' . '/spatie/pdf-to-image/src/Exceptions/PdfDoesNotExist.php',
+        'Spatie\\PdfToImage\\Pdf' => __DIR__ . '/..' . '/spatie/pdf-to-image/src/Pdf.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Attribute\\AsCommand' => __DIR__ . '/..' . '/symfony/console/Attribute/AsCommand.php',

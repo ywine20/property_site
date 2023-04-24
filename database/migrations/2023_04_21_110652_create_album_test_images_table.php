@@ -16,6 +16,7 @@ class CreateAlbumTestImagesTable extends Migration
         Schema::create('album_test_images', function (Blueprint $table) {
             $table->id();
             $table->longText('image');
+            $table->string('imageName');
             $table->foreignId('album_tests_id');
             $table->timestamps();
         });

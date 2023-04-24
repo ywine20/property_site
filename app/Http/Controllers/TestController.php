@@ -7,6 +7,8 @@ use App\Models\albumTest;
 use App\Models\AlbumTestImage;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
+use Spatie\PdfToImage\Pdf;
+
 
 class TestController extends Controller
 {
@@ -37,6 +39,7 @@ class TestController extends Controller
                 $files = new AlbumTestImage();
                 $files->album_tests_id = $album->id;
                 $files->image = $newName;
+                $files->imageName = $file->getClientOriginalName();
                 $files->save();
             }
         }
@@ -70,11 +73,17 @@ class TestController extends Controller
                 $files = new AlbumTestImage();
                 $files->image = $newName;
                 $files->album_tests_id = $album->id;
+                $files->imageName = $file->getClientOriginalName();
                 $files->save();
             }
         }
 
-        return redirect()->back()->with('status', 'Files upload success');
+        return redirect()->back()->with('success', 'Files upload success');
+    }
+
+    public function albumDelete($id)
+    {
+        return $id;
     }
 
     public function imageDelete(Request $request, $albumId, $imageName)

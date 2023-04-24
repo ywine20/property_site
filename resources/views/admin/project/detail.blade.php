@@ -84,6 +84,26 @@
     .none {
         display: none;
     }
+
+    .album {
+        transition: .5s;
+    }
+
+
+    .album-action {
+        top: 100%;
+        position: absolute;
+        transition: all .5s;
+
+    }
+
+    .album:hover {
+        transition: all .5s;
+    }
+
+    .album:hover .album-action {
+        top: 50%;
+    }
 </style>
 @endsection
 
@@ -324,7 +344,7 @@
                                                 </div>
                                                 <!-- small image 4 -->
                                                 <div class="col">
-                                                    <input type="file" name="small_img_4" class="form-control d-none small_file" id="small_img_input_4" value="{{$project->previewimages->small_img4}}" / disabled>
+                                                    <input type="file" name="small_img_4" class="form-control d-none small_file" id="small_img_input_4" value="{{$project->previewimages->small_img4}}" disabled>
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
                                                         <img src="{{ $project->previewimages->small_img4 ? asset('storage/images/gallery/'.$project->previewimages->small_img4) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg4" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                     </div>
@@ -341,6 +361,7 @@
                                                     <input type="file" name="small_img_6" class="form-control d-none small_file" id="small_img_input_6" value="{{$project->previewimages->small_img6}}" disabled>
                                                     <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
                                                         <img src="{{ $project->previewimages->small_img6 ? asset('storage/images/gallery/'.$project->previewimages->small_img6) : asset('/images/photoPlaceholderWhite.png') }}" id="sImg6" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
+
                                                     </div>
                                                 </div>
                                                 <!-- small image 7 -->
@@ -391,15 +412,41 @@
                                 </a>
                             </div>
                             @foreach ($project->albumTests as $album)
-                            <div class="col text-center">
-                                <a href="{{route('albumTest.show',['projectId' => $project->id, 'id' => $album->id])}}">
-                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
-                                        <img src="{{asset('storage/images/album/'.$album->albumTestImages->last()->image)}}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                    </div>
-                                    <span class="text-white">{{$album->title}}</span>
-                                </a>
-                            </div>
 
+                            <div class="col text-center">
+                                <a href="{{ route('albumTest.show', ['projectId' => $project->id, 'id' => $album->id]) }}" title="Detail">
+                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
+                                        @if(count($album->albumTestImages) > 0)
+                                        @php
+                                        $lastImage = $album->albumTestImages->last();
+                                        $extension = pathinfo($lastImage->image, PATHINFO_EXTENSION);
+                                        @endphp
+                                        @if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' ||
+                                        $extension == 'gif')
+                                        <img src="{{ asset('storage/images/album/'.$lastImage->image) }}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
+                                        @elseif ($extension == 'pdf')
+                                        <i class="fas fa-file-pdf fa-4x"></i>
+                                        <img src="{{ asset('images/pdf.png') }}" id="" alt="" class="w-100 h-100 bg-white" style="object-fit: cover">
+                                        @endif
+                                        @else
+                                        <img src="{{asset('images/photoPlaceholderWhite.png') }}" id="" alt="" class="w-100 h-100 bg-black bg-opacity-25" style="object-fit: cover">
+                                        @endif
+
+                                        <div class="album-action  w-100 h-50 bg-black bg-opacity-25">
+                                            <form action="{{route('album.delete',$album->id)}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-link btn-sm text-danger" id="delImageBtn{{$album->image}}">
+                                                    <!-- del -->
+                                                    <i class="bi bi-x-circle-fill fw-bolder fs-4"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <span class="text-white">{{ $album->title }}</span>
+                                </a>
+
+                            </div>
                             @endforeach
 
                         </div>
