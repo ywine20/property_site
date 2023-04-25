@@ -115,14 +115,13 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136018131-1"></script>
 <script>
+  window.dataLayer = window.dataLayer || [];
 
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-136018131-1');
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-136018131-1');
 </script>
 
 <body>
@@ -187,7 +186,8 @@
             <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{url('projectlist')}}">Projects</a>
           </li>
           <li class="side-nav-item">
-            <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{url('aboutus')}}">About Us</a>
+            <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{url('aboutus')}}">About
+              Us</a>
           </li>
           <li class="side-nav-item">
             <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{url('contactus')}}">Contact Us</a>
@@ -207,7 +207,7 @@
                   @if( isset(Auth::guard('user')->user()->profile_img))
                   <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;" style="object-fit:cover;">
                   @else
-                  <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;" style="object-fit:cover;">
+                  <img src="{{ asset('images/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;" style="object-fit:cover;">
                   @endif
                 </div>
                 <span class="text-primary usernameSmallDevice usernameToShort">{{Auth::guard('user')->user()->name}}</span>
@@ -216,7 +216,8 @@
             <div class="rounded px-3 py-3 text-primary w-100 text-center" style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="btn btn-link text-decoration-none text-primary">LOG OUT</button>
+                <button type="submit" class="btn btn-link text-decoration-none text-primary">LOG
+                  OUT</button>
               </form>
             </div>
 
@@ -252,10 +253,12 @@
               <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{url('projectlist')}}">Projects</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{url('aboutus')}}">About Us</a>
+              <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{url('aboutus')}}">About
+                Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{url('contactus')}}">Contact Us</a>
+              <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{url('contactus')}}">Contact
+                Us</a>
             </li>
           </ul>
           <div class="bg-primary mx-4 opacity-50" style="width:.1px; height:50px;"></div>
@@ -271,7 +274,7 @@
                     @if( isset(Auth::guard('user')->user()->profile_img))
                     <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;">
                     @else
-                    <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
+                    <img src="{{ asset('images/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
                     @endif
                   </div>
                 </a>
@@ -283,10 +286,13 @@
                         @if( isset(Auth::guard('user')->user()->profile_img))
                         <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;">
                         @else
-                        <img src="{{ asset('storage/images/client-profile/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
+                        <img src="{{ asset('images/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
                         @endif
                       </div>
                       <div class="">
+                        @if( isset(Auth::guard('user')->user()->profile_img))
+                        <p>shi tal image</p>
+                        @endif
                         <a href="{{route('profile',Auth::guard('user')->user()->id)}}" class="text-primary text-decoration-none"><span class="d-block fw-bold usernameLargeDevice usernameToShort text-primary">{{Auth::guard('user')->user()->name}}</span></a>
                         <a href="{{route('profile',Auth::guard('user')->user()->id)}}" class="text-primary text-decoration-none"><span class="text-primary emailToShort">{{Auth::guard('user')->user()->email}}</span></a>
                       </div>
@@ -294,7 +300,8 @@
                     <div class="w-100 bg-primary text-secondary text-center py-2 mt-3">
                       <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-secondary btn btn-link text-decoration-none px-0 py-0">LOG OUT</button>
+                        <button type="submit" class="text-secondary btn btn-link text-decoration-none px-0 py-0">LOG
+                          OUT</button>
                         <!-- <a href="{{route('logout')}}" class="text-secondary text-decoration-none">LOG OUT</a> -->
                       </form>
                     </div>
@@ -314,92 +321,86 @@
 
     <!-- footer -->
     <section id="footer" class="bg-secondary">
-        <div class="container-fluid bg-secondary py-3 overflow-hidden">
-            <div class="container">
-                <div
-                    class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
-                    <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
-                        <h5 class="fw-bold text-gold text-uppercase">Contact Us</h5>
-                        <div
-                            class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
-                            <div class="">
-                                <ul class="list-group">
-                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                        <a href="tel:+959777700111" class="text-decoration-none text-nowrap ">
-                                            <i class="bi bi-telephone-fill"></i>
-                                            09777700111,
-                                        </a>
-                                        &nbsp;
-                                        <a href="tel:+959777700222" class="text-decoration-none text-nowrap ">
-                                            09777700222
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                        <a href="mailto:sales@sunmyattun.com" target="_blank"
-                                            class="text-decoration-none text-nowrap">
-                                            <i class="bi bi-envelope"></i>
-                                            sales@sunmyattun.com
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                        <a href="https://www.facebook.com/Sunmyattun" target="_blank"
-                                            class="text-decoration-none text-nowrap ">
-                                            <i class="bi bi-facebook"></i>
-                                            Sun Myat Tun Construction Co.,Ltd
-                                        </a>
-                                    </li>
+      <div class="container-fluid bg-secondary py-3 overflow-hidden">
+        <div class="container">
+          <div class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
+            <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
+              <h5 class="fw-bold text-gold text-uppercase">Contact Us</h5>
+              <div class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
+                <div class="">
+                  <ul class="list-group">
+                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                      <a href="tel:+959777700111" class="text-decoration-none text-nowrap ">
+                        <i class="bi bi-telephone-fill"></i>
+                        09777700111,
+                      </a>
+                      &nbsp;
+                      <a href="tel:+959777700222" class="text-decoration-none text-nowrap ">
+                        09777700222
+                      </a>
+                    </li>
+                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                      <a href="mailto:sales@sunmyattun.com" target="_blank" class="text-decoration-none text-nowrap">
+                        <i class="bi bi-envelope"></i>
+                        sales@sunmyattun.com
+                      </a>
+                    </li>
+                    <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                      <a href="https://www.facebook.com/Sunmyattun" target="_blank" class="text-decoration-none text-nowrap ">
+                        <i class="bi bi-facebook"></i>
+                        Sun Myat Tun Construction Co.,Ltd
+                      </a>
+                    </li>
 
-                                </ul>
-                            </div>
-                            <div class=" ms-md-4">
-                                <div class="d-flex ">
-                                    <div class="d-none d-md-block"
-                                        style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
-                                    </div>
-                                    <div class="ms-md-3">
-                                        <ul class="list-group">
-                                            <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                                <a href="{{ url('faq') }}" class="text-decoration-none ">
-                                                    FAQs
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                                <a href="{{ url('termcondition') }}"
-                                                    class="text-decoration-none text-nowrap ">
-                                                    Terms And Conditions
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                  </ul>
+                </div>
+                <div class=" ms-md-4">
+                  <div class="d-flex ">
+                    <div class="d-none d-md-block" style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
                     </div>
-                    <div class="col-6 col-md-3  col-lg-2 col-xl-2 bg-danger px-0 footer-logo">
-                        <img src="/image/smtlogoLarge.png" alt="" class="img-fluid">
+                    <div class="ms-md-3">
+                      <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                          <a href="{{ url('faq') }}" class="text-decoration-none ">
+                            FAQs
+                          </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 text-gold px-0">
+                          <a href="{{ url('termcondition') }}" class="text-decoration-none text-nowrap ">
+                            Terms And Conditions
+                          </a>
+                        </li>
+                      </ul>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <div class="row">
-          <div class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
-            <div class="pointer mx-2">
-              <img src="{{asset('image/EnglishFlag.jpg')}}" alt="" class="rounded" style="width:40px;height:30px">
-              <span class="text-primary d-none d-md-inline">English</span>
-            </div>
-            <div class="pointer mx-2">
-              <img src="{{asset('image/BurmaFlag.jpg')}}" alt="" class="rounded" style="width:40px;height:30px">
-              <span class="text-primary d-none d-md-inline">Myanmar</span>
+            <div class="col-6 col-md-3  col-lg-2 col-xl-2 bg-danger px-0 footer-logo">
+              <img src="/image/smtlogoLarge.png" alt="" class="img-fluid">
             </div>
           </div>
         </div>
-          </div>
-        </div>
-       
       </div>
-    </section>
-    <!-- end footer -->
+
+      <div class="row">
+        <div class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
+          <div class="pointer mx-2">
+            <img src="{{asset('image/EnglishFlag.jpg')}}" alt="" class="rounded" style="width:40px;height:30px">
+            <span class="text-primary d-none d-md-inline">English</span>
+          </div>
+          <div class="pointer mx-2">
+            <img src="{{asset('image/BurmaFlag.jpg')}}" alt="" class="rounded" style="width:40px;height:30px">
+            <span class="text-primary d-none d-md-inline">Myanmar</span>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+
+  </div>
+  </section>
+  <!-- end footer -->
   </div>
 
 
@@ -429,7 +430,8 @@
             </div>
 
             <!-- login Button -->
-            <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase mt-2">LOG IN</button>
+            <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase mt-2">LOG
+              IN</button>
 
           </form>
           <!-- forgot password -->
@@ -437,7 +439,7 @@
             <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span class="text-primary">Forgot Password?</span></buttonhref=>
           </div>
           <!-- login with social app -->
-          <div class="text-center w-100 pt-1">
+          <div class="text-center w-100 pt-1 d-none">
             <button class="btn rounded-circle border border-secondary mx-1 social-icon">
               <i class="bi bi-google fa-fw text-secondary fs-5"></i>
             </button>
@@ -448,7 +450,8 @@
           <!-- don't have an account -->
           <div class="text-center w-100 my-3">
             <small class="d-flex justify-content-center align-items-center">Don't have an account?
-              <button class="btn btn-link text-primary" onclick="openRegisterModal()">Register</button> Now!
+              <button class="btn btn-link text-primary" onclick="openRegisterModal()">Register</button>
+              Now!
             </small>
           </div>
         </div>
@@ -494,7 +497,7 @@
             <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
           </form>
           <!-- register with social app -->
-          <div class="text-center w-100">
+          <div class="text-center w-100 d-none">
             <button class="btn rounded-circle border border-secondary mx-1 social-icon">
               <i class="bi bi-google fa-fw text-secondary fs-5"></i>
             </button>
@@ -521,7 +524,8 @@
         <span class="close fs-5 me-2 end-0 position-absolute pointer forgoPasswordCloseButton" onclick="closeforgotPasswordModal()">&times;</span>
         <div class="card-body">
           <h5 class="mb-4 fw-bolder">Forgot Password?</h5>
-          <span class="text-black-50 mb-5" style="font-size: .9rem;">Please Enter Your Email Address To Receive A New Password</span>
+          <span class="text-black-50 mb-5" style="font-size: .9rem;">Please Enter Your Email Address To
+            Receive A New Password</span>
           <form action="{{route('forgotPassword')}}" id="forgot_password_form" method="POST">
             @csrf
             <!-- email -->
@@ -551,7 +555,8 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="{{asset('js/counter_up.js')}}"></script>
   <script src="{{asset('js/jquery.waypoints.js')}}"></script>
@@ -751,12 +756,14 @@
             const nameError = error.name ? error.name[0] : '';
             const emailError = error.email ? error.email[0] : '';
             const passwordError = error.password ? error.password[0] : '';
-            const passwordConfirmError = error.password_confirmation ? error.password_confirmation[0] : '';
+            const passwordConfirmError = error.password_confirmation ? error.password_confirmation[
+              0] : '';
 
             document.querySelector('.register_name_error').innerText = nameError;
             document.querySelector('.register_email_error').innerText = emailError;
             document.querySelector('.register_password_error').innerText = passwordError;
-            document.querySelector('.register_passwordConfirm_error').innerText = passwordConfirmError;
+            document.querySelector('.register_passwordConfirm_error').innerText =
+              passwordConfirmError;
 
           } else if (err.request) {
             console.log('request error', err.request)
@@ -783,7 +790,7 @@
       const email = forgotPasswordForm.elements.email.value;
 
 
-       //end send message
+      //end send message
       // if (!email) {
       //   console.log('Email is required');
       //   return;
@@ -806,7 +813,8 @@
         }).catch(error => {
           let passwordError = error.response.data.error;
           console.log(error.response);
-          document.querySelector('.forgotPasswordError').innerText = passwordError.email ? passwordError.email[0] : '';
+          document.querySelector('.forgotPasswordError').innerText = passwordError.email ?
+            passwordError.email[0] : '';
           sendEmailBtn.innerHTML = "Send";
           sendEmailBtn.disabled = false;
         })
@@ -820,5 +828,5 @@
 
 
 </body>
-</html>
 
+</html>

@@ -95,7 +95,7 @@
 
                             <div class="form- mb-3">
                                 <label for="description" class="form-label text-white-50">Description :</label>
-                                <textarea type="text" name="description" rows="20" class="create-input form-control @error('description') border border-danger @enderror" id="description" required>{{ old('description') }}</textarea>
+                                <textarea type="text" name="description" rows="10" class="create-input form-control @error('description') border border-danger @enderror" id="description" required>{{ old('description') }}</textarea>
                                 @error('description')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -136,7 +136,7 @@
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             // CODE TO PREVIEW IMAGE
             const files = e.target.files;
-            const limit = 9;
+            const limit = 8;
 
             if (files.length > limit) {
                 alert("you can select max " + limit + " images");
