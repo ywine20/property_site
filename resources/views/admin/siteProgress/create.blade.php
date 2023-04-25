@@ -63,13 +63,13 @@
                         <div class="col-12">
                             <!-- @if (count($errors) > 0)
     <div class="alert alert-danger">
-                                                            <strong>Error!</strong> something went wrong <br><br>
-                                                            <ul>
-                                                                @foreach ($errors->all() as $error)
+                                                                            <strong>Error!</strong> something went wrong <br><br>
+                                                                            <ul>
+                                                                                @foreach ($errors->all() as $error)
     <li>{{ $error }}</li>
     @endforeach
-                                                            </ul>
-                                                        </div>
+                                                                            </ul>
+                                                                        </div>
     @endif -->
 
                             @if (Session::has('success'))
@@ -101,10 +101,9 @@
                                 <div class="form- mb-3">
                                     <label for="description" class="form-label text-white-50">Description :</label>
                                     <textarea type="text" name="description" rows="20"
-                                        class="create-input form-control @error('description') is-invalid @enderror" id="description"
-                                        value="{{ old('description') }}" required></textarea>
+                                        class="create-input form-control @error('description') border border-danger @enderror" id="description" required>{{ old('description') }}</textarea>
                                     @error('description')
-                                        <span class="invalid-feedback">{{ $message }}</span>
+                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 

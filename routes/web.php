@@ -100,7 +100,7 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::get('project/{projectId}/site-progess/{id}/edit',[SiteProgressController::class,'edit'])->name('siteProgress.edit');
     Route::patch('project/{projectId}/site-progess/{id}/update',[SiteProgressController::class,'update'])->name('siteProgress.update');
     Route::delete('project/{projectId}/site-progess/{id}/delete',[SiteProgressController::class,'destroy'])->name('siteProgress.destory');
-
+    Route::delete('site-progess/{siteProgressId}/image/{id}',[SiteProgressController::class,'imageDelete'])->name('siteProgressImage.destory');
 
 
     Route::resource('amenity', "AmenityController");

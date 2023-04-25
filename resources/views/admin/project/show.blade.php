@@ -290,7 +290,6 @@
                                                     <td class="text-white py-3" style="max-width:150px">
                                                         <div class="text-white"><small>
                                                                 <pre>{{ $project->description }}</pre><small>
-
                                                         </div>
                                                     </td>
                                                 </tr>

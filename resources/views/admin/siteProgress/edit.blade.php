@@ -45,7 +45,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
-                            <a href="#" onclick="window.history.back()">
+                            <a href="{{ route('project.detail', $siteProgress->project_id) }}">
                                 <i class="bi bi-arrow-left me-1"></i>Back
                             </a>
                         </li>
@@ -63,13 +63,13 @@
                         <div class="col-12">
                             <!-- @if (count($errors) > 0)
     <div class="alert alert-danger">
-                                                                <strong>Error!</strong> something went wrong <br><br>
-                                                                <ul>
-                                                                    @foreach ($errors->all() as $error)
+                                                                                                                                                                                                                            <strong>Error!</strong> something went wrong <br><br>
+                                                                                                                                                                                                                            <ul>
+                                                                                                                                                                                                                                @foreach ($errors->all() as $error)
     <li>{{ $error }}</li>
     @endforeach
-                                                                </ul>
-                                                            </div>
+                                                                                                                                                                                                                            </ul>
+                                                                                                                                                                                                                        </div>
     @endif -->
 
                             @if (Session::has('success'))
@@ -110,7 +110,14 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-3" id="imagesDiv">
+
+                                    {{-- <input type="file" hidden name="PreviousImages[]"
+                                        class="create-input form-control mb-3" value="{{ old('PreviousImages') }}" multiple> --}}
+
+
+
+
                                     <label for="images" class="form-label text-white-50">Images</label>
                                     <input type="file" name="images[]"
                                         class="create-input form-control mb-3 @error('images.*') is-invalid @enderror @error('images') is-invalid @enderror"
@@ -124,22 +131,24 @@
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
 
-                                    <div id="output" class="row row-cols-4 g-2">
-                                        {{-- @foreach ($progress->images as $image)
+                                    <div id="output1" class="row row-cols-4 g-2">
+                                        @foreach ($siteProgress->images as $img)
                                             <div class="col overflow-hidden position-relative" style="height:180px">
-                                                <img src="{{ asset('storage/images/siteimages/' . $image) }}"
+                                                <img src="{{ asset('storage/images/siteimages/' . $img->image) }}"
                                                     alt="" class="w-100 h-100" style="object-fit: fill;">
-                                                <button type="submit" form="delImag{{ $image }}" class=""
-                                                    id="delImageBtn{{ $image }}">
+                                                <button type="submit" form="delImag{{ $img->id }}" class=""
+                                                    id="delImageBtn{{ $img->id }}">
                                                     <!-- del -->
                                                     <i
                                                         class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg fs-4"></i>
                                                 </button>
                                             </div>
-                                        @endforeach --}}
+                                        @endforeach
                                     </div>
+                                    <div id="output" class="row row-cols-4 g-2 my-2"></div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-lg w-100">Post</button>
+                            </form>
                         </div>
 
                     </div>
@@ -147,15 +156,23 @@
             </div>
         </div>
     </div>
-    <!--                end content-->
+    <!--end content-->
 
     <!-- Images delete form -->
-    <div>
+    <div class="">
 
-
+        @foreach ($siteProgress->images as $img)
+            <form method="post"
+                action="{{ route('siteProgressImage.destory', ['siteProgressId' => $siteProgress->id, 'id' => $img->id]) }}"
+                id="delImag{{ $img->id }}">
+                @csrf
+                @method('DELETE')
+            </form>
+        @endforeach
     </div>
-@endsection
 
+
+@endsection
 @section('script')
     <script>
         // preview images
@@ -164,7 +181,7 @@
             if (window.File && window.FileReader && window.FileList && window.Blob) {
                 // CODE TO PREVIEW IMAGE
                 const files = e.target.files;
-                const limit = 9;
+                const limit = 8;
 
                 if (files.length > limit) {
                     alert("you can select max " + limit + " images");
