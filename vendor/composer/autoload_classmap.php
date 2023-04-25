@@ -20,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\PageController' => $baseDir . '/app/Http/Controllers/Admin/PageController.php',
     'App\\Http\\Controllers\\Admin\\PreviewImageController' => $baseDir . '/app/Http/Controllers/Admin/PreviewImageController.php',
     'App\\Http\\Controllers\\Admin\\ProjectController' => $baseDir . '/app/Http/Controllers/Admin/ProjectController.php',
+    'App\\Http\\Controllers\\Admin\\SiteProgressController' => $baseDir . '/app/Http/Controllers/Admin/SiteProgressController.php',
     'App\\Http\\Controllers\\Admin\\SliderController' => $baseDir . '/app/Http/Controllers/Admin/SliderController.php',
     'App\\Http\\Controllers\\Admin\\TownController' => $baseDir . '/app/Http/Controllers/Admin/TownController.php',
     'App\\Http\\Controllers\\AlbumController' => $baseDir . '/app/Http/Controllers/AlbumController.php',
@@ -66,6 +67,7 @@ return array(
     'App\\Http\\Requests\\StoreCategoryRequest' => $baseDir . '/app/Http/Requests/StoreCategoryRequest.php',
     'App\\Http\\Requests\\StoreCustomerProfileRequest' => $baseDir . '/app/Http/Requests/StoreCustomerProfileRequest.php',
     'App\\Http\\Requests\\StoreDeleteRequest' => $baseDir . '/app/Http/Requests/StoreDeleteRequest.php',
+
     'App\\Http\\Requests\\StorealbumTestRequest' => $baseDir . '/app/Http/Requests/StorealbumTestRequest.php',
     'App\\Http\\Requests\\StoresiteProgressRequest' => $baseDir . '/app/Http/Requests/StoresiteProgressRequest.php',
     'App\\Http\\Requests\\UpdateAlbumTestImageRequest' => $baseDir . '/app/Http/Requests/UpdateAlbumTestImageRequest.php',
@@ -73,6 +75,7 @@ return array(
     'App\\Http\\Requests\\UpdateCustomerProfileRequest' => $baseDir . '/app/Http/Requests/UpdateCustomerProfileRequest.php',
     'App\\Http\\Requests\\UpdateDeleteRequest' => $baseDir . '/app/Http/Requests/UpdateDeleteRequest.php',
     'App\\Http\\Requests\\UpdatealbumTestRequest' => $baseDir . '/app/Http/Requests/UpdatealbumTestRequest.php',
+
     'App\\Http\\Requests\\UpdatesiteProgressRequest' => $baseDir . '/app/Http/Requests/UpdatesiteProgressRequest.php',
     'App\\Mail\\SendPasswordMail' => $baseDir . '/app/Mail/SendPasswordMail.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
@@ -87,14 +90,13 @@ return array(
     'App\\Models\\CustomerProfile' => $baseDir . '/app/Models/CustomerProfile.php',
     'App\\Models\\Delete' => $baseDir . '/app/Models/Delete.php',
     'App\\Models\\FacebookLink' => $baseDir . '/app/Models/FacebookLink.php',
-    'App\\Models\\LegalDocument' => $baseDir . '/app/Models/LegalDocument.php',
+
+    'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\Previewimage' => $baseDir . '/app/Models/Previewimage.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\Project' => $baseDir . '/app/Models/Project.php',
     'App\\Models\\RedeemCode' => $baseDir . '/app/Models/RedeemCode.php',
-    'App\\Models\\SelectedProjects' => $baseDir . '/app/Models/SelectedProjects.php',
-    'App\\Models\\SiteGallery' => $baseDir . '/app/Models/SiteGallery.php',
-    'App\\Models\\SiteProgress' => $baseDir . '/app/Models/SiteProgress.php',
+
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
     'App\\Models\\Town' => $baseDir . '/app/Models/Town.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

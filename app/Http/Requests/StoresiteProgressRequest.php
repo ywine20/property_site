@@ -26,9 +26,9 @@ class StoresiteProgressRequest extends FormRequest
         return [
             'project_id' => 'required|integer',
             'title' => 'required|string|min:3|max:255',
-            'description' => 'required|string',
+            'description' => 'required|string|min:3|max:3000',
             'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048|min:8',
         ];
     }
 }

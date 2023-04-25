@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
-use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\SiteController;
@@ -10,7 +10,7 @@ use App\Http\Controllers\AlbumTestController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProjectController;
+// use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PanoramaController;
 use App\Http\Controllers\ContactUsController;
@@ -24,8 +24,9 @@ use App\Models\CustomerProfile;
 // use App\Http\Controllers\EngagementController;
 use App\Http\Controllers\PreviewImageController;
 use App\Http\Controllers\ProjectListController;
-use App\Http\Controllers\SiteProgressController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Admin\SiteProgressController;
+
 
 // Route::get('/{lang}',function ($lang){
 //     App::setlocale($lang);
@@ -92,14 +93,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::get('/user', 'PageController@profile');
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
-    Route::get('project/{id}/detail/', [AdminProjectController::class, 'detail'])->name('project.detail');
-    // Route::resource('siteProgress','SiteProgressController');
-    Route::get('project/{id}/site-progess/create', [SiteProgressController::class, 'create'])->name('siteProgress.create');
-    Route::get('project/{projectId}/site-progess/{id}', [SiteProgressController::class, 'show'])->name('siteProgress.show');
-    Route::post('project/{id}/site-progess/store', [SiteProgressController::class, 'store'])->name('siteProgress.store');
-    Route::get('project/{projectId}/site-progess/{id}/edit', [SiteProgressController::class, 'edit'])->name('siteProgress.edit');
-    Route::patch('project/{projectId}/site-progess/{id}/update', [SiteProgressController::class, 'update'])->name('siteProgress.update');
-    Route::delete('project/{projectId}/site-progess/{id}/delete', [SiteProgressController::class, 'destroy'])->name('siteProgress.destory');
+
+   
 
     // Album
     Route::get('project/{projectId}/album/create', [TestController::class, 'create'])->name('albumTest.create');
@@ -110,19 +105,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::delete('album/{albumId}/images/{imageName}', [TestController::class, 'imageDelete'])->name('albumImage.delete');
 
 
-
-
-    // Route::resource('test', "AlbumTestController::class");
-
-    // Route::get('test', [AlbumTestController::class, 'create'])->name('test');
-
-    // Route::get('project/{$projectId}/test', [AlbumTestController::class, 'create'])->name('test2.create');
-    // Route::post('project/{$porjectId}/test', [AlbumTestController::class, 'store2'])->name('test2.store');
-
-
-    // Route::post('test', [AlbumTestController::class, 'store'])->name('test.store');
-
-
+    // Site Progress
+    Route::get('project/{id}/detail/',[ProjectController::class,'detail'])->name('project.detail');
+    Route::get('project/{id}/site-progess/create',[SiteProgressController::class,'create'])->name('siteProgress.create');
+    Route::get('project/{projectId}/site-progess/{id}',[SiteProgressController::class,'show'])->name('siteProgress.show');
+    Route::post('project/{id}/site-progess/store',[SiteProgressController::class,'store'])->name('siteProgress.store');
+    Route::get('project/{projectId}/site-progess/{id}/edit',[SiteProgressController::class,'edit'])->name('siteProgress.edit');
+    Route::patch('project/{projectId}/site-progess/{id}/update',[SiteProgressController::class,'update'])->name('siteProgress.update');
+    Route::delete('project/{projectId}/site-progess/{id}/delete',[SiteProgressController::class,'destroy'])->name('siteProgress.destory');
+    Route::delete('site-progess/{siteProgressId}/image/{id}',[SiteProgressController::class,'imageDelete'])->name('siteProgressImage.destory');
 
 
     Route::resource('amenity', "AmenityController");
@@ -161,8 +152,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
     Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('profile.generateRedeemCode');
 });
-
-
 
 
 //SMT UPDATE 13-March-2023
