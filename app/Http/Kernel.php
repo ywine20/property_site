@@ -72,4 +72,6 @@ class Kernel extends HttpKernel
         'setting' => Setting::class,
         'customer.auth'=> CustomerAuthenticate::class,
     ];
+
+    
 }

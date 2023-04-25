@@ -536,11 +536,11 @@
 
             .detail-text-div {
                 .category {
-                    font-size: 1.4rem;
+                    font-size: 1rem;
                 }
 
                 .finished-badge {
-                    font-size: 1.4rem;
+                    font-size: 1rem;
                 }
 
                 .price-range {
@@ -661,8 +661,6 @@
 
 @media screen and (min-width:1440px) and (max-width:2550px) {
     .main {
-        background-color: blueviolet;
-
         .project-detail-card {
             .main-image-div {
                 width: 90%;
@@ -676,21 +674,31 @@
 
             .detail-text-div {
                 .category {
-                    font-size: 1rem;
-                    // font-size: 1rem;
+                    .bi {
+                        font-size: 1rem;
+                    }
+
+                    span {
+                        font-size: 1rem;
+                    }
                 }
 
                 .finished-badge {
-                    font-size: 1rem;
+                    .badge {
+                        font-size: 1rem;
+                    }
                 }
 
                 .price-range {
-                    font-size: 2.5rem !important;
-                    // font-weight: bold;
+                    span {
+                        font-size: 2.5rem;
+                    }
                 }
 
                 .address {
-                    font-size: 1.2rem;
+                    div {
+                        font-size: 1.2rem;
+                    }
                 }
 
                 .facts {
@@ -699,7 +707,7 @@
                     }
 
                     td {
-                        font-size: 1rem;
+                        font-size: 1rem !important;
                         padding: 0 !important;
 
                     }
@@ -707,11 +715,11 @@
 
                 .entity {
                     .amenity-head {
-                        font-size: 1.2rem;
+                        font-size: 1.1rem !important;
                     }
 
                     span {
-                        font-size: 1rem;
+                        font-size: 1rem !important;
                         font-weight: 300;
 
                     }

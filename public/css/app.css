@@ -19562,10 +19562,10 @@ textarea.form-control-lg {
        object-fit: cover;
   }
   .main .project-detail-card .detail-text-div .category {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
   .main .project-detail-card .detail-text-div .finished-badge {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
   .main .project-detail-card .detail-text-div .price-range {
     font-size: 2.6rem;
@@ -19634,9 +19634,6 @@ textarea.form-control-lg {
   }
 }
 @media screen and (min-width: 1440px) and (max-width: 2550px) {
-  .main {
-    background-color: blueviolet;
-  }
   .main .project-detail-card .main-image-div {
     width: 90%;
   }
@@ -19646,30 +19643,33 @@ textarea.form-control-lg {
     -o-object-fit: cover;
        object-fit: cover;
   }
-  .main .project-detail-card .detail-text-div .category {
+  .main .project-detail-card .detail-text-div .category .bi {
     font-size: 1rem;
   }
-  .main .project-detail-card .detail-text-div .finished-badge {
+  .main .project-detail-card .detail-text-div .category span {
     font-size: 1rem;
   }
-  .main .project-detail-card .detail-text-div .price-range {
-    font-size: 2.5rem !important;
+  .main .project-detail-card .detail-text-div .finished-badge .badge {
+    font-size: 1rem;
   }
-  .main .project-detail-card .detail-text-div .address {
+  .main .project-detail-card .detail-text-div .price-range span {
+    font-size: 2.5rem;
+  }
+  .main .project-detail-card .detail-text-div .address div {
     font-size: 1.2rem;
   }
   .main .project-detail-card .detail-text-div .facts .table {
     width: 75%;
   }
   .main .project-detail-card .detail-text-div .facts td {
-    font-size: 1rem;
+    font-size: 1rem !important;
     padding: 0 !important;
   }
   .main .project-detail-card .detail-text-div .entity .amenity-head {
-    font-size: 1.2rem;
+    font-size: 1.1rem !important;
   }
   .main .project-detail-card .detail-text-div .entity span {
-    font-size: 1rem;
+    font-size: 1rem !important;
     font-weight: 300;
   }
 }

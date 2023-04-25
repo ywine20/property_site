@@ -57,7 +57,7 @@
 
                         <div class="pe-lg-5">
                             <div class="price-range my-3 my-md-4 my-lg-4 my-xl-5">
-                                <span class="fw-bolder">{{ $project->lower_price }} - {{ $project->upper_price }}
+                                <span class="">{{ $project->lower_price }} - {{ $project->upper_price }}
                                     Lakhs</span>
                             </div>
                             <div class="address mb-3 mb-md-4 mb-lg-4 mb-xl-5">
@@ -79,7 +79,7 @@
                                     <!-- No(19/21), 45<sup>th</sup> Street (lower block), Bothtaung TownShip, Yangon, Myanmar -->
                                 </div>
                             </div>
-                            <div class="facts mt-4 mt-lg-3 mb-3 mb-md-3 mb-lg-4 mb-xl-5">
+                            <div class=" facts mt-4 mt-lg-3 mb-3 mb-md-3 mb-lg-4 mb-xl-5">
                                 <table class="table tb-sm project-card-table table-borderless mb-0">
                                     <tbody>
                                         <tr>
@@ -98,9 +98,10 @@
                                 </table>
                             </div>
 
-                            <div class="entity mb-4 d-flex flex-column flex-lg-row" style="font-size: 26px;">
-                                <span class="amenity-head my-0 my-lg-0 my-xl-3 text-nowrap fw-bold">Amenities : </span>
-                                <span class="card-text d-block my-0 my-lg-0 my-xl-3 ms-lg-3 entity">
+                            <div class="entity mb-4 d-flex flex-column ">
+                                <span class="amenity-head my-0 my-lg-0 my-xl-1 text-nowrap fw-bold">Amenities :
+                                </span>
+                                <span class="card-text d-block my-0 my-lg-0 my-xl-1 entity">
 
 
                                     @foreach ($amenity as $am)
@@ -118,9 +119,25 @@
                         </div>
                     </div>
                 </div>
+                <!-- Price Image  -->
+                <div class="pb-3 pb-md-4 pb-lg-5 project-item-price my-3 ">
+                    <div class="priceImage">
+                        <div class="row bg-black bg-opacity-25">
+                            <div class="col-12 py-5">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="{{ asset('images/itemPrice.png') }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- end project-detail first section -->
+        <!-- end Price Image -->
+
+
+
+
         <!-- gallery  -->
         <div class="pb-3 pb-md-4 pb-lg-5 project-gallery ">
             <div class="gallery">
