@@ -119,13 +119,76 @@
                         </div>
                     </div>
                 </div>
-                <!-- Price Image  -->
-                <div class="pb-3 pb-md-4 pb-lg-5 project-item-price my-3 ">
-                    <div class="priceImage">
-                        <div class="row bg-black bg-opacity-25">
-                            <div class="col-12 py-5">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('images/itemPrice.png') }}" alt="">
+            </div>
+        </div>
+        <!-- end Price Image -->
+    </div>
+
+    <div class="container-fluid  bg-secondary">
+        <!-- Site Progress  -->
+        <div class="pb-3 pb-md-4 pb-lg-5 project-item-price mt-5">
+            <div class="siteProgress">
+                <div class="row py-3">
+                    <div class="col-12 py-5">
+                        <div class="mb-4 d-flex align-items-center justify-content-between">
+                            <h5 class="text-primary">Site Progress</h5>
+                            <a href="{{ route('siteProgress.create', $project->id) }}"
+                                class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-plus "></i>
+                                Create Progress
+                            </a>
+                        </div>
+
+                        <div class="row row-cols-auto g-5  mb-3 ">
+                            <div class="col-12 px-5">
+                                <div class="row progressCard bg-secondary d-flex flex-row rounded rounded-3 overflow-hidden"
+                                    style="height:150px;">
+                                    <div class="col-2 px-0">
+                                        <div id="siteprogressId"
+                                            class="siteprogressImage1 bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative h-100 "
+                                            style="width:100%;cursor:pointer">
+
+                                            <img src="{{ asset('/images/smtlogoLarge.png') }}" alt=""
+                                                class="w-100 h-100">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-10 d-flex align-items-baseline justify-content-start py-2">
+
+                                        <div class="d-flex flex-column justify-content-center align-items-start w-100">
+                                            <div class="W-100 align-self-end">
+                                                <div class="time  text-muted mb-1 ">
+                                                    <small>
+                                                        <i class="bi bi-clock"></i>
+                                                        23/33/3000
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="card-title fw-bold text-primary mb-3"
+                                                style="min-height:50px;max-height:50px;">
+                                                this is title
+                                            </div>
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="" class="btn btn-sm btn-outline-primary me-2">
+                                                    <i class="bi bi-eye"></i>
+                                                    Show Detail
+                                                </a>
+                                                <a href="" class="btn btn-sm btn-outline-primary me-2">
+                                                    <i class="bi bi-pencil "></i>
+                                                    Edit
+                                                </a>
+                                                <form method="post" action="">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                        <i class="bi bi-trash "></i>
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -133,11 +196,24 @@
                 </div>
             </div>
         </div>
-        <!-- end Price Image -->
+    </div>
 
+    <div class="container-fluid  bg-secondary ">
+        <!-- Price Image  -->
+        <div class="pb-3 pb-md-4 pb-lg-5 project-item-price mt-5">
+            <div class="priceImage">
+                <div class="row py-3">
+                    <div class="col-12 py-5">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('images/itemPrice.png') }}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-
+    <div class="container">
         <!-- gallery  -->
         <div class="pb-3 pb-md-4 pb-lg-5 project-gallery ">
             <div class="gallery">
@@ -270,20 +346,15 @@
             </div>
         </div>
         <!-- End Project Detail -->
+    </div>
+
+    </div>
 
 
 
-        <!-- 360 img -->
-        <!-- <div class="pb-5 project-360">
-                                                                          <div class="row">
-                                                                            <div class="col-12">
-                                                                              <div id="panorama-360-view"></div> -->
-        <!-- <img src="./image/gallery/360img.jpeg" alt=""> -->
-        <!-- <iframe src="https://momento360.com/e/u/28c5f6727652423fb96a02e1c0a10c83?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true" class="w-100" height="500px" frameborder="0"></iframe> -->
-        <!-- </div>
-                                                                          </div>
-                                                                        </div> -->
-        <!-- end 360 img -->
+
+
+
 
     </div>
 </main>
