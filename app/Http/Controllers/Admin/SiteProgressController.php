@@ -179,15 +179,6 @@ class SiteProgressController extends Controller
 
     }
 
-//     public function deleteimage($id){
-//         $images=Image::findOrFail($id);
-//         if (File::exists("/public/images/siteimages/".$images->image)) {
-//            File::delete("/public/images/siteimages/".$images->image);
-//        }
-
-//        Image::find($id)->delete();
-//        return back();
-//    }
    public function imageDelete($siteProgressId,$id){
 
         // return $id;

@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\SiteController;
-use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\AlbumTestController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadController;
@@ -14,17 +13,14 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PanoramaController;
 use App\Http\Controllers\ContactUsController;
-
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\RedeemCodeController;
 use App\Models\CustomerProfile;
-// use Illuminate\Support\Facades\Session;
-// use App\Http\Controllers\EngagementController;
 use App\Http\Controllers\PreviewImageController;
 use App\Http\Controllers\ProjectListController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\Admin\AlbumController;
 use App\Http\Controllers\Admin\SiteProgressController;
 
 
@@ -94,15 +90,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
 
-   
+
 
     // Album
-    Route::get('project/{projectId}/album/create', [TestController::class, 'create'])->name('albumTest.create');
-    Route::post('project/{projectId}/album', [TestController::class, 'store'])->name('albumTest.store');
-    Route::get('project/{projectId}/album/{id}', [TestController::class, 'show'])->name('albumTest.show');
-    Route::patch('project/{projectId}/album/{id}', [TestController::class, 'update'])->name('albumTest.update');
-    Route::delete('album/{id}', [TestController::class, 'albumDelete'])->name('album.delete');
-    Route::delete('album/{albumId}/images/{imageName}', [TestController::class, 'imageDelete'])->name('albumImage.delete');
+    Route::get('project/{projectId}/album/create', [AlbumController::class, 'create'])->name('albumTest.create');
+    Route::post('project/{projectId}/album', [AlbumController::class, 'store'])->name('albumTest.store');
+    Route::get('project/{projectId}/album/{id}', [AlbumController::class, 'show'])->name('albumTest.show');
+    Route::patch('project/{projectId}/album/{id}', [AlbumController::class, 'update'])->name('albumTest.update');
+    Route::delete('album/{id}', [AlbumController::class, 'albumDelete'])->name('album.delete');
+    // Route::delete('album/{albumId}/images/{imageName}', [AlbumController::class, 'imageDelete'])->name('albumImage.delete');
+    Route::delete('album/{albumId}/images/{imageName}', [AlbumController::class, 'imageDel'])->name('albumImage.delete');
+
 
 
     // Site Progress
