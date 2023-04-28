@@ -19,3 +19,13 @@ new VenoBox({
     spinColor:'#F5CC7A',
     share: false,
   });
+
+  new VenoBox({
+    selector: '.myAlbum',
+    numeration: true,
+    infinigall: false,
+    spinner: 'grid',
+    spinColor: '#F5CC7A',
+    share: false,
+})
+

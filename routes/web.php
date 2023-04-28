@@ -94,7 +94,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
 
-   
+
 
     // Album
     Route::get('project/{projectId}/album/create', [TestController::class, 'create'])->name('albumTest.create');
@@ -106,14 +106,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
 
 
     // Site Progress
-    Route::get('project/{id}/detail/',[ProjectController::class,'detail'])->name('project.detail');
-    Route::get('project/{id}/site-progess/create',[SiteProgressController::class,'create'])->name('siteProgress.create');
-    Route::get('project/{projectId}/site-progess/{id}',[SiteProgressController::class,'show'])->name('siteProgress.show');
-    Route::post('project/{id}/site-progess/store',[SiteProgressController::class,'store'])->name('siteProgress.store');
-    Route::get('project/{projectId}/site-progess/{id}/edit',[SiteProgressController::class,'edit'])->name('siteProgress.edit');
-    Route::patch('project/{projectId}/site-progess/{id}/update',[SiteProgressController::class,'update'])->name('siteProgress.update');
-    Route::delete('project/{projectId}/site-progess/{id}/delete',[SiteProgressController::class,'destroy'])->name('siteProgress.destory');
-    Route::delete('site-progess/{siteProgressId}/image/{id}',[SiteProgressController::class,'imageDelete'])->name('siteProgressImage.destory');
+    Route::get('project/{id}/detail/', [ProjectController::class, 'detail'])->name('project.detail');
+    Route::get('project/{id}/site-progess/create', [SiteProgressController::class, 'create'])->name('siteProgress.create');
+    Route::get('project/{projectId}/site-progess/{id}', [SiteProgressController::class, 'show'])->name('siteProgress.show');
+    Route::post('project/{id}/site-progess/store', [SiteProgressController::class, 'store'])->name('siteProgress.store');
+    Route::get('project/{projectId}/site-progess/{id}/edit', [SiteProgressController::class, 'edit'])->name('siteProgress.edit');
+    Route::patch('project/{projectId}/site-progess/{id}/update', [SiteProgressController::class, 'update'])->name('siteProgress.update');
+    Route::delete('project/{projectId}/site-progess/{id}/delete', [SiteProgressController::class, 'destroy'])->name('siteProgress.destory');
+    Route::delete('site-progess/{siteProgressId}/image/{id}', [SiteProgressController::class, 'imageDelete'])->name('siteProgressImage.destory');
 
 
     Route::resource('amenity', "AmenityController");
@@ -163,6 +163,11 @@ Route::post('/profile/{id}/changeProfile', [CustomerProfileController::class, 'c
 Route::patch('/profile/{id}/changeProfileInfo', [CustomerProfileController::class, 'changeInfo'])->name('profile.changeInfo');
 Route::patch('/profile/{id}/changePassword', [CustomerProfileController::class, 'changePassword'])->name('profile.changePassword');
 Route::post('/', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
+Route::get('progject/{projectId}/siteprogress', [ProjectListController::class, 'siteProgressList'])->name('siteProgressList');
+Route::get('/siteprogress/{id}', [ProjectListController::class, 'siteProgressDetail'])->name('client-siteProgress.show');
+Route::get('/album/{id}', [ProjectListController::class, 'albumDetail'])->name('client-album.show');
+
+
 
 
 

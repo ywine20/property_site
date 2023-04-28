@@ -19225,6 +19225,8 @@ textarea.form-control-lg {
 }
 .main .project-detail-card .main-image-div {
   width: 90%;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 .main .project-detail-card .main-image-div img {
   width: 100%;
@@ -19270,6 +19272,16 @@ textarea.form-control-lg {
   }
   .main .back .backBtn {
     cursor: pointer;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert {
+    width: 90%;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert .progressCard .small {
+    font-size: 0.6rem;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert .progressCard .card-title {
+    font-size: 0.8rem;
+    font-weight: normal !important;
   }
   .main .project-detail-card .main-image-div {
     width: 100%;
@@ -19329,6 +19341,12 @@ textarea.form-control-lg {
   .main .project-gallery ::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
   }
+  .main .legal-document .album {
+    height: 100px;
+  }
+  .main .legal-document .album-title {
+    font-size: 0.8rem;
+  }
   .main .project-map .map .iframe-map {
     height: 250px !important;
     border: none;
@@ -19341,6 +19359,16 @@ textarea.form-control-lg {
   }
   .main .back .backBtn {
     cursor: pointer;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert {
+    width: 90%;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert .progressCard .small {
+    font-size: 0.65rem;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert .progressCard .card-title {
+    font-size: 0.9rem;
+    font-weight: normal !important;
   }
   .main .project-detail-card .main-image-div {
     width: 100%;
@@ -19378,6 +19406,12 @@ textarea.form-control-lg {
   .main .project-detail-card .detail-text-div .entity span {
     font-size: 1rem;
   }
+  .main .legal-document .album {
+    height: 100px;
+  }
+  .main .legal-document .album-title {
+    font-size: 0.8rem;
+  }
   .main .project-gallery {
     /* custom scrollbar */
   }
@@ -19412,6 +19446,15 @@ textarea.form-control-lg {
   }
   .main .back .backBtn {
     cursor: pointer;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert {
+    width: 90%;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert .progressCard .small {
+    font-size: 0.7rem;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert .progressCard .card-title {
+    font-size: 0.9rem;
   }
   .main .project-detail-card .main-image-div {
     width: 100%;
@@ -19470,6 +19513,12 @@ textarea.form-control-lg {
   .main .project-gallery ::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
   }
+  .main .legal-document .album {
+    height: 130px;
+  }
+  .main .legal-document .album-title {
+    font-size: 0.9rem;
+  }
   .main .project-map .map .iframe-map {
     height: 250px !important;
     border: none;
@@ -19482,6 +19531,9 @@ textarea.form-control-lg {
   }
   .main .back .backBtn {
     cursor: pointer;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert {
+    width: 90%;
   }
   .main .project-detail-card .main-image {
     padding-left: 15px;
@@ -19539,6 +19591,12 @@ textarea.form-control-lg {
   .main .project-gallery ::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
   }
+  .main .legal-document .album {
+    height: 150px;
+  }
+  .main .legal-document .album-title {
+    font-size: 1rem;
+  }
   .main .project-map .map .iframe-map {
     height: 300px !important;
     border: none;
@@ -19551,6 +19609,9 @@ textarea.form-control-lg {
   }
   .main .back .backBtn {
     cursor: pointer;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert {
+    width: 75%;
   }
   .main .project-detail-card .main-image-div {
     width: 90%;
@@ -19584,6 +19645,12 @@ textarea.form-control-lg {
   .main .project-detail-card .detail-text-div .entity span {
     font-size: 1.2rem;
   }
+  .main .legal-document .album {
+    height: 150px;
+  }
+  .main .legal-document .album-title {
+    font-size: 1rem;
+  }
   .main .project-map .map .iframe-map {
     height: 400px !important;
     border: none;
@@ -19596,6 +19663,9 @@ textarea.form-control-lg {
   }
   .main .back .backBtn {
     cursor: pointer;
+  }
+  .main .latest-site-progress .siteProgress .siteProgressAlert {
+    width: 75%;
   }
   .main .project-detail-card .main-image-div {
     width: 90%;
@@ -19628,12 +19698,21 @@ textarea.form-control-lg {
   .main .project-detail-card .detail-text-div .entity span {
     font-size: 1.2rem;
   }
+  .main .legal-document .album {
+    height: 180px;
+  }
+  .main .legal-document .album-title {
+    font-size: 1rem;
+  }
   .main .project-map .map .iframe-map {
     height: 400px !important;
     border: none;
   }
 }
 @media screen and (min-width: 1440px) and (max-width: 2550px) {
+  .main .latest-site-progress .siteProgress .siteProgressAlert {
+    width: 75%;
+  }
   .main .project-detail-card .main-image-div {
     width: 90%;
   }
@@ -19671,6 +19750,12 @@ textarea.form-control-lg {
   .main .project-detail-card .detail-text-div .entity span {
     font-size: 1rem !important;
     font-weight: 300;
+  }
+  .main .legal-document .album {
+    height: 180px;
+  }
+  .main .legal-document .album-title {
+    font-size: 1rem;
   }
 }
 * {
@@ -20777,6 +20862,61 @@ textarea.form-control-lg {
   #redeem .alert {
     font-size: 0.8rem;
     padding: 10px 5px;
+  }
+}
+.album-detail .album-head {
+  font-size: 1.2rem;
+}
+.album-detail .img-div {
+  overflow: hidden;
+  height: 150px;
+}
+.album-detail .img-div .album-image-name {
+  font-size: 0.8rem;
+}
+
+@media screen and (max-width: 600px) {
+  .album-detail .album-head {
+    font-size: 1.1rem;
+  }
+  .album-detail .img-div {
+    height: 80px;
+  }
+  .album-detail .img-div .album-image-name {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (min-width: 600px) {
+  .album-detail .album-head {
+    font-size: 1.15rem;
+  }
+  .album-detail .img-div {
+    height: 120px;
+  }
+  .album-detail .img-div .album-image-name {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .album-detail .album-head {
+    font-size: 1.15rem;
+  }
+  .album-detail .img-div {
+    height: 120px;
+  }
+  .album-detail .img-div .album-image-name {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .album-detail .album-head {
+    font-size: 1.2rem;
+  }
+  .album-detail .img-div {
+    height: 150px;
+  }
+  .album-detail .img-div .album-image-name {
+    font-size: 0.9rem;
   }
 }
 :root {
