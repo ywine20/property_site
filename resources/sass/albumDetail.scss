@@ -1,0 +1,99 @@
+    // Album Deail
+.album-detail{
+    .album-head{
+        font-size: 1.2rem;
+    }
+
+    .img-div {
+        overflow: hidden;
+        height: 150px;
+        .album-image-name{
+            font-size: .8rem;
+        }
+    }
+   
+}
+// End AlbumDetail
+
+// Site Progress Detail
+
+// End Site Progress Detail
+
+@media screen and (max-width: 600px) {
+    // Album Detail
+    .album-detail{
+        .album-head{
+            font-size: 1.1rem;
+        }
+
+        .img-div {
+            height: 80px;
+            .album-image-name{
+                font-size: .7rem;
+            }
+        }
+       
+    }
+    // End Album Detail
+}
+
+@media screen and (min-width: 600px) {
+    // Album Detail
+    .album-detail{
+        .album-head{
+            font-size: 1.15rem;
+        }
+
+        .img-div {
+            height: 120px;
+            .album-image-name{
+                font-size: .7rem;
+            }
+        }
+       
+    }
+        //End Album Detail
+
+}
+
+@media screen and (min-width: 768px) {
+        // Album Detail
+
+    .album-detail{
+        .album-head{
+            font-size: 1.15rem;
+        }
+
+        .img-div {
+            height: 120px;
+            .album-image-name{
+                font-size: .7rem;
+            }
+        }
+       
+    }
+        //End Album Detail
+
+}
+
+@media screen and (min-width: 992px) {
+}
+
+@media screen and (min-width: 1200px) {
+        // Album Detail
+
+    .album-detail{
+        .album-head{
+            font-size: 1.2rem;
+        }
+
+        .img-div {
+            height: 150px;
+            .album-image-name{
+                font-size: .9rem;
+            }
+        }
+       
+    }
+    // End Album Detail
+}

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Album as ModelsAlbum;
 use App\Models\City;
 use App\Models\Town;
 use App\Models\Image;
@@ -10,6 +11,7 @@ use App\Models\Amenity;
 use App\Models\Category;
 use App\Models\SiteGallery;
 use App\Models\FacebookLink;
+use App\Models\siteProgress;
 use App\Models\AlbumDocument;
 use Illuminate\Database\Eloquent\Model;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
@@ -33,8 +35,7 @@ class Project extends Model implements Viewable
     protected $fillable = [
         'slug',
         'project_name',
-        'site_progress_id',
-        'legal_document_id',
+        
         'description',
         'cover',
         'three_sixty_image',
@@ -105,19 +106,24 @@ class Project extends Model implements Viewable
     {
         return $this->belongsTo(Town::class, 'township_id');
     }
-    public function albums()
-    {
-        return $this->belongToMany(Album::class, 'legaldocuments');
-    }
-
-    public function site_galleries()
-    {
-        return $this->belongToMany(SiteGallery::class, 'siteprogresses');
-    }
 
     public function siteProgresses()
     {
         return $this->hasMany(siteProgress::class, 'project_id');
+    }
+
+    public function albumTests()
+    {
+        return $this->hasMany(albumTest::class, 'project_id');
+    }
+
+    public function albumTestsImage()
+    {
+        return $this->hasManyThrough(AlbumTestImage::class, albumTest::class, 'project_id', 'album_tests_id', 'id', 'id');
+    }
+
+    public function siteProgressesImage(){
+        return $this->hasManyThrough(Image::class,siteProgress::class);
     }
 
     public function unitprice()
@@ -126,3 +132,4 @@ class Project extends Model implements Viewable
     }
 
 }
+

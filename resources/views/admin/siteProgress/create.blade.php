@@ -62,29 +62,29 @@
 
                     <div class="col-12">
                         <!-- @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>Error!</strong> something went wrong <br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif -->
+    <div class="alert alert-danger">
+                                                                            <strong>Error!</strong> something went wrong <br><br>
+                                                                            <ul>
+                                                                                @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+                                                                            </ul>
+                                                                        </div>
+    @endif -->
 
-                        @if(Session::has('success'))
+                        @if (Session::has('success'))
                         <div class="alert alert-success d-flex justify-content-between align-items-center animate__animated animate__fadeInDown">
-                            {{Session::get('success')}}
+                            {{ Session::get('success') }}
                             <div class="text-end">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </div>
                         @endif
 
-                        <form method="POST" action="{{ route('siteProgress.store','$porjectId') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('siteProgress.store', '$porjectId') }}" enctype="multipart/form-data">
                             @csrf
 
-                            <input type="text" name="project_id" value="{{$projectId}}" hidden>
+                            <input type="text" name="project_id" value="{{ $projectId }}" hidden>
                             <div class="form-group mb-3">
                                 <label for="title" class="form-label text-white-50">Title :</label>
                                 <input type="text" name="title" class="create-input form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title') }}" required>
@@ -95,9 +95,9 @@
 
                             <div class="form- mb-3">
                                 <label for="description" class="form-label text-white-50">Description :</label>
-                                <textarea type="text" name="description" rows="20" class="create-input form-control @error('description') is-invalid @enderror" id="description" value="{{ old('description') }}" required></textarea>
+                                <textarea type="text" name="description" rows="10" class="create-input form-control @error('description') border border-danger @enderror" id="description" required>{{ old('description') }}</textarea>
                                 @error('description')
-                                <span class="invalid-feedback">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -106,7 +106,7 @@
                                 <input type="file" name="images[]" class="create-input form-control mb-3 @error('images.*') is-invalid @enderror @error('images') is-invalid @enderror" id="images" value="{{ old('images') }}" multiple>
                                 @error('images')
                                 <div class="invalid-feedback text-danger" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                                 @enderror
                                 @error('images.*')
@@ -136,7 +136,7 @@
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             // CODE TO PREVIEW IMAGE
             const files = e.target.files;
-            const limit = 9;
+            const limit = 8;
 
             if (files.length > limit) {
                 alert("you can select max " + limit + " images");
@@ -168,70 +168,4 @@
 </script>
 
 
-<!-- With local storage -->
-<script>
-    //  function previewImages() {
-    //         var preview = document.querySelector('#preview');
-    //         var files = document.querySelector('input[type=file]').files;
-
-    //         function readAndPreview(file) {
-    //   // Make sure `file.type` matches the desired image types
-    //   if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
-    //     var reader = new FileReader();
-
-    //     reader.addEventListener("load", function () {
-    //       var image = new Image();
-    //       image.height = 200;
-    //       image.title = file.name;
-    //       image.src = this.result;
-
-    //       var removeButton = document.createElement("button");
-    //       removeButton.textContent = "Remove";
-    //       removeButton.type = "button";
-    //       removeButton.className = 'removeBtn'
-    //       removeButton.addEventListener("click", function() {
-    //         var index = Array.from(preview.childNodes).indexOf(image);
-    //         removeImage(index);
-    //       });
-
-    //       var preview = document.querySelector('#preview');
-    //       preview.appendChild(image);
-    //       preview.appendChild(removeButton);
-
-    //       // Store the uploaded images in localStorage
-    //       var storedImages = localStorage.getItem('uploadedImages') ? JSON.parse(localStorage.getItem('uploadedImages')) : [];
-    //       storedImages.push(this.result);
-    //       localStorage.setItem('uploadedImages', JSON.stringify(storedImages));
-    //     }, false);
-
-    //     reader.readAsDataURL(file);
-    //   }
-    // }
-
-    //         if (files) {
-    //             [].forEach.call(files, readAndPreview);
-    //         }
-    //     }
-
-    //     // Check if there are any stored images in localStorage and display them on page load
-    //     window.onload = function() {
-    //         var storedImages = localStorage.getItem('uploadedImages') ? JSON.parse(localStorage.getItem('uploadedImages')) : [];
-    //         var preview = document.querySelector('#preview');
-    //         storedImages.forEach(function(imageSrc) {
-    //             var image = new Image();
-    //             image.height = 200;
-    //             image.src = imageSrc;
-    //             preview.appendChild(image);
-    //         });
-    //     }
-
-    //     document.querySelector('input[type=file]').addEventListener("change", previewImages);
-
-    // function removeImage(index) {
-    //   var images = JSON.parse(localStorage.getItem("images"));
-    //   images.splice(index, 1);
-    //   localStorage.setItem("images", JSON.stringify(images));
-    //   document.getElementById("output").innerHTML = generateImages(images);
-    // }
-</script>
 @endsection

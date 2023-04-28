@@ -3,39 +3,43 @@
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\SiteController;
-use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProjectController;
+// use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PanoramaController;
+use App\Http\Controllers\AlbumTestController;
 use App\Http\Controllers\ContactUsController;
-
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\RedeemCodeController;
-use App\Models\CustomerProfile;
-// use Illuminate\Support\Facades\Session;
-// use App\Http\Controllers\EngagementController;
-use App\Http\Controllers\PreviewImageController;
+use App\Http\Controllers\Admin\AlbumController;
 use App\Http\Controllers\ProjectListController;
-use App\Http\Controllers\SiteProgressController;
+use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\PreviewImageController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\CustomerProfileController;
+use App\Http\Controllers\Admin\SiteProgressController;
+use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
 
-// Route::get('/{lang}',function ($lang){
-//     App::setlocale($lang);
-//     return view('master');
-// });
 
-Route::get('lang/home', [LangController::class, 'index']);
-Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
+Route::get('/',function (){
 
-Route::get('/products',[ProductController::class,'index']);
-Route::get('/products/vouchers/{id}',[ProductController::class,'voucher']);
+    return view('master');
+});
+
+Route::get('locale/{lang}',[LocalizationController::class,'setLang']);
+
+// Route::get('lang/home', [LangController::class, 'index']);
+// Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
+
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/vouchers/{id}', [ProductController::class, 'voucher']);
 
 //Login
 Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -76,12 +80,13 @@ Route::post('/contactus', [App\Http\Controllers\ContactController::class, 'store
 Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
 
-Route::get('admin/site',[SiteController::class,'siteindex'])->name('save-sitepost-gallery');
-Route::post('admin/site',[SiteController::class, 'sitesave']);
-Route::delete('/site-gallery/{id}', [SiteController::class,'sitedelete'])->name('delete-site-gallery');
 
-Route::get('admin/album',[AlbumController::class, 'index'])->name('save-multipel-imgae');
-Route::post('admin/album',[AlbumController::class, 'save']);
+Route::get('admin/site', [SiteController::class, 'siteindex'])->name('save-sitepost-gallery');
+Route::post('admin/site', [SiteController::class, 'sitesave']);
+Route::delete('/site-gallery/{id}', [SiteController::class, 'sitedelete'])->name('delete-site-gallery');
+
+Route::get('admin/album', [AlbumController::class, 'index'])->name('save-multipel-imgae');
+Route::post('admin/album', [AlbumController::class, 'save']);
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Admin']], function () {
     Route::get('/', 'PageController@showDashboard');
@@ -89,14 +94,31 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::get('/user', 'PageController@profile');
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
-    Route::get('project/{id}/detail/',[AdminProjectController::class,'detail'])->name('project.detail');
-    // Route::resource('siteProgress','SiteProgressController');
-    Route::get('project/{id}/site-progess/create',[SiteProgressController::class,'create'])->name('siteProgress.create');
-    Route::get('project/{projectId}/site-progess/{id}',[SiteProgressController::class,'show'])->name('siteProgress.show');
-    Route::post('project/{id}/site-progess/store',[SiteProgressController::class,'store'])->name('siteProgress.store');
-    Route::get('project/{projectId}/site-progess/{id}/edit',[SiteProgressController::class,'edit'])->name('siteProgress.edit');
-    Route::patch('project/{projectId}/site-progess/{id}/update',[SiteProgressController::class,'update'])->name('siteProgress.update');
-    Route::delete('project/{projectId}/site-progess/{id}/delete',[SiteProgressController::class,'destroy'])->name('siteProgress.destory');
+
+
+
+
+    // Album
+    Route::get('project/{projectId}/album/create', [AlbumController::class, 'create'])->name('albumTest.create');
+    Route::post('project/{projectId}/album', [AlbumController::class, 'store'])->name('albumTest.store');
+    Route::get('project/{projectId}/album/{id}', [AlbumController::class, 'show'])->name('albumTest.show');
+    Route::patch('project/{projectId}/album/{id}', [AlbumController::class, 'update'])->name('albumTest.update');
+    Route::delete('album/{id}', [AlbumController::class, 'albumDelete'])->name('album.delete');
+    // Route::delete('album/{albumId}/images/{imageName}', [AlbumController::class, 'imageDelete'])->name('albumImage.delete');
+    Route::delete('album/{albumId}/images/{imageName}', [AlbumController::class, 'imageDel'])->name('albumImage.delete');
+
+
+
+    // Site Progress
+    Route::get('project/{id}/detail/', [ProjectController::class, 'detail'])->name('project.detail');
+    Route::get('project/{id}/site-progess/create', [SiteProgressController::class, 'create'])->name('siteProgress.create');
+    Route::get('project/{projectId}/site-progess/{id}', [SiteProgressController::class, 'show'])->name('siteProgress.show');
+    Route::post('project/{id}/site-progess/store', [SiteProgressController::class, 'store'])->name('siteProgress.store');
+    Route::get('project/{projectId}/site-progess/{id}/edit', [SiteProgressController::class, 'edit'])->name('siteProgress.edit');
+    Route::patch('project/{projectId}/site-progess/{id}/update', [SiteProgressController::class, 'update'])->name('siteProgress.update');
+    Route::delete('project/{projectId}/site-progess/{id}/delete', [SiteProgressController::class, 'destroy'])->name('siteProgress.destory');
+    Route::delete('site-progess/{siteProgressId}/image/{id}', [SiteProgressController::class, 'imageDelete'])->name('siteProgressImage.destory');
+
 
     Route::resource('amenity', "AmenityController");
     Route::resource('facebooklink', "FacebookLinkController");
@@ -125,8 +147,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::post('/delete-multiple-town', [\App\Http\Controllers\Admin\AddressController::class, 'multiDelTown'])->name('town.multi-delete');
     Route::put('city-update/{id}', [\App\Http\Controllers\Admin\AddressController::class, 'cityUpdate'])->name('address.cityUpdate');
     Route::put('town-update/{id}', [\App\Http\Controllers\Admin\AddressController::class, 'townUpdate'])->name('address.townUpdate');
-    
-    Route::delete('/previewImages/{name}/{fieldName}',[AdminPreviewImageController::class,'delete'])->name('previewImage.delete');
+
+    Route::delete('/previewImages/{name}/{fieldName}', [AdminPreviewImageController::class, 'delete'])->name('previewImage.delete');
 
     //for redeem code
     Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('admin.generateRedeemCodePage');
@@ -135,6 +157,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     //to customer list
     Route::get('/customers/list', [CustomerController::class, 'customersList'])->name('admin.customersList');
 });
+
+
+
 
 //SMT UPDATE 13-March-2023
 
@@ -145,6 +170,11 @@ Route::post('/profile/{id}/changeProfile', [CustomerProfileController::class, 'c
 Route::patch('/profile/{id}/changeProfileInfo', [CustomerProfileController::class, 'changeInfo'])->name('profile.changeInfo');
 Route::patch('/profile/{id}/changePassword', [CustomerProfileController::class, 'changePassword'])->name('profile.changePassword');
 Route::post('/', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
+Route::get('progject/{projectId}/siteprogress', [ProjectListController::class, 'siteProgressList'])->name('siteProgressList');
+Route::get('/siteprogress/{id}', [ProjectListController::class, 'siteProgressDetail'])->name('client-siteProgress.show');
+Route::get('/album/{id}', [ProjectListController::class, 'albumDetail'])->name('client-album.show');
+
+
 
 // Route::view('/profile','customer/profile')->name('profile');
 
@@ -154,9 +184,10 @@ Route::view('/redeem', 'customer/redeem')->name('profile-redeem');
 // Redeem Code for customemr
 Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRedeemCodes'])->name('profile.customerRedeemCodes');
 
+
 //winwinmaw
-Route::get('/redeemCode', [RedeemCodeController::class,'generateCode'])->name('profile.generateCode');
-Route::post('/code', [RedeemCodeController::class,'code'])->name('profile.code');
-Route::view('/multiple-selected','test');
+Route::get('/redeemCode', [RedeemCodeController::class, 'generateCode'])->name('profile.generateCode');
+Route::post('/code', [RedeemCodeController::class, 'code'])->name('profile.code');
+Route::view('/multiple-selected', 'test');
 
 
