@@ -9,10 +9,32 @@
 <!-- End Pannellum library -->
 
 <link rel="stylesheet" href="{{ asset('css/project-detail.css') }}">
-@endsection
+<style>
+.album {
+    transition: .5s;
+}
 
 
-@section('content')
+.album-action {
+    height: fit-content;
+    bottom: -50%;
+    position: absolute;
+    transition: all .5s;
+
+}
+
+.album:hover {
+    transition: all .5s;
+    transform: scale(1.05);
+
+}
+
+.album:hover .album-action {
+    bottom: 0%;
+}
+</style>
+
+@endsection @section('content')
 <!-- main -->
 <main class="main">
     <!-- back -->
@@ -29,11 +51,12 @@
         <div class="pb-4 pt-3 py-md-5 project-detail-card overflow-hidden">
             <div
                 class="row gy-4 gx-0 gy-md-0 gx-lg-3 gy-lg-0 flex-column flex-md-row justify-content-center align-content-center">
+
                 <div
-                    class="col-7 col-md-5 col-lg-4 d-flex justify-content-center justify-content-lg-end mx-auto main-image">
+                    class="col-7 col-md-5 col-lg-4 col-xl-4 col-xxl-3 d-flex justify-content-center justify-content-lg-end mx-auto main-image">
                     <div class="main-image-div bg-red rounded rounded-2 overflow-hidden shadow">
                         <!-- https://source.unsplash.com/random/300x400/?building,project,apartments -->
-                        <img src="{{ asset('storage/images/cover/'.$project->cover) }}" class="" alt="">
+                        <img src="{{ asset('storage/images/cover/'.$project->cover) }}" class="" alt="" style="" />
                     </div>
                 </div>
                 <div class="col-12 col-md-7 col-lg-8 ps-0 ps-md-3 ps-lg-4 pe-0">
@@ -56,7 +79,7 @@
                         </div>
 
                         <div class="pe-lg-5">
-                            <div class="price-range my-3 my-md-4 my-lg-4 my-xl-5">
+                            <div class="price-range my-3 my-md-3">
                                 <span class="">{{ $project->lower_price }} - {{ $project->upper_price }}
                                     Lakhs</span>
                             </div>
@@ -98,97 +121,22 @@
                                 </table>
                             </div>
 
-                            <div class="entity mb-4 d-flex flex-column ">
+                            <div class="entity mb-2 d-flex flex-column ">
                                 <span class="amenity-head my-0 my-lg-0 my-xl-1 text-nowrap fw-bold">Amenities :
                                 </span>
-                                <span class="card-text d-block my-0 my-lg-0 my-xl-1 entity">
+                                <div class="card-text d-block my-0 my-lg-0 my-xl-1 entity">
 
 
                                     @foreach ($amenity as $am)
                                     @foreach ($project->amenity as $pm)
                                     @if ($pm->id == $am->id)
-                                    <span class="bg-primary mx-1 px-2 rounded">
+                                    <span class="bg-primary mx-1 my-1 px-2 rounded">
                                         {{ $am->amenity }}
                                     </span>
                                     @endif
                                     @endforeach
                                     @endforeach
 
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end Price Image -->
-    </div>
-
-    <div class="container-fluid  bg-secondary">
-        <!-- Site Progress  -->
-        <div class="pb-3 pb-md-4 pb-lg-5 project-item-price mt-5">
-            <div class="siteProgress">
-                <div class="row py-3">
-                    <div class="col-12 py-5">
-                        <div class="mb-4 d-flex align-items-center justify-content-between">
-                            <h5 class="text-primary">Site Progress</h5>
-                            <a href="{{ route('siteProgress.create', $project->id) }}"
-                                class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-plus "></i>
-                                Create Progress
-                            </a>
-                        </div>
-
-                        <div class="row row-cols-auto g-5  mb-3 ">
-                            <div class="col-12 px-5">
-                                <div class="row progressCard bg-secondary d-flex flex-row rounded rounded-3 overflow-hidden"
-                                    style="height:150px;">
-                                    <div class="col-2 px-0">
-                                        <div id="siteprogressId"
-                                            class="siteprogressImage1 bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative h-100 "
-                                            style="width:100%;cursor:pointer">
-
-                                            <img src="{{ asset('/images/smtlogoLarge.png') }}" alt=""
-                                                class="w-100 h-100">
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-10 d-flex align-items-baseline justify-content-start py-2">
-
-                                        <div class="d-flex flex-column justify-content-center align-items-start w-100">
-                                            <div class="W-100 align-self-end">
-                                                <div class="time  text-muted mb-1 ">
-                                                    <small>
-                                                        <i class="bi bi-clock"></i>
-                                                        23/33/3000
-                                                    </small>
-                                                </div>
-                                            </div>
-                                            <div class="card-title fw-bold text-primary mb-3"
-                                                style="min-height:50px;max-height:50px;">
-                                                this is title
-                                            </div>
-                                            <div class="d-flex justify-content-start align-items-center">
-                                                <a href="" class="btn btn-sm btn-outline-primary me-2">
-                                                    <i class="bi bi-eye"></i>
-                                                    Show Detail
-                                                </a>
-                                                <a href="" class="btn btn-sm btn-outline-primary me-2">
-                                                    <i class="bi bi-pencil "></i>
-                                                    Edit
-                                                </a>
-                                                <form method="post" action="">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                        <i class="bi bi-trash "></i>
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -198,12 +146,12 @@
         </div>
     </div>
 
-    <div class="container-fluid  bg-secondary ">
-        <!-- Price Image  -->
+    <!-- Price Image  -->
+    <div class="container-fluid  bg-secondary bg-opacity-10 ">
         <div class="pb-3 pb-md-4 pb-lg-5 project-item-price mt-5">
             <div class="priceImage">
                 <div class="row py-3">
-                    <div class="col-12 py-5">
+                    <div class="col-12 pt-5">
                         <div class="d-flex justify-content-center align-items-center">
                             <img src="{{ asset('images/itemPrice.png') }}" alt="">
                         </div>
@@ -213,11 +161,79 @@
         </div>
     </div>
 
+
+    <!-- Site Progress  -->
+    <div class="container-fluid  bg-secondary">
+        <div class="container latest-site-progress">
+            <div class="siteProgress">
+                <div class="row py-3">
+                    <div class="col-12 py-3 px-md-4 px-lg-5">
+                        <div class="d-flex justify-content-between align-items-center px-lg-5">
+                            <h4 class="text-uppercase text-primary">Site Progress</h4>
+                            <a href="{{route('siteProgressList',$project->id)}}">ALL</a>
+                        </div>
+
+                        <div class="mx-auto mb-5 mt-5 siteProgressAlert">
+                            @if($siteProgress)
+                            <div class="row progressCard bg-secondary d-flex rounded rounded-3 overflow-hidden"
+                                style="max-height:200px; box-shadow:1px 1px 6px #eac376;">
+                                <div class=" col-4 col-md-3 col-lg-2 p-1 p-md-2">
+                                    <div id="siteprogressId"
+                                        class="siteprogressImage bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative h-100  rounded rounded-3"
+                                        style="width:100%;cursor:pointer">
+                                        @foreach ($siteProgress->images as $key => $image)
+                                        @if ($key == 0)
+                                        <img src="{{ asset('storage/images/siteimages/' . $image->image) }}" alt=""
+                                            class="w-100 h-100">
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div
+                                    class="col-8 col-md-9 col-lg-10 d-flex align-items-baseline justify-content-start py-2">
+
+                                    <div class="d-flex flex-column justify-content-center align-items-start w-100">
+                                        <div class="W-100 align-self-baseline align-self-md-end ">
+                                            <div class="time mb-1 ">
+                                                <small class="text-white-50">
+                                                    <i class="bi bi-clock text-white-50"></i>
+                                                    {{ $siteProgress->created_at->format('j F, Y') }}
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="card-title  fw-bold text-primary mb-3"
+                                            style="min-height:50px;max-height:100px;">
+                                            {{$siteProgress->title}}
+                                        </div>
+                                        <div class="d-flex justify-content-start align-items-center">
+                                            <a href="{{ route('client-siteProgress.show', ['id' => $siteProgress->id]) }}"
+                                                class="btn btn-sm btn-outline-primary me-2">
+                                                <i class="bi bi-eye text-primary"></i>
+                                                Show Detail
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- gallery  -->
     <div class="container">
-        <!-- gallery  -->
         <div class="pb-3 pb-md-4 pb-lg-5 project-gallery ">
-            <div class="gallery">
-                <h3 class="text-uppercase">Gallery</h3>
+            <div class="gallery py-5">
+                <h3 class="text-uppercase mb-5">GALLERY</h3>
 
                 <div class="row row-cols-2 row-cols-md-5 row-cols-xl-5 g-lg-3 g-md-2 g-1">
 
@@ -240,7 +256,7 @@
                         <a href="/storage/images/gallery/{{ $project->previewimages->small_img1 }}" class="myGallery"
                             data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
                             <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img1) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                                style="width: 100%;height:100%;object-fit:cover;" alt="" />
                         </a>
                     </div>
                     @endif
@@ -321,12 +337,79 @@
                 </div>
             </div>
         </div>
-        <!-- end preview gallery -->
+    </div>
+    <!-- end preview gallery -->
+
+    <!-- Album  -->
+    <div class="container-fluid  bg-secondary bg-opacity-10">
+        <div class="">
+            <div class=" legal-document container">
+                <div class="row py-5">
+                    <div class="col-12 py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="text-secondary text-uppercase">
+                                Legal Document
+                            </h4>
+                            <!-- <a href="" class="text-secondary">ALL</a> -->
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mx-auto py-3">
+                            <div
+                                class="row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-2 gy-3 g-md-3 g-lg-5">
+                                @foreach($albums as $album)
+                                <div class="col text-center">
+                                    <a href="{{ route('client-album.show', ['id' => $album->id]) }}" title="Detail"
+                                        class="text-decoration-none">
+                                        <div id="album{{$album->id}}"
+                                            class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg mb-3"
+                                            style="cursor:pointer">
+                                            @if(count($album->albumTestImages) > 0)
+                                            @php
+                                            $lastImage = $album->albumTestImages->last();
+                                            $extension = pathinfo($lastImage->image, PATHINFO_EXTENSION);
+                                            @endphp
+                                            @if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png'
+                                            ||
+                                            $extension == 'gif')
+                                            <img src="{{ asset('storage/images/album/'.$lastImage->image) }}" id=""
+                                                alt="" class="w-100 h-100" style="object-fit: cover">
+                                            @elseif ($extension == 'pdf')
+
+                                            <canvas class="thumbnail pdf-canvas"
+                                                data-pdf-url="{{ asset('storage/images/album/'.$lastImage->image) }}"></canvas>
+
+                                            @endif
+                                            @else
+                                            <img src="{{asset('images/photoPlaceholderWhite.png') }}" id="" alt=""
+                                                class="w-100 h-100 bg-black bg-opacity-25" style="object-fit: cover">
+                                            @endif
 
 
-        <!-- Map -->
+                                        </div>
+                                        <span class="text-black album-title">{{ $album->title }}</span>
+                                    </a>
+
+                                </div>
+                                @endforeach
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Map -->
+    <div class="container">
         <div class="pb-3 pb-md-4 pb-lg-5 project-map">
-            <div class="map">
+            <div class="map py-5">
+                <h4 class="text-uppercase mb-5">MAP</h4>
+
                 <div class="row">
                     <div class="col-12">
                         <iframe src="{{ $project->gmlink }}" class="w-100 h-100 iframe-map" allowfullscreen=""
@@ -351,11 +434,6 @@
     </div>
 
 
-
-
-
-
-
     </div>
 </main>
 <!-- end main -->
@@ -367,6 +445,39 @@
     integrity="sha512-EmZuy6vd0ns9wP+3l1hETKq/vNGELFRuLfazPnKKBbDpgZL0sZ7qyao5KgVbGJKOWlAFPNn6G9naB/8WnKN43Q=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+
+
+
+<script>
+const canvases = document.querySelectorAll('.pdf-canvas');
+
+
+for (let i = 0; i < canvases.length; i++) {
+    const canvas = canvases[i];
+    const pdfUrl = canvas.dataset.pdfUrl;
+
+    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+        pdf.getPage(1).then(function(page) {
+            const viewport = page.getViewport({
+                scale: 0.2
+            });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            page.render({
+                canvasContext: canvas.getContext('2d'),
+                viewport: viewport
+            }).promise.then(function() {
+                const imgDataUrl = canvas.toDataURL();
+                const img = new Image();
+                img.src = imgDataUrl;
+                img.classList = "w-100 h-100"
+
+                canvas.parentNode.replaceChild(img, canvas);
+            });
+        });
+    });
+}
+</script>
 @endsection
 
 
