@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
     <!-- <link rel="icon" href="../../images/smtlogo.png" type="image/png"> -->
-    <link rel="icon" href="{{asset('image/smtlogo.png')}}" type="image/png">
+    <link rel="icon" href="{{ asset('image/smtlogo.png') }}" type="image/png">
+
 
     <title>@yield('title')</title>
 
@@ -24,7 +25,8 @@
     <meta property="og:title" content="Sun Myat Tun Construction Co.,Ltd.">
     <meta property="og:description"
         content="Sun Myat Tun Construction: We are here to stay - Inspire Better Living with Humility and Affordabilit">
-    <meta property="og:image" content="{{asset('image/smtlogoLarge.png')}}">
+    <meta property="og:image" content="{{ asset('image/smtlogoLarge.png') }}">
+
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -32,7 +34,8 @@
     <meta property="twitter:title" content="Sun Myat Tun Construction Co.,Ltd.">
     <meta property="twitter:description"
         content="Sun Myat Tun Construction: We are here to stay - Inspire Better Living with Humility and Affordabilit">
-    <meta property="twitter:image" content="{{asset('image/smtlogoLarge.png')}}">
+    <meta property="twitter:image" content="{{ asset('image/smtlogoLarge.png') }}">
+
 
 
 
@@ -45,6 +48,7 @@
 
     <!-- animate.style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
@@ -60,6 +64,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async></script>
     @yield('css')
     <style>
+
     .slick-dots {
         background-color: white;
     }
@@ -124,6 +129,7 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136018131-1"></script>
 <script>
+
 window.dataLayer = window.dataLayer || [];
 
 function gtag() {
@@ -139,16 +145,18 @@ gtag('config', 'UA-136018131-1');
     <!-- Messenger Chat Plugin Code -->
 
     <!-- Messenger Chat plugin Code -->
+
     <!-- <div id="fb-root"></div> 
   <div id="fb-customer-chat" class="fb-customerchat"> </div>
   <script>
-    var chatbox = document.getElementById('fb-customer-chat');
-    chatbox.setAttribute("page_id", "353690388313896");
-    chatbox.setAttribute("attribution", "biz_inbox");
-  </script> 
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "353690388313896");
+      chatbox.setAttribute("attribution", "biz_inbox");
+  </script>
    -->
     <!-- Your SDK code -->
     <!-- <script>
+
     window.fbAsyncInit = function() {
       FB.init({
         xfbml: true,
@@ -177,6 +185,7 @@ gtag('config', 'UA-136018131-1');
             <div class="offcanvas-body ">
                 <div class="offcanvas-header">
                     <div class="d-flex justify-content-between align-items-center w-100 bg-secondary">
+
                         <img src="{{asset('image/smtlogo.png')}}" alt="" style="width:50px;height:auto">
                         <button class="btn btn-link py-0 px-2" id="slideClose">
                             <i class="bi bi-x fs-2 text-primary"></i>
@@ -189,19 +198,22 @@ gtag('config', 'UA-136018131-1');
                 </div>
                 <ul class="side-nav-ul list-group me-auto mb-2 mb-lg-0">
                     <li class="side-nav-item">
-                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{url('/')}}">Home</a>
+                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page"
+                            href="{{ url('/') }}">@lang('public.home')</a>
                     </li>
                     <li class="side-nav-item">
                         <a class="side-nav-link nav-link px-2 py-3" aria-current="page"
-                            href="{{url('projectlist')}}">Projects</a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{url('aboutus')}}">About
-                            Us</a>
+                            href="{{ url('projectlist') }}">@lang('public.project')</a>
                     </li>
                     <li class="side-nav-item">
                         <a class="side-nav-link nav-link px-2 py-3" aria-current="page"
-                            href="{{url('contactus')}}">Contact Us</a>
+                            href="{{ url('aboutus') }}">@lang('public.about')
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page"
+                            href="{{ url('contactus') }}">@lang('public.contact')</a>
+
                     </li>
                 </ul>
 
@@ -209,46 +221,49 @@ gtag('config', 'UA-136018131-1');
             <div class="px-2 py-2 d-lg-none position-absolute bottom-0 w-100">
                 <div class="d-flex justify-content-start align-items-center">
 
-                    @if(auth()->guard('user')->check())
+                    @if (auth()->guard('user')->check())
 
-                    <div class="d-flex flex-column w-100">
-                        <a href="{{route('profile',Auth::guard('user')->user()->id)}}"
-                            class="text-decoration-none w-100">
-                            <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center"
-                                style="    box-shadow: inset 0px 1px 0px #f5cc7a47;">
-                                <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2"
-                                    style="width:40px;height:40px">
-                                    @if( isset(Auth::guard('user')->user()->profile_img))
-                                    <img src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}"
-                                        alt="" class="w-100 h-100 user-profile" style="object-fit:cover;"
-                                        style="object-fit:cover;">
-                                    @else
-                                    <img src="{{ asset('images/user.png') }}" alt="..." class="w-100 h-100"
-                                        style="object-fit:cover;" style="object-fit:cover;">
-                                    @endif
+                        <div class="d-flex flex-column w-100">
+                            <a href="{{ route('profile', Auth::guard('user')->user()->id) }}"
+                                class="text-decoration-none w-100">
+                                <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center"
+                                    style="    box-shadow: inset 0px 1px 0px #f5cc7a47;">
+                                    <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2"
+                                        style="width:40px;height:40px">
+                                        @if (isset(Auth::guard('user')->user()->profile_img))
+                                            <img src="{{ asset('storage/images/client-profile/' . Auth::guard('user')->user()->profile_img) }}"
+                                                alt="" class="w-100 h-100 user-profile"
+                                                style="object-fit:cover;" style="object-fit:cover;">
+                                        @else
+                                            <img src="{{ asset('images/user.png') }}" alt="..."
+                                                class="w-100 h-100" style="object-fit:cover;"
+                                                style="object-fit:cover;">
+                                        @endif
+                                    </div>
+                                    <span
+                                        class="text-primary usernameSmallDevice usernameToShort">{{ Auth::guard('user')->user()->name }}</span>
                                 </div>
-                                <span
-                                    class="text-primary usernameSmallDevice usernameToShort">{{Auth::guard('user')->user()->name}}</span>
+                            </a>
+                            <div class="rounded px-3 py-3 text-primary w-100 text-center"
+                                style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="btn btn-link text-decoration-none text-primary">@lang('public.logout')
+                                    </button>
+                                </form>
                             </div>
-                        </a>
-                        <div class="rounded px-3 py-3 text-primary w-100 text-center"
-                            style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="btn btn-link text-decoration-none text-primary">LOG
-                                    OUT</button>
-                            </form>
-                        </div>
 
-                    </div>
-                    @else
-                    <button class="btn btn-link text-decoration-none w-100 px-0"
-                        onclick="openLoginModalInSmallDevice()">
-                        <div class="rounded px-3 py-3 text-primary w-100 text-center"
-                            style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
-                            Login
                         </div>
-                    </button>
+                    @else
+                        <button class="btn btn-link text-decoration-none w-100 px-0"
+                            onclick="openLoginModalInSmallDevice()">
+                            <div class="rounded px-3 py-3 text-primary w-100 text-center"
+                                style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
+                                @lang('public.login')
+                            </div>
+                        </button>
+
                     @endif
                 </div>
             </div>
@@ -257,10 +272,12 @@ gtag('config', 'UA-136018131-1');
 
         <nav class="navbar navbar-expand-lg px-2 px-md-0 py-0 fixed-top">
             <div class="container d-flex align-item-center px-0 py-md-1 py-lg-0">
-                <a href="{{url('/')}}"
+
+                <a href="{{ url('/') }}"
                     class="logo-div text-decoration-none fs-1 text-gold bg-secondary d-flex justify-content-center align-items-center"
                     style="height: auto;">
-                    <img src="{{asset('image/smtlogo_copy.png')}}" alt="" style="width:100%;height:100%">
+                    <img src="{{ asset('image/smtlogo_copy.png') }}" alt="" style="width:100%;height:100%">
+
                 </a>
 
                 <div class="pe-md-0 d-lg-none text-primary" id="sideNavButton">
@@ -270,23 +287,27 @@ gtag('config', 'UA-136018131-1');
                 <div class="d-none d-lg-inline-flex align-items-center py-1" tabindex="-1" id="offcanvasNavbar">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3 " aria-current="page" href="{{url('/')}}">Home</a>
+
+                            <a class="nav-link pe-0 ps-4 py-3 " aria-current="page"
+                                href="{{ url('/') }}">@lang('public.home')</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
-                                href="{{url('projectlist')}}">Projects</a>
+                                href="{{ url('projectlist') }}">@lang('public.project')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{url('aboutus')}}">About
-                                Us</a>
+                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
+                                href="{{ url('aboutus') }}">@lang('public.about')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{url('contactus')}}">Contact
-                                Us</a>
+                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
+                                href="{{ url('contactus') }}">@lang('public.contact')</a>
+
                         </li>
                     </ul>
                     <div class="bg-primary mx-4 opacity-50" style="width:.1px; height:50px;"></div>
                     <div class="">
+
                         @if(auth()->guard('user')->check())
 
                         <div class="profile-dropdown position-relative">
@@ -364,7 +385,8 @@ gtag('config', 'UA-136018131-1');
                     <div
                         class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
                         <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
-                            <h5 class="fw-bold text-gold text-uppercase">Contact Us</h5>
+                            <h5 class="fw-bold text-gold text-uppercase">@lang('public.contactus')</h5>
+
                             <div
                                 class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
                                 <div class="">
@@ -390,7 +412,8 @@ gtag('config', 'UA-136018131-1');
                                             <a href="https://www.facebook.com/Sunmyattun" target="_blank"
                                                 class="text-decoration-none text-nowrap ">
                                                 <i class="bi bi-facebook"></i>
-                                                Sun Myat Tun Construction Co.,Ltd
+                                                @lang('public.company')
+
                                             </a>
                                         </li>
 
@@ -405,13 +428,15 @@ gtag('config', 'UA-136018131-1');
                                             <ul class="list-group">
                                                 <li class="list-group-item bg-transparent border-0 text-gold px-0">
                                                     <a href="{{ url('faq') }}" class="text-decoration-none ">
-                                                        FAQs
+                                                        @lang('public.faqs')
+
                                                     </a>
                                                 </li>
                                                 <li class="list-group-item bg-transparent border-0 text-gold px-0">
                                                     <a href="{{ url('termcondition') }}"
                                                         class="text-decoration-none text-nowrap ">
-                                                        Terms And Conditions
+                                                        @lang('public.termsandcon')
+
                                                     </a>
                                                 </li>
                                             </ul>
@@ -431,6 +456,7 @@ gtag('config', 'UA-136018131-1');
                 <div
                     class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
                     <div class="pointer mx-2">
+
                         <img src="{{asset('image/EnglishFlag.jpg')}}" alt="" class="rounded"
                             style="width:40px;height:30px">
                         <span class="text-primary d-none d-md-inline">English</span>
@@ -523,6 +549,7 @@ gtag('config', 'UA-136018131-1');
                     onclick="closeRegisterModal()">&times;</span>
                 <div class="card-body">
                     <h4 class="mb-4">Register To Sun Myat Tun</h4>
+
                     <form action="{{route('register')}}" method="POST" class="register-form">
                         @csrf
                         <!-- user name -->
@@ -590,6 +617,7 @@ gtag('config', 'UA-136018131-1');
                     <h5 class="mb-4 fw-bolder">Forgot Password?</h5>
                     <span class="text-black-50 mb-5" style="font-size: .9rem;">Please Enter Your Email Address To
                         Receive A New Password</span>
+
                     <form action="{{route('forgotPassword')}}" id="forgot_password_form" method="POST">
                         @csrf
                         <!-- email -->
@@ -610,6 +638,7 @@ gtag('config', 'UA-136018131-1');
                         <div id="email-send-success-alert"
                             class="alert alert-success my-3 text-center animate__animated animate__slideInDown">
                             Vertify Email Send Successfully.<br> Check Your Email. <br>
+
                             @if(!(auth()->guard('user')->check()))
                             <button class="btn btn-link text-success" onclick="openLoginModal()">Log in</button>
                             @endif
@@ -620,6 +649,7 @@ gtag('config', 'UA-136018131-1');
         </div>
 
     </div>
+
 
 
 
@@ -891,6 +921,7 @@ gtag('config', 'UA-136018131-1');
             })
 
     })
+
     </script>
 
 

@@ -127,7 +127,7 @@ img {
         </div>
     </div>
 </div>
-<!--                end content-->
+<!--end content-->
 @endsection
 
 @section('script')
@@ -163,7 +163,7 @@ fileInput.addEventListener("change", (e) => {
                     output.innerHTML += `
                     <div class="col img-div">
                         <img class="thumbnail" src="${imgFile.result}">
-                        
+
                     </div>
                     `;
                 });

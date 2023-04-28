@@ -18,4 +18,9 @@ class Album extends Model
     {
         return $this->belongsToMany(Project::class, 'legaldocuments');
     }
+
+     public function albumTestImages()
+    {
+        return $this->hasMany(AlbumTestImage::class, 'album_tests_id');
+    }
 }

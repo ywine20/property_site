@@ -15,18 +15,8 @@ class siteProgress extends Model
         'decription',
 
 
-    // protected $fillable = ['title', 'description', 'images'];
-
-    // protected $casts = [
-    //     'images' => 'array',
     ];
 
-
-
-    // public function setFilenamesAttribute($value)
-    // {
-    //     $this->attributes['filenames'] = json_encode($value);
-    // }
 
     public function project(){
         return $this->belongsTo(Project::class);

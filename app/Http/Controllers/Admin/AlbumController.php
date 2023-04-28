@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Album;
 use App\Models\albumTest;
-use App\Models\AlbumTestImage;
-use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Return_;
 use Spatie\PdfToImage\Pdf;
+use Illuminate\Http\Request;
+use App\Models\AlbumTestImage;
+use PhpParser\Node\Stmt\Return_;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 
-class TestController extends Controller
+class AlbumController extends Controller
 {
     //
     public function create($id)
@@ -78,16 +80,33 @@ class TestController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Files upload success');
+        return redirect()->back()->with('status', 'Files upload success');
     }
+//the whole album delete
+   public function albumDelete($id)
+{
+    $album = AlbumTest::findOrFail($id);
 
-    public function albumDelete($id)
-    {
-        return $id;
+    foreach ($album->albumTestImages as $image) {
+        Storage::delete('public/images/album/' . $image->image);
+        $image->delete();
     }
+    $album->delete();
+    return redirect()->back()->with('status', 'Album deleted successfully.');
+}
+//each delete
+    public function imageDel($albumId,$id){
+        $image = AlbumTestImage::where('album_tests_id', $albumId)->first();
+        // return $image;
 
-    public function imageDelete(Request $request, $albumId, $imageName)
-    {
-        return $imageName;
+    // Delete the image file from storage
+    Storage::delete('public/images/album/' . $image->image);
+
+    // Delete the image record from the database
+    $image->delete();
+
+    // Redirect the user back to the previous page with a success message
+    return redirect()->back()->with('status', 'Image deleted successfully.');
+
     }
 }
