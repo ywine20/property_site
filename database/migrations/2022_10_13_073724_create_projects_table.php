@@ -17,8 +17,8 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('project_name');
-            $table->string('site_progress_id');
-            $table->string('legal_document_id');
+            $table->string('site_progress_id')->nullable();
+            $table->string('legal_document_id')->nullable();
             $table->longText('description');
             $table->text('cover');
             $table->text('three_sixty_image')->nullable();

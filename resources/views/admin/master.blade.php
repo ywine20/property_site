@@ -40,14 +40,90 @@
     <!-- backdrop-->
 
 
-    <section id="app">
-        <div class="row justify-content-start align-items-center g-0">
-            <!--            start Aside-->
-            <!--            col-4 col-md-3 col-lg-2-->
-            <aside class="vh-100 bg-secondary aside-hide ">
-                <div class="d-flex justify-content-end">
-                    <button class="btn btn-link " id="close-aside">
-                        <i class="bi bi-x-circle"></i>
+<section id="app">
+    <div class="row justify-content-start align-items-center g-0">
+        <!--            start Aside-->
+        <!--            col-4 col-md-3 col-lg-2-->
+        <aside class="vh-100 bg-secondary aside-hide ">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-link " id="close-aside">
+                    <i class="bi bi-x-circle"></i>
+                </button>
+            </div>
+            <div class="header justify-content-center align-items-center">
+                <img src="{{asset('image/smtlogo.png')}}" alt="">
+            </div>
+            <div id="side"  class="bg-secondary w-100 my-3">
+                <ul class="list-unstyled">
+                    <a class="side-link w-100 {{ Request::is('admin') ? 'active': '' }}" href="{{url('/admin')}}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3 ">
+                            Dashboard
+                        </li>
+                    </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/customers/list*') ? 'active': '' }}" href="{{ route('admin.customersList') }}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Customers
+                        </li>
+                    </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/contact*') ? 'active': '' }}" href="{{url('admin/contact')}}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Contact Us
+                        </li>
+                    </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/project*') ? 'active': '' }}" href="{{url('admin/project')}}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Projects
+                        </li>
+                    </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/redeemCodes/page*') ? 'active': '' }}" href="{{ route('admin.generateRedeemCodePage') }}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Redeem Code
+                        </li>
+                    </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/category*') ? 'active': '' }}" href="{{url('admin/category')}}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Categories
+                        </li>
+                    </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/amenity*') ? 'active': '' }}" href="{{url('admin/amenity')}}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Amenities
+                        </li>
+                    </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/address*') ? 'active': '' }}" href="{{url('admin/address')}}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Address
+                        </li>
+                    </a>
+                    <a class="side-link   w-100 {{ Request::is('admin/facebooklink*') ? 'active': '' }}" href="{{url('admin/facebooklink')}}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Facebook Link
+                        </li>
+                    </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/slider*') ? 'active': '' }}" href="{{url('admin/slider')}}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Slider Images
+                        </li>
+                    </a>
+                    @if(Auth()->guard('admin')->user()->id == 1)
+                    <a class="side-link  w-100 {{ Request::is('admin/setting*') ? 'active': '' }}" href="{{url('admin/setting')}}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Setting
+                        </li>
+                    </a>
+                    @endif
+                </ul>
+            </div>
+        </aside>
+        <!--            end Aside-->
+        <!--            col-12 col-md-12 col-lg-10-->
+        <div class=" min-vh-100 px-0 g-0 right">
+            <!--                start Nav-->
+            <nav class="navbar position-sticky top-0">
+                <div class="container-fluid">
+                    <button class="btn btn-link fs-3 text-primary menu-list">
+                        <i class="bi bi-list"></i>
+
                     </button>
                 </div>
                 <div class="header justify-content-center align-items-center">

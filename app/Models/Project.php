@@ -125,4 +125,11 @@ class Project extends Model implements Viewable
     public function siteProgressesImage(){
         return $this->hasManyThrough(Image::class,siteProgress::class);
     }
+
+    public function unitprice()
+    {
+        return $this->hasMany(UnitPrice::class);
+    }
+
 }
+

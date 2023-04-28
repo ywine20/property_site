@@ -12,7 +12,7 @@
 @section('content')
 
     <div class="container p-5">
-        <form action="{{ route("profile.generateRedeemCode") }}" method="POST" id="redeem-code-form">
+        <form action="{{ route("admin.generateRedeemCode") }}" method="POST" id="redeem-code-form">
             @csrf
             <div id="tier">
                 <label for="">Tier :</label>
@@ -87,14 +87,14 @@
                 </div>
                 <div class="modal-body">
                     <p id="redeem-code"></p>
-                    <button class="btn btn-secondary" onclick="copyCode()">Copy</button>
+                    <button class="btn btn-secondary" onclick="copyCode()"><i class="bi bi-clipboard"></i></button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
-          </div>
+        </div>
         
         
         

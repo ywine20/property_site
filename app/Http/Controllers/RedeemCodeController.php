@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\SelectedProjects;
 use App\Http\Controllers\Controller;
+use App\Jobs\DeleteExpiredRedeemCodes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use function PHPUnit\Framework\returnSelf;
@@ -26,7 +27,7 @@ class RedeemCodeController extends Controller
     public function generateRedeemCodePage()
     {
         $projects = Project::get();
-        return view('redeemCode.redeemCode', compact('projects'));
+        return view('admin.redeemCode.generate-code', compact('projects'));
     }
 
     public function generateCode(){
@@ -39,9 +40,13 @@ class RedeemCodeController extends Controller
 
         // Validation code starts here
         $validator = Validator::make($request->all(), [
+            'tier' => 'required',
             'projectIds' => 'required|array|min:1',
             'progress' => 'required_without_all:legalDocument',
             'legalDocument' => 'required_without_all:progress',
+        ], [
+            'projectIds.required' => 'Please select at least one project',
+            'progress.required_without_all' => 'Please select at least progress or legal document',
         ]);
 
         if ($validator->fails()) {
@@ -78,6 +83,8 @@ class RedeemCodeController extends Controller
                 'redeemed' => false,
             ]);
         }
+
+        DeleteExpiredRedeemCodes::dispatch()->delay(now()->addDays(30));
 
         return response()->json(['code' => $code]);
     }
@@ -127,15 +134,14 @@ class RedeemCodeController extends Controller
                     }
 
                     // Delete redeem code
-                    // $redeemCode->delete();
+                    $redeemCode->delete();
                 }
             };
 
             return redirect()->to(url()->previous() . "#redeemInput")->with('redeemSuccess', 'Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.');
             // return redirect()->back()->with('redeemSuccess', 'Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.');
-            return redirect()->route('profile.redeem', ['id' => $user->id]); //redirect route to the profile controller along with the login user Id
+            // return redirect()->route('profile.redeem', ['id' => $user->id]); //redirect route to the profile controller along with the login user Id
         } else {
-            // dd('wrong');
             return back()->with('InvalidCode', 'Sorry! Your code is not valid. Please try again.');
         }
     }

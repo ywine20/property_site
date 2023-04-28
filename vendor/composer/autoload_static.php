@@ -534,6 +534,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\DeleteOldRedeemCodes' => __DIR__ . '/../..' . '/app/Console/Commands/DeleteOldRedeemCodes.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AboutUsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AboutUsController.php',
@@ -575,6 +576,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Http\\Controllers\\RedeemCodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/RedeemCodeController.php',
         'App\\Http\\Controllers\\SiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/SiteController.php',
         'App\\Http\\Controllers\\SiteProgressController' => __DIR__ . '/../..' . '/app/Http/Controllers/SiteProgressController.php',
+
         'App\\Http\\Controllers\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/TestController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\WelcomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/WelcomeController.php',
@@ -595,6 +597,7 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Http\\Requests\\StoreCategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreCategoryRequest.php',
         'App\\Http\\Requests\\StoreCustomerProfileRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreCustomerProfileRequest.php',
         'App\\Http\\Requests\\StoreDeleteRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreDeleteRequest.php',
+
 
         'App\\Http\\Requests\\StorealbumTestRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StorealbumTestRequest.php',
         'App\\Http\\Requests\\StoresiteProgressRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoresiteProgressRequest.php',
@@ -619,19 +622,23 @@ class ComposerStaticInit9fe02954280629cda50829ecd9cdbe4f
         'App\\Models\\Delete' => __DIR__ . '/../..' . '/app/Models/Delete.php',
         'App\\Models\\FacebookLink' => __DIR__ . '/../..' . '/app/Models/FacebookLink.php',
         'App\\Models\\LegalDocument' => __DIR__ . '/../..' . '/app/Models/LegalDocument.php',
+
         'App\\Models\\Image' => __DIR__ . '/../..' . '/app/Models/Image.php',
         'App\\Models\\Previewimage' => __DIR__ . '/../..' . '/app/Models/Previewimage.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\Project' => __DIR__ . '/../..' . '/app/Models/Project.php',
         'App\\Models\\RedeemCode' => __DIR__ . '/../..' . '/app/Models/RedeemCode.php',
+        'App\\Models\\SelectedProjects' => __DIR__ . '/../..' . '/app/Models/SelectedProjects.php',
 
         'App\\Models\\SiteGallery' => __DIR__ . '/../..' . '/app/Models/SiteGallery.php',
         'App\\Models\\SiteProgress' => __DIR__ . '/../..' . '/app/Models/SiteProgress.php',
 
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\Town' => __DIR__ . '/../..' . '/app/Models/Town.php',
+        'App\\Models\\UnitPrice' => __DIR__ . '/../..' . '/app/Models/UnitPrice.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Visitor' => __DIR__ . '/../..' . '/app/Models/Visitor.php',
+
         'App\\Models\\albumTest' => __DIR__ . '/../..' . '/app/Models/albumTest.php',
         'App\\Policies\\AlbumTestImagePolicy' => __DIR__ . '/../..' . '/app/Policies/AlbumTestImagePolicy.php',
         'App\\Policies\\AlbumTestPolicy' => __DIR__ . '/../..' . '/app/Policies/AlbumTestPolicy.php',

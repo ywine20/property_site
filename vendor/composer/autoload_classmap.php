@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\DeleteOldRedeemCodes' => $baseDir . '/app/Console/Commands/DeleteOldRedeemCodes.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AboutUsController' => $baseDir . '/app/Http/Controllers/AboutUsController.php',
@@ -47,6 +48,7 @@ return array(
     'App\\Http\\Controllers\\RedeemCodeController' => $baseDir . '/app/Http/Controllers/RedeemCodeController.php',
     'App\\Http\\Controllers\\SiteController' => $baseDir . '/app/Http/Controllers/SiteController.php',
     'App\\Http\\Controllers\\SiteProgressController' => $baseDir . '/app/Http/Controllers/SiteProgressController.php',
+
     'App\\Http\\Controllers\\TestController' => $baseDir . '/app/Http/Controllers/TestController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Controllers\\WelcomeController' => $baseDir . '/app/Http/Controllers/WelcomeController.php',
@@ -67,6 +69,7 @@ return array(
     'App\\Http\\Requests\\StoreCategoryRequest' => $baseDir . '/app/Http/Requests/StoreCategoryRequest.php',
     'App\\Http\\Requests\\StoreCustomerProfileRequest' => $baseDir . '/app/Http/Requests/StoreCustomerProfileRequest.php',
     'App\\Http\\Requests\\StoreDeleteRequest' => $baseDir . '/app/Http/Requests/StoreDeleteRequest.php',
+
 
     'App\\Http\\Requests\\StorealbumTestRequest' => $baseDir . '/app/Http/Requests/StorealbumTestRequest.php',
     'App\\Http\\Requests\\StoresiteProgressRequest' => $baseDir . '/app/Http/Requests/StoresiteProgressRequest.php',
@@ -90,21 +93,27 @@ return array(
     'App\\Models\\CustomerProfile' => $baseDir . '/app/Models/CustomerProfile.php',
     'App\\Models\\Delete' => $baseDir . '/app/Models/Delete.php',
     'App\\Models\\FacebookLink' => $baseDir . '/app/Models/FacebookLink.php',
+    'App\\Models\\LegalDocument' => $baseDir . '/app/Models/LegalDocument.php',
 
     'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\Previewimage' => $baseDir . '/app/Models/Previewimage.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\Project' => $baseDir . '/app/Models/Project.php',
     'App\\Models\\RedeemCode' => $baseDir . '/app/Models/RedeemCode.php',
+    'App\\Models\\SelectedProjects' => $baseDir . '/app/Models/SelectedProjects.php',
+    'App\\Models\\SiteGallery' => $baseDir . '/app/Models/SiteGallery.php',
 
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
     'App\\Models\\Town' => $baseDir . '/app/Models/Town.php',
+    'App\\Models\\UnitPrice' => $baseDir . '/app/Models/UnitPrice.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\Visitor' => $baseDir . '/app/Models/Visitor.php',
+
     'App\\Models\\albumTest' => $baseDir . '/app/Models/albumTest.php',
     'App\\Policies\\AlbumTestImagePolicy' => $baseDir . '/app/Policies/AlbumTestImagePolicy.php',
     'App\\Policies\\AlbumTestPolicy' => $baseDir . '/app/Policies/AlbumTestPolicy.php',
     'App\\Policies\\CustomerProfilePolicy' => $baseDir . '/app/Policies/CustomerProfilePolicy.php',
+    
     'App\\Policies\\DeletePolicy' => $baseDir . '/app/Policies/DeletePolicy.php',
     'App\\Policies\\SiteProgressPolicy' => $baseDir . '/app/Policies/SiteProgressPolicy.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

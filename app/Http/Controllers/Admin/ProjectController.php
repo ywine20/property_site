@@ -11,6 +11,7 @@ use App\Models\Town;
 use App\Models\Amenity;
 use App\Models\Previewimage;
 use App\Models\City;
+use App\Models\UnitPrice;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -59,36 +60,36 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'project_Id' => "required|string|min:3|max:255",
-            // dimensions:width=600,height=900|max:2048|
-            'cover' => "required|mimes:jpeg,png,jpg,gif",
-            'threeSixtyImage' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
-            'description' => "required|string",
-            'lower_price' => "required|min:2|max:20",
-            'upper_price' => "required|min:2|max:30",
-            'category' => "required",
-            'layer' => "required|string|min:1|max:255",
-            'squre_feet' => "required|string|min:1|max:255",
-            'map_link' => "required|string",
-            'progress' => "required|string",
-            'amenity.*' => "required|string",
-            'hou_no' => "required|string",
-            'street' => "required|string",
-            'ward' => "required|string",
-            'town_slug' => "required",
-            'city_slug' => "required",
-            'small_img_1' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-            'small_img_2' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-            'small_img_3' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-            'small_img_4' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-            'small_img_5' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-            'small_img_6' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-            'small_img_7' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-            'small_img_8' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-            'small_img_9' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        // $request->validate([
+        //     'project_Id' => "required|string|min:3|max:255",
+        //     // dimensions:width=600,height=900|max:2048|
+        //     'cover' => "required|mimes:jpeg,png,jpg,gif",
+        //     'threeSixtyImage' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
+        //     'description' => "required|string",
+        //     'lower_price' => "required|min:2|max:20",
+        //     'upper_price' => "required|min:2|max:30",
+        //     'category' => "required",
+        //     'layer' => "required|string|min:1|max:255",
+        //     'squre_feet' => "required|string|min:1|max:255",
+        //     'map_link' => "required|string",
+        //     'progress' => "required|string",
+        //     'amenity.*' => "required|string",
+        //     'hou_no' => "required|string",
+        //     'street' => "required|string",
+        //     'ward' => "required|string",
+        //     'town_slug' => "required",
+        //     'city_slug' => "required",
+        //     'small_img_1' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        //     'small_img_2' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        //     'small_img_3' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        //     'small_img_4' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        //     'small_img_5' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        //     'small_img_6' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        //     'small_img_7' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        //     'small_img_8' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        //     'small_img_9' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
 
-        ]);
+        // ]);
 
         $category = Category::where('category_id', $request->category)->first();
         if (!$category) {
@@ -143,11 +144,24 @@ class ProjectController extends Controller
             'upper_price' => $request->upper_price,
             'layer' => $request->layer,
             'squre_feet' => $request->squre_feet,
-
             'hou_no' => $request->hou_no,
             'street' => $request->street,
             'ward' => $request->ward,
         ]);
+
+        //create unit price
+
+        $minPrice = $request->lower_price;
+        $maxPrice =  $request->upper_price;
+
+        for($price = $minPrice ; $price <= $maxPrice ; $price += 100 ) {
+            UnitPrice::create([
+                'project_id' => $project->id,
+                'price' => $price,
+            ]);
+        }
+
+
         // for amenity select
         $p = Project::find($project->id);
         $p->amenity()->sync($amenities);
@@ -298,6 +312,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $find_project = Project::find($id);
+
+        $oldMaxPrice = $find_project->lower_price;
+        $oldMinPrice = $find_project->upper_price;
+
+        if($oldMaxPrice != $request->lower_price || $oldMinPrice != $request->upper_price) {
+            //Delete first all the rows in unit price table related with the updated project's id
+            UnitPrice::where('project_id',$id)->delete();
+            //Recreate unit price table
+
+            $minPrice = $request->lower_price;
+            $maxPrice =  $request->upper_price;
+
+            for($price = $minPrice ; $price <= $maxPrice ; $price += 100 ) {
+                UnitPrice::create([
+                    'project_id' => $id,
+                    'price' => $price,
+                ]);
+            }
+        }
 
         $request->validate([
             'project_Id' => "required|string|min:3|max:255",
@@ -329,7 +363,6 @@ class ProjectController extends Controller
 
         ]);
 
-        $find_project = Project::find($id);
         // if (!$find_project->first()) {
         //     return redirect()->back()->with('error', 'not found project');
         // }
@@ -397,7 +430,6 @@ class ProjectController extends Controller
             'description' => $request->description,
             'lower_price' => $request->lower_price,
             'upper_price' => $request->upper_price,
-
             'layer' => $request->layer,
             'squre_feet' => $request->squre_feet,
             'hou_no' => $request->hou_no,
@@ -508,6 +540,9 @@ class ProjectController extends Controller
         $project = Project::where('id', $id)->first();
         // Project::find($project->first()->id)->amenity()->sync([]);
 
+         //Delete all the rows in unit price table related with the project's id
+         UnitPrice::where('project_id',$id)->delete();
+
         // Delete related records from project_amenity table
         Project::find($id)->amenity()->detach();
 
@@ -546,6 +581,11 @@ class ProjectController extends Controller
         }
 
         $projects = Project::whereIn('id', $ids)->get();
+
+        $unitPrice = UnitPrice::whereIn('project_id',$ids)->delete();
+        // $unitPrice->delete();
+
+        // dd($unitPrice->toArray());
 
         //Delete Cover Photo
         foreach ($projects as $project) {

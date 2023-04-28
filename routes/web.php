@@ -1,6 +1,9 @@
 <?php
 
-use App\Models\CustomerProfile;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormController;
@@ -85,13 +88,13 @@ Route::delete('/site-gallery/{id}', [SiteController::class, 'sitedelete'])->name
 Route::get('admin/album', [AlbumController::class, 'index'])->name('save-multipel-imgae');
 Route::post('admin/album', [AlbumController::class, 'save']);
 
-
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Admin']], function () {
     Route::get('/', 'PageController@showDashboard');
     Route::post('/logout', 'PageController@logout');
     Route::get('/user', 'PageController@profile');
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
+
 
 
 
@@ -147,12 +150,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
 
     Route::delete('/previewImages/{name}/{fieldName}', [AdminPreviewImageController::class, 'delete'])->name('previewImage.delete');
 
-
     //for redeem code
-    Route::get('/redeemList/page', [RedeemCodeController::class, 'redeemList'])->name('profile.redeemListPage');
-    Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
-    Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('profile.generateRedeemCode');
+    Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('admin.generateRedeemCodePage');
+    Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('admin.generateRedeemCode');
+
+    //to customer list
+    Route::get('/customers/list', [CustomerController::class, 'customersList'])->name('admin.customersList');
 });
+
+
 
 
 //SMT UPDATE 13-March-2023
@@ -170,9 +176,6 @@ Route::get('/album/{id}', [ProjectListController::class, 'albumDetail'])->name('
 
 
 
-
-
-
 // Route::view('/profile','customer/profile')->name('profile');
 
 Route::view('/profile/setting', 'customer/profile-setting')->name('profile-setting');
@@ -181,9 +184,6 @@ Route::view('/redeem', 'customer/redeem')->name('profile-redeem');
 // Redeem Code for customemr
 Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRedeemCodes'])->name('profile.customerRedeemCodes');
 
-//for redeem code
-Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('profile.generateRedeemCodePage');
-Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('profile.generateRedeemCode');
 
 //winwinmaw
 Route::get('/redeemCode', [RedeemCodeController::class, 'generateCode'])->name('profile.generateCode');
