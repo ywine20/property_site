@@ -53,6 +53,11 @@
                             Dashboard
                         </li>
                     </a>
+                    <a class="side-link  w-100 {{ Request::is('admin/customers/list*') ? 'active': '' }}" href="{{ route('admin.customersList') }}" style="text-decoration: none;">
+                        <li class="py-3 side-item px-3">
+                            Customers
+                        </li>
+                    </a>
                     <a class="side-link  w-100 {{ Request::is('admin/contact*') ? 'active': '' }}" href="{{url('admin/contact')}}" style="text-decoration: none;">
                         <li class="py-3 side-item px-3">
                             Contact Us
@@ -63,7 +68,7 @@
                             Projects
                         </li>
                     </a>
-                    <a class="side-link  w-100 {{ Request::is('admin/category*') ? 'active': '' }}" href="{{ route('admin.generateRedeemCodePage') }}" style="text-decoration: none;">
+                    <a class="side-link  w-100 {{ Request::is('admin/redeemCodes/page*') ? 'active': '' }}" href="{{ route('admin.generateRedeemCodePage') }}" style="text-decoration: none;">
                         <li class="py-3 side-item px-3">
                             Redeem Code
                         </li>

@@ -43,10 +43,7 @@ class DeleteOldRedeemCodes extends Command
     public function handle()
     {
         $expirationDate = Carbon::now()->subSeconds(55);
-        $expiredCodes = RedeemCode::where('created_at', '<=', $expirationDate)->delete();
-        Log::info("$expiredCodes redeem codes have been deleted.");
-
-        $expirationDate = Carbon::now()->subDays(30);
+        // $expirationDate = Carbon::now()->subDays(30);
         $expiredCodes = RedeemCode::where('created_at', '<=', $expirationDate)->delete();
         Log::info("$expiredCodes redeem codes have been deleted.");
     }

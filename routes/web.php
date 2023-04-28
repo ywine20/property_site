@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use Illuminate\Support\Facades\Route;
@@ -75,14 +76,12 @@ Route::post('/contactus', [App\Http\Controllers\ContactController::class, 'store
 Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
 
-
 Route::get('admin/site',[SiteController::class,'siteindex'])->name('save-sitepost-gallery');
 Route::post('admin/site',[SiteController::class, 'sitesave']);
 Route::delete('/site-gallery/{id}', [SiteController::class,'sitedelete'])->name('delete-site-gallery');
 
 Route::get('admin/album',[AlbumController::class, 'index'])->name('save-multipel-imgae');
 Route::post('admin/album',[AlbumController::class, 'save']);
-
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Admin']], function () {
     Route::get('/', 'PageController@showDashboard');
@@ -98,8 +97,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::get('project/{projectId}/site-progess/{id}/edit',[SiteProgressController::class,'edit'])->name('siteProgress.edit');
     Route::patch('project/{projectId}/site-progess/{id}/update',[SiteProgressController::class,'update'])->name('siteProgress.update');
     Route::delete('project/{projectId}/site-progess/{id}/delete',[SiteProgressController::class,'destroy'])->name('siteProgress.destory');
-
-
 
     Route::resource('amenity', "AmenityController");
     Route::resource('facebooklink', "FacebookLinkController");
@@ -131,10 +128,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     
     Route::delete('/previewImages/{name}/{fieldName}',[AdminPreviewImageController::class,'delete'])->name('previewImage.delete');
 
-
     //for redeem code
     Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('admin.generateRedeemCodePage');
     Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('admin.generateRedeemCode');
+
+    //to customer list
+    Route::get('/customers/list', [CustomerController::class, 'customersList'])->name('admin.customersList');
 });
 
 //SMT UPDATE 13-March-2023
