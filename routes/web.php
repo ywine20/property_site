@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormController;
-use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadController;
@@ -80,9 +79,9 @@ Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
 
 
-Route::get('admin/site', [SiteController::class, 'siteindex'])->name('save-sitepost-gallery');
-Route::post('admin/site', [SiteController::class, 'sitesave']);
-Route::delete('/site-gallery/{id}', [SiteController::class, 'sitedelete'])->name('delete-site-gallery');
+// Route::get('admin/site', [SiteController::class, 'siteindex'])->name('save-sitepost-gallery');
+// Route::post('admin/site', [SiteController::class, 'sitesave']);
+// Route::delete('/site-gallery/{id}', [SiteController::class, 'sitedelete'])->name('delete-site-gallery');
 
 Route::get('admin/album', [AlbumController::class, 'index'])->name('save-multipel-imgae');
 Route::post('admin/album', [AlbumController::class, 'save']);
