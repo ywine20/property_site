@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 
 use Illuminate\Support\Facades\Route;
@@ -28,12 +27,12 @@ use App\Http\Controllers\Admin\SiteProgressController;
 use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
 
 
-Route::get('/',function (){
+Route::get('/', function () {
 
     return view('master');
 });
 
-Route::get('locale/{lang}',[LocalizationController::class,'setLang']);
+Route::get('locale/{lang}', [LocalizationController::class, 'setLang']);
 
 // Route::get('lang/home', [LangController::class, 'index']);
 // Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
@@ -189,5 +188,3 @@ Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRede
 Route::get('/redeemCode', [RedeemCodeController::class, 'generateCode'])->name('profile.generateCode');
 Route::post('/code', [RedeemCodeController::class, 'code'])->name('profile.code');
 Route::view('/multiple-selected', 'test');
-
-

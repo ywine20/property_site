@@ -3,35 +3,33 @@
 @section('title', 'Project Detail - SMT')
 @section('css')
 <!-- Pannellum library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css"
-    integrity="sha512-UoT/Ca6+2kRekuB1IDZgwtDt0ZUfsweWmyNhMqhG4hpnf7sFnhrLrO0zHJr2vFp7eZEvJ3FN58dhVx+YMJMt2A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css" integrity="sha512-UoT/Ca6+2kRekuB1IDZgwtDt0ZUfsweWmyNhMqhG4hpnf7sFnhrLrO0zHJr2vFp7eZEvJ3FN58dhVx+YMJMt2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- End Pannellum library -->
 
 <link rel="stylesheet" href="{{ asset('css/project-detail.css') }}">
 <style>
-.album {
-    transition: .5s;
-}
+    .album {
+        transition: .5s;
+    }
 
 
-.album-action {
-    height: fit-content;
-    bottom: -50%;
-    position: absolute;
-    transition: all .5s;
+    .album-action {
+        height: fit-content;
+        bottom: -50%;
+        position: absolute;
+        transition: all .5s;
 
-}
+    }
 
-.album:hover {
-    transition: all .5s;
-    transform: scale(1.05);
+    .album:hover {
+        transition: all .5s;
+        transform: scale(1.05);
 
-}
+    }
 
-.album:hover .album-action {
-    bottom: 0%;
-}
+    .album:hover .album-action {
+        bottom: 0%;
+    }
 </style>
 
 @endsection @section('content')
@@ -49,11 +47,9 @@
 
         <!-- project-detail first section -->
         <div class="pb-4 pt-3 py-md-5 project-detail-card overflow-hidden">
-            <div
-                class="row gy-4 gx-0 gy-md-0 gx-lg-3 gy-lg-0 flex-column flex-md-row justify-content-center align-content-center">
+            <div class="row gy-4 gx-0 gy-md-0 gx-lg-3 gy-lg-0 flex-column flex-md-row justify-content-center align-content-center">
 
-                <div
-                    class="col-7 col-md-5 col-lg-4 col-xl-4 col-xxl-3 d-flex justify-content-center justify-content-lg-end mx-auto main-image">
+                <div class="col-7 col-md-5 col-lg-4 col-xl-4 col-xxl-3 d-flex justify-content-center justify-content-lg-end mx-auto main-image">
                     <div class="main-image-div bg-red rounded rounded-2 overflow-hidden shadow">
                         <!-- https://source.unsplash.com/random/300x400/?building,project,apartments -->
                         <img src="{{ asset('storage/images/cover/'.$project->cover) }}" class="" alt="" style="" />
@@ -71,8 +67,7 @@
                                 @endforeach
                             </div>
                             <div class="finished-badge pe-lg-2">
-                                <div
-                                    class="badge {{ $project->progress >= '80' ? 'bg-success' : 'bg-warning' }} text-uppercase shadow-sm py-2 py-md-2 px-md-2 px-lg-2 py-lg-2 rounded rounded-2">
+                                <div class="badge {{ $project->progress >= '80' ? 'bg-success' : 'bg-warning' }} text-uppercase shadow-sm py-2 py-md-2 px-md-2 px-lg-2 py-lg-2 rounded rounded-2">
                                     {{ $project->progress }}% Finished
                                 </div>
                             </div>
@@ -175,22 +170,17 @@
 
                         <div class="mx-auto mb-5 mt-5 siteProgressAlert">
                             @if($siteProgress)
-                            <div class="row progressCard bg-secondary d-flex rounded rounded-3 overflow-hidden"
-                                style="max-height:200px; box-shadow:1px 1px 6px #eac376;">
-                                <div class=" col-4 col-md-3 col-lg-2 p-1 p-md-2">
-                                    <div id="siteprogressId"
-                                        class="siteprogressImage bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative h-100  rounded rounded-3"
-                                        style="width:100%;cursor:pointer">
+                            <div class="row progressCard bg-secondary d-flex rounded rounded-3 overflow-hidden" style="max-height:200px; box-shadow:1px 1px 6px #eac376;">
+                                <div class=" col-4 col-md-3 col-lg-2 p-1 p-md-2 overflow-hidden" style="max-height:170px">
+                                    <div id=" siteprogressId{{$siteProgress->id}}" class="siteprogressImage bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative h-100  rounded rounded-3" style="width:100%;cursor:pointer">
                                         @foreach ($siteProgress->images as $key => $image)
                                         @if ($key == 0)
-                                        <img src="{{ asset('storage/images/siteimages/' . $image->image) }}" alt=""
-                                            class="w-100 h-100">
+                                        <img src="{{ asset('storage/images/siteimages/' . $image->image) }}" alt="" class="w-100 h-100" style="object-fit:fill" />
                                         @endif
                                         @endforeach
                                     </div>
                                 </div>
-                                <div
-                                    class="col-8 col-md-9 col-lg-10 d-flex align-items-baseline justify-content-start py-2">
+                                <div class="col-8 col-md-9 col-lg-10 d-flex align-items-baseline justify-content-start py-2">
 
                                     <div class="d-flex flex-column justify-content-center align-items-start w-100">
                                         <div class="W-100 align-self-baseline align-self-md-end ">
@@ -201,13 +191,11 @@
                                                 </small>
                                             </div>
                                         </div>
-                                        <div class="card-title  fw-bold text-primary mb-3"
-                                            style="min-height:50px;max-height:100px;">
+                                        <div class="card-title  fw-bold text-primary mb-3" style="min-height:50px;max-height:100px;">
                                             {{$siteProgress->title}}
                                         </div>
                                         <div class="d-flex justify-content-start align-items-center">
-                                            <a href="{{ route('client-siteProgress.show', ['id' => $siteProgress->id]) }}"
-                                                class="btn btn-sm btn-outline-primary me-2">
+                                            <a href="{{ route('client-siteProgress.show', ['id' => $siteProgress->id]) }}" class="btn btn-sm btn-outline-primary me-2">
                                                 <i class="bi bi-eye text-primary"></i>
                                                 Show Detail
                                             </a>
@@ -241,10 +229,8 @@
                     <!-- 360* images -->
                     @if ($project->three_sixty_image != '')
                     <div class="col" style="aspect-ratio: 1;">
-                        <a data-vbtype="iframe" href="{{ url('panorama/' . $project->id) }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="1000px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/360Images/' . $project->three_sixty_image) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                        <a data-vbtype="iframe" href="{{ url('panorama/' . $project->id) }}" class="myGallery" data-gall="myGallery" data-maxwidth="1000px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/360Images/' . $project->three_sixty_image) }}" style="width: 100%;height:100%;object-fit:cover;" alt="">
                         </a>
                     </div>
                     @endif
@@ -253,83 +239,65 @@
                     <!-- preview Image -->
                     @if($project->previewimages->small_img1)
                     <div class="col" style="aspect-ratio: 1;">
-                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img1 }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img1) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="" />
+                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img1 }}" class="myGallery" data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img1) }}" style="width: 100%;height:100%;object-fit:cover;" alt="" />
                         </a>
                     </div>
                     @endif
                     @if($project->previewimages->small_img2)
                     <div class="col" style="aspect-ratio: 1;">
-                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img2 }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img2) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img2 }}" class="myGallery" data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img2) }}" style="width: 100%;height:100%;object-fit:cover;" alt="">
                         </a>
                     </div>
                     @endif
                     @if($project->previewimages->small_img3)
                     <div class="col" style="aspect-ratio: 1;">
-                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img3 }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img3) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img3 }}" class="myGallery" data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img3) }}" style="width: 100%;height:100%;object-fit:cover;" alt="">
                         </a>
                     </div>
                     @endif
                     @if($project->previewimages->small_img4)
                     <div class="col" style="aspect-ratio: 1;">
-                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img4 }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img4) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img4 }}" class="myGallery" data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img4) }}" style="width: 100%;height:100%;object-fit:cover;" alt="">
                         </a>
                     </div>
                     @endif
                     @if($project->previewimages->small_img5)
                     <div class="col" style="aspect-ratio: 1;">
-                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img5 }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img5) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img5 }}" class="myGallery" data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img5) }}" style="width: 100%;height:100%;object-fit:cover;" alt="">
                         </a>
                     </div>
                     @endif
                     @if($project->previewimages->small_img6)
                     <div class="col" style="aspect-ratio: 1;">
-                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img6 }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img6) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img6 }}" class="myGallery" data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img6) }}" style="width: 100%;height:100%;object-fit:cover;" alt="">
                         </a>
                     </div>
                     @endif
                     @if($project->previewimages->small_img7)
                     <div class="col" style="aspect-ratio: 1;">
-                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img7 }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img7) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img7 }}" class="myGallery" data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img7) }}" style="width: 100%;height:100%;object-fit:cover;" alt="">
                         </a>
                     </div>
                     @endif
                     @if($project->previewimages->small_img8)
                     <div class="col" style="aspect-ratio: 1;">
 
-                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img8 }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img8) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img8 }}" class="myGallery" data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img8) }}" style="width: 100%;height:100%;object-fit:cover;" alt="">
                         </a>
                     </div>
                     @endif
                     @if($project->previewimages->small_img9)
                     <div class="col" style="aspect-ratio: 1;">
-                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img9 }}" class="myGallery"
-                            data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
-                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img9) }}"
-                                style="width: 100%;height:100%;object-fit:cover;" alt="">
+                        <a href="/storage/images/gallery/{{ $project->previewimages->small_img9 }}" class="myGallery" data-gall="myGallery" data-maxwidth="600px" data-overlay="#423e3ddf">
+                            <img src="{{ asset('storage/images/gallery/' . $project->previewimages->small_img9) }}" style="width: 100%;height:100%;object-fit:cover;" alt="">
                         </a>
                     </div>
                     @endif
@@ -355,15 +323,11 @@
                     </div>
                     <div class="col-12">
                         <div class="mx-auto py-3">
-                            <div
-                                class="row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-2 gy-3 g-md-3 g-lg-5">
+                            <div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-2 gy-3 g-md-3 g-lg-5">
                                 @foreach($albums as $album)
                                 <div class="col text-center">
-                                    <a href="{{ route('client-album.show', ['id' => $album->id]) }}" title="Detail"
-                                        class="text-decoration-none">
-                                        <div id="album{{$album->id}}"
-                                            class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg mb-3"
-                                            style="cursor:pointer">
+                                    <a href="{{ route('client-album.show', ['id' => $album->id]) }}" title="Detail" class="text-decoration-none">
+                                        <div id="album{{$album->id}}" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg mb-3" style="cursor:pointer">
                                             @if(count($album->albumTestImages) > 0)
                                             @php
                                             $lastImage = $album->albumTestImages->last();
@@ -372,17 +336,14 @@
                                             @if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png'
                                             ||
                                             $extension == 'gif')
-                                            <img src="{{ asset('storage/images/album/'.$lastImage->image) }}" id=""
-                                                alt="" class="w-100 h-100" style="object-fit: cover">
+                                            <img src="{{ asset('storage/images/album/'.$lastImage->image) }}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
                                             @elseif ($extension == 'pdf')
 
-                                            <canvas class="thumbnail pdf-canvas"
-                                                data-pdf-url="{{ asset('storage/images/album/'.$lastImage->image) }}"></canvas>
+                                            <canvas class="thumbnail pdf-canvas" data-pdf-url="{{ asset('storage/images/album/'.$lastImage->image) }}"></canvas>
 
                                             @endif
                                             @else
-                                            <img src="{{asset('images/photoPlaceholderWhite.png') }}" id="" alt=""
-                                                class="w-100 h-100 bg-black bg-opacity-25" style="object-fit: cover">
+                                            <img src="{{asset('images/photoPlaceholderWhite.png') }}" id="" alt="" class="w-100 h-100 bg-black bg-opacity-25" style="object-fit: cover">
                                             @endif
 
 
@@ -412,8 +373,7 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <iframe src="{{ $project->gmlink }}" class="w-100 h-100 iframe-map" allowfullscreen=""
-                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="{{ $project->gmlink }}" class="w-100 h-100 iframe-map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
@@ -441,42 +401,40 @@
 
 
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"
-    integrity="sha512-EmZuy6vd0ns9wP+3l1hETKq/vNGELFRuLfazPnKKBbDpgZL0sZ7qyao5KgVbGJKOWlAFPNn6G9naB/8WnKN43Q=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js" integrity="sha512-EmZuy6vd0ns9wP+3l1hETKq/vNGELFRuLfazPnKKBbDpgZL0sZ7qyao5KgVbGJKOWlAFPNn6G9naB/8WnKN43Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 
 
 <script>
-const canvases = document.querySelectorAll('.pdf-canvas');
+    const canvases = document.querySelectorAll('.pdf-canvas');
 
 
-for (let i = 0; i < canvases.length; i++) {
-    const canvas = canvases[i];
-    const pdfUrl = canvas.dataset.pdfUrl;
+    for (let i = 0; i < canvases.length; i++) {
+        const canvas = canvases[i];
+        const pdfUrl = canvas.dataset.pdfUrl;
 
-    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
-        pdf.getPage(1).then(function(page) {
-            const viewport = page.getViewport({
-                scale: 0.2
-            });
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-            page.render({
-                canvasContext: canvas.getContext('2d'),
-                viewport: viewport
-            }).promise.then(function() {
-                const imgDataUrl = canvas.toDataURL();
-                const img = new Image();
-                img.src = imgDataUrl;
-                img.classList = "w-100 h-100"
+        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+            pdf.getPage(1).then(function(page) {
+                const viewport = page.getViewport({
+                    scale: 0.2
+                });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                page.render({
+                    canvasContext: canvas.getContext('2d'),
+                    viewport: viewport
+                }).promise.then(function() {
+                    const imgDataUrl = canvas.toDataURL();
+                    const img = new Image();
+                    img.src = imgDataUrl;
+                    img.classList = "w-100 h-100"
 
-                canvas.parentNode.replaceChild(img, canvas);
+                    canvas.parentNode.replaceChild(img, canvas);
+                });
             });
         });
-    });
-}
+    }
 </script>
 @endsection
 

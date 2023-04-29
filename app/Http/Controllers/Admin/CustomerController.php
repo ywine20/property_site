@@ -14,9 +14,8 @@ class CustomerController extends Controller
 
     public function customersList()
     {
-        $customers = User::get();
+        $customers = User::all();
         // dd($customers->toArray());
-        dump($customers);
         return view('admin.customer.customerList', compact('customers'));
     }
 }
