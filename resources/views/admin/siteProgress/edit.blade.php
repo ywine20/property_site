@@ -103,7 +103,7 @@ img {
 
                             <div class="form- mb-3">
                                 <label for="description" class="form-label text-white-50">Description :</label>
-                                <textarea type="text" name="description" rows="20"
+                                <textarea type="text" name="description" rows="10"
                                     class="create-input form-control @error('description') is-invalid @enderror"
                                     id="description"
                                     required>{{ old('description', $siteProgress->description) }}</textarea>
@@ -122,7 +122,7 @@ img {
 
 
                                 <label for="images" class="form-label text-white-50">Images</label>
-                                <input type="file" name="images[]"
+                                <input type="file" name="images[]" accept="image/*"
                                     class="create-input form-control mb-3 @error('images.*') is-invalid @enderror @error('images') is-invalid @enderror"
                                     id="images" value="{{ old('images') }}" multiple>
                                 @error('images')

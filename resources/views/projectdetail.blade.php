@@ -35,13 +35,15 @@
 @endsection @section('content')
 <!-- main -->
 <main class="main">
-    <!-- back -->
-    <div class="back py-2 py-md-3">
-        <span class="backBtn" onclick="history.back()">
-            <i class="bi bi-chevron-left"></i><i>Back</i>
-        </span>
+    <div class="container-fluid px-0 px-md-2 back ">
+        <!-- back -->
+        <div class="container py-2 py-md-3 px-2 px-md-0">
+            <span class="backBtn" onclick="history.back()" style="cursor: pointer;">
+                <i class="bi bi-chevron-left"></i><i>Back</i>
+            </span>
+        </div>
+        <!-- end back -->
     </div>
-    <!-- end back -->
 
     <div class="container px-4 px-md-0 px-xl-2">
 
@@ -73,7 +75,7 @@
                             </div>
                         </div>
 
-                        <div class="pe-lg-5">
+                        <div class="pe-lg-4 pe-xl-5">
                             <div class="price-range my-3 my-md-3">
                                 <span class="">{{ $project->lower_price }} - {{ $project->upper_price }}
                                     Lakhs</span>
@@ -97,7 +99,7 @@
                                     <!-- No(19/21), 45<sup>th</sup> Street (lower block), Bothtaung TownShip, Yangon, Myanmar -->
                                 </div>
                             </div>
-                            <div class=" facts mt-4 mt-lg-3 mb-3 mb-md-3 mb-lg-4 mb-xl-5">
+                            <div class=" facts mt-4 mt-lg-3 mb-4 mb-md-3 mb-lg-4 mb-xl-5">
                                 <table class="table tb-sm project-card-table table-borderless mb-0">
                                     <tbody>
                                         <tr>
@@ -125,7 +127,7 @@
                                     @foreach ($amenity as $am)
                                     @foreach ($project->amenity as $pm)
                                     @if ($pm->id == $am->id)
-                                    <span class="bg-primary mx-1 my-1 px-2 rounded">
+                                    <span class="bg-primary mx-1 my-1 px-2 rounded d-inline-block">
                                         {{ $am->amenity }}
                                     </span>
                                     @endif
@@ -146,9 +148,9 @@
         <div class="pb-3 pb-md-4 pb-lg-5 project-item-price mt-5">
             <div class="priceImage">
                 <div class="row py-3">
-                    <div class="col-12 pt-5">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <img src="{{ asset('images/itemPrice.png') }}" alt="">
+                    <div class="col-5 col-md-4 col-lg-3 col-xl-2 pt-2 pt-md-3 pt-lg-5 mx-auto">
+                        <div class="d-flex justify-content-center align-items-center w-100 h-100 overflow-hidden">
+                            <img src="{{ asset('images/itemPrice.png') }}" alt="" class="w-100 h-100" style="object-fit:contain" />
                         </div>
                     </div>
                 </div>
@@ -159,39 +161,39 @@
 
     <!-- Site Progress  -->
     <div class="container-fluid  bg-secondary">
-        <div class="container latest-site-progress">
+        <div class="container latest-site-progress px-0">
             <div class="siteProgress">
-                <div class="row py-3">
-                    <div class="col-12 py-3 px-md-4 px-lg-5">
-                        <div class="d-flex justify-content-between align-items-center px-lg-5">
+                <div class="row py-3 ">
+                    <div class="col-12 py-3 px-3  px-md-4 px-lg-5">
+                        <div class="d-flex justify-content-between align-items-center">
                             <h4 class="text-uppercase text-primary">Site Progress</h4>
                             <a href="{{route('siteProgressList',$project->id)}}">ALL</a>
                         </div>
 
-                        <div class="mx-auto mb-5 mt-5 siteProgressAlert">
+                        <div class="mx-auto mt-4 my-md-5 px-2 px-md-0 siteProgressAlert">
                             @if($siteProgress)
-                            <div class="row progressCard bg-secondary d-flex rounded rounded-3 overflow-hidden" style="max-height:200px; box-shadow:1px 1px 6px #eac376;">
-                                <div class=" col-4 col-md-3 col-lg-2 p-1 p-md-2 overflow-hidden" style="max-height:170px">
+                            <div class="row progressCard bg-secondary d-flex rounded rounded-3 overflow-hidden " style="box-shadow:1px 1px 6px #eac376;">
+                                <div class=" col-4 col-md-3 col-xxl-2 p-1 p-md-2 overflow-hidden img-col">
                                     <div id=" siteprogressId{{$siteProgress->id}}" class="siteprogressImage bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative h-100  rounded rounded-3" style="width:100%;cursor:pointer">
                                         @foreach ($siteProgress->images as $key => $image)
                                         @if ($key == 0)
-                                        <img src="{{ asset('storage/images/siteimages/' . $image->image) }}" alt="" class="w-100 h-100" style="object-fit:fill" />
+                                        <img src="{{ asset('storage/images/siteimages/' . $image->image) }}" alt="" class="w-100 h-100" />
                                         @endif
                                         @endforeach
                                     </div>
                                 </div>
-                                <div class="col-8 col-md-9 col-lg-10 d-flex align-items-baseline justify-content-start py-2">
+                                <div class="col-8 col-md-9 col-xxl-10  d-flex align-items-baseline justify-content-start py-2">
 
                                     <div class="d-flex flex-column justify-content-center align-items-start w-100">
-                                        <div class="W-100 align-self-baseline align-self-md-end ">
-                                            <div class="time mb-1 ">
+                                        <div class="w-100 align-self-baseline align-self-md-end ">
+                                            <div class="time mb-1 text-end ">
                                                 <small class="text-white-50">
                                                     <i class="bi bi-clock text-white-50"></i>
                                                     {{ $siteProgress->created_at->format('j F, Y') }}
                                                 </small>
                                             </div>
                                         </div>
-                                        <div class="card-title  fw-bold text-primary mb-3" style="min-height:50px;max-height:100px;">
+                                        <div class="card-title  fw-bold text-primary mb-3 overflow-hidden">
                                             {{$siteProgress->title}}
                                         </div>
                                         <div class="d-flex justify-content-start align-items-center">
@@ -220,8 +222,8 @@
     <!-- gallery  -->
     <div class="container">
         <div class="pb-3 pb-md-4 pb-lg-5 project-gallery ">
-            <div class="gallery py-5">
-                <h3 class="text-uppercase mb-5">GALLERY</h3>
+            <div class="gallery py-3 py-md-5">
+                <h3 class="text-uppercase my-3 mb-4 mb-md-5 text-center text-md-start">GALLERY</h3>
 
                 <div class="row row-cols-2 row-cols-md-5 row-cols-xl-5 g-lg-3 g-md-2 g-1">
 
@@ -312,9 +314,9 @@
     <div class="container-fluid  bg-secondary bg-opacity-10">
         <div class="">
             <div class=" legal-document container">
-                <div class="row py-5">
+                <div class="row py-3 py-md-5">
                     <div class="col-12 py-3">
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-center justify-content-md-between align-items-center">
                             <h4 class="text-secondary text-uppercase">
                                 Legal Document
                             </h4>
@@ -368,8 +370,8 @@
     <!-- Map -->
     <div class="container">
         <div class="pb-3 pb-md-4 pb-lg-5 project-map">
-            <div class="map py-5">
-                <h4 class="text-uppercase mb-5">MAP</h4>
+            <div class="map py-3">
+                <h4 class="text-uppercase my-4 mb-md-5 text-center text-md-start">MAP</h4>
 
                 <div class="row">
                     <div class="col-12">
@@ -382,8 +384,8 @@
         <!-- Project Detail -->
         <div class="pb-3 pb-md-4 pb-lg-5 project-about">
             <div class="row">
-                <div class="col-12 text-start text-md-start">
-                    <h3 class="text-uppercase">Project Details</h3>
+                <div class="col-12 text-center text-md-start">
+                    <h3 class="text-uppercase mb-3 mb-md-4">Project Details</h3>
                     <small class=" lh-lg" style="white-space:pre-wrap">{{ $project->description }}</small>
                 </div>
             </div>

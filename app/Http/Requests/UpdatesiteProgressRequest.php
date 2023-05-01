@@ -24,7 +24,11 @@ class UpdatesiteProgressRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'project_id' => 'required|integer',
+            'title' => 'required|string|min:3|max:1000',
+            'description' => 'required|string|min:3',
+            'images' => 'nullable',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048|min:8',
         ];
     }
 }

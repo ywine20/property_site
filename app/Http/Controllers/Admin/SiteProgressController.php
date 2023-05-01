@@ -41,87 +41,85 @@ class SiteProgressController extends Controller
     public function store(StoresiteProgressRequest $request)
     {
         //  if($request->hasFile("cover")){
-            //         $file=$request->file("cover");
-            //         $imageName=time().'_'.$file->getClientOriginalName();
-            //         $file->storeAs('\public\sitecover',$imageName);
-            //         // $file->move(\public_path("cover/"),$imageName);
+        //         $file=$request->file("cover");
+        //         $imageName=time().'_'.$file->getClientOriginalName();
+        //         $file->storeAs('\public\sitecover',$imageName);
+        //         // $file->move(\public_path("cover/"),$imageName);
 
-            //         $progress =new Progress([
-                //             "title" =>$request->title,
-                //             "body" =>$request->body,
-                //             "cover" =>$imageName,
-                //         ]);
-                //        $progress->save();
-                //     }
+        //         $progress =new Progress([
+        //             "title" =>$request->title,
+        //             "body" =>$request->body,
+        //             "cover" =>$imageName,
+        //         ]);
+        //        $progress->save();
+        //     }
 
-                // return $request;
-                //         $progress =new siteProgress([
-                    //                         "title" =>$request->title,
-                    //                         "description" =>$request->description,
-                    //                         'project_id' => $request->project_id,
-                    //                     ]);
+        // return $request;
+        //         $progress =new siteProgress([
+        //                         "title" =>$request->title,
+        //                         "description" =>$request->description,
+        //                         'project_id' => $request->project_id,
+        //                     ]);
 
-                    $progress = new siteProgress();
-                    $progress->title = $request->title;
-                    $progress->description = $request->description;
-                    $progress->project_id = $request->project_id;
-                    $progress->save();
-                    // return $progress;
+        $progress = new siteProgress();
+        $progress->title = $request->title;
+        $progress->description = $request->description;
+        $progress->project_id = $request->project_id;
+        $progress->save();
+        // return $progress;
 
-                    foreach($request->file("images") as $file){
-                        $imageName='siteProgress'.time().'_'.$file->getClientOriginalName();
-                        $file->storeAs('/public/images/siteimages',$imageName);
-                        $image = new Image();
-                        $image->image = $imageName;
-                        $image->site_progress_id = $progress->id;
-                        $image->save();
+        foreach ($request->file("images") as $file) {
+            $imageName = 'siteProgress' . time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('/public/images/siteimages', $imageName);
+            $image = new Image();
+            $image->image = $imageName;
+            $image->site_progress_id = $progress->id;
+            $image->save();
+        }
 
-                    }
 
+        return redirect()->route('siteProgress.show', ['projectId' => $progress->project_id, 'id' => $progress->id])->with('status', 'Site progress created successfully.');
+    }
 
-                    return redirect()->route('siteProgress.show',['projectId'=>$progress->project_id,'id'=>$progress->id])->with('status', 'Site progress created successfully.');
-                }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\siteProgress  $siteProgress
+     * @return \Illuminate\Http\Response
+     */
+    public function show(siteProgress $siteProgress, $projectId, $siteProgressId)
+    {
 
-                /**
-                 * Display the specified resource.
-                 *
-                 * @param  \App\Models\siteProgress  $siteProgress
-                 * @return \Illuminate\Http\Response
-                 */
-                public function show(siteProgress $siteProgress, $projectId ,$siteProgressId)
-                {
+        $siteProgress = siteProgress::with('images')->findorfail($siteProgressId);
 
-                    $siteProgress = siteProgress::with('images')->findorfail($siteProgressId);
+        // pass the images to the view
+        return view('admin.siteProgress.show', [
+            'siteProgress' => $siteProgress,
+            // 'images' => $images,
 
-                    // pass the images to the view
-                    return view('admin.siteProgress.show', [
-                        'siteProgress' => $siteProgress,
-                        // 'images' => $images,
+        ]);
+        // return $request->all();
+        // return $siteProgress;
+    }
 
-                    ]);
-                    // return $request->all();
-                    // return $siteProgress;
-                }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\siteProgress  $siteProgress
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(siteProgress $siteProgress, $projectId, $siteProgressId)
+    {
+        $siteProgress = siteProgress::find($siteProgressId);
+        // unserialize the images
+        // $images = unserialize($siteProgress->images);
 
-                /**
-                 * Show the form for editing the specified resource.
-                 *
-                 * @param  \App\Models\siteProgress  $siteProgress
-                 * @return \Illuminate\Http\Response
-                 */
-                public function edit(siteProgress $siteProgress,$projectId,$siteProgressId)
-                {
-                    $siteProgress = siteProgress::find($siteProgressId);
-                    // unserialize the images
-                    // $images = unserialize($siteProgress->images);
+        // pass the images to the view
+        return view('admin.siteProgress.edit', [
+            'siteProgress' => $siteProgress,
+            // 'images' => $images,
 
-                    // pass the images to the view
-                    return view('admin.siteProgress.edit', [
-                        'siteProgress' => $siteProgress,
-                        // 'images' => $images,
-
-                    ]);
-
+        ]);
     }
 
     /**
@@ -131,30 +129,31 @@ class SiteProgressController extends Controller
      * @param  \App\Models\siteProgress  $siteProgress
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatesiteProgressRequest $request, $projectId,$id)
+    public function update(UpdatesiteProgressRequest $request, $projectId, $id)
     {
 
+        $progress = siteProgress::findOrFail($id);
+        $progress->title = $request->title;
+        $progress->description = $request->description;
+        $progress->update();
+        // $progress->update([
+        //     "title" => $request->title,
+        //     "description" => $request->description,
+        // ]);
+
         // return $request->all();
-        $progress=siteProgress::findOrFail($id);
-        $progress->update([
-            "title" =>$request->title,
-            "body"=>$request->description,
-        ]);
-
-        if($request->images){
-            foreach($request->file("images") as $file){
-                        $imageName='siteProgress'.time().'_'.$file->getClientOriginalName();
-                        $file->storeAs('/public/images/siteimages',$imageName);
-                        $image = new Image();
-                        $image->image = $imageName;
-                        $image->site_progress_id = $progress->id;
-                        $image->save();
-
-                    }
+        if ($request->images) {
+            foreach ($request->file("images") as $file) {
+                $imageName = 'siteProgress' . time() . '_' . $file->getClientOriginalName();
+                $file->storeAs('/public/images/siteimages', $imageName);
+                $image = new Image();
+                $image->image = $imageName;
+                $image->site_progress_id = $progress->id;
+                $image->save();
+            }
         }
 
-                    return redirect()->route('siteProgress.show',['projectId'=>$projectId,'id'=>$id]);
-
+        return redirect()->route('siteProgress.show', ['projectId' => $projectId, 'id' => $id])->with('status', 'Update Successful');
     }
 
     /**
@@ -163,34 +162,32 @@ class SiteProgressController extends Controller
      * @param  \App\Models\siteProgress  $siteProgress
      * @return \Illuminate\Http\Response
      */
-    public function destroy(siteProgress $siteProgress,$projectId,$id)
+    public function destroy(siteProgress $siteProgress, $projectId, $id)
     {
         // return $siteProgressId;
 
-         $siteProgress=siteProgress::findOrFail($id);
-         $images=Image::where("site_progress_id",$siteProgress->id)->get();
-         foreach($images as $image){
-                Storage::delete('public/images/siteimages/'.$image->image);
-                $image->delete();
-            }
-         $siteProgress->delete();
-         return back()->with('status','Deleted Successful');
-
-
+        $siteProgress = siteProgress::findOrFail($id);
+        $images = Image::where("site_progress_id", $siteProgress->id)->get();
+        foreach ($images as $image) {
+            Storage::delete('public/images/siteimages/' . $image->image);
+            $image->delete();
+        }
+        $siteProgress->delete();
+        return back()->with('status', 'Deleted Successful');
     }
 
-   public function imageDelete($siteProgressId,$id){
+    public function imageDelete($siteProgressId, $id)
+    {
 
         // return $id;
-    $siteProgress = SiteProgress::findOrFail($siteProgressId);
+        $siteProgress = SiteProgress::findOrFail($siteProgressId);
 
-    // Find the image by ID and delete it
-    $image = Image::findOrFail($id);
-    Storage::delete('public/images/siteimages/'.$image->image);
-    $image->delete();
+        // Find the image by ID and delete it
+        $image = Image::findOrFail($id);
+        Storage::delete('public/images/siteimages/' . $image->image);
+        $image->delete();
 
-    // return redirect()->back()->with('status', 'Image deleted successfully.');
-    return redirect()->to(url()->previous()."#imagesDiv")->with('status', 'Image deleted successfully.');
-
-   }
+        // return redirect()->back()->with('status', 'Image deleted successfully.');
+        return redirect()->to(url()->previous() . "#imagesDiv")->with('status', 'Image deleted successfully.');
+    }
 }
