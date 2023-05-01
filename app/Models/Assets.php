@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Assets extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'customer_id',
         'project_id',
         'site_progress',
         'legal_document',
     ];
 
-    public function project(){
+    public function project()
+    {
         return $this->belongsTo(Project::class);
     }
-}
 
+}

@@ -19,6 +19,7 @@ use Intervention\Image\Facades\Image;
 
 use App\Http\Requests\StoreCustomerProfileRequest;
 use App\Http\Requests\UpdateCustomerProfileRequest;
+use App\Models\siteProgress;
 
 class CustomerProfileController extends Controller
 {
@@ -32,7 +33,6 @@ class CustomerProfileController extends Controller
     {
         $user = User::findOrFail($id);
         $assets = Assets::where('customer_id', $id)->get();
-
         if (isset($assets) && count($assets) > 0) {
             $projectIds = [];
             foreach ($assets as $asset) {
@@ -47,6 +47,7 @@ class CustomerProfileController extends Controller
                     $customerProjects->push($project);
                 }
             }
+
             return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets]);
             // return view('customer.profile')->with('redeemSuccess', 'Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.');
         } else {

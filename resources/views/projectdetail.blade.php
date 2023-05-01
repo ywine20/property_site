@@ -169,7 +169,6 @@
                             <h4 class="text-uppercase text-primary">Site Progress</h4>
                             <a href="{{route('siteProgressList',$project->id)}}">ALL</a>
                         </div>
-
                         <div class="mx-auto mt-4 my-md-5 px-2 px-md-0 siteProgressAlert">
                             @if($siteProgress)
                             <div class="row progressCard bg-secondary d-flex rounded rounded-3 overflow-hidden " style="box-shadow:1px 1px 6px #eac376;">
@@ -197,7 +196,7 @@
                                             {{$siteProgress->title}}
                                         </div>
                                         <div class="d-flex justify-content-start align-items-center">
-                                            @if (auth()->guard('user')->check())
+                                            @if($assets == null || $assets->site_progress != '1')
                                             <a href="{{ route('client-siteProgress.show', ['id' => $siteProgress->id]) }}" class="btn btn-sm btn-outline-primary me-2">
                                                 <i class="bi bi-eye text-primary"></i>
                                                 Show Detail
@@ -215,15 +214,12 @@
                             @endif
 
                         </div>
-
-
-
                     </div>
 
                 </div>
             </div>
         </div>
-        @if (!auth()->guard('user')->check())
+        @if($assets == null || $assets->site_progress != '1')
         <div id="progressLock" class="lockSection px-0 w-100 h-100 position-absolute bg-black bg-opacity-50 start-0 top-0 text-center d-flex align-items-center justify-content-center" style="backdrop-filter:blur(10px)">
             <div class="d-flex flex-column align-items-center justify-content-center">
                 <img src="{{asset('images/lock.png')}}" alt="">
@@ -236,6 +232,15 @@
             </div>
         </div>
         @endif
+        <!-- @if (!auth()->guard('user')->check()) -->
+
+        <!-- @if($assets && $assets->site_progress == '1')
+        allowed
+        @else -->
+
+        <!-- @endif -->
+
+        <!-- @endif -->
     </div>
 
 
@@ -348,7 +353,7 @@
                             <div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-2 gy-3 g-md-3 g-lg-5">
                                 @foreach($albums as $album)
                                 <div class="col text-center">
-                                    @if (auth()->guard('user')->check())
+                                    @if($assets == null || $assets->legal_document != '1')
                                     <a href="{{ route('client-album.show', ['id' => $album->id]) }}" title="Detail" class="text-decoration-none">
                                         @else
                                         <a href="#" title="Detail" class="text-decoration-none">
@@ -387,7 +392,7 @@
                 </div>
             </div>
         </div>
-        @if (!auth()->guard('user')->check())
+        @if($assets == null || $assets->legal_document != '1')
         <div id="albumLock" class="lockSection  px-0 w-100 h-100 position-absolute bg-black bg-opacity-50 start-0 top-0 text-center d-flex align-items-center justify-content-center" style="backdrop-filter:blur(10px)">
             <div class="d-flex flex-column align-items-center justify-content-center">
                 <img src="{{asset('images/lock.png')}}" alt="">

@@ -50,7 +50,7 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="mb-3 text-primary header">Redeem Code Create</h4>
-                           
+
                         </div>
                     </div>
 
@@ -101,10 +101,10 @@
                                                     </label>
 
                                                     @foreach ($projects as $project)
-                                                        <label>
-                                                            <input type="checkbox" name="projectIds[]" value="{{ $project->id }}" class="ckkBox val form-check-input " />
-                                                            <span class="text-white">{{ $project->project_name }}</span>
-                                                        </label>
+                                                    <label>
+                                                        <input type="checkbox" name="projectIds[]" value="{{ $project->id }}" class="ckkBox val form-check-input " />
+                                                        <span class="text-white">{{ $project->project_name }} - {{$project->town->name}}, {{$project->city->name}}</span>
+                                                    </label>
                                                     @endforeach
 
                                                     <label class="notFound none text-white-50">Not found result</label>
@@ -150,8 +150,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
+
+
                                 <div id="error-message" class="text-danger"></div>
 
                                 <!-- Generate Code Button -->
@@ -202,8 +202,8 @@
 <!-- this is for multiple select -->
 <script>
     //generate redeem code with modal
-    $(document).ready(function () {
-        $('#redeem-code-form').submit(function (event) {
+    $(document).ready(function() {
+        $('#redeem-code-form').submit(function(event) {
             event.preventDefault();
             var form = $(this);
             var formData = form.serialize(); // serialize the form data
@@ -211,16 +211,16 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                dataType : 'json',
+                dataType: 'json',
                 type: 'POST',
                 url: 'http://127.0.0.1:8000/admin/redeemCodes',
-                data : formData,
-                success: function (data) {
+                data: formData,
+                success: function(data) {
                     $('#redeem-code').text(data.code);
                     $('#redeem-modal').modal('show');
                 },
-                
-                error: function (xhr, status, error) {
+
+                error: function(xhr, status, error) {
                     $('#error-message').text(xhr.responseJSON.error);
                 }
             });

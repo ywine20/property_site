@@ -5,7 +5,7 @@
 
 <!-- main -->
 <main class="main">
-<x-profile :user='$user' />
+    <x-profile :user='$user' />
     <section id="redeem">
 
         <div class="w-100 bg-white">
@@ -42,9 +42,9 @@
                                 <div class="w-100" id="redeemInput">
                                     <input type="text" name="code" maxlength="50" class="form-control form-control-lg @if(session('InvalidCode')) is-invalid @endif" placeholder="S34DFGH5HJ77YHFG" require>
                                     @if(session('InvalidCode'))
-                                        <div class="text-danger invalid-feedback">
-                                            {{ session('InvalidCode') }}
-                                        </div>
+                                    <div class="text-danger invalid-feedback">
+                                        {{ session('InvalidCode') }}
+                                    </div>
                                     @endif
                                 </div>
                                 <button type="submit" class="btn btn-secondary btn-lg rounded rounded-1 text-primary fw-bold ms-0 ms-md-3 mt-3 mt-md-0 redeemSubmitBtn">Submit</button>
@@ -53,14 +53,14 @@
                     </form>
 
                     @if(session('redeemSuccess'))
-                        <div class="alert alert-success alert-dismissible show mt-3 mt-md-5 animate__animated animate__fadeInDown" role="alert">
-                            <div class="d-flex flex-column flex-md-row justify-content-start align-items-center text-center text-md-start">
-                                <i class="bi bi-check2 h3 text-success mb-0 fs-bolder d-none d-md-flex me-3"></i>
-                                {{ session('redeemSuccess') }}
-                            </div>
+                    <div class="alert alert-success alert-dismissible show mt-3 mt-md-5 animate__animated animate__fadeInDown" role="alert">
+                        <div class="d-flex flex-column flex-md-row justify-content-start align-items-center text-center text-md-start">
+                            <i class="bi bi-check2 h3 text-success mb-0 fs-bolder d-none d-md-flex me-3"></i>
+                            {{ session('redeemSuccess') }}
                         </div>
+                    </div>
                     @endif
-                   
+
                 </div>
             </div>
 

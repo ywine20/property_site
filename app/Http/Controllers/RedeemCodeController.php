@@ -30,7 +30,8 @@ class RedeemCodeController extends Controller
         return view('admin.redeemCode.generate-code', compact('projects'));
     }
 
-    public function generateCode(){
+    public function generateCode()
+    {
         return view('admin.tier.generate-code');
     }
 
@@ -56,7 +57,7 @@ class RedeemCodeController extends Controller
         // Validation code ends here
 
         // dd($request->progress);
-        $code = Str::random(40); // make redeem code
+        $code = Str::random(16); // make redeem code
         $progress = ($request->progress === "progressAllowed" ? true : ($request->progress === "progressNotAllowed" ? false : null)); // making boolean value of progress according from the request
         $legalDocument = ($request->legalDocument === "LDallowed" ? true : ($request->legalDocument === "LDnotAllowed" ? false : null)); // making boolean value of legalDocument according from the request
 
@@ -89,7 +90,8 @@ class RedeemCodeController extends Controller
         return response()->json(['code' => $code]);
     }
 
-    public function code(Request $request){
+    public function code(Request $request)
+    {
         return $request->all();
     }
 

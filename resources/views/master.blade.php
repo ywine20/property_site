@@ -306,9 +306,7 @@
                                                 @endif
                                             </div>
                                             <div class="">
-                                                @if( isset(Auth::guard('user')->user()->profile_img))
-                                                <p>shi tal image</p>
-                                                @endif
+
                                                 <a href="{{route('profile',Auth::guard('user')->user()->id)}}" class="text-primary text-decoration-none"><span class="d-block fw-bold usernameLargeDevice usernameToShort text-primary">{{Auth::guard('user')->user()->name}}</span></a>
                                                 <a href="{{route('profile',Auth::guard('user')->user()->id)}}" class="text-primary text-decoration-none"><span class="text-primary emailToShort">{{Auth::guard('user')->user()->email}}</span></a>
                                             </div>

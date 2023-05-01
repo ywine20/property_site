@@ -7,6 +7,7 @@ use App\Models\Visitor;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Amenity;
+use App\Models\Assets;
 use App\Models\Category;
 // use App\Models\Address;
 use App\Models\Town;
@@ -14,6 +15,7 @@ use App\Models\City;
 use App\Models\siteProgress;
 // use App\Models\Gallery;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
@@ -140,16 +142,16 @@ class ProjectListController extends Controller
         $findSearch = $request->get('search');
 
 
-        if( $request->min_price && $request->max_price ){
-           $minPrice  = (int) $request->min_price;
-           $maxPrice  = (int) $request->max_price;
+        if ($request->min_price && $request->max_price) {
+            $minPrice  = (int) $request->min_price;
+            $maxPrice  = (int) $request->max_price;
 
-           $projects = $projects->whereHas('unitprice', function ($query) use ($minPrice, $maxPrice) {
-            $query->where('price', '>=', $minPrice)
-                  ->where('price', '<=', $maxPrice);
-        })->get();
+            $projects = $projects->whereHas('unitprice', function ($query) use ($minPrice, $maxPrice) {
+                $query->where('price', '>=', $minPrice)
+                    ->where('price', '<=', $maxPrice);
+            })->get();
 
-        // dd($projects->toArray());
+            // dd($projects->toArray());
 
             // $min_projects = $projects->whereBetween('lower_price',[$min_price,$max_price])->get();
             // $max_projects = $projects->whereBetween('upper_price',[$min_price,$max_price])->get();
@@ -161,8 +163,8 @@ class ProjectListController extends Controller
             // $collection = collect($min_projects,$max_projects);
             // $unique = $collection->unique();
             // $projects = $unique->values()->all();
-            return view('projectListAdvance', compact('projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro','findSearch',));             
-        }    
+            return view('projectListAdvance', compact('projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro', 'findSearch',));
+        }
 
 
         $findCat = Category::where('category_id', $category_id)->pluck('category_name')->first();
@@ -239,6 +241,14 @@ class ProjectListController extends Controller
             $siteProgress = siteProgress::latest()->with('images')->where('project_id', $project->id)->first();
             $albums = albumTest::where('project_id', $project->id)->get();
 
+            $assets =  Assets::where('customer_id',  Auth::guard('user')->user()->id)
+                ->where('project_id', $id)
+                ->first();
+
+            // if ($siteProgressAssets && $siteProgressAssets->site_progress == "1") {
+            //     return $siteProgressAssets;
+            // }
+
 
             $expiresAt = now()->addHours(3);
 
@@ -250,7 +260,7 @@ class ProjectListController extends Controller
             $project->viewer = $count;
             $project->update();
 
-            return view('projectdetail', compact('project', 'amenity', 'city', 'town', 'category', 'siteProgress', 'albums'));
+            return view('projectdetail', compact('project', 'amenity', 'city', 'town', 'category', 'siteProgress', 'albums', 'assets'));
         } else {
             return redirect()->back();
         }

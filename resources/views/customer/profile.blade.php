@@ -61,8 +61,8 @@
                                     {{ $customerProject->city->name }}.
                                 </td>
                                 <td class="">
-                                    @if ( $customerProject->assets()->latest()->first()->site_progress )
-                                    <p class="site-progress">Latest progress</p>
+                                    @if ( $customerProject->assets()->latest()->first()->site_progress == '1' )
+                                    <p class="site-progress">{{$customerProject}}</p>
                                     @else
                                     <span class="badge text-bg-danger bg-opacity-50">
                                         Not Allow</span>
@@ -76,7 +76,7 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="">
+                                    <a href="{{ url('detail/'.$customerProject->id) }}">
                                         <i class="bi bi-eye fs-4 text-primary"></i>
                                     </a>
                                 </td>
