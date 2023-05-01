@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+// use Intervention\Image\ImageManagerStatic as Image;
+// use Intervention\Image\Facades\Image as InterventionImage;
+use Intervention\Image\Facades\Image;
+
 use App\Http\Requests\StoreCustomerProfileRequest;
 use App\Http\Requests\UpdateCustomerProfileRequest;
 
@@ -28,7 +32,7 @@ class CustomerProfileController extends Controller
     {
         $user = User::findOrFail($id);
         $assets = Assets::where('customer_id', $id)->get();
-      
+
         if (isset($assets) && count($assets) > 0) {
             $projectIds = [];
             foreach ($assets as $asset) {
@@ -48,7 +52,6 @@ class CustomerProfileController extends Controller
         } else {
             return view("customer.profile", ["user" => $user, 'assets' => $assets]);
         }
-        
     }
 
     public function profileSetting($id)
@@ -67,37 +70,45 @@ class CustomerProfileController extends Controller
     {
 
         $user = Auth::guard('user')->user();
-        $validator = Validator::make($request->all(),[
-            'profile_img' => 'required|mimes:jpeg,png,jpg|max:1024|'
-        ],
-        [
-            'profile_img.mimes' => 'Profile image must be a file of type: jpeg, png, jpg.',
-            'profile_img.dimensions' => 'Profile image must be ratio 1/1',
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'profile_img' => 'required|mimes:jpeg,png,jpg|max:1024'
+            ],
+            [
+                'profile_img.mimes' => 'Profile image must be a file of type: jpeg, png, jpg.',
+                'profile_img.dimensions' => 'Profile image must be ratio 1/1',
 
-        ]);
+            ]
+        );
 
         if ($validator->fails()) {
-            return response()->json(['status'=>'0','error' => $validator->errors()->toArray(),'request'=>$request->all()], 422);
-        }else{
+            return response()->json(['status' => '0', 'error' => $validator->errors()->toArray(), 'request' => $request->all()], 422);
+        } else {
             $userProfile = $user->profile_img;
-            $uploadFileName = $request->file('profile_img')->getClientOriginalName();
-    
-            if($request->hasFile('profile_img')){
-                    if($userProfile != 'user.png'){
-                        Storage::delete('public/images/client-profile/'.$user->profile_img);
-                    }
+            // $uploadFileName = $request->file('profile_img')->getClientOriginalName();
+
+
+
+            // delete local image
+            if ($request->hasFile('profile_img')) {
+                if ($userProfile != 'user.png') {
+                    Storage::delete('public/images/client-profile/' . $user->profile_img);
+                }
             }
-            
-            $profileImg = $request->file('profile_img');
-            $profileImgName = "profile_".uniqid().".".$profileImg->getClientOriginalExtension();
-            $profileImgPath = $profileImg->storeAs('public/images/client-profile',$profileImgName);
+
+            // store new image 
+            $file = $request->file('profile_img');
+            $profileImg = Image::make($file->path())->fit(300);
+            $profileImgName = "profile_" . uniqid() . "." . $file->getClientOriginalExtension();
+            // $profileImgPath = $profileImg->storeAs('public/images/client-profile/', $profileImgName);
+            $profileImg->save(storage_path("app/public/images/client-profile/{$profileImgName}"));
+
             $user->profile_img = $profileImgName;
             $user->save();
-        
-            return response()->json(['status'=>'1','message' => 'Profile image updated successfully','profile_name'=>$profileImgName],200);
-        }
 
-    
+            return response()->json(['status' => '1', 'message' => 'Profile image updated successfully', 'profile_name' => $profileImgName], 200);
+        }
     }
 
     public function changeInfo(Request $request)
@@ -105,43 +116,43 @@ class CustomerProfileController extends Controller
 
 
         $user = Auth::guard('user')->user();
-          $validator = Validator::make($request->all(),[
-            "username"=>"required|min:3|max:50|",
-            "email" => "required|email|unique:users,email,".$user->id,
-            "phone"=>"nullable",
-            "tier"=> 'nullable|in:bronze,silver,gold,platinum,diamond',
+        $validator = Validator::make($request->all(), [
+            "username" => "required|min:3|max:50|",
+            "email" => "required|email|unique:users,email," . $user->id,
+            "phone" => "nullable",
+            "tier" => 'nullable|in:bronze,silver,gold,platinum,diamond',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status'=>'0','error' => $validator->errors()->toArray(),'request'=>$request->all()], 422);
-        }else{
-              //Change Password
-              $user->name = ucwords($request->username);
-              $user->email = $request->email;
-              $user->phone = $request->phone;
-              $user->save();
-              return response()->json(['status'=>'1','message' => 'Profile Info updated successfully','userInfo'=>$user],200);
-
+            return response()->json(['status' => '0', 'error' => $validator->errors()->toArray(), 'request' => $request->all()], 422);
+        } else {
+            //Change Password
+            $user->name = ucwords($request->username);
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->save();
+            return response()->json(['status' => '1', 'message' => 'Profile Info updated successfully', 'userInfo' => $user], 200);
         }
     }
 
-    public function changePassword(Request $request){
-      
-        $validator = Validator::make($request->all(), [ 
-            'currentPassword' => ['required',new MatchOldPassword],     
+    public function changePassword(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'currentPassword' => ['required', new MatchOldPassword],
             'newPassword' => 'required|string|min:6|max:16',
             'confirmPassword' => 'required|same:newPassword'
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status'=>'0','error' => $validator->errors()->toArray(),'request'=>$request->all()], 422);
-        }else{
-              //Change Password
-         $user = auth()->guard('user')->user();
-         $user->password = Hash::make($request->newPassword);
-         $user->save();
-// add data to the session
-         return response()->json(['status'=>'1','message' => 'Password updated successfully']);
+            return response()->json(['status' => '0', 'error' => $validator->errors()->toArray(), 'request' => $request->all()], 422);
+        } else {
+            //Change Password
+            $user = auth()->guard('user')->user();
+            $user->password = Hash::make($request->newPassword);
+            $user->save();
+            // add data to the session
+            return response()->json(['status' => '1', 'message' => 'Password updated successfully']);
         }
     }
 

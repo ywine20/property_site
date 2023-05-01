@@ -201,7 +201,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-
     //Change Profile Image
     const profileImageInput = document.getElementById('profileImageInput');
     const uploadBtn = document.getElementById('uploadBtn');
@@ -233,7 +232,7 @@
                     }
                     document.querySelector('#profile_img_large').src = profileImage.src;
                     //sweetalert box show if success
-                  if (response.data.status == '1') {
+                    if (response.data.status == '1') {
                         const Toast = Swal.mixin({
                             toast: true,
                             showConfirmButton: false,
@@ -257,6 +256,7 @@
                 .catch(error => {
                     if (error.response) {
                         let profileImgError = error.response.data.error;
+                        console.log(error.response);
                         console.log(profileImgError);
                         document.querySelector('.profileImgError').innerText = profileImgError.profile_img ? profileImgError.profile_img : '';
                     }
@@ -311,32 +311,32 @@
                 saveBtn.disabled = true;
                 // document.querySelector('#info-change-success').style.display = 'flex';
 
-                  //sweetalert box show if success
-                  if (response.data.status == '1') {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            showConfirmButton: false,
-                            showCloseButton: true,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
-                        Toast.fire({
-                            icon: 'success',
-                            background: 'white',
-                            color: 'green',
-                            position: 'top',
-                            title: response.data.message,
-                        });
+                //sweetalert box show if success
+                if (response.data.status == '1') {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        showConfirmButton: false,
+                        showCloseButton: true,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        background: 'white',
+                        color: 'green',
+                        position: 'top',
+                        title: response.data.message,
+                    });
 
-                        console.log(response.data.userInfo['name']);
-                        document.querySelector('.name').innerHTML = response.data.userInfo['name'];
-                        document.querySelector('.email').innerHTML = response.data.userInfo['email'];
-                        document.querySelector('.phone').innerHTML = response.data.userInfo['phone'];
-                    }
+                    console.log(response.data.userInfo['name']);
+                    document.querySelector('.name').innerHTML = response.data.userInfo['name'];
+                    document.querySelector('.email').innerHTML = response.data.userInfo['email'];
+                    document.querySelector('.phone').innerHTML = response.data.userInfo['phone'];
+                }
 
             }).catch(error => {
                 document.querySelector('.usernameError').innerText = '';
@@ -427,6 +427,5 @@
         }
 
     )
-
 </script>
 @endpush
