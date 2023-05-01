@@ -68,7 +68,7 @@ class CustomerProfileController extends Controller
 
         $user = Auth::guard('user')->user();
         $validator = Validator::make($request->all(),[
-            'profile_img' => 'required|mimes:jpeg,png,jpg|max:1024|dimensions:ratio=1/1'
+            'profile_img' => 'required|mimes:jpeg,png,jpg|max:1024|'
         ],
         [
             'profile_img.mimes' => 'Profile image must be a file of type: jpeg, png, jpg.',

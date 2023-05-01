@@ -160,7 +160,7 @@
 
 
     <!-- Site Progress  -->
-    <div class="container-fluid  bg-secondary">
+    <div class="container-fluid  bg-secondary position-relative">
         <div class="container latest-site-progress px-0">
             <div class="siteProgress">
                 <div class="row py-3 ">
@@ -197,10 +197,17 @@
                                             {{$siteProgress->title}}
                                         </div>
                                         <div class="d-flex justify-content-start align-items-center">
+                                            @if (auth()->guard('user')->check())
                                             <a href="{{ route('client-siteProgress.show', ['id' => $siteProgress->id]) }}" class="btn btn-sm btn-outline-primary me-2">
                                                 <i class="bi bi-eye text-primary"></i>
                                                 Show Detail
                                             </a>
+                                            @else
+                                            <a href="#" class="btn btn-sm btn-outline-primary me-2">
+                                                <i class="bi bi-eye text-primary"></i>
+                                                Show Detail
+                                            </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -216,6 +223,19 @@
                 </div>
             </div>
         </div>
+        @if (!auth()->guard('user')->check())
+        <div id="progressLock" class="lockSection px-0 w-100 h-100 position-absolute bg-black bg-opacity-50 start-0 top-0 text-center d-flex align-items-center justify-content-center" style="backdrop-filter:blur(10px)">
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <img src="{{asset('images/lock.png')}}" alt="">
+                <div class="text-primary my-3">
+                    Upgrade your account for <a href="{{route('contact-form')}}" target="_blank" class="fw-bold text-decoration-none">Progress</a> section
+                </div>
+                <a href="{{route('contact-form')}}" target="_blank">
+                    <button class="btn btn-outline-primary">Contact Us</button>
+                </a>
+            </div>
+        </div>
+        @endif
     </div>
 
 
@@ -311,7 +331,7 @@
     <!-- end preview gallery -->
 
     <!-- Album  -->
-    <div class="container-fluid  bg-secondary bg-opacity-10">
+    <div class="container-fluid  bg-secondary bg-opacity-10 position-relative">
         <div class="">
             <div class=" legal-document container">
                 <div class="row py-3 py-md-5">
@@ -328,31 +348,34 @@
                             <div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-2 gy-3 g-md-3 g-lg-5">
                                 @foreach($albums as $album)
                                 <div class="col text-center">
+                                    @if (auth()->guard('user')->check())
                                     <a href="{{ route('client-album.show', ['id' => $album->id]) }}" title="Detail" class="text-decoration-none">
-                                        <div id="album{{$album->id}}" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg mb-3" style="cursor:pointer">
-                                            @if(count($album->albumTestImages) > 0)
-                                            @php
-                                            $lastImage = $album->albumTestImages->last();
-                                            $extension = pathinfo($lastImage->image, PATHINFO_EXTENSION);
-                                            @endphp
-                                            @if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png'
-                                            ||
-                                            $extension == 'gif')
-                                            <img src="{{ asset('storage/images/album/'.$lastImage->image) }}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
-                                            @elseif ($extension == 'pdf')
-
-                                            <canvas class="thumbnail pdf-canvas" data-pdf-url="{{ asset('storage/images/album/'.$lastImage->image) }}"></canvas>
-
+                                        @else
+                                        <a href="#" title="Detail" class="text-decoration-none">
                                             @endif
-                                            @else
-                                            <img src="{{asset('images/photoPlaceholderWhite.png') }}" id="" alt="" class="w-100 h-100 bg-black bg-opacity-25" style="object-fit: cover">
-                                            @endif
+                                            <div id="album{{$album->id}}" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg mb-3" style="cursor:pointer">
+                                                @if(count($album->albumTestImages) > 0)
+                                                @php
+                                                $lastImage = $album->albumTestImages->last();
+                                                $extension = pathinfo($lastImage->image, PATHINFO_EXTENSION);
+                                                @endphp
+                                                @if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png'
+                                                ||
+                                                $extension == 'gif')
+                                                <img src="{{ asset('storage/images/album/'.$lastImage->image) }}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
+                                                @elseif ($extension == 'pdf')
+
+                                                <canvas class="thumbnail pdf-canvas" data-pdf-url="{{ asset('storage/images/album/'.$lastImage->image) }}"></canvas>
+
+                                                @endif
+                                                @else
+                                                <img src="{{asset('images/photoPlaceholderWhite.png') }}" id="" alt="" class="w-100 h-100 bg-black bg-opacity-25" style="object-fit: cover">
+                                                @endif
 
 
-                                        </div>
-                                        <span class="text-black album-title">{{ $album->title }}</span>
-                                    </a>
-
+                                            </div>
+                                            <span class="text-black album-title">{{ $album->title }}</span>
+                                        </a>
                                 </div>
                                 @endforeach
 
@@ -364,6 +387,19 @@
                 </div>
             </div>
         </div>
+        @if (!auth()->guard('user')->check())
+        <div id="albumLock" class="lockSection  px-0 w-100 h-100 position-absolute bg-black bg-opacity-50 start-0 top-0 text-center d-flex align-items-center justify-content-center" style="backdrop-filter:blur(10px)">
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <img src="{{asset('images/lock.png')}}" alt="">
+                <div class="text-primary my-3   ">
+                    Upgrade your account for <a href="{{route('contact-form')}}" target="_blank" class="fw-bold text-decoration-none">Legal Documents</a> section
+                </div>
+                <a href="{{route('contact-form')}}" target="_blank">
+                    <button class="btn btn-outline-primary">Contact Us</button>
+                </a>
+            </div>
+        </div>
+        @endif
     </div>
 
 
