@@ -33,6 +33,7 @@ class CustomerProfileController extends Controller
     {
         $user = User::findOrFail($id);
         $assets = Assets::where('customer_id', $id)->get();
+        // dd($latestSiteProgress->toArray());
         if (isset($assets) && count($assets) > 0) {
             $projectIds = [];
             foreach ($assets as $asset) {
@@ -40,16 +41,24 @@ class CustomerProfileController extends Controller
                 array_push($projectIds, $projectId);
             }
             $customerProjects = collect();
+            $siteProgresses = collect();
             foreach ($projectIds as $projectId) {
                 $project = Project::where('id', $projectId)
                     ->with('town', 'city', 'assets')->first();
+                
+                $latestSiteProgress = siteProgress::where('project_id', $projectId)->latest()->first();
+                if ($latestSiteProgress) {
+                    $siteProgresses->push($latestSiteProgress);
+                }
+                // dd($latestSiteProgress->toArray());
+
                 if ($project) {
                     $customerProjects->push($project);
                 }
             }
-
-            return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets]);
-            // return view('customer.profile')->with('redeemSuccess', 'Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.');
+            dump($customerProjects->toArray());
+            dump($siteProgresses->toArray());
+            return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets, 'siteProgresses' => $siteProgresses]);
         } else {
             return view("customer.profile", ["user" => $user, 'assets' => $assets]);
         }

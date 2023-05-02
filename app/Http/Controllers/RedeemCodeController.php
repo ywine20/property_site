@@ -61,7 +61,6 @@ class RedeemCodeController extends Controller
         $progress = ($request->progress === "progressAllowed" ? true : ($request->progress === "progressNotAllowed" ? false : null)); // making boolean value of progress according from the request
         $legalDocument = ($request->legalDocument === "LDallowed" ? true : ($request->legalDocument === "LDnotAllowed" ? false : null)); // making boolean value of legalDocument according from the request
 
-
         $projectIds = $request->projectIds; // eg. [1,2,3,4,5] that is the project ids in the array.
 
         //check if all projects or custom projects
@@ -100,6 +99,7 @@ class RedeemCodeController extends Controller
     public function customerRedeemCodes(Request $request)
     {
         $redeemCodes = RedeemCode::where('random_code', $request->code)->get(); //get the related data of the redeemcode from the redeemCode table 
+        // dd($redeemCodes->toArray());
         $user = Auth::guard('user')->user(); //get the login user
 
         if (count($redeemCodes) != 0) {
@@ -113,7 +113,6 @@ class RedeemCodeController extends Controller
                     ]);
 
                     $projectId = $redeemCode->project_id; //get project Id which is related with the user
-
                     $asset = Assets::where('project_id', $projectId)->get()->toArray();
 
                     //check if the projects are already in the assets table or not
