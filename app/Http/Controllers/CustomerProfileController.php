@@ -30,39 +30,37 @@ class CustomerProfileController extends Controller
     }
 
     public function profile($id)
-{
-    // Retrieve the currently authenticated user's data
-    $user = Auth::guard('user')->user();
-
-    // Check if the requested ID matches the ID of the authenticated user
-    if ($id != $user->id) {
-        // abort(401);
-        return view("error");
-    }
-
-    // Retrieve the assets associated with the given customer ID
-    $assets = Assets::where('customer_id', $id)->get();
-
-    if (isset($assets) && count($assets) > 0) {
-        $projectIds = [];
-        foreach ($assets as $asset) {
-            $projectId = $asset->project_id;
-            array_push($projectIds, $projectId);
-        }
-        $customerProjects = collect();
-        foreach ($projectIds as $projectId) {
-            $project = Project::where('id', $projectId)
-                ->with('town', 'city', 'assets')->first();
-            if ($project) {
-                $customerProjects->push($project);
+    {
+        $user = User::findOrFail($id);
+        $assets = Assets::where('customer_id', $id)->get();
+        // dd($latestSiteProgress->toArray());
+        if (isset($assets) && count($assets) > 0) {
+            $projectIds = [];
+            foreach ($assets as $asset) {
+                $projectId = $asset->project_id;
+                array_push($projectIds, $projectId);
             }
-        }
+            $customerProjects = collect();
+            $siteProgresses = collect();
+            foreach ($projectIds as $projectId) {
+                $project = Project::where('id', $projectId)
+                    ->with('town', 'city', 'assets')->first();
+                
+                $latestSiteProgress = siteProgress::where('project_id', $projectId)->latest()->first();
+                if ($latestSiteProgress) {
+                    $siteProgresses->push($latestSiteProgress);
+                }
+                // dd($latestSiteProgress->toArray());
 
-        // Return the data to the view
-        return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets]);
-    } else {
-        // Return the data to the view
-        return view("customer.profile", ["user" => $user, 'assets' => $assets]);
+                if ($project) {
+                    $customerProjects->push($project);
+                }
+            }
+            dump($customerProjects->toArray());
+            dump($siteProgresses->toArray());
+            return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets, 'siteProgresses' => $siteProgresses]);
+        } else {
+            return view("customer.profile", ["user" => $user, 'assets' => $assets]);
     }
 }
 

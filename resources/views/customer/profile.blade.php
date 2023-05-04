@@ -61,11 +61,19 @@
                                     {{ $customerProject->city->name }}.
                                 </td>
                                 <td class="">
-                                    @if ( $customerProject->assets()->latest()->first()->site_progress == '1' )
-                                    <p class="site-progress">{{$customerProject}}</p>
+                                    @if ( $customerProject->assets()->latest()->first()->site_progress )
+                                        @foreach($siteProgresses as $siteProgress)
+                                            @if ($siteProgress->project_id === $customerProject->id)
+                                                    <p class="site-progress">{{ $siteProgress->title }}</p>
+                                            @endif
+                                        @endforeach
                                     @else
                                     <span class="badge text-bg-danger bg-opacity-50">
                                         Not Allow</span>
+                                    @endif
+
+                                    @if (empty($siteProgresses->where('project_id', $customerProject->id)->first()))
+                                        <p class="site-progress">--</p>
                                     @endif
                                 </td>
                                 <td class="text-center">
