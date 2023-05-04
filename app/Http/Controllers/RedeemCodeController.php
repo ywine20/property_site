@@ -97,6 +97,57 @@ class RedeemCodeController extends Controller
 
 
     //input redeem code from customer side
+    // public function customerRedeemCodes(Request $request)
+    // {
+    //     $redeemCodes = RedeemCode::where('random_code', $request->code)->get(); //get the related data of the redeemcode from the redeemCode table 
+    //     $user = Auth::guard('user')->user(); //get the login user
+
+    //     if (count($redeemCodes) != 0) {
+    //         //loop the redeemCodes and fill the Assets tables with the data from the redeem code table
+    //         foreach ($redeemCodes as $redeemCode) {
+    //             //checck if the user input redeem code exists in the redeem table or not
+    //             if ($redeemCode && $redeemCode->exists()) {
+    //                 $newTier = $redeemCode->tier; //new tier from the request
+    //                 $user->update([
+    //                     'tier' => $newTier, //update user tier
+    //                 ]);
+
+    //                 $projectId = $redeemCode->project_id; //get project Id which is related with the user
+
+    //                 $asset = Assets::where('project_id', $projectId)->get()->toArray();
+
+    //                 //check if the projects are already in the assets table or not
+    //                 //if the projects are already in the assets table , just update
+    //                 if (count($asset) > 0) {
+    //                     if ($redeemCode->site_progress !== null || $redeemCode->album !== null) {
+    //                         Assets::where('project_id', $projectId)->update([
+    //                             'site_progress' => $redeemCode->site_progress,
+    //                             'legal_document' => $redeemCode->album,
+    //                         ]);
+    //                     }
+    //                 } else {
+    //                     //if the projects are not already in the assets table , create new row in assets table
+    //                     Assets::create([
+    //                         'customer_id' => $user->id,
+    //                         'project_id' => $projectId,
+    //                         'site_progress' => $redeemCode->site_progress,
+    //                         'legal_document' => $redeemCode->album,
+    //                     ]);
+    //                 }
+
+    //                 // Delete redeem code
+    //                 $redeemCode->delete();
+    //             }
+    //         };
+
+    //         return redirect()->to(url()->previous() . "#redeemInput")->with('redeemSuccess', 'Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.');
+    //         // return redirect()->back()->with('redeemSuccess', 'Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.');
+    //         // return redirect()->route('profile.redeem', ['id' => $user->id]); //redirect route to the profile controller along with the login user Id
+    //     } else {
+    //         return back()->with('InvalidCode', 'Sorry! Your code is not valid. Please try again.');
+    //     }
+    // }
+
     public function customerRedeemCodes(Request $request)
     {
         $redeemCodes = RedeemCode::where('random_code', $request->code)->get(); //get the related data of the redeemcode from the redeemCode table 
