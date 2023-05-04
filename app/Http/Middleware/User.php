@@ -17,7 +17,7 @@ class User
    public function handle(Request $request, Closure $next)
     {
         if(!auth()->guard('user')->check()){
-
+            
         }
         return $next($request);
     }

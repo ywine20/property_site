@@ -10,20 +10,18 @@
 </head>
 
 <body>
-    <section class="error w-100 vh-100 d-flex justify-content-center align-items-center"
-        style="background-color: #fea918;
+    <section class="error w-100 vh-100 d-flex justify-content-center align-items-center" style="background-color: #fea918;
     ">
-        {{-- <h1>You do not have permission to access this page !</h1>
-        <div class="back py-2 py-md-3">
-            <button>
-                <span class="backBtn" onclick="history.back()" style="cursor: pointer;">
-                    <i class="bi bi-chevron-left"></i><i>Back</i>
-                </span>
-            </button>
-        </div> --}}
+      
 
-        <div class="w-50">
+        <div class="w-50 position-relative">
             <img src="{{ asset('images/401_Error.jpg') }}" alt="" class="w-100 h-100">
+           
+            <div class="w-100 position-absolute d-flex align-items-center justify-content-center">
+                <button type="button" onclick="history.back()" class="btn bg-black text-white  d-flex align-items-center justify-content-center">
+                    <i class="bi bi-chevron-left text-white"></i>Back
+                </button>
+            </div>
         </div>
     </section>
 </body>

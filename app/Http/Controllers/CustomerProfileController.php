@@ -31,7 +31,13 @@ class CustomerProfileController extends Controller
 
     public function profile($id)
     {
-        $user = User::findOrFail($id);
+
+        // $user = User::findOrFail($id);
+        $user = Auth::guard('user')->user();
+        if($id != $user->id){
+            return view('error');
+        }
+
         $assets = Assets::where('customer_id', $id)->get();
         // dd($latestSiteProgress->toArray());
         if (isset($assets) && count($assets) > 0) {
@@ -45,7 +51,7 @@ class CustomerProfileController extends Controller
             foreach ($projectIds as $projectId) {
                 $project = Project::where('id', $projectId)
                     ->with('town', 'city', 'assets')->first();
-                
+
                 $latestSiteProgress = siteProgress::where('project_id', $projectId)->latest()->first();
                 if ($latestSiteProgress) {
                     $siteProgresses->push($latestSiteProgress);
@@ -56,13 +62,11 @@ class CustomerProfileController extends Controller
                     $customerProjects->push($project);
                 }
             }
-            dump($customerProjects->toArray());
-            dump($siteProgresses->toArray());
             return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets, 'siteProgresses' => $siteProgresses]);
         } else {
             return view("customer.profile", ["user" => $user, 'assets' => $assets]);
+        }
     }
-}
 
 
 
