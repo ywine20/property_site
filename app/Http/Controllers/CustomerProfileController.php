@@ -5,55 +5,68 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Assets;
 use App\Models\Project;
+use App\Models\siteProgress;
 use Illuminate\Http\Request;
 use App\Models\CustomerProfile;
 use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 // use Intervention\Image\ImageManagerStatic as Image;
 // use Intervention\Image\Facades\Image as InterventionImage;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreCustomerProfileRequest;
 use App\Http\Requests\UpdateCustomerProfileRequest;
-use App\Models\siteProgress;
 
 class CustomerProfileController extends Controller
 {
 
     public function __construct()
     {
-        // $this->middleware('customer.auth');
+        $this->middleware(['user']);
     }
 
     public function profile($id)
-    {
-        $user = User::findOrFail($id);
-        $assets = Assets::where('customer_id', $id)->get();
-        if (isset($assets) && count($assets) > 0) {
-            $projectIds = [];
-            foreach ($assets as $asset) {
-                $projectId = $asset->project_id;
-                array_push($projectIds, $projectId);
-            }
-            $customerProjects = collect();
-            foreach ($projectIds as $projectId) {
-                $project = Project::where('id', $projectId)
-                    ->with('town', 'city', 'assets')->first();
-                if ($project) {
-                    $customerProjects->push($project);
-                }
-            }
+{
+    // Retrieve the currently authenticated user's data
+    $user = Auth::guard('user')->user();
 
-            return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets]);
-            // return view('customer.profile')->with('redeemSuccess', 'Congratulation! Your code has been successfully redeemed. Thank you for your loyalty and support.');
-        } else {
-            return view("customer.profile", ["user" => $user, 'assets' => $assets]);
-        }
+    // Check if the requested ID matches the ID of the authenticated user
+    if ($id != $user->id) {
+        // abort(401);
+        return view("error");
     }
+
+    // Retrieve the assets associated with the given customer ID
+    $assets = Assets::where('customer_id', $id)->get();
+
+    if (isset($assets) && count($assets) > 0) {
+        $projectIds = [];
+        foreach ($assets as $asset) {
+            $projectId = $asset->project_id;
+            array_push($projectIds, $projectId);
+        }
+        $customerProjects = collect();
+        foreach ($projectIds as $projectId) {
+            $project = Project::where('id', $projectId)
+                ->with('town', 'city', 'assets')->first();
+            if ($project) {
+                $customerProjects->push($project);
+            }
+        }
+
+        // Return the data to the view
+        return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets]);
+    } else {
+        // Return the data to the view
+        return view("customer.profile", ["user" => $user, 'assets' => $assets]);
+    }
+}
+
+
 
     public function profileSetting($id)
     {
@@ -98,7 +111,7 @@ class CustomerProfileController extends Controller
                 }
             }
 
-            // store new image 
+            // store new image
             $file = $request->file('profile_img');
             $profileImg = Image::make($file->path())->fit(300);
             $profileImgName = "profile_" . uniqid() . "." . $file->getClientOriginalExtension();

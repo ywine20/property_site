@@ -134,7 +134,7 @@
             </div>
         </div>
     </div>
-    <!--                end content-->
+    <!--end content-->
 
 
 @endsection
