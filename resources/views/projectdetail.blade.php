@@ -211,6 +211,10 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+                            <div class="row">
+                                <div class="col py-5 my-3"></div>
+                            </div>
                             @endif
 
                         </div>
@@ -348,6 +352,8 @@
                             <!-- <a href="" class="text-secondary">ALL</a> -->
                         </div>
                     </div>
+                    @if(count($albums) > 0)
+
                     <div class="col-12">
                         <div class="mx-auto py-3">
                             <div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-2 gy-3 g-md-3 g-lg-5">
@@ -383,12 +389,14 @@
                                         </a>
                                 </div>
                                 @endforeach
-
-
                             </div>
                         </div>
                     </div>
-
+                    @else
+                    <div class="col-12 w-100">
+                        <div class="py-5 my-2"></div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

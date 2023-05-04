@@ -98,12 +98,22 @@ class CustomerProfileController extends Controller
                 }
             }
 
+            $folderPath = 'public/images/client-profile';
+
+            if (!Storage::exists($folderPath)) {
+                Storage::makeDirectory($folderPath);
+            }
+
             // store new image 
             $file = $request->file('profile_img');
             $profileImg = Image::make($file->path())->fit(300);
             $profileImgName = "profile_" . uniqid() . "." . $file->getClientOriginalExtension();
-            // $profileImgPath = $profileImg->storeAs('public/images/client-profile/', $profileImgName);
             $profileImg->save(storage_path("app/public/images/client-profile/{$profileImgName}"));
+
+            // $profileImgPath = $profileImg->storeAs('public/images/client-profile/', $profileImgName);
+            // $profileImg->save(public_path("storage/images/client-profile/{$profileImgName}"));
+            // Storage::putFileAs('public/images/client-profile', $profileImg, $profileImgName);
+
 
             $user->profile_img = $profileImgName;
             $user->save();

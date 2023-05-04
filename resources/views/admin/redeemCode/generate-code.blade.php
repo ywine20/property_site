@@ -56,7 +56,7 @@
 
                     <div class="col-12 col-md-12 col-lg-12 ">
 
-                        <form action="{{ route("admin.generateRedeemCode") }}" method="POST" enctype="multipart/form-data" class="create-form" id="redeem-code-form">
+                        <form action="{{ route('admin.generateRedeemCode') }}" method="POST" enctype="multipart/form-data" class="create-form" id="redeem-code-form">
                             @csrf
                             <div class="row flex-column">
                                 <!--Choose Tier -->
@@ -67,7 +67,7 @@
                                             <select name="tier" class="create-select form-select form-select-lg fs-6 text-white rounded rounded-1 c mb-2 mb-md-0" id="tier" require>
                                                 <option value="">Choose Tier</option>
                                                 <option value="bronze">Bronze</option>
-                                                <option value="sliver">Sliver</option>
+                                                <option value="silver">Silver</option>
                                                 <option value="gold">Gold</option>
                                                 <option value="platinum">Platinum</option>
                                                 <option value="diamond">Diamond</option>
