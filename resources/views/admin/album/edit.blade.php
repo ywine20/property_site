@@ -2,37 +2,37 @@
 
 @section('style')
 <style>
-#output {
-    display: flex;
-}
+    #output {
+        display: flex;
+    }
 
-.img-div {
-    overflow: hidden;
-    height: 180px;
-}
+    .img-div {
+        overflow: hidden;
+        height: 180px;
+    }
 
-.thumbnail {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    transition: all .6s;
-    box-shadow: 1px 1px 6px gray
-}
+    .thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        transition: all .6s;
+        box-shadow: 1px 1px 6px gray
+    }
 
-img {
-    position: relative;
-}
+    img {
+        position: relative;
+    }
 
-.removeBtn {
-    position: absolute;
-    width: 150px;
-    height: 50px;
-    z-index: 10000;
-    top: 0;
-    right: 0;
-    background-color: red;
+    .removeBtn {
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        z-index: 10000;
+        top: 0;
+        right: 0;
+        background-color: red;
 
-}
+    }
 </style>
 @endsection
 
@@ -69,12 +69,10 @@ img {
                         @endif
 
                         @if(Session::has('success'))
-                        <div
-                            class="alert alert-success d-flex justify-content-between align-items-center animate__animated animate__fadeInDown">
+                        <div class="alert alert-success d-flex justify-content-between align-items-center animate__animated animate__fadeInDown">
                             {{Session::get('success')}}
                             <div class="text-end">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </div>
                         @endif
@@ -85,15 +83,12 @@ img {
                                     <h4 class="text-primary header">Create Album</h4>
                                 </div>
                                 <div class="px-3 py-3">
-                                    <form method="POST" action="{{ route('albumTest.store','$porjectId') }}"
-                                        enctype="multipart/form-data">
+                                    <form method="POST" action="{{ route('albumTest.store','$porjectId') }}" enctype="multipart/form-data">
                                         @csrf
                                         <input type="text" name="project_id" value="{{$projectId}}" hidden>
                                         <div class="form-group mb-3">
                                             <label for="album" class="form-label text-white-50">Album Name :</label>
-                                            <input type="text" name="albumName"
-                                                class="create-input form-control @error('albumName') is-invalid @enderror"
-                                                id="album" value="{{ old('album') }}" required>
+                                            <input type="text" name="albumName" class="create-input form-control @error('albumName') is-invalid @enderror" id="album" value="{{ old('album') }}" required>
                                             @error('albumName')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
@@ -102,14 +97,12 @@ img {
                                         <div class="form- mb-3">
                                             <label for="uploadFile" class="form-label text-white-50">Upload
                                                 File:</label>
-                                            <input id="files" type="file" name="uploadFile[]"
-                                                class="create-file form-control " multiple>
+                                            <input id="files" type="file" name="uploadFile[]" class="create-file form-control" accept=" .pdf, .jpg, .jpeg, .png, .gif" multiple>
                                             @error('uploadFile')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <button type="submit"
-                                            class="btn btn-outline-primary btn-lg w-100 my-5">Upload</button>
+                                        <button type="submit" class="btn btn-outline-primary btn-lg w-100 my-5">Upload</button>
                                     </form>
                                 </div>
                             </div>
@@ -132,49 +125,49 @@ img {
 
 @section('script')
 <script>
-// preview images
-let fileInput = document.querySelector("#files");
-fileInput.addEventListener("change", (e) => {
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-        // CODE TO PREVIEW IMAGE
-        const files = e.target.files;
-        const limit = 30;
+    // preview images
+    let fileInput = document.querySelector("#files");
+    fileInput.addEventListener("change", (e) => {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            // CODE TO PREVIEW IMAGE
+            const files = e.target.files;
+            const limit = 30;
 
-        if (files.length > limit) {
-            alert("you can select max " + limit + " images");
-            fileInput.value = null;
-        } else {
-            const output = document.querySelector("#output");
-            output.innerHTML = "";
-            for (let i = 0; i < files.length; i++) {
-                if (!files[i].type.match("image")) continue;
-                const imgReader = new FileReader();
-                imgReader.addEventListener("load", function(event) {
-                    const imgFile = event.target;
-                    // const div = document.createElement("div");
-                    // div.className = "col img-div";
-                    // const img = document.createElement("img");
-                    // img.className = "thumbnail";
-                    // img.src = imgFile.result;
-                    // div.appendChild(img);
-                    // output.appendChild(div);
+            if (files.length > limit) {
+                alert("you can select max " + limit + " images");
+                fileInput.value = null;
+            } else {
+                const output = document.querySelector("#output");
+                output.innerHTML = "";
+                for (let i = 0; i < files.length; i++) {
+                    if (!files[i].type.match("image")) continue;
+                    const imgReader = new FileReader();
+                    imgReader.addEventListener("load", function(event) {
+                        const imgFile = event.target;
+                        // const div = document.createElement("div");
+                        // div.className = "col img-div";
+                        // const img = document.createElement("img");
+                        // img.className = "thumbnail";
+                        // img.src = imgFile.result;
+                        // div.appendChild(img);
+                        // output.appendChild(div);
 
 
-                    output.innerHTML += `
+                        output.innerHTML += `
                     <div class="col img-div">
                         <img class="thumbnail" src="${imgFile.result}">
 
                     </div>
                     `;
-                });
+                    });
 
-                imgReader.readAsDataURL(files[i]);
+                    imgReader.readAsDataURL(files[i]);
+                }
             }
+        } else {
+            alert("Your browser does not support File API");
         }
-    } else {
-        alert("Your browser does not support File API");
-    }
-});
+    });
 </script>
 
 @endsection
