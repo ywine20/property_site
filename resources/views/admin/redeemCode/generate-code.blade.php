@@ -56,7 +56,7 @@
 
                     <div class="col-12 col-md-12 col-lg-12 ">
 
-                        <form action="{{ route("admin.generateRedeemCode") }}" method="POST" enctype="multipart/form-data" class="create-form" id="redeem-code-form">
+                        <form action="{{ route('admin.generateRedeemCode') }}" method="POST" enctype="multipart/form-data" class="create-form" id="redeem-code-form">
                             @csrf
                             <div class="row flex-column">
                                 <!--Choose Tier -->
@@ -166,21 +166,25 @@
                         <div class="modal fade" id="redeem-modal" tabindex="-1" role="dialog" aria-labelledby="redeem-modal-label">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <!-- <div class="modal-header">
                                         <h5 class="modal-title" id="redeem-modal-label">Generated Redeem Code</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div> -->
+                                    <div class="modal-body d-flex justify-content-between flex-column">
+                                        <h5 class="text-primary text-center">Your Code Here</h5>
+                                        <div class="d-flex flex-row align-items-center my-3 bg-black bg-opacity-10 py-2 px-2 rounded">
+                                            <p id="redeem-code" class="text-primary flex-fill mb-0 fs-5"></p>
+                                            <button class="btn btn-link text-decoration-none position-relative " onclick="copyCode()">
+                                                <i id="clipboard-icon" class="bi bi-clipboard fs-4"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="modal-body d-flex justify-content-between">
-                                        <p id="redeem-code"></p>
-                                        <button class="btn btn-secondary" onclick="copyCode()"><i class="bi bi-clipboard"></i></button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK </button>
+                                    <div class="modal-footer border-0 d-flex justify-content-center">
+                                        <button type="button" class="btn btn-outline-primary btn-lg px-5" data-bs-dismiss="modal">OK</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <!--end send successful Modal Box -->
 
                     </div>
@@ -227,10 +231,31 @@
         });
     });
 
-    //copy code
+    // //copy code
+    // function copyCode() {
+    //     var code = $('#redeem-code').text();
+    //     navigator.clipboard.writeText(code);
+    // }
+
     function copyCode() {
-        var code = $('#redeem-code').text();
-        navigator.clipboard.writeText(code);
+        // Get the code element
+        var codeElem = document.getElementById('redeem-code');
+
+        // Copy the code to the clipboard
+        navigator.clipboard.writeText(codeElem.textContent);
+
+        // Change the copy icon to a checkmark icon
+        var clipboardIcon = document.getElementById('clipboard-icon');
+        clipboardIcon.classList.remove('bi-clipboard');
+        clipboardIcon.classList.add('bi-clipboard-check-fill');
+
+
+
+        // Change the icon back to the copy icon after 2 seconds
+        setTimeout(function() {
+            clipboardIcon.classList.remove('bi-clipboard-check-fill');
+            clipboardIcon.classList.add('bi-clipboard');
+        }, 5000);
     }
 
 

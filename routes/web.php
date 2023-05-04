@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
-
+use App\Http\Middleware\User;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ProductController;
 // use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
@@ -21,20 +21,18 @@ use App\Http\Controllers\ProjectListController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PreviewImageController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\Admin\SiteProgressController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
 
 
 Route::get('/', function () {
-
     return view('master');
 });
-
+//localization
 Route::get('locale/{lang}', [LocalizationController::class, 'setLang']);
-
-// Route::get('lang/home', [LangController::class, 'index']);
-// Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/vouchers/{id}', [ProductController::class, 'voucher']);
@@ -92,9 +90,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::get('/user', 'PageController@profile');
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
-
-
-
 
     // Album
     Route::get('project/{projectId}/album/create', [AlbumController::class, 'create'])->name('albumTest.create');
@@ -161,7 +156,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
 
 //SMT UPDATE 13-March-2023
 
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['user']], function () {
+
 Route::get('/profile/{id}', [CustomerProfileController::class, 'profile'])->name('profile');
+
 Route::get('/profile/{id}/setting', [CustomerProfileController::class, 'profileSetting'])->name('profile.setting');
 Route::get('/profile/{id}/redeem', [CustomerProfileController::class, 'redeem'])->name('profile.redeem');
 Route::post('/profile/{id}/changeProfile', [CustomerProfileController::class, 'changeImage'])->name('profile.changeImge');
@@ -179,6 +177,7 @@ Route::get('/album/{id}', [ProjectListController::class, 'albumDetail'])->name('
 Route::view('/profile/setting', 'customer/profile-setting')->name('profile-setting');
 Route::view('/redeem', 'customer/redeem')->name('profile-redeem');
 
+
 // Redeem Code for customemr
 Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRedeemCodes'])->name('profile.customerRedeemCodes');
 
@@ -186,4 +185,6 @@ Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRede
 //winwinmaw
 Route::get('/redeemCode', [RedeemCodeController::class, 'generateCode'])->name('profile.generateCode');
 Route::post('/code', [RedeemCodeController::class, 'code'])->name('profile.code');
+});
+
 Route::view('/multiple-selected', 'test');

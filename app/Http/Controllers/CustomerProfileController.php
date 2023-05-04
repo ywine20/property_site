@@ -5,28 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Assets;
 use App\Models\Project;
+use App\Models\siteProgress;
 use Illuminate\Http\Request;
 use App\Models\CustomerProfile;
 use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 // use Intervention\Image\ImageManagerStatic as Image;
 // use Intervention\Image\Facades\Image as InterventionImage;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreCustomerProfileRequest;
 use App\Http\Requests\UpdateCustomerProfileRequest;
-use App\Models\siteProgress;
 
 class CustomerProfileController extends Controller
 {
 
     public function __construct()
     {
-        // $this->middleware('customer.auth');
+        $this->middleware(['user']);
     }
 
     public function profile($id)
@@ -61,8 +61,10 @@ class CustomerProfileController extends Controller
             return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets, 'siteProgresses' => $siteProgresses]);
         } else {
             return view("customer.profile", ["user" => $user, 'assets' => $assets]);
-        }
     }
+}
+
+
 
     public function profileSetting($id)
     {
@@ -107,12 +109,22 @@ class CustomerProfileController extends Controller
                 }
             }
 
-            // store new image 
+
+            $folderPath = 'public/images/client-profile';
+
+            if (!Storage::exists($folderPath)) {
+                Storage::makeDirectory($folderPath);
+            }
+
             $file = $request->file('profile_img');
             $profileImg = Image::make($file->path())->fit(300);
             $profileImgName = "profile_" . uniqid() . "." . $file->getClientOriginalExtension();
-            // $profileImgPath = $profileImg->storeAs('public/images/client-profile/', $profileImgName);
             $profileImg->save(storage_path("app/public/images/client-profile/{$profileImgName}"));
+
+            // $profileImgPath = $profileImg->storeAs('public/images/client-profile/', $profileImgName);
+            // $profileImg->save(public_path("storage/images/client-profile/{$profileImgName}"));
+            // Storage::putFileAs('public/images/client-profile', $profileImg, $profileImgName);
+
 
             $user->profile_img = $profileImgName;
             $user->save();
