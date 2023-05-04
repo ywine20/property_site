@@ -167,7 +167,9 @@
                     <div class="col-12 py-3 px-3  px-md-4 px-lg-5">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="text-uppercase text-primary">Site Progress</h4>
+                            @if($assets != null && $assets->legal_document == '1')
                             <a href="{{route('siteProgressList',$project->id)}}">ALL</a>
+                            @endif
                         </div>
                         <div class="mx-auto mt-4 my-md-5 px-2 px-md-0 siteProgressAlert">
                             @if($siteProgress)
@@ -196,7 +198,7 @@
                                             {{$siteProgress->title}}
                                         </div>
                                         <div class="d-flex justify-content-start align-items-center">
-                                            @if($assets == null || $assets->site_progress != '1')
+                                            @if($assets != null && $assets->legal_document == '1')
                                             <a href="{{ route('client-siteProgress.show', ['id' => $siteProgress->id]) }}" class="btn btn-sm btn-outline-primary me-2">
                                                 <i class="bi bi-eye text-primary"></i>
                                                 Show Detail
@@ -359,7 +361,7 @@
                             <div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-2 gy-3 g-md-3 g-lg-5">
                                 @foreach($albums as $album)
                                 <div class="col text-center">
-                                    @if($assets == null || $assets->legal_document != '1')
+                                    @if($assets != null && $assets->legal_document == '1')
                                     <a href="{{ route('client-album.show', ['id' => $album->id]) }}" title="Detail" class="text-decoration-none">
                                         @else
                                         <a href="#" title="Detail" class="text-decoration-none">
