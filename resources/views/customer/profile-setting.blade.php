@@ -50,7 +50,13 @@
                                 <input type="text" name="userId" class="d-none userId" value="{{$user->id}}" />
                                 <input type="file" name="profile_img" class="d-none" id="profileImageInput" />
                                 <div class=" overflow-hidden rounded rounded-circle bg-black bg-opacity-10 shadow-sm" style="width:100px;height:100px;">
-                                    <img id="setting-profile-img" src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 shadow" style="object-fit:cover;">
+                                    <!-- <img id="setting-profile-img" src="{{asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)}}" alt="" class="w-100 h-100 shadow" style="object-fit:cover;"> -->
+                                    <img id="setting-profile-img" src="{{Auth::guard('user')->user()->profile_img ? asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img) : asset('images/user.png')}}" alt="" class="w-100 h-100 shadow" style="object-fit:cover;">
+                                    <!-- asset('storage/images/client-profile/'.Auth::guard('user')->user()->profile_img)
+                                    @if( isset(Auth::guard('user')->user()->profile_img))
+                                    @else
+                                    <img src="{{asset('images/user.png')}}" alt="" class="w-100 h-100 " style="object-fit:cover;">
+                                    @endif -->
                                 </div>
                                 <button id="uploadBtn" class="btn btn-md bg-black bg-opacity-10 text-black ms-4">Change</button>
                             </div>
@@ -207,6 +213,7 @@
     const profileImage = document.getElementById('setting-profile-img');
     let userId = document.querySelector('.userId').value;
 
+
     uploadBtn.addEventListener('click', (e) => {
         e.preventDefault();
         profileImageInput.click();
@@ -219,7 +226,6 @@
             profileImage.src = reader.result;
             const formData = new FormData();
             formData.append('profile_img', file);
-
 
 
             axios.post(`/profile/${userId}/changeProfile`, formData)

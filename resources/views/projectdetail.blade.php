@@ -147,10 +147,11 @@
     <div class="container-fluid  bg-secondary bg-opacity-10 ">
         <div class="pb-3 pb-md-4 pb-lg-5 project-item-price mt-5">
             <div class="priceImage">
-                <div class="row py-3">
-                    <div class="col-5 col-md-4 col-lg-3 col-xl-2 pt-2 pt-md-3 pt-lg-5 mx-auto">
-                        <div class="d-flex justify-content-center align-items-center w-100 h-100 overflow-hidden">
-                            <img src="{{ asset('images/itemPrice.png') }}" alt="" class="w-100 h-100" style="object-fit:contain" />
+                <div class="row py-3 ">
+
+                    <div class="col-12 pt-2 pt-md-3 pt-lg-5 mx-auto d-flex justify-content-center align-items-center ">
+                        <div class="d-flex justify-content-center align-items-center overflow-hidden price-img-div" style="">
+                            <img src="{{asset('storage/images/priceImg/'.$project->priceImg)}}" alt="" class="w-100 h-100" style="object-fit:contain" />
                         </div>
                     </div>
                 </div>
@@ -198,13 +199,13 @@
                                             {{$siteProgress->title}}
                                         </div>
                                         <div class="d-flex justify-content-start align-items-center">
-                                            @if($assets != null && $assets->legal_document == '1')
-                                            <a href="{{ route('client-siteProgress.show', ['id' => $siteProgress->id]) }}" class="btn btn-sm btn-outline-primary me-2">
+                                            @if($assets == null || $assets->site_progress != '1')
+                                            <a href="#" class="btn btn-sm btn-outline-primary me-2">
                                                 <i class="bi bi-eye text-primary"></i>
                                                 Show Detail
                                             </a>
                                             @else
-                                            <a href="#" class="btn btn-sm btn-outline-primary me-2">
+                                            <a href="{{ route('client-siteProgress.show', ['id' => $siteProgress->id]) }}" class="btn btn-sm btn-outline-primary me-2">
                                                 <i class="bi bi-eye text-primary"></i>
                                                 Show Detail
                                             </a>

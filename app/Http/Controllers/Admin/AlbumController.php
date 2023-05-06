@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 use App\Models\AlbumTestImage;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
+use App\Models\Amenity;
+use App\Models\Category;
+use App\Models\City;
+use App\Models\Project;
+use App\Models\Town;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -46,9 +51,21 @@ class AlbumController extends Controller
             }
         }
 
+        $towns = Town::all();
+        $categories = Category::all();
+        $cities = City::all();
+        $amenity = Amenity::all();
+        $project = Project::where('id', $request->project_id)
+            ->with('categories', 'amenity', 'towns', 'cities')
+            ->first();
+        if (!$project) {
+            return redirect()->back()->with('error', 'Project Not found');
+        }
 
 
-        return redirect()->route('project.detail', $request->project_id);
+        return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'))->with('status', 'Files upload success');
+
+        // return redirect()->route('project.detail', $request->project_id);
     }
 
     public function show($projectId, $id)
@@ -80,33 +97,47 @@ class AlbumController extends Controller
             }
         }
 
-        return redirect()->back()->with('status', 'Files upload success');
-    }
-//the whole album delete
-   public function albumDelete($id)
-{
-    $album = AlbumTest::findOrFail($id);
+        $towns = Town::all();
+        $categories = Category::all();
+        $cities = City::all();
+        $amenity = Amenity::all();
+        $project = Project::where('id', $request->project_id)
+            ->with('categories', 'amenity', 'towns', 'cities')
+            ->first();
+        if (!$project) {
+            return redirect()->back()->with('error', 'Project Not found');
+        }
 
-    foreach ($album->albumTestImages as $image) {
-        Storage::delete('public/images/album/' . $image->image);
-        $image->delete();
+
+        return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'))->with('status', 'Files upload success');
+
+        // return redirect()->back()->with('status', 'Files upload success');
     }
-    $album->delete();
-    return redirect()->back()->with('status', 'Album deleted successfully.');
-}
-//each delete
-    public function imageDel($albumId,$id){
+    //the whole album delete
+    public function albumDelete($id)
+    {
+        $album = AlbumTest::findOrFail($id);
+
+        foreach ($album->albumTestImages as $image) {
+            Storage::delete('public/images/album/' . $image->image);
+            $image->delete();
+        }
+        $album->delete();
+        return redirect()->back()->with('status', 'Album deleted successfully.');
+    }
+    //each delete
+    public function imageDel($albumId, $id)
+    {
         $image = AlbumTestImage::where('album_tests_id', $albumId)->first();
         // return $image;
 
-    // Delete the image file from storage
-    Storage::delete('public/images/album/' . $image->image);
+        // Delete the image file from storage
+        Storage::delete('public/images/album/' . $image->image);
 
-    // Delete the image record from the database
-    $image->delete();
+        // Delete the image record from the database
+        $image->delete();
 
-    // Redirect the user back to the previous page with a success message
-    return redirect()->back()->with('status', 'Image deleted successfully.');
-
+        // Redirect the user back to the previous page with a success message
+        return redirect()->back()->with('status', 'Image deleted successfully.');
     }
 }

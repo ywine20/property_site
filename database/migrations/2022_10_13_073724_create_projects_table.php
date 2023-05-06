@@ -22,6 +22,7 @@ class CreateProjectsTable extends Migration
             $table->longText('description');
             $table->text('cover');
             $table->text('three_sixty_image')->nullable();
+            $table->text('priceImg')->nullable();
             $table->string('lower_price');
             $table->string('upper_price');
             $table->integer('layer');
@@ -48,5 +49,4 @@ class CreateProjectsTable extends Migration
     {
         Schema::dropIfExists('projects');
     }
-
 }

@@ -59,12 +59,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-
         // $request->validate([
         //     'project_Id' => "required|string|min:3|max:255",
         //     // dimensions:width=600,height=900|max:2048|
         //     'cover' => "required|mimes:jpeg,png,jpg,gif",
         //     'threeSixtyImage' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
+        //     'priceIamge' => "nullable|mimes:jpeg,png,jpg|max:2560",
         //     'description' => "required|string",
         //     'lower_price' => "required|min:2|max:20",
         //     'upper_price' => "required|min:2|max:30",
@@ -129,11 +129,19 @@ class ProjectController extends Controller
             $threeSixtyImage->storeAs('/public/images/360Images', $threeSixtyImage_name);
         }
 
+        $priceImg_name = '';
+        $priceImg = $request->file('priceImage');
+        if ($priceImg) {
+            $priceImg_name = 'price_' . $request->project_Id . '_' . uniqid() . '.' . $priceImg->getClientOriginalExtension();
+            $priceImg->storeAs('/public/images/priceImg', $priceImg_name);
+        }
+
         $project = Project::create([
             'slug' => Str::slug($request->project_name) . uniqid(),
             'project_name' => $request->project_Id,
             'cover' => $cover_name,
             'three_sixty_image' =>  $threeSixtyImage_name,
+            'priceImg' =>  $priceImg_name,
             'category_id' => $category->category_id,
             'township_id' => $town->id,
             'city_id' => $city->id,
@@ -154,7 +162,7 @@ class ProjectController extends Controller
         $minPrice = $request->lower_price;
         $maxPrice =  $request->upper_price;
 
-        for($price = $minPrice ; $price <= $maxPrice ; $price += 100 ) {
+        for ($price = $minPrice; $price <= $maxPrice; $price += 100) {
             UnitPrice::create([
                 'project_id' => $project->id,
                 'price' => $price,
@@ -277,7 +285,7 @@ class ProjectController extends Controller
         $amenity = Amenity::all();
         $categories = Category::all();
 
-        $project = Project::with('siteProgresses','siteProgressesImage')->where('id', $id)->first();
+        $project = Project::with('siteProgresses', 'siteProgressesImage')->where('id', $id)->first();
 
         return view('admin.project.detail', compact('project', 'amenity', 'categories', 'cities', 'towns'));
     }
@@ -317,15 +325,15 @@ class ProjectController extends Controller
         $oldMaxPrice = $find_project->lower_price;
         $oldMinPrice = $find_project->upper_price;
 
-        if($oldMaxPrice != $request->lower_price || $oldMinPrice != $request->upper_price) {
+        if ($oldMaxPrice != $request->lower_price || $oldMinPrice != $request->upper_price) {
             //Delete first all the rows in unit price table related with the updated project's id
-            UnitPrice::where('project_id',$id)->delete();
+            UnitPrice::where('project_id', $id)->delete();
             //Recreate unit price table
 
             $minPrice = $request->lower_price;
             $maxPrice =  $request->upper_price;
 
-            for($price = $minPrice ; $price <= $maxPrice ; $price += 100 ) {
+            for ($price = $minPrice; $price <= $maxPrice; $price += 100) {
                 UnitPrice::create([
                     'project_id' => $id,
                     'price' => $price,
@@ -337,6 +345,7 @@ class ProjectController extends Controller
             'project_Id' => "required|string|min:3|max:255",
             'cover' => "nullable|mimes:jpeg,png,jpg,gif|max:2048|dimensions:width=600,height=900", // dimensions:width=600,height=900
             'threeSixtyImage' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
+            'priceImage' => "required|mimes:jpeg,png,jpg,gif|max:2560",
             'description' => "required|string",
             'lower_price' => "required|min:2|max:20",
             'upper_price' => "required|min:2|max:30",
@@ -362,6 +371,7 @@ class ProjectController extends Controller
             'small_img_9' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800', // |max:1024|dimensions:width=800,height=800
 
         ]);
+
 
         // if (!$find_project->first()) {
         //     return redirect()->back()->with('error', 'not found project');
@@ -405,6 +415,15 @@ class ProjectController extends Controller
             $cover_name = $find_project->cover;
         }
 
+        // Cover
+        $priceImg = $request->file('priceImage');
+        if ($priceImg) {
+            Storage::delete('public/images/priceImg/' . $find_project->priceImg);
+            $priceImg_name = 'price_' . $request->project_Id . '_' . uniqid() . '.' . $priceImg->getClientOriginalExtension();
+            $priceImg->storeAs('/public/images/priceImg', $priceImg_name);
+        } else {
+            $priceImg_name = $find_project->priceImg;
+        }
 
         // 360 Images
         $threeSixtyImage = $request->file('threeSixtyImage');
@@ -422,6 +441,7 @@ class ProjectController extends Controller
             'project_name' => $request->project_Id,
             'cover' => $cover_name,
             'three_sixty_image' => $threeSixtyImage_name,
+            'priceImg' => $priceImg_name,
             'category_id' => $category->category_id,
             'township_id' => $town->id,
             'city_id' => $city->id,
@@ -436,6 +456,7 @@ class ProjectController extends Controller
             'street' => $request->street,
             'ward' => $request->ward,
         ]);
+
 
         $project_id = $find_project->id;
 
@@ -540,14 +561,17 @@ class ProjectController extends Controller
         $project = Project::where('id', $id)->first();
         // Project::find($project->first()->id)->amenity()->sync([]);
 
-         //Delete all the rows in unit price table related with the project's id
-         UnitPrice::where('project_id',$id)->delete();
+        //Delete all the rows in unit price table related with the project's id
+        UnitPrice::where('project_id', $id)->delete();
 
         // Delete related records from project_amenity table
         Project::find($id)->amenity()->detach();
 
         //delete cover from local
         Storage::delete('public/images/cover/' . $project->cover);
+
+        //delete cover from local
+        Storage::delete('public/images/priceImg/' . $project->priceImg);
 
         //delete 360 image form local
         Storage::delete('public/images/360Images/' . $project->three_sixty_image);
@@ -582,7 +606,7 @@ class ProjectController extends Controller
 
         $projects = Project::whereIn('id', $ids)->get();
 
-        $unitPrice = UnitPrice::whereIn('project_id',$ids)->delete();
+        $unitPrice = UnitPrice::whereIn('project_id', $ids)->delete();
         // $unitPrice->delete();
 
         // dd($unitPrice->toArray());
@@ -592,6 +616,14 @@ class ProjectController extends Controller
             $cover = $project->cover;
             if ($cover) {
                 Storage::delete('public/images/cover/' . $cover);
+            }
+        }
+
+        //Delete priceImg Photo
+        foreach ($projects as $project) {
+            $priceImg = $project->priceImg;
+            if ($priceImg) {
+                Storage::delete('public/images/priceImg/' . $priceImg);
             }
         }
 

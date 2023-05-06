@@ -9,6 +9,13 @@
         }
     }
 
+    .priceImage{
+        .price-img-div{
+            height:300px;
+            width:60%;
+        }
+    }
+
     .project-detail-card {
         .main-image-div {
             width: 90%;
@@ -96,6 +103,14 @@
                 cursor: pointer;
             }
         }
+
+        .priceImage{
+            .price-img-div{
+                height:300px;
+                width: 95%;
+            }
+        }
+
 
         .latest-site-progress {
             .siteProgress {
@@ -257,6 +272,13 @@
 
             .backBtn {
                 cursor: pointer;
+            }
+        }
+
+        .priceImage{
+            .price-img-div{
+                height:300px;
+                width:90%;
             }
         }
 
@@ -427,6 +449,14 @@
 
             .backBtn {
                 cursor: pointer;
+            }
+        }
+
+        .priceImage{
+            .price-img-div{
+                height:300px;
+                min-width:75%;
+                max-width: 90%;
             }
         }
 

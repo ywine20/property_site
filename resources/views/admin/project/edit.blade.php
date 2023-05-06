@@ -79,6 +79,27 @@
     .none {
         display: none;
     }
+
+    .album {
+        transition: .5s;
+    }
+
+
+    .album-action {
+        height: fit-content;
+        bottom: -50%;
+        position: absolute;
+        transition: all .5s;
+
+    }
+
+    .album:hover {
+        transition: all .5s;
+    }
+
+    .album:hover .album-action {
+        bottom: 0%;
+    }
 </style>
 @endsection
 
@@ -286,6 +307,31 @@
 
 
                                     </div>
+                                    <div class="mb-3">
+                                        <div class="w-100">
+                                            <div class="project-cover-preview w-100 overflow-hidden">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <label for="price_img_input" class="form-label">Unit Price Image
+                                                        :</label>
+                                                    <small class="text-warning fw-light">
+                                                        max : 2 MB
+                                                    </small>
+                                                </div>
+                                                <input type="file" id="price_img_input" name="priceImage" class="create-input form-control @error('priceImage') is-invalid @enderror">
+
+                                                @error('priceImage')
+                                                <div class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="priceImagePreview">
+                                                <div class=" bg-white overflow-hidden w-auto py-2 mt-2" style="height:250px;max-width:70%;{{$project->priceImg ? 'display:block':'display:none'}}">
+                                                    <img id="price_img" src="{{asset('storage/images/priceImg/'.$project->priceImg)}}" alt="" class="w-100 h-100" style="object-fit: contain;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
                                     <!-- map link -->
@@ -342,7 +388,7 @@
                                                         :</label>
                                                     <input type="file" class="form-control d-none" value="{{ $project->threeSixtyImage }}" name="threeSixtyImage" id="project_360_input">
                                                     <div id="360-preview" class="three-preview bg-secondary bg-opacity-50 cursor-pointer d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview  @error('threeSixtyImage') border border-danger @enderror" style="height:300px;">
-                                                    <img src="{{ $project->three_sixty_image ?  asset('storage/images/360Images/'.$project->three_sixty_image) : asset('/images/photoPlaceholderWhite.png') }}" id="360_img" alt="" class="w-100 h-100" style="object-fit: cover">
+                                                        <img src="{{ $project->three_sixty_image ?  asset('storage/images/360Images/'.$project->three_sixty_image) : asset('/images/photoPlaceholderWhite.png') }}" id="360_img" alt="" class="w-100 h-100" style="object-fit: cover">
                                                         <!--                                                                <i class="bi bi-camera-fill fa-fw fa-3x text-secondary"></i>-->
                                                     </div>
                                                     <small class="text-warning fw-light">
@@ -370,7 +416,7 @@
 
                                             </div>
                                             @if ($errors->has('small_img_1') || $errors->has('small_img_2') || $errors->has('small_img_3') || $errors->has('small_img_4') || $errors->has('small_img_5') || $errors->has('small_img_6') || $errors->has('small_img_7') || $errors->has('small_img_8') || $errors->has('small_img_9'))
-                                            <div class="text-danger fs-6 mt-2 alert alert-danger d-flex flex-column" role="alert"> 
+                                            <div class="text-danger fs-6 mt-2 alert alert-danger d-flex flex-column" role="alert">
                                                 @error('small_img_1')
                                                 <span>{{ $message }}</span>
                                                 @enderror
@@ -400,7 +446,7 @@
                                                 @enderror
                                             </div>
                                             @endif
-                                            
+
                                             <div class="row row-cols-5 g-2 my-3">
                                                 <!-- small image 1 -->
                                                 <div class="col">
@@ -446,7 +492,7 @@
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
                                                         </button>
                                                     </div>
-                                                  
+
                                                 </div>
                                                 <!-- small image 5 -->
                                                 <div class="col">
@@ -458,7 +504,7 @@
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
                                                         </button>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <!-- small image 6  -->
                                                 <div class="col">
@@ -470,7 +516,7 @@
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
                                                         </button>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <!-- small image 7 -->
                                                 <div class="col">
@@ -482,7 +528,7 @@
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
                                                         </button>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <!-- small image 8 -->
                                                 <div class="col">
@@ -494,7 +540,7 @@
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
                                                         </button>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <!-- small image 9 -->
                                                 <div class="col">
@@ -506,7 +552,7 @@
                                                             <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg"></i>
                                                         </button>
                                                     </div>
-                                                   
+
                                                 </div>
                                             </div>
                                         </div>
@@ -521,6 +567,133 @@
                             </div>
                         </form>
                     </div>
+
+                    <hr class="my-4 text-white">
+
+                    <!-- Legal Doucment -->
+                    <div class="col-12">
+                        <h5 class="text-primary mb-4">Legal Document</h5>
+
+                        <div class="row row-cols-auto g-4 ">
+                            <div class="col text-center">
+                                <a href="{{route('albumTest.create',$project->id)}}">
+                                    <div id="album_create" class="album bg-white bg-opacity-10 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer;">
+                                        <img src="{{asset('/images/addPlaceholder.png')}}" id="" alt="" class="w-100 h-100" style="object-fit: cover;filter:invert(1)">
+                                    </div>
+                                    <span class="text-white">Create Album</span>
+                                </a>
+                            </div>
+                            @foreach ($project->albumTests as $album)
+
+                            <div class="col text-center">
+                                <a href="{{ route('albumTest.show', ['projectId' => $project->id, 'id' => $album->id]) }}" title="Detail">
+                                    <div id="album1" class="album bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer">
+                                        @if(count($album->albumTestImages) > 0)
+                                        @php
+                                        $lastImage = $album->albumTestImages->last();
+                                        $extension = pathinfo($lastImage->image, PATHINFO_EXTENSION);
+                                        @endphp
+                                        @if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' ||
+                                        $extension == 'gif')
+                                        <img src="{{ asset('storage/images/album/'.$lastImage->image) }}" id="" alt="" class="w-100 h-100" style="object-fit: cover">
+                                        @elseif ($extension == 'pdf')
+                                        <!-- <i class="fas fa-file-pdf fa-4x"></i>
+                    <img src="{{ asset('images/pdf.png') }}" id="" alt=""
+                        class="w-100 h-100 bg-white" style="object-fit: cover"> -->
+                                        <canvas class="thumbnail pdf-canvas" data-pdf-url="{{ asset('storage/images/album/'.$lastImage->image) }}"></canvas>
+
+                                        @endif
+                                        @else
+                                        <img src="{{asset('images/photoPlaceholderWhite.png') }}" id="" alt="" class="w-100 h-100 bg-black bg-opacity-25" style="object-fit: cover">
+                                        @endif
+
+                                        <div class="album-action  w-100 bg-black bg-opacity-50 pt-1">
+                                            <form action="{{route('album.delete',$album->id)}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-link btn-sm text-danger" id="delImageBtn{{$album->image}}">
+                                                    <!-- del -->
+                                                    <i class="bi bi-trash-fill fw-bolder fs-4"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <span class="text-white">{{ $album->title }}</span>
+                                </a>
+
+                            </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+                    <hr class="my-4 text-white">
+
+                    <!-- Site Progress -->
+                    <div class="col-12">
+                        <div class="mb-4 d-flex align-items-center justify-content-between">
+                            <h5 class="text-primary">Site Progress</h5>
+                            <a href="{{ route('siteProgress.create', $project->id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-plus "></i>
+                                Create Progress
+                            </a>
+                        </div>
+
+                        @foreach ($project->siteProgresses as $siteProgress)
+                        <div class="row row-cols-auto g-5  mb-3 ">
+                            <div class="col-12 px-5">
+                                <div class="row progressCard bg-secondary d-flex flex-row rounded rounded-3 overflow-hidden" style="height:150px;">
+                                    <div class="col-2 px-0  overflow-hidden " style="max-height:200px;">
+                                        <div id="siteprogressId{{$siteProgress->id}}" class="siteprogressImage bg-white bg-opacity-50 d-flex justify-content-center align-items-center overflow-hidden position-relative w-100 h-100 " style="cursor:pointer;">
+
+                                            @foreach ($siteProgress->images as $key => $image)
+                                            @if ($key == 0)
+                                            <img src="{{ asset('storage/images/siteimages/' . $image->image) }}" alt="" class="w-100 h-100" style="object-fit:cover" />
+                                            @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    <div class="col-10 d-flex align-items-baseline justify-content-start py-2">
+
+                                        <div class="d-flex flex-column justify-content-center align-items-start w-100">
+                                            <div class="W-100 align-self-end">
+                                                <div class="time  text-muted mb-1 ">
+                                                    <small>
+                                                        <i class="bi bi-clock"></i>
+                                                        {{ $siteProgress->created_at->format('j F, Y') }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="card-title fw-bold text-primary mb-3" style="min-height:50px;max-height:50px;">
+                                                {{ $siteProgress->title }}
+                                            </div>
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="{{ route('siteProgress.show', ['projectId' => $siteProgress->project_id, 'id' => $siteProgress->id]) }}" class="btn btn-sm btn-outline-primary me-2">
+                                                    <i class="bi bi-eye"></i>
+                                                    Show Detail
+                                                </a>
+                                                <a href="{{ route('siteProgress.edit', ['projectId' => $siteProgress->project_id, 'id' => $siteProgress->id]) }}" class="btn btn-sm btn-outline-primary me-2">
+                                                    <i class="bi bi-pencil "></i>
+                                                    Edit
+                                                </a>
+                                                <form method="post" action="{{ route('siteProgress.destory', ['projectId' => $siteProgress->project_id, 'id' => $siteProgress->id]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                        <i class="bi bi-trash "></i>
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    <div class="py-5"></div>
                 </div>
             </div>
         </div>
@@ -606,7 +779,7 @@
 @endsection
 
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" price_img integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     //<!--    FOR COVER IMAGE-->
@@ -622,6 +795,24 @@
             coverImage.src = reader.result;
         }
         reader.readAsDataURL(file);
+    })
+
+    //<!-- For Pricec Image -->
+    let priceImg = document.getElementById('price_img');
+    let priceImgInput = document.getElementById('price_img_input');
+    let priceImagePreview = document.querySelector('.priceImagePreview > div')
+
+    // priceImgInput.addEventListener('click', _ => projectCoverInput.click());
+
+    priceImgInput.addEventListener("change", _ => {
+        let file = priceImgInput.files[0];
+        let reader2 = new FileReader();
+        reader2.onload = function() {
+            priceImg.src = reader2.result;
+        }
+        priceImagePreview.style.display = 'block';
+
+        reader2.readAsDataURL(file);
     })
 
     //<!-- FOR 360 IMAGE   -->

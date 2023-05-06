@@ -12,11 +12,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 // use App\Models\Contact;
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
-    
+
 
     public function login()
     {
@@ -26,7 +27,7 @@ class PageController extends Controller
         ]);
 
         $cre = request()->only('email', 'password');
-        if(auth()->guard('admin')->attempt($cre)){
+        if (auth()->guard('admin')->attempt($cre)) {
             return redirect('/admin');
         }
         return redirect()->back();
@@ -39,17 +40,50 @@ class PageController extends Controller
 
     public function showDashboard()
     {
-        $chartVisitor = Visitor::select(DB::raw("COUNT(*) as count"), DB::raw("Date(created_at) as date_name"))
-            ->where('created_at', '>=', Carbon::today()->subDay(9))
-            ->groupBy(DB::raw("date_name"))
-            ->orderBy('date_name', 'ASC')
-            ->pluck('count', 'date_name');
 
+        $chartVisitor = Visitor::select(DB::raw("COUNT(*) as count"), DB::raw("DATE_FORMAT(created_at, '%M') as month_name"))
+            ->where('created_at', '>=', Carbon::now()->subMonths(9))
+            ->groupBy(DB::raw("month_name"))
+            ->orderBy(DB::raw("MONTH(created_at)"), 'ASC')
+            ->pluck('count', 'month_name');
 
-        $labels = $chartVisitor->keys();
-        $chartData = $chartVisitor->values();
+        $chartUsers = User::select(DB::raw("COUNT(*) as count"), DB::raw("DATE_FORMAT(created_at, '%M') as month_name"))
+            ->where('created_at', '>=', Carbon::now()->subMonths(9))
+            ->groupBy(DB::raw("month_name"))
+            ->orderBy(DB::raw("MONTH(created_at)"), 'ASC')
+            ->pluck('count', 'month_name');
 
-//        $projects = Project::all()->take(10);
+        $visitorData = [];
+        $userData = [];
+        $months = [];
+
+        // Loop through the past 9 months
+        for ($i = 6; $i >= 0; $i--) {
+            $month = Carbon::now()->subMonths($i);
+            $monthName = $month->format('F');
+            $months[] = $monthName;
+
+            // Add the visitor count for this month
+            if (isset($chartVisitor[$monthName])) {
+                $visitorData[] = $chartVisitor[$monthName];
+            } else {
+                $visitorData[] = 0;
+            }
+
+            // Add the user count for this month
+            if (isset($chartUsers[$monthName])) {
+                $userData[] = $chartUsers[$monthName];
+            } else {
+                $userData[] = 0;
+            }
+        }
+
+        // Convert the data to JSON format for Chart.js
+        $visitorData = json_encode($visitorData);
+        $userData = json_encode($userData);
+        $months = json_encode($months);
+
+        //        $projects = Project::all()->take(10);
         $projects = Project::orderBy('viewer', 'DESC')->take(10)->get();
 
         $categories = Category::all();
@@ -57,16 +91,38 @@ class PageController extends Controller
         $cities = City::all();
 
         $data = Admin::take(1)->first();
-        return view('admin.dashboard',[
-            'data'=>$data,
-            'labels' => $labels,
-            'chartData' => $chartData,
-            'projects'=>$projects,
-            'categories'=>$categories,
-            'towns'=>$towns,
-            'cities'=>$cities
+        return view('admin.dashboard', [
+            'data' => $data,
+            'months' => $months,
+            'visitorData' => $visitorData,
+            'userData' => $userData,
+            'projects' => $projects,
+            'categories' => $categories,
+            'towns' => $towns,
+            'cities' => $cities
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function logout()
     {

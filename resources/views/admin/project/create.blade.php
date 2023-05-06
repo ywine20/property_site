@@ -421,6 +421,31 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="mb-3">
+                                        <div class="w-100">
+                                            <div class="project-cover-preview w-100 overflow-hidden">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <label for="price_img_input" class="form-label">Unit Price Image
+                                                        :</label>
+                                                    <small class="text-warning fw-light">
+                                                        max : 2 MB
+                                                    </small>
+                                                </div>
+                                                <input type="file" id="price_img_input" name="priceImage" class="create-input form-control @error('priceImage') is-invalid @enderror">
+
+                                                @error('priceImage')
+                                                <div class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="priceImagePreview">
+                                                <div class=" bg-white overflow-hidden w-auto py-2 mt-2" style="height:250px;max-width:70%;display:none;">
+                                                    <img id="price_img" src="" alt="" class="w-100 h-100" style="object-fit: contain;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
                                     <div class="mb-3">
@@ -533,7 +558,7 @@
                                             <div class="row row-cols-5 g-2 my-3">
                                                 <div class="col">
                                                     <input type="file" name="small_img_1" class="form-control d-none small_file" id="small_img_input_1" value="{{old('small_img_1')}}">
-                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
+                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px;cursor:pointer;cursor:pointer">
                                                         <img src="{{asset('/images/photoPlaceholderWhite.png')}}" id="sImg1" alt="" class="w-100 h-100 pointer small_img" style="object-fit: cover">
                                                         <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg none" id="delBtn1"></i>
                                                     </div>
@@ -546,7 +571,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="file" name="small_img_2" class="form-control d-none small_file" id="small_img_input_2">
-                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
+                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px;cursor:pointer">
                                                         <img src="{{asset('/images/photoPlaceholderWhite.png')}}" id="sImg2" alt="" class="w-100 h-100 pointer small_img " style="object-fit: cover">
                                                         <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg none" id="delBtn2"></i>
                                                     </div>
@@ -558,7 +583,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="file" name="small_img_3" class="form-control d-none small_file" id="small_img_input_3">
-                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
+                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px;cursor:pointer">
                                                         <img src="{{asset('/images/photoPlaceholderWhite.png')}}" id="sImg3" alt="" class="w-100 h-100 pointer small_img " style="object-fit: cover">
                                                         <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg none" id="delBtn3"></i>
                                                     </div>
@@ -570,7 +595,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="file" name="small_img_4" class="form-control d-none small_file" id="small_img_input_4">
-                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
+                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px;cursor:pointer">
                                                         <img src="{{asset('/images/photoPlaceholderWhite.png')}}" id="sImg4" alt="" class="w-100 h-100 pointer small_img " style="object-fit: cover">
                                                         <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg none" id="delBtn4"></i>
                                                     </div>
@@ -582,7 +607,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="file" name="small_img_5" class="form-control d-none small_file" id="small_img_input_5">
-                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
+                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px;cursor:pointer">
                                                         <img src="{{asset('/images/photoPlaceholderWhite.png')}}" id="sImg5" alt="" class="w-100 h-100 pointer small_img " style="object-fit: cover">
                                                         <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg none" id="delBtn5"></i>
                                                     </div>
@@ -594,7 +619,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="file" name="small_img_6" class="form-control d-none small_file" id="small_img_input_6">
-                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
+                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px;cursor:pointer">
                                                         <img src="{{asset('/images/photoPlaceholderWhite.png')}}" id="sImg6" alt="" class="w-100 h-100 pointer small_img " style="object-fit: cover">
                                                         <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg none" id="delBtn6"></i>
                                                     </div>
@@ -606,7 +631,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="file" name="small_img_7" class="form-control d-none small_file" id="small_img_input_7">
-                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
+                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px;cursor:pointer">
                                                         <img src="{{asset('/images/photoPlaceholderWhite.png')}}" id="sImg7" alt="" class="w-100 h-100 pointer small_img " style="object-fit: cover">
                                                         <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg none" id="delBtn7"></i>
                                                     </div>
@@ -618,7 +643,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="file" name="small_img_8" class="form-control d-none small_file" id="small_img_input_8">
-                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
+                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px;cursor:pointer">
                                                         <img src="{{asset('/images/photoPlaceholderWhite.png')}}" id="sImg8" alt="" class="w-100 h-100 pointer small_img " style="object-fit: cover">
                                                         <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg none" id="delBtn8"></i>
                                                     </div>
@@ -630,7 +655,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="file" name="small_img_9" class="form-control d-none small_file" id="small_img_input_9">
-                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px">
+                                                    <div id="" class="small_img_preview bg-secondary bg-opacity-50 d-flex justify-content-center align-items-center rounded is-invalid overflow-hidden image-preview position-relative" style="width:100px;height:100px;cursor:pointer">
                                                         <img src="{{asset('/images/photoPlaceholderWhite.png')}}" id="sImg9" alt="" class="w-100 h-100 pointer small_img " style="object-fit: cover">
                                                         <i class="bi bi-x-circle-fill text-danger fw-bolder position-absolute top-0 end-0 me-1 pointer delImg none" id="delBtn9"></i>
                                                     </div>
@@ -706,6 +731,22 @@
             coverImage.src = reader.result;
         }
         reader.readAsDataURL(file);
+    })
+    //<!-- For Pricec Image -->
+    let priceImg = document.getElementById('price_img');
+    let priceImgInput = document.getElementById('price_img_input');
+    let priceImagePreview = document.querySelector('.priceImagePreview > div')
+
+    // priceImgInput.addEventListener('click', _ => projectCoverInput.click());
+
+    priceImgInput.addEventListener("change", _ => {
+        let file = priceImgInput.files[0];
+        let reader2 = new FileReader();
+        reader2.onload = function() {
+            priceImg.src = reader2.result;
+        }
+        priceImagePreview.style.display = 'block';
+        reader2.readAsDataURL(file);
     })
 
     //<!-- FOR 360 IMAGE   -->
@@ -854,7 +895,7 @@
     for (let d = 0; d < delImgBtn.length; d++) {
         delImgBtn[d].addEventListener('click', () => {
             small_file[d].value = '';
-            small_img[d].src = '{{asset('/images/photoPlaceholderWhite.png')}}';
+            small_img[d].src = '{{asset(' / images / photoPlaceholderWhite.png ')}}';
             delImgBtn[d].classList.add('none');
         })
     }

@@ -259,6 +259,22 @@
 
 
                                     </div>
+                                    <!-- price img -->
+                                    <div class="mb-3">
+                                        <div class="w-100">
+                                            <div class="project-cover-preview w-100 overflow-hidden">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <label for="price_img_input" class="form-label">Unit Price Image
+                                                        :</label>
+                                                </div>
+                                            </div>
+                                            <div class="priceImagePreview">
+                                                <div class=" bg-white overflow-hidden w-auto py-2 mt-2" style="height:250px;max-width:70%;{{$project->priceImg ? 'display:block':'display:none'}}">
+                                                    <img id="price_img" src="{{asset('storage/images/priceImg/'.$project->priceImg)}}" alt="" class="w-100 h-100" style="object-fit: contain;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
                                     <!-- map link -->

@@ -12,7 +12,7 @@
                         <div class="w-100">
                             <div class="card bg-secondary border-0 rounded rounded-2 overflow-hidden w-100">
                                 <div class="card-body bg-secondary">
-                                    <h5 class="text-primary text-center mb-5">Daily Visitors From SMT Website</h5>
+                                    <h5 class="text-primary text-center mb-5">Monthly Visitors & Customers From SMT Website</h5>
                                     <div class="w-100" style="height: 350px">
                                         <canvas id="myChart" style="width: 100%;height: 100%"></canvas>
                                     </div>
@@ -24,12 +24,21 @@
                 <div class="col-lg-5">
                     <div class=" d-flex flex-column justify-content-center align-items-center">
                         <div class="card w-75 bg-secondary py-4 px-3 border-0 my-2">
-                            <div class="card-body text-success d-flex flex-column justify-content-center align-items-center">
+                            <div class="card-body text-primary d-flex flex-column justify-content-center align-items-center">
                                 <h4 class="">
                                     <i class="bi bi-people-fill"></i>
                                     Total Visitors
                                 </h4>
                                 <span class="fw-bold fs-2">{{\App\Models\Visitor::all()->count()}}+</span>
+                            </div>
+                        </div>
+                        <div class="card w-75 bg-secondary py-4 px-3 border-0 my-2">
+                            <div class="card-body text-success d-flex flex-column justify-content-center align-items-center">
+                                <h4 class="">
+                                    <i class="bi bi-people-fill"></i>
+                                    Total Customers
+                                </h4>
+                                <span class="fw-bold fs-2">{{\App\Models\User::all()->count()}}+</span>
                             </div>
                         </div>
                         <div class="card w-75 bg-secondary py-4 px-3 border-0 my-2">
@@ -157,70 +166,7 @@
 
 
 <script>
-    var labels = {{Js::from($labels)}};
-    var chartData = {{Js::from($chartData)}};
-    const ctx = document.getElementById('myChart');
 
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Daily Visitor',
-                data: chartData,
-                backgroundColor: [
-                    '#F5CC7A',
-                ],
-                borderColor: [
-                    '#F5CC7A',
-                ],
-                borderWidth: 0.5,
-                barPercentage: 0.8,
-                tension: 0.5,
-                borderRadius: 2,
-                color: '#F5CC7A',
-
-                fill: false
-
-
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        display: true,
-                        color: '#F5CC7A',
-                    },
-                    grid: {
-                        display: false,
-                        drawOnChartArea: false,
-                        // borderWidth:0,
-                        drawBorder: false
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        display: true,
-                        color: '#F5CC7A',
-
-                    },
-                    grid: {
-                        display: true,
-                        drawOnChartArea: false,
-                        drawBorder: false
-                        // borderWidth:0,
-                    }
-                }
-            }
-        }
-    });
 </script>
 <script>
     // $(document).ready(function () {
@@ -234,6 +180,42 @@
     //         order: [[1, 'asc']],
     //     });
     // });
+</script>
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: <?php echo $months; ?>,
+            datasets: [{
+                    label: 'Visitors',
+                    data: <?php echo $visitorData; ?>,
+                    backgroundColor: 'rgb(245 204 122)',
+                    borderColor: 'rgb(245 204 122)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Users',
+                    data: <?php echo $userData; ?>,
+                    backgroundColor: 'rgb(85 216 95)',
+                    borderColor: 'rgb(85 216 95)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0,
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
 </script>
 
 

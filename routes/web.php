@@ -158,33 +158,33 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
 
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['user']], function () {
 
-Route::get('/profile/{id}', [CustomerProfileController::class, 'profile'])->name('profile');
+    Route::get('/profile/{id}', [CustomerProfileController::class, 'profile'])->name('profile');
 
-Route::get('/profile/{id}/setting', [CustomerProfileController::class, 'profileSetting'])->name('profile.setting');
-Route::get('/profile/{id}/redeem', [CustomerProfileController::class, 'redeem'])->name('profile.redeem');
-Route::post('/profile/{id}/changeProfile', [CustomerProfileController::class, 'changeImage'])->name('profile.changeImge');
-Route::patch('/profile/{id}/changeProfileInfo', [CustomerProfileController::class, 'changeInfo'])->name('profile.changeInfo');
-Route::patch('/profile/{id}/changePassword', [CustomerProfileController::class, 'changePassword'])->name('profile.changePassword');
-Route::post('/', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
-Route::get('progject/{projectId}/siteprogress', [ProjectListController::class, 'siteProgressList'])->name('siteProgressList');
-Route::get('/siteprogress/{id}', [ProjectListController::class, 'siteProgressDetail'])->name('client-siteProgress.show');
-Route::get('/album/{id}', [ProjectListController::class, 'albumDetail'])->name('client-album.show');
-
-
-
-// Route::view('/profile','customer/profile')->name('profile');
-
-Route::view('/profile/setting', 'customer/profile-setting')->name('profile-setting');
-Route::view('/redeem', 'customer/redeem')->name('profile-redeem');
+    Route::get('/profile/{id}/setting', [CustomerProfileController::class, 'profileSetting'])->name('profile.setting');
+    Route::get('/profile/{id}/redeem', [CustomerProfileController::class, 'redeem'])->name('profile.redeem');
+    Route::post('/profile/{id}/changeProfile', [CustomerProfileController::class, 'changeImage'])->name('profile.changeImge');
+    Route::patch('/profile/{id}/changeProfileInfo', [CustomerProfileController::class, 'changeInfo'])->name('profile.changeInfo');
+    Route::patch('/profile/{id}/changePassword', [CustomerProfileController::class, 'changePassword'])->name('profile.changePassword');
+    Route::post('/', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
+    Route::get('progject/{projectId}/siteprogress', [ProjectListController::class, 'siteProgressList'])->name('siteProgressList');
+    Route::get('/siteprogress/{id}', [ProjectListController::class, 'siteProgressDetail'])->name('client-siteProgress.show');
+    Route::get('/album/{id}', [ProjectListController::class, 'albumDetail'])->name('client-album.show');
 
 
-// Redeem Code for customemr
-Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRedeemCodes'])->name('profile.customerRedeemCodes');
+
+    // Route::view('/profile','customer/profile')->name('profile');
+
+    Route::view('/profile/setting', 'customer/profile-setting')->name('profile-setting');
+    Route::view('/redeem', 'customer/redeem')->name('profile-redeem');
 
 
-//winwinmaw
-Route::get('/redeemCode', [RedeemCodeController::class, 'generateCode'])->name('profile.generateCode');
-Route::post('/code', [RedeemCodeController::class, 'code'])->name('profile.code');
+    // Redeem Code for customemr
+    Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRedeemCodes'])->name('profile.customerRedeemCodes');
+
+
+    //winwinmaw
+    Route::get('/redeemCode', [RedeemCodeController::class, 'generateCode'])->name('profile.generateCode');
+    Route::post('/code', [RedeemCodeController::class, 'code'])->name('profile.code');
 });
 
 Route::view('/multiple-selected', 'test');

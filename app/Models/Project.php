@@ -35,10 +35,11 @@ class Project extends Model implements Viewable
     protected $fillable = [
         'slug',
         'project_name',
-        
+
         'description',
         'cover',
         'three_sixty_image',
+        'priceImg',
         'lower_price',
         'upper_price',
         'category_id',
@@ -122,14 +123,13 @@ class Project extends Model implements Viewable
         return $this->hasManyThrough(AlbumTestImage::class, albumTest::class, 'project_id', 'album_tests_id', 'id', 'id');
     }
 
-    public function siteProgressesImage(){
-        return $this->hasManyThrough(Image::class,siteProgress::class);
+    public function siteProgressesImage()
+    {
+        return $this->hasManyThrough(Image::class, siteProgress::class);
     }
 
     public function unitprice()
     {
         return $this->hasMany(UnitPrice::class);
     }
-
 }
-
