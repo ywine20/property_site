@@ -418,14 +418,14 @@
                         <h5 class="text-primary mb-4">Legal Document</h5>
 
                         <div class="row row-cols-auto g-4 ">
-                            <div class="col text-center">
+                            <!-- <div class="col text-center ">
                                 <a href="{{route('albumTest.create',$project->id)}}">
                                     <div id="album_create" class="album bg-white bg-opacity-10 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer;">
                                         <img src="{{asset('/images/addPlaceholder.png')}}" id="" alt="" class="w-100 h-100" style="object-fit: cover;filter:invert(1)">
                                     </div>
                                     <span class="text-white">Create Album</span>
                                 </a>
-                            </div>
+                            </div> -->
                             @foreach ($project->albumTests as $album)
 
                             <div class="col text-center">
@@ -475,10 +475,11 @@
                     <div class="col-12">
                         <div class="mb-4 d-flex align-items-center justify-content-between">
                             <h5 class="text-primary">Site Progress</h5>
-                            <a href="{{ route('siteProgress.create', $project->id) }}" class="btn btn-sm btn-outline-primary">
+                            <span class="text-primary">Total : {{count($project->siteProgresses)}}</span>
+                            <!-- <a href="{{ route('siteProgress.create', $project->id) }}" class="btn btn-sm btn-outline-primary">
                                 <i class="bi bi-plus "></i>
                                 Create Progress
-                            </a>
+                            </a> -->
                         </div>
 
                         @foreach ($project->siteProgresses as $siteProgress)
