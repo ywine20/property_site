@@ -126,10 +126,9 @@ class AlbumController extends Controller
         return redirect()->back()->with('status', 'Album deleted successfully.');
     }
     //each delete
-    public function imageDel($albumId, $id)
+    public function imageDel($albumId, $image)
     {
-        $image = AlbumTestImage::where('album_tests_id', $albumId)->first();
-        // return $image;
+        $image = AlbumTestImage::where('album_tests_id', $albumId)->where('image',$image)->first();
 
         // Delete the image file from storage
         Storage::delete('public/images/album/' . $image->image);

@@ -285,7 +285,7 @@ class ProjectListController extends Controller
                 ->first();
                 // return $projectId;
             if($assets->customer_id == $user->id){
-                 $siteProgresses = siteProgress::where('project_id', $projectId)->get();
+                 $siteProgresses = siteProgress::latest()->where('project_id', $projectId)->get();
                 return view('siteprogress.list', ['siteProgresses' => $siteProgresses]);
             }else{
                 return view('error');
