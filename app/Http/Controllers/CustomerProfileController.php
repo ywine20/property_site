@@ -24,16 +24,19 @@ use App\Http\Requests\UpdateCustomerProfileRequest;
 class CustomerProfileController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware(['user']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['user']);
+    // }
 
     public function profile($id)
     {
 
         // $user = User::findOrFail($id);
         $user = Auth::guard('user')->user();
+        if(!$user) {
+            return view('error');
+        }
         if($id != $user->id){
             return view('error');
         }

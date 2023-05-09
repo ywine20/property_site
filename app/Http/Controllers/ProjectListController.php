@@ -27,6 +27,7 @@ class ProjectListController extends Controller
     public function projectlist(Request $request)
     {
 
+
         $currentURL = URL::current();
         // substr($string, $startPosition,$lengthOfSubstring);
         $string = $currentURL;
@@ -77,10 +78,10 @@ class ProjectListController extends Controller
         $findTon = Town::where('id')->first();
         $finPro = Project::where('id')->first();
         $findPro = Project::where('id')->first();
+         $user = Auth::guard('user')->user();
 
 
-
-        return view('projectlist', compact('projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'findPro', 'finPro'));
+        return view('projectlist', compact('user','projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'findPro', 'finPro'));
     }
 
     // public function search(Request $request){
@@ -186,7 +187,15 @@ class ProjectListController extends Controller
 
     public function detail($id, Request $request)
     {
+        //production route
+          $user = Auth::guard('user')->user();
+        if(!$user) {
+            return view('error');
+        }
+
+
         $project = Project::find($id);
+
 
         if ($project) {
 
@@ -266,23 +275,82 @@ class ProjectListController extends Controller
         }
     }
 
-    public function siteProgressList($id)
+    public function siteProgressList($projectId)
     {
-        $siteProgresses = siteProgress::where('project_id', $id)->get();
-        return view('siteprogress.list', ['siteProgresses' => $siteProgresses]);
+            $user = Auth::guard('user')->user();
+
+        if($user) {
+            $assets =  Assets::where('customer_id',  Auth::guard('user')->user()->id)
+                ->where('project_id', $projectId)
+                ->first();
+                // return $projectId;
+            if($assets->customer_id == $user->id){
+                 $siteProgresses = siteProgress::where('project_id', $projectId)->get();
+                return view('siteprogress.list', ['siteProgresses' => $siteProgresses]);
+            }else{
+                return view('error');
+            }
+        }
+        else{
+            return view('error');
+        }
+
+
+
     }
 
-    public function siteProgressDetail($id)
+    public function siteProgressDetail($projectId,$id)
     {
-        $siteProgress = siteProgress::find($id);
 
-        return view('siteprogress.show', ['siteProgress' => $siteProgress]);
+         $user = Auth::guard('user')->user();
+        if($user) {
+            $assets =  Assets::where('customer_id',  Auth::guard('user')->user()->id)
+                ->where('project_id', $projectId)
+                ->first();
+                // dd($assets);
+            if($assets->customer_id == $user->id){
+
+                $siteProgress = siteProgress::find($id);
+                if($siteProgress){
+                    return view('siteprogress.show', ['siteProgress' => $siteProgress]);
+                }else{
+                    return abort(404);
+                }
+
+            }else{
+                return view('error');
+            }
+        }
+        else{
+            return view('error');
+        }
+
     }
 
-    public function albumDetail($id)
+    public function albumDetail($projectId,$id)
     {
-        $album = albumTest::where('id', $id)->first();
-        return view('albumDetail', ['album' => $album]);
+        $user = Auth::guard('user')->user();
+        if($user) {
+            $assets =  Assets::where('customer_id',  Auth::guard('user')->user()->id)
+                ->where('project_id', $projectId)
+                ->first();
+            if($assets->customer_id == $user->id){
+                $album = albumTest::where('id', $id)->first();
+                if($album){
+
+                    return view('albumDetail', ['album' => $album]);
+                }
+                else{
+                     return abort(404);
+                }
+            }else{
+                return view('error');
+            }
+        }
+        else{
+            return view('error');
+        }
+
     }
 }
     // public function advance(Request $request)
