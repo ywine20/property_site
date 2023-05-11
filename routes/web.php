@@ -165,7 +165,7 @@ Route::group([], function () {
     Route::post('/profile/{id}/changeProfile', [CustomerProfileController::class, 'changeImage'])->name('profile.changeImge');
     Route::patch('/profile/{id}/changeProfileInfo', [CustomerProfileController::class, 'changeInfo'])->name('profile.changeInfo');
     Route::patch('/profile/{id}/changePassword', [CustomerProfileController::class, 'changePassword'])->name('profile.changePassword');
-    Route::post('/', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
+    Route::post('/forgotpassword', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
     Route::get('project/{projectId}/siteprogress', [ProjectListController::class, 'siteProgressList'])->name('siteProgressList');
     Route::get('project/{projectId}/siteprogress/{id}', [ProjectListController::class, 'siteProgressDetail'])->name('client-siteProgress.show');
     Route::get('project/{projectId}/album/{id}', [ProjectListController::class, 'albumDetail'])->name('client-album.show');
