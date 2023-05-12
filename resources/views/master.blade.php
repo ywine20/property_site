@@ -480,6 +480,79 @@
 
 
 
+    <!-- Customer Register -->
+    <div id="registerModal" class="custom-modal">
+        <div class="register d-flex justify-content-center w-100 bg-secondary bg-opacity-10 py-5 ">
+            <div class="card bg-white shadow px-2 py-2 animate__animated animate__fadeIn"
+                style="width:400px;height:fit-content">
+                <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose"
+                    onclick="closeRegisterModal()">&times;</span>
+                <div class="card-body">
+                    <h4 class="mb-4">Register To Sun Myat Tun</h4>
+
+                    <form action="{{ route('register') }}" method="POST" class="register-form">
+                        @csrf
+                        <!-- user name -->
+                        <div class="form-floating mb-3">
+                            <input type="text" name="name" class="form-control form-control-border-bottom"
+                                id="floatingInputName" placeholder="JohnDoe" />
+                            <label for="floatingInputName">User Name</label>
+                            <small class="error-text register_name_error text-danger"></small>
+                        </div>
+                        <!-- email -->
+                        <div class="form-floating mb-3">
+                            <input type="text" name="email" class="form-control form-control-border-bottom"
+                                id="floatingInputEmail" placeholder="name@example.com" />
+                            <label for="floatingInputEmail">Email</label>
+                            <small class="error-text register_email_error text-danger"></small>
+                        </div>
+                        <!-- password -->
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control form-control-border-bottom"
+                                id="floatingInputPassword" placeholder="name@example.com" />
+                            <label for="floatingInputPassword">Password</label>
+                            <small class="error-text register_password_error text-danger"></small>
+                        </div>
+                        <!-- confirm password -->
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password_confirmation"
+                                class="form-control form-control-border-bottom" id="floatingInputConfirmPassword"
+                                placeholder="name@example.com" />
+                            <label for="floatingInputConfirmPassword">Confirm Password</label>
+                            <small class="error-text register_passwordConfirm_error text-danger"></small>
+                        </div>
+                        <div class="mb-3">
+                            <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+                            @if (Session::has('g-recaptcha-response'))
+                                <i class="{{ Session::get('alert-info') }} text-danger">
+                                    {{ Session::get('g-recaptcha-response') }}
+                                </i>
+                            @endif
+                        </div>
+                        <!-- registere Button -->
+                        <button type="submit"
+                            class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
+                    </form>
+                    <!-- register with social app -->
+                    <div class="text-center w-100 d-none">
+                        <button class="btn rounded-circle border border-secondary mx-1 social-icon">
+                            <i class="bi bi-google fa-fw text-secondary fs-5"></i>
+                        </button>
+                        <button class="btn rounded-circle border border-secondary social-icon">
+                            <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
+                        </button>
+                    </div>
+                    <!-- Already have an account -->
+                    <div class="text-center w-100 my-3">
+                        <small class="d-flex justify-content-center align-items-center">Don't have an account?
+                            <button class="btn btn-link text-primary" onclick="openLoginModal()">Log in</button> Now!
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <!--Customer LOG IN -->
     <div id="loginModal" class="custom-modal ">
@@ -543,71 +616,7 @@
 
     </div>
 
-    <!-- Customer Register -->
-    <div id="registerModal" class="custom-modal">
-        <div class="register d-flex justify-content-center w-100 bg-secondary bg-opacity-10 py-5 ">
-            <div class="card bg-white shadow px-2 py-2 animate__animated animate__fadeIn"
-                style="width:400px;height:fit-content">
-                <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose"
-                    onclick="closeRegisterModal()">&times;</span>
-                <div class="card-body">
-                    <h4 class="mb-4">Register To Sun Myat Tun</h4>
 
-                    <form action="{{ route('register') }}" method="POST" class="register-form">
-                        @csrf
-                        <!-- user name -->
-                        <div class="form-floating mb-3">
-                            <input type="text" name="name" class="form-control form-control-border-bottom"
-                                id="floatingInputName" placeholder="JohnDoe" />
-                            <label for="floatingInputName">User Name</label>
-                            <small class="error-text register_name_error text-danger"></small>
-                        </div>
-                        <!-- email -->
-                        <div class="form-floating mb-3">
-                            <input type="text" name="email" class="form-control form-control-border-bottom"
-                                id="floatingInputEmail" placeholder="name@example.com" />
-                            <label for="floatingInputEmail">Email</label>
-                            <small class="error-text register_email_error text-danger"></small>
-                        </div>
-                        <!-- password -->
-                        <div class="form-floating mb-3">
-                            <input type="password" name="password" class="form-control form-control-border-bottom"
-                                id="floatingInputPassword" placeholder="name@example.com" />
-                            <label for="floatingInputPassword">Password</label>
-                            <small class="error-text register_password_error text-danger"></small>
-                        </div>
-                        <!-- confirm password -->
-                        <div class="form-floating mb-3">
-                            <input type="password" name="password_confirmation"
-                                class="form-control form-control-border-bottom" id="floatingInputConfirmPassword"
-                                placeholder="name@example.com" />
-                            <label for="floatingInputConfirmPassword">Confirm Password</label>
-                            <small class="error-text register_passwordConfirm_error text-danger"></small>
-                        </div>
-                        <!-- registere Button -->
-                        <button type="submit"
-                            class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
-                    </form>
-                    <!-- register with social app -->
-                    <div class="text-center w-100 d-none">
-                        <button class="btn rounded-circle border border-secondary mx-1 social-icon">
-                            <i class="bi bi-google fa-fw text-secondary fs-5"></i>
-                        </button>
-                        <button class="btn rounded-circle border border-secondary social-icon">
-                            <i class="bi bi-facebook fa-fw text-secondary fs-5"></i>
-                        </button>
-                    </div>
-                    <!-- Already have an account -->
-                    <div class="text-center w-100 my-3">
-                        <small class="d-flex justify-content-center align-items-center">Don't have an account?
-                            <button class="btn btn-link text-primary" onclick="openLoginModal()">Log in</button> Now!
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
 
     <!--Customer forgot password -->
     <div id="forgotPasswordModal" class="custom-modal ">
@@ -871,6 +880,7 @@
                         document.querySelector('.register_password_error').innerText = passwordError;
                         document.querySelector('.register_passwordConfirm_error').innerText =
                             passwordConfirmError;
+                            
 
                     } else if (err.request) {
                         console.log('request error', err.request)
@@ -907,6 +917,7 @@
                 sendEmailBtn.disabled = false;
                 return;
             }
+
             const forgotPasswordFormData = new FormData();
             // forgotPasswordFormData.append('email',email)
             // let userId = document.querySelector('.userId').value;
@@ -923,7 +934,7 @@
                     // sendEmailBtn.disabled = ;
                 }).catch(error => {
                     let passwordError = error.response.data.error;
-                    console.log(error.response);
+                    // console.log(error.response);
                     document.querySelector('.forgotPasswordError').innerText = passwordError.email ?
                         passwordError.email[0] : '';
                     sendEmailBtn.innerHTML = "Send";

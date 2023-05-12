@@ -24,7 +24,7 @@ class ContactController extends Controller
                 // echo "The URL starts with the desired URL.";
                 $check_if_exists = DB::table('visitors')->where('session_id', $request->getSession()->getId())->first();
                 $check_date = DB::table('visitors')->whereDate('created_at', Carbon::today())->get();
-        
+
                 if (!$check_if_exists || ($check_date->count()) < 1) {
                     $visitor = new Visitor();
                     $visitor->url = $request->url();
@@ -34,13 +34,13 @@ class ContactController extends Controller
                     $visitor->visited_date = Carbon::now();
                     $visitor->save();
                 }
-        
+
                 Session::push('visited_user', request()->getSession()->getId());
             }else if(substr($string, 0, 28) === "https://www.sunmyattunmm.com") {
                  // echo "The URL starts with the desired URL.";
                  $check_if_exists = DB::table('visitors')->where('session_id', $request->getSession()->getId())->first();
                  $check_date = DB::table('visitors')->whereDate('created_at', Carbon::today())->get();
-         
+
                  if (!$check_if_exists || ($check_date->count()) < 1) {
                      $visitor = new Visitor();
                      $visitor->url = $request->url();
@@ -50,7 +50,7 @@ class ContactController extends Controller
                      $visitor->visited_date = Carbon::now();
                      $visitor->save();
                  }
-         
+
                  Session::push('visited_user', request()->getSession()->getId());
             }else{
                  // echo "The URL starts with not the desired URL.";

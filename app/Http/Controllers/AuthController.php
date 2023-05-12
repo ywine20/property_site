@@ -23,10 +23,21 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3|max:50',
             'email' => 'required|email|unique:users,email',
-            // 'email' => ['required', 'email', new ValidEmail('users', 'email')],
-
             'password' => 'required|min:8|max:16',
             'password_confirmation' => 'required|same:password',
+            'g-recaptcha-response' => function ($attribute, $value, $fail) {
+                $secretKey = config('services.recaptcha.secret');
+                $response = $value;
+                $userIP = $_SERVER['REMOTE_ADDR'];
+                $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$userIP";
+                $response = \file_get_contents($url);
+                $response = json_decode($response);
+                if(!$response->success){
+                    Session::flash('g-recaptcha-response', 'please check reCaptcha.');
+                    Session::flash('alert-class', 'alert-danger');
+                    $fail($attribute.'google reCaptcha fail');
+                }
+            },
         ]);
 
 

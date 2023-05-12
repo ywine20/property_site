@@ -158,7 +158,7 @@
                                                 <option value="">Choose Category</option>
                                                 @foreach ($categories as $c)
                                                     <!-- <option value="{{ $c->category_id }}" @if ($c->category_id == $project->category_id) selected @endif >{{ $c->category_name }}
-                                                                                                                                                                                                                                                </option> -->
+                                                                                                                                                                                                                                                    </option> -->
                                                     <option value="{{ $c->category_id }}"
                                                         {{ $c->category_id == old('category_id', $project->category_id) ? 'selected' : '' }}>
                                                         {{ $c->category_name }}
@@ -771,8 +771,8 @@
                                                             style="object-fit: cover">
                                                     @elseif ($extension == 'pdf')
                                                         <!-- <i class="fas fa-file-pdf fa-4x"></i>
-                                                                                <img src="{{ asset('images/pdf.png') }}" id="" alt=""
-                                                                                    class="w-100 h-100 bg-white" style="object-fit: cover"> -->
+                                                                                    <img src="{{ asset('images/pdf.png') }}" id="" alt=""
+                                                                                        class="w-100 h-100 bg-white" style="object-fit: cover"> -->
                                                         <canvas class="thumbnail pdf-canvas"
                                                             data-pdf-url="{{ asset('storage/images/album/' . $lastImage->image) }}"></canvas>
 
