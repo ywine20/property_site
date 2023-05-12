@@ -22,15 +22,17 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3|max:50',
-            'email' => 'required|email|unique:users,email',
+            // 'email' => 'required|email|unique:users,email',
+            'email' => ['required', 'email', new ValidEmail('users', 'email')],
+
             'password' => 'required|min:8|max:16',
             'password_confirmation' => 'required|same:password',
         ]);
 
 
-         if ($validator->fails()) {
-            return response()->json(['status'=>'0','error' => $validator->errors()->toArray(),'request'=>$request->all()], 422);
-        }else{
+        if ($validator->fails()) {
+            return response()->json(['status' => '0', 'error' => $validator->errors()->toArray(), 'request' => $request->all()], 422);
+        } else {
             $user = new User();
             $user->name = ucwords($request->name);
             $user->email = $request->email;
@@ -77,12 +79,12 @@ class AuthController extends Controller
 
 
                 $token = Hash::make("$userId|$time|$secret");
-                
+
                 $user->remember_token = $token;
                 $user->save();
-    
+
                 session()->put('remember_token',  $user->remember_token);
-    
+
 
                 return response()->json([
                     'access_token' => $token,
@@ -139,9 +141,9 @@ class AuthController extends Controller
                     // 'fromName'=>'SMT',
                     'title' => 'Sending New Password',
                     'body' => "DO NOT! share it to anyone, in order to prevent fraud",
-                    'newPassword'=>$newPassword,
+                    'newPassword' => $newPassword,
                 ];
-    
+
                 Mail::to($request->email)->send(new SendPasswordMail($details));
 
                 // Add code to send the new password to the user via email or some other means.
@@ -150,7 +152,7 @@ class AuthController extends Controller
                 return response()->json(['error' => 'User not found.'], 404);
             }
 
-          
+
             // return response()->json(['status' => '1', 'user' => $user], 200);
         }
     }
