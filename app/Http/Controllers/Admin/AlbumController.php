@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\City;
+use App\Models\Town;
 use App\Models\Album;
+use App\Models\Amenity;
+use App\Models\Project;
+use App\Models\Category;
 use App\Models\albumTest;
 use Spatie\PdfToImage\Pdf;
 use Illuminate\Http\Request;
 use App\Models\AlbumTestImage;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
-use App\Models\Amenity;
-use App\Models\Category;
-use App\Models\City;
-use App\Models\Project;
-use App\Models\Town;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Admin\ProjectController;
 
 
 class AlbumController extends Controller
@@ -27,6 +28,7 @@ class AlbumController extends Controller
 
     public function store($projectId, Request $request)
     {
+
 
         if ($request->albumName) {
             $album = new albumTest();
@@ -52,20 +54,20 @@ class AlbumController extends Controller
             }
         }
 
-        $towns = Town::all();
-        $categories = Category::all();
-        $cities = City::all();
-        $amenity = Amenity::all();
-        $project = Project::where('id', $request->project_id)
-            ->with('categories', 'amenity', 'towns', 'cities')
-            ->first();
-        if (!$project) {
-            return redirect()->back()->with('error', 'Project Not found');
-        }
+        // $towns = Town::all();
+        // $categories = Category::all();
+        // $cities = City::all();
+        // $amenity = Amenity::all();
+        // $project = Project::where('id', $request->project_id)
+        //     ->with('categories', 'amenity', 'towns', 'cities')
+        //     ->first();
+        // if (!$project) {
+        //     return redirect()->back()->with('error', 'Project Not found');
+        // }
 
-        return 'upload success';
 
-        return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'))->with('status', 'Files upload success');
+return redirect()->action([ProjectController::class, 'edit'], ['project' => $request->project_id]);
+        // return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'))->with('status', 'Files upload success');
 
         // return redirect()->route('project.detail', $request->project_id);
     }

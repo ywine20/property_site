@@ -93,7 +93,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
 
     // Album
     Route::get('project/{projectId}/album/create', [AlbumController::class, 'create'])->name('albumTest.create');
-    Route::post('project/{projectId}/album', [AlbumController::class, 'store'])->name('albumTest.store');
+    Route::post('project/{projectId}/album/store', [AlbumController::class, 'store'])->name('albumTest.store');
     Route::get('project/{projectId}/album/{id}', [AlbumController::class, 'show'])->name('albumTest.show');
     Route::patch('project/{projectId}/album/{id}', [AlbumController::class, 'update'])->name('albumTest.update');
     Route::delete('album/{id}', [AlbumController::class, 'albumDelete'])->name('album.delete');

@@ -158,7 +158,7 @@
                                                 <option value="">Choose Category</option>
                                                 @foreach ($categories as $c)
                                                     <!-- <option value="{{ $c->category_id }}" @if ($c->category_id == $project->category_id) selected @endif >{{ $c->category_name }}
-                                                                                                                                                                                                                        </option> -->
+                                                                                                                                                                                                                                                </option> -->
                                                     <option value="{{ $c->category_id }}"
                                                         {{ $c->category_id == old('category_id', $project->category_id) ? 'selected' : '' }}>
                                                         {{ $c->category_name }}
@@ -740,7 +740,6 @@
                         <!-- Legal Doucment -->
                         <div class="col-12">
                             <h5 class="text-primary mb-4">Legal Document</h5>
-
                             <div class="row row-cols-auto g-4 ">
                                 <div class="col text-center">
                                     <a href="{{ route('albumTest.create', $project->id) }}">
@@ -772,8 +771,8 @@
                                                             style="object-fit: cover">
                                                     @elseif ($extension == 'pdf')
                                                         <!-- <i class="fas fa-file-pdf fa-4x"></i>
-                                                        <img src="{{ asset('images/pdf.png') }}" id="" alt=""
-                                                            class="w-100 h-100 bg-white" style="object-fit: cover"> -->
+                                                                                <img src="{{ asset('images/pdf.png') }}" id="" alt=""
+                                                                                    class="w-100 h-100 bg-white" style="object-fit: cover"> -->
                                                         <canvas class="thumbnail pdf-canvas"
                                                             data-pdf-url="{{ asset('storage/images/album/' . $lastImage->image) }}"></canvas>
 
@@ -1371,3 +1370,36 @@
         }
     </script>
 @endsection
+
+@push('customScript')
+    <script>
+        const canvases = document.querySelectorAll('.pdf-canvas');
+
+
+        for (let i = 0; i < canvases.length; i++) {
+            const canvas = canvases[i];
+            const pdfUrl = canvas.dataset.pdfUrl;
+
+            pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+                pdf.getPage(1).then(function(page) {
+                    const viewport = page.getViewport({
+                        scale: 0.2
+                    });
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    page.render({
+                        canvasContext: canvas.getContext('2d'),
+                        viewport: viewport
+                    }).promise.then(function() {
+                        const imgDataUrl = canvas.toDataURL();
+                        const img = new Image();
+                        img.src = imgDataUrl;
+                        img.classList = "w-100 h-100"
+
+                        canvas.parentNode.replaceChild(img, canvas);
+                    });
+                });
+            });
+        }
+    </script>
+@endpush

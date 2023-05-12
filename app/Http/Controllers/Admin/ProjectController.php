@@ -299,13 +299,16 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
+
         $towns = Town::all();
         $categories = Category::all();
         $cities = City::all();
         $amenity = Amenity::all();
-        $project = Project::where('slug', $id)
+        $project = Project::where('id', $id)
             ->with('categories', 'amenity', 'towns', 'cities')
             ->first();
+
+
         if (!$project) {
             return redirect()->back()->with('error', 'Project Not found');
         }
