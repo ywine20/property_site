@@ -22,8 +22,8 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3|max:50',
-            // 'email' => 'required|email|unique:users,email',
-            'email' => ['required', 'email', new ValidEmail('users', 'email')],
+            'email' => 'required|email|unique:users,email',
+            // 'email' => ['required', 'email', new ValidEmail('users', 'email')],
 
             'password' => 'required|min:8|max:16',
             'password_confirmation' => 'required|same:password',
@@ -139,9 +139,10 @@ class AuthController extends Controller
                     // 'recipient' => 'mawinwinmaw4@gmail.com',
                     // 'fromEmail'=>'winwinmaw@axletechmm.com',
                     // 'fromName'=>'SMT',
-                    'title' => 'Sending New Password',
-                    'body' => "DO NOT! share it to anyone, in order to prevent fraud",
+                    'title' => 'Password Reset',
+                    'body' => "We had received your request for Password Reset.",
                     'newPassword' => $newPassword,
+                    'userName'=>$user->name,
                 ];
 
                 Mail::to($request->email)->send(new SendPasswordMail($details));

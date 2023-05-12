@@ -37,7 +37,7 @@
 @endsection
 
 @section('content')
-<!--                start content-->
+<!--start content-->
 <div class="content">
     <div class="row g-0 flex-column flex-md-row justify-content-center justify-content-md-start ">
         <!-- breadcrumb -->

@@ -24,6 +24,7 @@ class AlbumController extends Controller
     {
         return view('admin.album.create', ['projectId' => $id]);
     }
+
     public function store($projectId, Request $request)
     {
 
@@ -62,6 +63,7 @@ class AlbumController extends Controller
             return redirect()->back()->with('error', 'Project Not found');
         }
 
+        return 'upload success';
 
         return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'))->with('status', 'Files upload success');
 
@@ -121,6 +123,7 @@ class AlbumController extends Controller
         foreach ($album->albumTestImages as $image) {
             Storage::delete('public/images/album/' . $image->image);
             $image->delete();
+            // return $id;
         }
         $album->delete();
         return redirect()->back()->with('status', 'Album deleted successfully.');

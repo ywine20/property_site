@@ -81,8 +81,8 @@ Route::post('/admin/login', 'Admin\PageController@login');
 // Route::post('admin/site', [SiteController::class, 'sitesave']);
 // Route::delete('/site-gallery/{id}', [SiteController::class, 'sitedelete'])->name('delete-site-gallery');
 
-Route::get('admin/album', [AlbumController::class, 'index'])->name('save-multipel-imgae');
-Route::post('admin/album', [AlbumController::class, 'save']);
+// Route::get('admin/album', [AlbumController::class, 'index'])->name('save-multipel-imgae');
+// Route::post('admin/album', [AlbumController::class, 'save']);
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Admin']], function () {
     Route::get('/', 'PageController@showDashboard');
