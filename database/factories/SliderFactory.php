@@ -14,7 +14,7 @@ class SliderFactory extends Factory
     public function definition()
     {
         return [
-            'image'=>'sliderexample.jpg'
+            'image'=>null,
         ];
     }
 }

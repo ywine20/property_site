@@ -90,8 +90,8 @@ class FacebookLinkController extends Controller
      */
     public function edit($id)
     {
-        
-  
+
+
         // $projects = Project::all();
         $facebooklink = FacebookLink::where('id', $id)
             ->first();
@@ -119,7 +119,7 @@ class FacebookLinkController extends Controller
         ]);
 
         $facebooklink = FacebookLink::where('id', $id)->first();
-       
+
         if($image = $request->file('picture')){
 
             Storage::delete('public/images/fbImages/' . $facebooklink->picture);

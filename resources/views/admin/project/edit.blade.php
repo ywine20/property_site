@@ -113,8 +113,13 @@
             <div class="bg-secondary bg-opacity-50 px-2 py-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('project.index') }}">Projects</a></li>
-                        <li class="breadcrumb-item active">Edit</li>
+                        <li class="breadcrumb-item">
+                            <a href="#" onclick="history.back()">
+                                <i class="bi bi-arrow-left me-1"></i>Back
+                            </a>
+                        </li>
+                        {{-- <li class="breadcrumb-item"><a href="{{ route('project.index') }}">Projects</a></li>
+                        <li class="breadcrumb-item active">Edit</li> --}}
                         <!--                                <li class="breadcrumb-item active" aria-current="page">Data</li>-->
                     </ol>
                 </nav>
@@ -158,7 +163,7 @@
                                                 <option value="">Choose Category</option>
                                                 @foreach ($categories as $c)
                                                     <!-- <option value="{{ $c->category_id }}" @if ($c->category_id == $project->category_id) selected @endif >{{ $c->category_name }}
-                                                                                                                                                                                                                                                    </option> -->
+                                                                                                                                                                                                                                                        </option> -->
                                                     <option value="{{ $c->category_id }}"
                                                         {{ $c->category_id == old('category_id', $project->category_id) ? 'selected' : '' }}>
                                                         {{ $c->category_name }}
@@ -771,8 +776,8 @@
                                                             style="object-fit: cover">
                                                     @elseif ($extension == 'pdf')
                                                         <!-- <i class="fas fa-file-pdf fa-4x"></i>
-                                                                                    <img src="{{ asset('images/pdf.png') }}" id="" alt=""
-                                                                                        class="w-100 h-100 bg-white" style="object-fit: cover"> -->
+                                                                                        <img src="{{ asset('images/pdf.png') }}" id="" alt=""
+                                                                                            class="w-100 h-100 bg-white" style="object-fit: cover"> -->
                                                         <canvas class="thumbnail pdf-canvas"
                                                             data-pdf-url="{{ asset('storage/images/album/' . $lastImage->image) }}"></canvas>
 

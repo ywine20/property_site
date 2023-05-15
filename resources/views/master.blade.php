@@ -138,41 +138,6 @@
 </script>
 
 <body>
-    <!--Start Messenger -->
-
-    <!-- Messenger Chat Plugin Code -->
-
-    <!-- Messenger Chat plugin Code -->
-
-    <!-- <div id="fb-root"></div>
-  <div id="fb-customer-chat" class="fb-customerchat"> </div>
-  <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "353690388313896");
-      chatbox.setAttribute("attribution", "biz_inbox");
-  </script>
-   -->
-    <!-- Your SDK code -->
-    <!-- <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml: true,
-                version: 'v15.0'
-            });
-        };
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script> -->
-
-    <!-- End Messenger -->
-
-
     <div class="container-fluid p-0">
         <!-- nav -->
         <!-- offcanvas -->
@@ -454,7 +419,7 @@
                 <div
                     class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
                     <div class="pointer mx-2">
-                        <a href="locale/en" class="text-decoration-none"> <img
+                        <a href="{{ asset('locale/en') }}" class="text-decoration-none"> <img
                                 src="{{ asset('image/EnglishFlag.jpg') }}" alt="" class="rounded"
                                 style="width:40px;height:30px">
                             <span class="text-primary d-none d-md-inline">English</span>
@@ -462,7 +427,7 @@
 
                     </div>
                     <div class="pointer mx-2">
-                        <a href="locale/my" class="text-decoration-none">
+                        <a href="{{ asset('locale/my') }}" class="text-decoration-none">
                             <img src="{{ asset('image/BurmaFlag.jpg') }}" alt="" class="rounded "
                                 style="width:40px;height:30px">
                             <span class="text-primary d-none d-md-inline">Myanmar</span>
@@ -523,11 +488,12 @@
                         </div>
                         <div class="mb-3">
                             <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
-                            @if (Session::has('g-recaptcha-response'))
+                            <small class="error-text g-recaptcha-response_error text-danger"></small>
+                            {{-- @if (Session::has('g-recaptcha-response'))
                                 <i class="{{ Session::get('alert-info') }} text-danger">
                                     {{ Session::get('g-recaptcha-response') }}
                                 </i>
-                            @endif
+                            @endif --}}
                         </div>
                         <!-- registere Button -->
                         <button type="submit"
@@ -838,8 +804,8 @@
             const email = registerForm.elements.email.value;
             const password = registerForm.elements.password.value;
             const password_confirmation = registerForm.elements.password_confirmation.value;
-
-
+            const recaptchaResponse = grecaptcha.getResponse(); // Assuming you have included the reCAPTCHA script on your page
+            console.log(recaptchaResponse);
             axios.post('/register', {
                     name: name,
                     email: email,
@@ -864,6 +830,7 @@
                     document.querySelector('.register_email_error').innerText = '';
                     document.querySelector('.register_password_error').innerText = '';
                     document.querySelector('.register_passwordConfirm_error').innerText = '';
+                    document.querySelector('.g-recaptcha-response_error').innerText = '';
 
                     if (err.response) {
                         const {
@@ -880,7 +847,7 @@
                         document.querySelector('.register_password_error').innerText = passwordError;
                         document.querySelector('.register_passwordConfirm_error').innerText =
                             passwordConfirmError;
-                            
+
 
                     } else if (err.request) {
                         console.log('request error', err.request)

@@ -154,33 +154,6 @@
     <!--                end content -->
 @endsection
 
-
-{{-- <!--Edit Modal-->
-<!-- Modal -->
-    <div class="modal fade " id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content text-primary">
-                <div class="modal-header border-0">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Category Edit</h1>
-                    <button type="button" class="btn-close text-primary d-flex justify-content-center align-items-center" data-bs-dismiss="modal">
-                        <i class="bi bi-x fa-fw fs-3"></i>
-                    </button>
-                </div>
-                <div class="modal-body  border-0">
-                    <form action="" method="post" id="editForm">
-                        <label class="mb-1 text-white fs-6">Category Name</label>
-                        <input type="text" value="Home" class="form-control bg-secondary bg-opacity-50 border-0 text-white py-3">
-                    </form>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-<!--End Edit Modal--> --}}
-
 @section('script')
     <script>
         // <!--  start  aside and nav responsive design-->

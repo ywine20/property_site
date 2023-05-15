@@ -118,8 +118,13 @@
             <div class="bg-secondary bg-opacity-50 px-2 py-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('project.index') }}">Projects</a></li>
-                        <li class="breadcrumb-item active">Detail</li>
+                         <li class="breadcrumb-item">
+                            <a href="#" onclick="history.back()">
+                                <i class="bi bi-arrow-left me-1"></i>Back
+                            </a>
+                        </li>
+                        {{-- <li class="breadcrumb-item"><a href="{{ route('project.index') }}">Projects</a></li>
+                        <li class="breadcrumb-item active">Detail</li> --}}
                         <!--                                <li class="breadcrumb-item active" aria-current="page">Data</li>-->
                     </ol>
                 </nav>
@@ -547,13 +552,13 @@
 
                             <div class="row row-cols-auto g-4 ">
                                 <!-- <div class="col text-center ">
-                                    <a href="{{ route('albumTest.create', $project->id) }}">
-                                        <div id="album_create" class="album bg-white bg-opacity-10 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer;">
-                                            <img src="{{ asset('/images/addPlaceholder.png') }}" id="" alt="" class="w-100 h-100" style="object-fit: cover;filter:invert(1)">
-                                        </div>
-                                        <span class="text-white">Create Album</span>
-                                    </a>
-                                </div> -->
+                                        <a href="{{ route('albumTest.create', $project->id) }}">
+                                            <div id="album_create" class="album bg-white bg-opacity-10 d-flex justify-content-center align-items-center rounded overflow-hidden rounded-4 position-relative shadow-lg" style="width:150px;height:150px;cursor:pointer;">
+                                                <img src="{{ asset('/images/addPlaceholder.png') }}" id="" alt="" class="w-100 h-100" style="object-fit: cover;filter:invert(1)">
+                                            </div>
+                                            <span class="text-white">Create Album</span>
+                                        </a>
+                                    </div> -->
                                 @foreach ($project->albumTests as $album)
 
                                     <div class="col text-center">
@@ -573,8 +578,8 @@
                                                             style="object-fit: cover">
                                                     @elseif ($extension == 'pdf')
                                                         <!-- <i class="fas fa-file-pdf fa-4x"></i>
-                                            <img src="{{ asset('images/pdf.png') }}" id="" alt=""
-                                                class="w-100 h-100 bg-white" style="object-fit: cover"> -->
+                                                <img src="{{ asset('images/pdf.png') }}" id="" alt=""
+                                                    class="w-100 h-100 bg-white" style="object-fit: cover"> -->
                                                         <canvas class="thumbnail pdf-canvas"
                                                             data-pdf-url="{{ asset('storage/images/album/' . $lastImage->image) }}"></canvas>
 
@@ -587,7 +592,8 @@
                                                 @endif
 
                                                 <div class="album-action  w-100 bg-black bg-opacity-50 pt-1">
-                                                    <form action="{{ route('album.delete', $album->id) }}" method="post">
+                                                    <form action="{{ route('album.delete', $album->id) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-link btn-sm text-danger"
@@ -614,9 +620,9 @@
                                 <h5 class="text-primary">Site Progress</h5>
                                 <span class="text-primary">Total : {{ count($project->siteProgresses) }}</span>
                                 <!-- <a href="{{ route('siteProgress.create', $project->id) }}" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-plus "></i>
-                                    Create Progress
-                                </a> -->
+                                        <i class="bi bi-plus "></i>
+                                        Create Progress
+                                    </a> -->
                             </div>
 
                             @foreach ($project->siteProgresses as $siteProgress)

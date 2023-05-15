@@ -54,22 +54,7 @@ class AlbumController extends Controller
             }
         }
 
-        // $towns = Town::all();
-        // $categories = Category::all();
-        // $cities = City::all();
-        // $amenity = Amenity::all();
-        // $project = Project::where('id', $request->project_id)
-        //     ->with('categories', 'amenity', 'towns', 'cities')
-        //     ->first();
-        // if (!$project) {
-        //     return redirect()->back()->with('error', 'Project Not found');
-        // }
-
-
-return redirect()->action([ProjectController::class, 'edit'], ['project' => $request->project_id]);
-        // return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'))->with('status', 'Files upload success');
-
-        // return redirect()->route('project.detail', $request->project_id);
+        return redirect()->action([ProjectController::class, 'edit'], ['project' => $request->project_id])->with('status','Files upload successfully');
     }
 
     public function show($projectId, $id)

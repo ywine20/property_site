@@ -59,37 +59,37 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'project_Id' => "required|string|min:3|max:255",
-        //     // dimensions:width=600,height=900|max:2048|
-        //     'cover' => "required|mimes:jpeg,png,jpg,gif",
-        //     'threeSixtyImage' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
-        //     'priceIamge' => "nullable|mimes:jpeg,png,jpg|max:2560",
-        //     'description' => "required|string",
-        //     'lower_price' => "required|min:2|max:20",
-        //     'upper_price' => "required|min:2|max:30",
-        //     'category' => "required",
-        //     'layer' => "required|string|min:1|max:255",
-        //     'squre_feet' => "required|string|min:1|max:255",
-        //     'map_link' => "required|string",
-        //     'progress' => "required|string",
-        //     'amenity.*' => "required|string",
-        //     'hou_no' => "required|string",
-        //     'street' => "required|string",
-        //     'ward' => "required|string",
-        //     'town_slug' => "required",
-        //     'city_slug' => "required",
-        //     'small_img_1' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-        //     'small_img_2' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-        //     'small_img_3' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-        //     'small_img_4' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-        //     'small_img_5' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-        //     'small_img_6' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-        //     'small_img_7' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-        //     'small_img_8' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
-        //     'small_img_9' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+        $request->validate([
+            'project_Id' => "required|string|min:3|max:255",
+            // dimensions:width=600,height=900|max:2048|
+            'cover' => "required|mimes:jpeg,png,jpg,gif",
+            'threeSixtyImage' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
+            'priceIamge' => "nullable|mimes:jpeg,png,jpg|max:2560",
+            'description' => "required|string",
+            'lower_price' => "required|min:2|max:20",
+            'upper_price' => "required|min:2|max:30",
+            'category' => "required",
+            'layer' => "required|string|min:1|max:255",
+            'squre_feet' => "required|string|min:1|max:255",
+            'map_link' => "required|string",
+            'progress' => "required|string",
+            'amenity.*' => "required|string",
+            'hou_no' => "required|string",
+            'street' => "required|string",
+            'ward' => "required|string",
+            'town_slug' => "required",
+            'city_slug' => "required",
+            'small_img_1' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_2' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_3' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_4' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_5' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_6' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_7' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_8' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
+            'small_img_9' => 'nullable|mimes:jpeg,png|max:1024|dimensions:width=800,height=800',
 
-        // ]);
+        ]);
 
         $category = Category::where('category_id', $request->category)->first();
         if (!$category) {
@@ -348,7 +348,7 @@ class ProjectController extends Controller
             'project_Id' => "required|string|min:3|max:255",
             'cover' => "nullable|mimes:jpeg,png,jpg,gif|max:2048|dimensions:width=600,height=900", // dimensions:width=600,height=900
             'threeSixtyImage' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
-            'priceImage' => "required|mimes:jpeg,png,jpg,gif|max:2560",
+            'priceImage' => "nullable|mimes:jpeg,png,jpg,gif|max:2560",
             'description' => "required|string",
             'lower_price' => "required|min:2|max:20",
             'upper_price' => "required|min:2|max:30",

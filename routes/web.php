@@ -10,7 +10,6 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ProductController;
-// use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PanoramaController;
 use App\Http\Controllers\AlbumTestController;
@@ -32,7 +31,7 @@ Route::get('/', function () {
     return view('master');
 });
 //localization
-Route::get('locale/{lang}', [LocalizationController::class, 'setLang']);
+   Route::get('locale/{lang}', [LocalizationController::class, 'setLang']);
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/vouchers/{id}', [ProductController::class, 'voucher']);
@@ -41,10 +40,6 @@ Route::get('/products/vouchers/{id}', [ProductController::class, 'voucher']);
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-//User
-Route::resource('/user', "UserController");
 
 
 
@@ -75,14 +70,6 @@ Route::post('/contactus', [App\Http\Controllers\ContactController::class, 'store
 */
 Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
-
-
-// Route::get('admin/site', [SiteController::class, 'siteindex'])->name('save-sitepost-gallery');
-// Route::post('admin/site', [SiteController::class, 'sitesave']);
-// Route::delete('/site-gallery/{id}', [SiteController::class, 'sitedelete'])->name('delete-site-gallery');
-
-// Route::get('admin/album', [AlbumController::class, 'index'])->name('save-multipel-imgae');
-// Route::post('admin/album', [AlbumController::class, 'save']);
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Admin']], function () {
     Route::get('/', 'PageController@showDashboard');
@@ -185,6 +172,8 @@ Route::group([], function () {
     //winwinmaw
     Route::get('/redeemCode', [RedeemCodeController::class, 'generateCode'])->name('profile.generateCode');
     Route::post('/code', [RedeemCodeController::class, 'code'])->name('profile.code');
+    // Route::get('locale/{lang}', [LocalizationController::class, 'setLang']);
+
 });
 
 Route::view('/multiple-selected', 'test');

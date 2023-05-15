@@ -39,7 +39,7 @@ return [
             'host' => env('MAIL_HOST','smtp.office365.com'),
             'port' => env('MAIL_PORT',587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME','winwinmaw@axletechmm.com'),
+            'username' => env('MAIL_USERNAME','noreply@sunmyattun.com'),
             'password' => env('MAIL_PASSWORD','Smtcorp123456'),
             'timeout' => null,
             'auth_mode' => null,
@@ -92,7 +92,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'winwinmaw@axletechmm.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@sunmyattun.com'),
         'name' => env('MAIL_FROM_NAME', 'Reset Password'),
     ],
 

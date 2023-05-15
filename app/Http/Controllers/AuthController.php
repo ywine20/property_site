@@ -11,6 +11,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
+
 
 class AuthController extends Controller
 {
@@ -30,13 +32,17 @@ class AuthController extends Controller
                 $response = $value;
                 $userIP = $_SERVER['REMOTE_ADDR'];
                 $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$userIP";
-                $response = \file_get_contents($url);
-                $response = json_decode($response);
-                if(!$response->success){
-                    Session::flash('g-recaptcha-response', 'please check reCaptcha.');
-                    Session::flash('alert-class', 'alert-danger');
-                    $fail($attribute.'google reCaptcha fail');
-                }
+
+                $response = Http::asForm()->post($url, [
+                'secret' => $secretKey,
+                'response' => $response,
+                'remoteip' => $userIP,
+            ]);
+
+            $responseData = $response->json();
+            if (!$responseData['success']) {
+                $fail($attribute . ' Google reCAPTCHA failed');
+            }
             },
         ]);
 

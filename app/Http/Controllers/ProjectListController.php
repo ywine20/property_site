@@ -101,6 +101,7 @@ class ProjectListController extends Controller
         // $address = Address::all();
         $towns = Town::all();
         $projects = Project::latest();
+        $user = Auth::guard('user')->user();
 
 
         if ($category_id = request()->category) {
@@ -120,20 +121,18 @@ class ProjectListController extends Controller
         }
 
 
-        if ($request->input('search')) {
-            $projects = $projects->where('project_name', 'LIKE', "%" . $request->search . "%")
-                //  ->orWhere('description', 'LIKE', "%" .$request->search . "%")
-                ->orWhere('lower_price', 'LIKE', "%" . $request->search . "%")
-                ->orWhere('upper_price', 'LIKE', "%" . $request->search . "%")
-                ->orWhere('squre_feet', 'LIKE', "%" . $request->search . "%")
-                //  ->orWhere('gmlink','LIKE',"%".$request->search."%")
-                ->orWhere('progress', 'LIKE', "%" . $request->search . "%")
-                ->orWhere('layer', 'LIKE', "%" . $request->search . "%")
-                ->orWhere('hou_no', 'LIKE', "%" . $request->search . "%")
-                ->orWhere('street', 'LIKE', "%" . $request->search . "%")
-                ->orWhere('ward', 'LIKE', "%" . $request->search . "%");
-        }
-
+       if ($request->input('search')) {
+    $searchTerm = strtolower($request->search);
+    $projects = $projects->whereRaw('LOWER(project_name) LIKE ?', ['%'.$searchTerm.'%'])
+        ->orWhereRaw('LOWER(lower_price) LIKE ?', ['%'.$searchTerm.'%'])
+        ->orWhereRaw('LOWER(upper_price) LIKE ?', ['%'.$searchTerm.'%'])
+        ->orWhereRaw('LOWER(squre_feet) LIKE ?', ['%'.$searchTerm.'%'])
+        ->orWhereRaw('LOWER(progress) LIKE ?', ['%'.$searchTerm.'%'])
+        ->orWhereRaw('LOWER(layer) LIKE ?', ['%'.$searchTerm.'%'])
+        ->orWhereRaw('LOWER(hou_no) LIKE ?', ['%'.$searchTerm.'%'])
+        ->orWhereRaw('LOWER(street) LIKE ?', ['%'.$searchTerm.'%'])
+        ->orWhereRaw('LOWER(ward) LIKE ?', ['%'.$searchTerm.'%']);
+}
 
         // $arr = [];
         $findCat = Category::where('category_id', $category_id)->pluck('category_name')->first();
@@ -152,19 +151,8 @@ class ProjectListController extends Controller
                     ->where('price', '<=', $maxPrice);
             })->get();
 
-            // dd($projects->toArray());
 
-            // $min_projects = $projects->whereBetween('lower_price',[$min_price,$max_price])->get();
-            // $max_projects = $projects->whereBetween('upper_price',[$min_price,$max_price])->get();
-
-
-            // $min_projects = $projects->where('lower_price','>=',$request->min_price)->get();
-            // $max_projects = $projects->where('upper_price','<=',$request->max_price)->get();
-            // $projects =   [...$min_projects,...$max_projects];
-            // $collection = collect($min_projects,$max_projects);
-            // $unique = $collection->unique();
-            // $projects = $unique->values()->all();
-            return view('projectListAdvance', compact('projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro', 'findSearch',));
+            return view('projectListAdvance', compact('user','projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro', 'findSearch',));
         }
 
 
@@ -174,15 +162,9 @@ class ProjectListController extends Controller
         $findPro = $request->get('max_price');
         $findSearch = $request->get('search');
 
-
-        //  if (!$projects || !$projects->count()) {
-        //     Session::flash('no-results', 'No Result');
-        // }
-
-
         $projects = $projects->paginate(9);
 
-        return view('projectlist', compact('projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro', 'findSearch'));
+        return view('projectlist', compact('user','projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro', 'findSearch'));
     }
 
     public function detail($id, Request $request)
