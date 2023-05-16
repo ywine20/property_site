@@ -27,22 +27,23 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|max:16',
             'password_confirmation' => 'required|same:password',
-            'g-recaptcha-response' => function ($attribute, $value, $fail) {
+            'gRecaptchaResponseServer' => function ($attribute, $value, $fail) {
                 $secretKey = config('services.recaptcha.secret');
                 $response = $value;
                 $userIP = $_SERVER['REMOTE_ADDR'];
                 $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$userIP";
 
                 $response = Http::asForm()->post($url, [
-                'secret' => $secretKey,
-                'response' => $response,
-                'remoteip' => $userIP,
-            ]);
+                    'secret' => $secretKey,
+                    'response' => $response,
+                    'remoteip' => $userIP,
+                ]);
 
-            $responseData = $response->json();
-            if (!$responseData['success']) {
-                $fail($attribute . ' Google reCAPTCHA failed');
-            }
+                $responseData = $response->json();
+                if (!$responseData['success']) {
+                    // $fail($attribute . ' Google reCAPTCHA failed');
+                    $fail('Google reCAPTCHA failed');
+                }
             },
         ]);
 
@@ -159,7 +160,7 @@ class AuthController extends Controller
                     'title' => 'Password Reset',
                     'body' => "We had received your request for Password Reset.",
                     'newPassword' => $newPassword,
-                    'userName'=>$user->name,
+                    'userName' => $user->name,
                 ];
 
                 Mail::to($request->email)->send(new SendPasswordMail($details));

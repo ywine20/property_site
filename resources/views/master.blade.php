@@ -16,15 +16,13 @@
     <!-- Primary Meta Tags -->
     <!-- <title>Sun Myat Tun Construction Co.,Ltd.</title> -->
     <meta name="title" content="Sun Myat Tun Construction Co.,Ltd.">
-    <meta name="description"
-        content="Sun Myat Tun Construction: We are here to stay - Inspire Better Living with Humility and Affordabilit">
+    <meta name="description" content="Sun Myat Tun Construction: We are here to stay - Inspire Better Living with Humility and Affordabilit">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sunmyattunmm.com">
     <meta property="og:title" content="Sun Myat Tun Construction Co.,Ltd.">
-    <meta property="og:description"
-        content="Sun Myat Tun Construction: We are here to stay - Inspire Better Living with Humility and Affordabilit">
+    <meta property="og:description" content="Sun Myat Tun Construction: We are here to stay - Inspire Better Living with Humility and Affordabilit">
     <meta property="og:image" content="{{ asset('image/smtlogoLarge.png') }}">
 
 
@@ -32,8 +30,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://sunmyattunmm.com">
     <meta property="twitter:title" content="Sun Myat Tun Construction Co.,Ltd.">
-    <meta property="twitter:description"
-        content="Sun Myat Tun Construction: We are here to stay - Inspire Better Living with Humility and Affordabilit">
+    <meta property="twitter:description" content="Sun Myat Tun Construction: We are here to stay - Inspire Better Living with Humility and Affordabilit">
     <meta property="twitter:image" content="{{ asset('image/smtlogoLarge.png') }}">
 
 
@@ -56,9 +53,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- pdf -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.5.141/pdf.min.js"
-        integrity="sha512-BagCUdQjQ2Ncd42n5GGuXQn1qwkHL2jCSkxN5+ot9076d5wAI8bcciSooQaI3OG3YLj6L97dKAFaRvhSXVO0/Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.5.141/pdf.min.js" integrity="sha512-BagCUdQjQ2Ncd42n5GGuXQn1qwkHL2jCSkxN5+ot9076d5wAI8bcciSooQaI3OG3YLj6L97dKAFaRvhSXVO0/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Google Recaptcha -->
     <script src="https://www.google.com/recaptcha/api.js" async></script>
@@ -137,6 +132,35 @@
     gtag('config', 'UA-136018131-1');
 </script>
 
+<!--Start Messenger -->
+
+<!-- Messenger Chat plugin Code -->
+<div id="fb-root"></div> <!-- Your Chat plugin code -->
+<div id="fb-customer-chat" class="fb-customerchat"> </div>
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "353690388313896");
+    chatbox.setAttribute("attribution", "biz_inbox");
+</script> <!-- Your SDK code -->
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml: true,
+            version: 'v15.0'
+        });
+    };
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<!-- End Messenger -->
+
 <body>
     <div class="container-fluid p-0">
         <!-- nav -->
@@ -160,21 +184,17 @@
                 </div>
                 <ul class="side-nav-ul list-group me-auto mb-2 mb-lg-0">
                     <li class="side-nav-item">
-                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page"
-                            href="{{ url('/') }}">@lang('public.home')</a>
+                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{ url('/') }}">@lang('public.home')</a>
                     </li>
                     <li class="side-nav-item">
-                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page"
-                            href="{{ url('projectlist') }}">@lang('public.project')</a>
+                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{ url('projectlist') }}">@lang('public.project')</a>
                     </li>
                     <li class="side-nav-item">
-                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page"
-                            href="{{ url('aboutus') }}">@lang('public.about')
+                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{ url('aboutus') }}">@lang('public.about')
                         </a>
                     </li>
                     <li class="side-nav-item">
-                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page"
-                            href="{{ url('contactus') }}">@lang('public.contact')</a>
+                        <a class="side-nav-link nav-link px-2 py-3" aria-current="page" href="{{ url('contactus') }}">@lang('public.contact')</a>
 
                     </li>
                 </ul>
@@ -185,46 +205,34 @@
 
                     @if (auth()->guard('user')->check())
 
-                        <div class="d-flex flex-column w-100">
-                            <a href="{{ route('profile', Auth::guard('user')->user()->id) }}"
-                                class="text-decoration-none w-100">
-                                <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center"
-                                    style="    box-shadow: inset 0px 1px 0px #f5cc7a47;">
-                                    <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2"
-                                        style="width:40px;height:40px">
-                                        @if (isset(Auth::guard('user')->user()->profile_img))
-                                            <img src="{{ asset('storage/images/client-profile/' . Auth::guard('user')->user()->profile_img) }}"
-                                                alt="" class="w-100 h-100 user-profile"
-                                                style="object-fit:cover;" style="object-fit:cover;">
-                                        @else
-                                            <img src="{{ asset('images/user.png') }}" alt="..."
-                                                class="w-100 h-100" style="object-fit:cover;"
-                                                style="object-fit:cover;">
-                                        @endif
-                                    </div>
-                                    <span
-                                        class="text-primary usernameSmallDevice usernameToShort">{{ Auth::guard('user')->user()->name }}</span>
+                    <div class="d-flex flex-column w-100">
+                        <a href="{{ route('profile', Auth::guard('user')->user()->id) }}" class="text-decoration-none w-100">
+                            <div class="rounded px-3 py-3 text-primary w-100 d-flex justify-content-center align-items-center" style="    box-shadow: inset 0px 1px 0px #f5cc7a47;">
+                                <div class="rounded rounded-circle border border-primary shadow overflow-hidden me-2" style="width:40px;height:40px">
+                                    @if (isset(Auth::guard('user')->user()->profile_img))
+                                    <img src="{{ asset('storage/images/client-profile/' . Auth::guard('user')->user()->profile_img) }}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;" style="object-fit:cover;">
+                                    @else
+                                    <img src="{{ asset('images/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;" style="object-fit:cover;">
+                                    @endif
                                 </div>
-                            </a>
-                            <div class="rounded px-3 py-3 text-primary w-100 text-center"
-                                style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit"
-                                        class="btn btn-link text-decoration-none text-primary">@lang('public.logout')
-                                    </button>
-                                </form>
+                                <span class="text-primary usernameSmallDevice usernameToShort">{{ Auth::guard('user')->user()->name }}</span>
                             </div>
-
+                        </a>
+                        <div class="rounded px-3 py-3 text-primary w-100 text-center" style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-link text-decoration-none text-primary">@lang('public.logout')
+                                </button>
+                            </form>
                         </div>
+
+                    </div>
                     @else
-                        <button class="btn btn-link text-decoration-none w-100 px-0"
-                            onclick="openLoginModalInSmallDevice()">
-                            <div class="rounded px-3 py-3 text-primary w-100 text-center"
-                                style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
-                                @lang('public.login')
-                            </div>
-                        </button>
+                    <button class="btn btn-link text-decoration-none w-100 px-0" onclick="openLoginModalInSmallDevice()">
+                        <div class="rounded px-3 py-3 text-primary w-100 text-center" style="box-shadow: inset 0px 1px 0px #f5cc7a47;">
+                            @lang('public.login')
+                        </div>
+                    </button>
 
                     @endif
                 </div>
@@ -235,9 +243,7 @@
         <nav class="navbar navbar-expand-lg px-2 px-md-0 py-0 fixed-top">
             <div class="container d-flex align-item-center px-0 py-md-1 py-lg-0">
 
-                <a href="{{ url('/') }}"
-                    class="logo-div text-decoration-none fs-1 text-gold bg-secondary d-flex justify-content-center align-items-center"
-                    style="height: auto;">
+                <a href="{{ url('/') }}" class="logo-div text-decoration-none fs-1 text-gold bg-secondary d-flex justify-content-center align-items-center" style="height: auto;">
                     <img src="{{ asset('image/smtlogo_copy.png') }}" alt="" style="width:100%;height:100%">
 
                 </a>
@@ -250,20 +256,16 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
 
-                            <a class="nav-link pe-0 ps-4 py-3 " aria-current="page"
-                                href="{{ url('/') }}">@lang('public.home')</a>
+                            <a class="nav-link pe-0 ps-4 py-3 " aria-current="page" href="{{ url('/') }}">@lang('public.home')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
-                                href="{{ url('projectlist') }}">@lang('public.project')</a>
+                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{ url('projectlist') }}">@lang('public.project')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
-                                href="{{ url('aboutus') }}">@lang('public.about')</a>
+                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{ url('aboutus') }}">@lang('public.about')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page"
-                                href="{{ url('contactus') }}">@lang('public.contact')</a>
+                            <a class="nav-link pe-0 ps-4 py-3" aria-current="page" href="{{ url('contactus') }}">@lang('public.contact')</a>
 
                         </li>
                     </ul>
@@ -272,67 +274,50 @@
 
                         @if (auth()->guard('user')->check())
 
+                        <div class="profile-dropdown position-relative">
+
                             <div class="profile-dropdown position-relative">
+                                <a href="{{ route('profile', Auth::guard('user')->user()->id) }}" class="text-decoration-none  d-flex justify-content-center align-items-center nav-profile ">
+                                    <span class="text-primary me-2 usernameLargeDevice usernameToShort">{{ Auth::guard('user')->user()->name }}</span>
+                                    <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
+                                        @if (isset(Auth::guard('user')->user()->profile_img))
+                                        <img src="{{ asset('storage/images/client-profile/' . Auth::guard('user')->user()->profile_img) }}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;">
+                                        @else
+                                        <img src="{{ asset('images/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
+                                        @endif
+                                    </div>
+                                </a>
 
-                                <div class="profile-dropdown position-relative">
-                                    <a href="{{ route('profile', Auth::guard('user')->user()->id) }}"
-                                        class="text-decoration-none  d-flex justify-content-center align-items-center nav-profile ">
-                                        <span
-                                            class="text-primary me-2 usernameLargeDevice usernameToShort">{{ Auth::guard('user')->user()->name }}</span>
-                                        <div class="rounded rounded-circle border border-primary shadow overflow-hidden"
-                                            style="width:40px;height:40px">
-                                            @if (isset(Auth::guard('user')->user()->profile_img))
-                                                <img src="{{ asset('storage/images/client-profile/' . Auth::guard('user')->user()->profile_img) }}"
-                                                    alt="" class="w-100 h-100 user-profile"
-                                                    style="object-fit:cover;">
-                                            @else
-                                                <img src="{{ asset('images/user.png') }}" alt="..."
-                                                    class="w-100 h-100" style="object-fit:cover;">
-                                            @endif
+                                <div class="profile-dropdown-content card bg-secondary bg-opacity-75 border border-1 border-opacity-25 border-primary">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-row align-items-center gap-3">
+                                            <div class="rounded rounded-circle border border-primary shadow overflow-hidden" style="width:40px;height:40px">
+                                                @if (isset(Auth::guard('user')->user()->profile_img))
+                                                <img src="{{ asset('storage/images/client-profile/' . Auth::guard('user')->user()->profile_img) }}" alt="" class="w-100 h-100 user-profile" style="object-fit:cover;">
+                                                @else
+                                                <img src="{{ asset('images/user.png') }}" alt="..." class="w-100 h-100" style="object-fit:cover;">
+                                                @endif
+                                            </div>
+                                            <div class="">
+
+                                                <a href="{{ route('profile', Auth::guard('user')->user()->id) }}" class="text-primary text-decoration-none"><span class="d-block fw-bold usernameLargeDevice usernameToShort text-primary">{{ Auth::guard('user')->user()->name }}</span></a>
+                                                <a href="{{ route('profile', Auth::guard('user')->user()->id) }}" class="text-primary text-decoration-none"><span class="text-primary emailToShort">{{ Auth::guard('user')->user()->email }}</span></a>
+                                            </div>
                                         </div>
-                                    </a>
-
-                                    <div
-                                        class="profile-dropdown-content card bg-secondary bg-opacity-75 border border-1 border-opacity-25 border-primary">
-                                        <div class="card-body">
-                                            <div class="d-flex flex-row align-items-center gap-3">
-                                                <div class="rounded rounded-circle border border-primary shadow overflow-hidden"
-                                                    style="width:40px;height:40px">
-                                                    @if (isset(Auth::guard('user')->user()->profile_img))
-                                                        <img src="{{ asset('storage/images/client-profile/' . Auth::guard('user')->user()->profile_img) }}"
-                                                            alt="" class="w-100 h-100 user-profile"
-                                                            style="object-fit:cover;">
-                                                    @else
-                                                        <img src="{{ asset('images/user.png') }}" alt="..."
-                                                            class="w-100 h-100" style="object-fit:cover;">
-                                                    @endif
-                                                </div>
-                                                <div class="">
-
-                                                    <a href="{{ route('profile', Auth::guard('user')->user()->id) }}"
-                                                        class="text-primary text-decoration-none"><span
-                                                            class="d-block fw-bold usernameLargeDevice usernameToShort text-primary">{{ Auth::guard('user')->user()->name }}</span></a>
-                                                    <a href="{{ route('profile', Auth::guard('user')->user()->id) }}"
-                                                        class="text-primary text-decoration-none"><span
-                                                            class="text-primary emailToShort">{{ Auth::guard('user')->user()->email }}</span></a>
-                                                </div>
-                                            </div>
-                                            <div class="w-100 bg-primary text-secondary text-center py-2 mt-3">
-                                                <form method="POST" action="{{ route('logout') }}">
-                                                    @csrf
-                                                    <button type="submit"
-                                                        class="text-secondary btn btn-link text-decoration-none px-0 py-0">LOG
-                                                        OUT</button>
-                                                    <!-- <a href="{{ route('logout') }}" class="text-secondary text-decoration-none">LOG OUT</a> -->
-                                                </form>
-                                            </div>
+                                        <div class="w-100 bg-primary text-secondary text-center py-2 mt-3">
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <button type="submit" class="text-secondary btn btn-link text-decoration-none px-0 py-0">LOG
+                                                    OUT</button>
+                                                <!-- <a href="{{ route('logout') }}" class="text-secondary text-decoration-none">LOG OUT</a> -->
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         @else
-                            <button class="btn btn-link text-decoration-none"
-                                onclick="openLoginModal()">@lang('public.login')</button>
+                        <button class="btn btn-link text-decoration-none" onclick="openLoginModal()">@lang('public.login')</button>
                         @endif
                     </div>
                 </div>
@@ -345,13 +330,11 @@
         <section id="footer" class="bg-secondary">
             <div class="container-fluid bg-secondary py-3 overflow-hidden">
                 <div class="container">
-                    <div
-                        class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
+                    <div class="row px-0 py-0 flex-row  text-start justify-content-around justify-content-md-between align-items-center">
                         <div class="col-12 col-md-7 col-lg-6 col-xl-5 text-center text-md-start">
                             <h5 class="fw-bold text-gold text-uppercase">@lang('public.contactus')</h5>
 
-                            <div
-                                class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
+                            <div class="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center justify-content-md-start align-items-md-center">
                                 <div class="">
                                     <ul class="list-group">
                                         <li class="list-group-item bg-transparent border-0 text-gold px-0">
@@ -365,15 +348,13 @@
                                             </a>
                                         </li>
                                         <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                            <a href="mailto:sales@sunmyattun.com" target="_blank"
-                                                class="text-decoration-none text-nowrap">
+                                            <a href="mailto:sales@sunmyattun.com" target="_blank" class="text-decoration-none text-nowrap">
                                                 <i class="bi bi-envelope"></i>
                                                 sales@sunmyattun.com
                                             </a>
                                         </li>
                                         <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                            <a href="https://www.facebook.com/Sunmyattun" target="_blank"
-                                                class="text-decoration-none text-nowrap ">
+                                            <a href="https://www.facebook.com/Sunmyattun" target="_blank" class="text-decoration-none text-nowrap ">
                                                 <i class="bi bi-facebook"></i>
                                                 @lang('public.company')
 
@@ -384,8 +365,7 @@
                                 </div>
                                 <div class=" ms-md-4">
                                     <div class="d-flex ">
-                                        <div class="d-none d-md-block"
-                                            style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
+                                        <div class="d-none d-md-block" style="width: 1px;height: 80px;background-color: var(--gold);opacity: .3;">
                                         </div>
                                         <div class="ms-md-3">
                                             <ul class="list-group">
@@ -396,8 +376,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="list-group-item bg-transparent border-0 text-gold px-0">
-                                                    <a href="{{ url('termcondition') }}"
-                                                        class="text-decoration-none text-nowrap ">
+                                                    <a href="{{ url('termcondition') }}" class="text-decoration-none text-nowrap ">
                                                         @lang('public.termsandcon')
 
                                                     </a>
@@ -416,20 +395,16 @@
             </div>
 
             <div class="row">
-                <div
-                    class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
+                <div class="col-12 text-center bg-white bg-opacity-10 py-3 d-flex justify-content-center align-items-center">
                     <div class="pointer mx-2">
-                        <a href="{{ asset('locale/en') }}" class="text-decoration-none"> <img
-                                src="{{ asset('image/EnglishFlag.jpg') }}" alt="" class="rounded"
-                                style="width:40px;height:30px">
+                        <a href="{{ asset('locale/en') }}" class="text-decoration-none"> <img src="{{ asset('image/EnglishFlag.jpg') }}" alt="" class="rounded" style="width:40px;height:30px">
                             <span class="text-primary d-none d-md-inline">English</span>
                         </a>
 
                     </div>
                     <div class="pointer mx-2">
                         <a href="{{ asset('locale/my') }}" class="text-decoration-none">
-                            <img src="{{ asset('image/BurmaFlag.jpg') }}" alt="" class="rounded "
-                                style="width:40px;height:30px">
+                            <img src="{{ asset('image/BurmaFlag.jpg') }}" alt="" class="rounded " style="width:40px;height:30px">
                             <span class="text-primary d-none d-md-inline">Myanmar</span>
                         </a>
                     </div>
@@ -448,10 +423,8 @@
     <!-- Customer Register -->
     <div id="registerModal" class="custom-modal">
         <div class="register d-flex justify-content-center w-100 bg-secondary bg-opacity-10 py-5 ">
-            <div class="card bg-white shadow px-2 py-2 animate__animated animate__fadeIn"
-                style="width:400px;height:fit-content">
-                <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose"
-                    onclick="closeRegisterModal()">&times;</span>
+            <div class="card bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
+                <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose" onclick="closeRegisterModal()">&times;</span>
                 <div class="card-body">
                     <h4 class="mb-4">Register To Sun Myat Tun</h4>
 
@@ -459,45 +432,43 @@
                         @csrf
                         <!-- user name -->
                         <div class="form-floating mb-3">
-                            <input type="text" name="name" class="form-control form-control-border-bottom"
-                                id="floatingInputName" placeholder="JohnDoe" />
+                            <input type="text" name="name" class="form-control form-control-border-bottom" id="floatingInputName" placeholder="JohnDoe" />
                             <label for="floatingInputName">User Name</label>
                             <small class="error-text register_name_error text-danger"></small>
                         </div>
                         <!-- email -->
                         <div class="form-floating mb-3">
-                            <input type="text" name="email" class="form-control form-control-border-bottom"
-                                id="floatingInputEmail" placeholder="name@example.com" />
+                            <input type="text" name="email" class="form-control form-control-border-bottom" id="floatingInputEmail" placeholder="name@example.com" />
                             <label for="floatingInputEmail">Email</label>
                             <small class="error-text register_email_error text-danger"></small>
                         </div>
                         <!-- password -->
                         <div class="form-floating mb-3">
-                            <input type="password" name="password" class="form-control form-control-border-bottom"
-                                id="floatingInputPassword" placeholder="name@example.com" />
+                            <input type="password" name="password" class="form-control form-control-border-bottom" id="floatingInputPassword" placeholder="name@example.com" />
                             <label for="floatingInputPassword">Password</label>
                             <small class="error-text register_password_error text-danger"></small>
                         </div>
                         <!-- confirm password -->
                         <div class="form-floating mb-3">
-                            <input type="password" name="password_confirmation"
-                                class="form-control form-control-border-bottom" id="floatingInputConfirmPassword"
-                                placeholder="name@example.com" />
+                            <input type="password" name="password_confirmation" class="form-control form-control-border-bottom" id="floatingInputConfirmPassword" placeholder="name@example.com" />
                             <label for="floatingInputConfirmPassword">Confirm Password</label>
                             <small class="error-text register_passwordConfirm_error text-danger"></small>
                         </div>
                         <div class="mb-3">
-                            <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+                            <!-- <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}" name="g-recaptcha-response"></div>
                             <small class="error-text g-recaptcha-response_error text-danger"></small>
                             {{-- @if (Session::has('g-recaptcha-response'))
                                 <i class="{{ Session::get('alert-info') }} text-danger">
-                                    {{ Session::get('g-recaptcha-response') }}
-                                </i>
-                            @endif --}}
+                            {{ Session::get('g-recaptcha-response') }}
+                            </i>
+                            @endif --}} -->
+                            <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+                            <input type="hidden" name="gRecaptchaResponse" id="gRecaptchaResponse" />
+                            <small class="error-text g-recaptcha-response_error text-danger"></small>
+
                         </div>
                         <!-- registere Button -->
-                        <button type="submit"
-                            class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
+                        <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
                     </form>
                     <!-- register with social app -->
                     <div class="text-center w-100 d-none">
@@ -523,41 +494,34 @@
     <!--Customer LOG IN -->
     <div id="loginModal" class="custom-modal ">
         <div class="login d-flex justify-content-center w-100 bg-secondary bg-opacity-10 vh-100 py-5">
-            <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn"
-                style="width:400px;height:fit-content">
-                <span class="close fs-5 me-2 end-0 position-absolute pointer loginClose"
-                    onclick="closeLoginModal()">&times;</span>
+            <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
+                <span class="close fs-5 me-2 end-0 position-absolute pointer loginClose" onclick="closeLoginModal()">&times;</span>
                 <div class="card-body">
                     <h4 class="mb-4">Log In To Sun Myat Tun</h4>
                     <form enctype="multipart/form-data" class="login-form">
                         <!-- email -->
                         <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control form-control-border-bottom"
-                                id="floatingInputLoginEmail" placeholder="name@example.com">
+                            <input type="email" name="email" class="form-control form-control-border-bottom" id="floatingInputLoginEmail" placeholder="name@example.com" />
                             <label for="floatingInputLoginEmail">Email</label>
                             <small class="error-text login_email_error text-danger"></small>
 
                         </div>
                         <!-- password -->
                         <div class="form-floating mb-3">
-                            <input type="password" name="password"
-                                class="form-control form-control-border-bottom @error('email') is-invalid @enderror"
-                                id="floatingInputLoginPassword" placeholder="name@example.com">
+                            <input type="password" name="password" class="form-control form-control-border-bottom @error('email') is-invalid @enderror" id="floatingInputLoginPassword" placeholder="name@example.com" />
                             <label for="floatingInputLoginPassword">Password</label>
                             <small class="error-text login_password_error text-danger"></small>
 
                         </div>
 
                         <!-- login Button -->
-                        <button type="submit"
-                            class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase mt-2">@lang('public.login1')
+                        <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase mt-2">@lang('public.login1')
                         </button>
 
                     </form>
                     <!-- forgot password -->
                     <div class="w-100 text-end mb-3">
-                        <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span
-                                class="text-primary">Forgot Password?</span></buttonhref=>
+                        <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span class="text-primary">Forgot Password?</span></buttonhref=>
                     </div>
                     <!-- login with social app -->
                     <div class="text-center w-100 pt-1 d-none">
@@ -571,8 +535,7 @@
                     <!-- don't have an account -->
                     <div class="text-center w-100 my-3">
                         <small class="d-flex justify-content-center align-items-center">Don't have an account?
-                            <button class="btn btn-link text-primary"
-                                onclick="openRegisterModal()">@lang('public.register')</button>
+                            <button class="btn btn-link text-primary" onclick="openRegisterModal()">@lang('public.register')</button>
                             Now!
                         </small>
                     </div>
@@ -587,10 +550,8 @@
     <!--Customer forgot password -->
     <div id="forgotPasswordModal" class="custom-modal ">
         <div class="forgotPassword d-flex justify-content-center w-100 bg-secondary bg-opacity-10 vh-100 py-5">
-            <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn"
-                style="width:400px;height:fit-content">
-                <span class="close fs-5 me-2 end-0 position-absolute pointer forgoPasswordCloseButton"
-                    onclick="closeforgotPasswordModal()">&times;</span>
+            <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
+                <span class="close fs-5 me-2 end-0 position-absolute pointer forgoPasswordCloseButton" onclick="closeforgotPasswordModal()">&times;</span>
                 <div class="card-body">
                     <h5 class="mb-4 fw-bolder">Forgot Password?</h5>
                     <span class="text-black-50 mb-5" style="font-size: .9rem;">Please Enter Your Email Address To
@@ -601,27 +562,20 @@
                         <!-- email -->
                         <div class="form-floating mb-5">
                             @if (auth()->guard('user')->check())
-                                <input type="email" name="email"
-                                    value="{{ Auth::guard('user')->user()->email }}"
-                                    class="form-control form-control-border-bottom" id="floatingInput"
-                                    placeholder="name@example.com" />
+                            <input type="email" name="email" value="{{ Auth::guard('user')->user()->email }}" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
                             @else
-                                <input type="email" name="email" value=""
-                                    class="form-control form-control-border-bottom" id="floatingInput"
-                                    placeholder="name@example.com" />
+                            <input type="email" name="email" value="" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
                             @endif
                             <label for="floatingInput">Vertify Email Address</label>
                             <small class="text-danger forgotPasswordError"></small>
                         </div>
-                        <button type="submit" id="send-email-btn"
-                            class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">SEND</button>
-                        <div id="email-send-success-alert"
-                            class="alert alert-success my-3 text-center animate__animated animate__slideInDown">
+                        <button type="submit" id="send-email-btn" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">SEND</button>
+                        <div id="email-send-success-alert" class="alert alert-success my-3 text-center animate__animated animate__slideInDown">
                             Your password has been sent to your email.
                             <br>
 
                             @if (!auth()->guard('user')->check())
-                                <button class="btn btn-link text-success" onclick="openLoginModal()">Log in</button>
+                            <button class="btn btn-link text-success" onclick="openLoginModal()">Log in</button>
                             @endif
                         </div>
                     </form>
@@ -634,11 +588,8 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="{{ asset('js/counter_up.js') }}"></script>
@@ -800,17 +751,26 @@
         const registerForm = document.querySelector('.register-form');
         registerForm.addEventListener('submit', e => {
             e.preventDefault();
+
+            // Get the reCAPTCHA response
+            const gRecaptchaResponse = grecaptcha.getResponse();
+            gRecaptchaResponseInputValue = document.getElementById('gRecaptchaResponse').value;
+            gRecaptchaResponseInputValue = gRecaptchaResponse;
+
             const name = registerForm.elements.name.value;
             const email = registerForm.elements.email.value;
             const password = registerForm.elements.password.value;
             const password_confirmation = registerForm.elements.password_confirmation.value;
-            const recaptchaResponse = grecaptcha.getResponse(); // Assuming you have included the reCAPTCHA script on your page
-            console.log(recaptchaResponse);
+            gRecaptchaResponseServer = gRecaptchaResponseInputValue;
+
+
             axios.post('/register', {
                     name: name,
                     email: email,
                     password: password,
                     password_confirmation: password_confirmation,
+                    gRecaptchaResponseServer: gRecaptchaResponseInputValue,
+
                 })
                 .then(response => {
                     localStorage.setItem('token', JSON.stringify(response.data.access_token));
@@ -839,14 +799,15 @@
                         const nameError = error.name ? error.name[0] : '';
                         const emailError = error.email ? error.email[0] : '';
                         const passwordError = error.password ? error.password[0] : '';
-                        const passwordConfirmError = error.password_confirmation ? error.password_confirmation[
-                            0] : '';
+                        const passwordConfirmError = error.password_confirmation ? error.password_confirmation[0] : '';
+                        const gRecaptchaError = error.gRecaptchaResponseServer ? error.gRecaptchaResponseServer[0] : '';
 
                         document.querySelector('.register_name_error').innerText = nameError;
                         document.querySelector('.register_email_error').innerText = emailError;
                         document.querySelector('.register_password_error').innerText = passwordError;
-                        document.querySelector('.register_passwordConfirm_error').innerText =
-                            passwordConfirmError;
+                        document.querySelector('.register_passwordConfirm_error').innerText = passwordConfirmError;
+                        document.querySelector('.g-recaptcha-response_error').innerText = gRecaptchaError;
+
 
 
                     } else if (err.request) {
