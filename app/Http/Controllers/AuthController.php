@@ -27,24 +27,8 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|max:16',
             'password_confirmation' => 'required|same:password',
-            'gRecaptchaResponseServer' => function ($attribute, $value, $fail) {
-                $secretKey = config('services.recaptcha.secret');
-                $response = $value;
-                $userIP = $_SERVER['REMOTE_ADDR'];
-                $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$userIP";
-
-                $response = Http::asForm()->post($url, [
-                    'secret' => $secretKey,
-                    'response' => $response,
-                    'remoteip' => $userIP,
-                ]);
-
-                $responseData = $response->json();
-                if (!$responseData['success']) {
-                    // $fail($attribute . ' Google reCAPTCHA failed');
-                    $fail('Google reCAPTCHA failed');
-                }
-            },
+            'gRecaptchaResponseServer' => 'required|recaptcha',
+           
         ]);
 
 
