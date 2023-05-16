@@ -36,7 +36,7 @@
     <script>
       pannellum.viewer('panorama-360-view', {
         "type": "equirectangular",
-        "panorama": "{{ asset('images/360images/'.$project->gallery) }}",
+        "panorama": "{{ asset('storage/images/360Images/'.$project->three_sixty_image) }}",
         "autoLoad": true
     })
     </script>

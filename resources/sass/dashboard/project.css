@@ -1,0 +1,117 @@
+.project-360-preview {
+  transition: all 1s;
+}
+.project-360-preview .three-preview {
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.6s;
+}
+.project-360-preview .three-preview img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.project-360-preview .three-preview:hover {
+  filter: brightness(1.2);
+}
+.project-360-preview .three-preview:active {
+  transform: scale(0.95);
+  border: 2px solid red;
+}
+
+.project-cover-preview {
+  transition: all 1s;
+}
+.project-cover-preview #cover-preview {
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.6s;
+}
+.project-cover-preview #cover-preview img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.project-cover-preview #cover-preview:hover {
+  filter: brightness(1.2);
+}
+.project-cover-preview #cover-preview:active {
+  transform: scale(0.95);
+  border: 2px solid red;
+}
+
+.project-detail-dashboard .project-detail-table {
+  background-color: transparent !important;
+}
+.project-detail-dashboard .project-detail-table tbody {
+  background-color: transparent !important;
+}
+.project-detail-dashboard .project-detail-table tbody tr {
+  background-color: transparent !important;
+}
+.project-detail-dashboard .project-detail-table tbody tr td {
+  background-color: transparent !important;
+}
+.project-detail-dashboard .project-detail-table tbody tr:first-child {
+  max-width: 150px;
+  background-color: deepskyblue;
+}
+.project-detail-dashboard .project-detail-table tbody tr:nth-child(2) {
+  width: 20px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .project-detail-dashboard .coverImage {
+    max-height: 340px;
+  }
+  .project-detail-dashboard .project-detail-table {
+    background-color: transparent !important;
+  }
+  .project-detail-dashboard .project-detail-table tbody {
+    background-color: transparent !important;
+  }
+  .project-detail-dashboard .project-detail-table tbody tr {
+    background-color: transparent !important;
+  }
+  .project-detail-dashboard .project-detail-table tbody tr td {
+    background-color: transparent !important;
+  }
+  .project-detail-dashboard .project-detail-table tbody tr:first-child {
+    max-width: 150px;
+    background-color: deepskyblue;
+  }
+  .project-detail-dashboard .project-detail-table tbody tr:nth-child(2) {
+    width: 20px;
+  }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .project-detail-dashboard .coverImage {
+    max-height: 400px;
+  }
+  .project-detail-dashboard .project-detail-table {
+    background-color: transparent !important;
+  }
+  .project-detail-dashboard .project-detail-table tbody {
+    background-color: transparent !important;
+  }
+  .project-detail-dashboard .project-detail-table tbody tr {
+    background-color: transparent !important;
+  }
+  .project-detail-dashboard .project-detail-table tbody tr td {
+    background-color: transparent !important;
+  }
+  .project-detail-dashboard .project-detail-table tbody tr:first-child {
+    max-width: 150px;
+    background-color: deepskyblue;
+  }
+  .project-detail-dashboard .project-detail-table tbody tr:nth-child(2) {
+    width: 20px;
+  }
+}/*# sourceMappingURL=project.css.map */

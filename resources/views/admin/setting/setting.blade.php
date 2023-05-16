@@ -19,15 +19,15 @@
                                 <h5 class="text-white-50">Setting</h5>
                             </div>
                             <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center rounded ps-0 pe-3 py-1">
+                                <div class="d-flex justify-content-between align-items-center rounded py-2 px-3 mb-3 bg-secondary bg-opacity-50">
                                     <div class="">
-                                        <h5 class="text-primary">Admin/Moderator List</h5>
+                                        <h5 class="text-primary mb-0">Admin/Moderator List</h5>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <button type="button" class="btn mx-1 trash-icon px-2 py-1 position-relative " id="multiple_deletion_moderator">
+                                    <div class="d-flex justify-content-center align-items-center ">
+                                        <!-- <button type="button" class="btn mx-1 trash-icon px-2 py-1 position-relative " id="multiple_deletion_moderator">
                                             <i class="bi bi-trash text-danger fa-fw fs-4"></i>
                                             <span id="checkedCount" class="position-absolute rounded-circle bg-danger border border-secondary text-white d-flex justify-content-center align-items-center p-1" style="width: 15px;height: 15px;font-size: 12px;top: 50%;">0</span>
-                                        </button>
+                                        </button> -->
                                         <a href="{{route('setting.create')}}" class="mx-1 create-btn px-2 py-1 rounded">
                                             <i class="bi bi-plus-circle"></i>
                                             Create Moderator
@@ -43,9 +43,9 @@
                                                 <table id="table_moderator" class="w-100 display nowrap row-border table table-bordered align-middle table-hover mb-0">
                                                     <thead class="">
                                                     <tr class="bg-primary text-secondary">
-                                                        <th class="text-center" data-orderable="false">
+                                                        <!-- <th class="text-center" data-orderable="false">
                                                             <input type="checkbox" id="allSelectModerator" name="allSelectModerator" class="form-check-input border-secondary">
-                                                        </th>
+                                                        </th> -->
                                                         <th class="text-center">No.</th>
                                                         <th class="text-center" data-orderable="false" style="max-width:130px;">Photo</th>
                                                         <th class="">Name</th>
@@ -60,14 +60,14 @@
                                                     <tbody class="bg-secondary text-white">
                                                     @foreach($data as $keys=>$data)
                                                     <tr id="row{{$data->id}}">
-                                                        <td class="text-center">
+                                                        <!-- <td class="text-center">
                                                             <input type="checkbox" name="chk[]" class="form-check-input checkboxModerator">
-                                                        </td>
+                                                        </td> -->
                                                         <th scope="row" class="text-center">{{++$keys}}</th>
                                                         <td class="d-flex justify-content-center align-items-center">
                                                             <div class="user-photo">
                                                                 <div class="border border-secondary rounded-circle">
-                                                                    <img src="{{asset('images/admin/'.$data->image)}}" alt="" class="border rounded-circle">
+                                                                    <img src="{{$data->image ? asset('storage/images/admin/'.$data->image) : asset('/images/user.png') }}" alt="" class="border rounded-circle">
                                                                 </div>
                                                             </div>
                                                         </td>

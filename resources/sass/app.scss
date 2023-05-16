@@ -7,6 +7,7 @@ $success:#0fd101;
 
 $border-radius: .15rem;
 
+
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~bootstrap-icons/font/bootstrap-icons.scss';
 // @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
@@ -18,6 +19,13 @@ $border-radius: .15rem;
 @import 'faq.scss';
 @import 'directorProfile.scss';
 @import 'termsAndConditions.scss';
+@import 'login.scss';
+@import 'profile.scss';
+@import 'profile-setting.scss';
+@import 'profile-redeem.scss';
+@import 'albumDetail.scss';
+
+
 //@import 'dashboard/contact';
 // @import '~animate/animate.min.css';
 @import '~venobox/dist/venobox.min.css';
@@ -301,6 +309,17 @@ main{
     }
     .side-nav{
         width:65vw;
+        .side-nav-ul{
+            .side-nav-item{
+                a{
+                    font-size: .9rem;
+                }
+            }
+        }
+
+        .usernameSmallDevice{
+            font-size: .9rem;
+        }
     }
     .logo-div{
         width:40px !important;
@@ -412,6 +431,13 @@ main{
     }
     .side-nav{
         width:65vw;
+        .side-nav-ul{
+            .side-nav-item{
+                a{
+                    font-size: .7rem;
+                }
+            }
+        }
     }
     .logo-div{
         width:40px !important;

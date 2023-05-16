@@ -14,7 +14,7 @@ class SliderFactory extends Factory
     public function definition()
     {
         return [
-            'image'=>'https://source.unsplash.com/random/1200x500/?portrait'
+            'image'=>null,
         ];
     }
 }

@@ -2,29 +2,44 @@
 
 namespace App\Models;
 
+use App\Models\Album as ModelsAlbum;
+use App\Models\City;
+use App\Models\Town;
+use App\Models\Image;
+use App\Modles\Album;
+use App\Models\Amenity;
+use App\Models\Category;
+use App\Models\SiteGallery;
+use App\Models\FacebookLink;
+use App\Models\siteProgress;
+use App\Models\AlbumDocument;
+use Illuminate\Database\Eloquent\Model;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Image;
-use App\Models\Category;
-use App\Models\Amenity;
-// use App\Models\Gallery;
-use App\Models\FacebookLink;
-use App\Models\Town;
-use App\Models\City;
 
 class Project extends Model implements Viewable
 {
     use HasFactory;
     use InteractsWithViews;
+    protected static function boot()
+    {
+        parent::boot();
 
-    protected $fillable=[
+        // Use the deleting event hook to remove related records from project_amenity table
+        static::deleting(function ($project) {
+            $project->amenity()->detach();
+        });
+    }
+
+    protected $fillable = [
         'slug',
         'project_name',
+
         'description',
         'cover',
-        'gallery',
+        'three_sixty_image',
+        'priceImg',
         'lower_price',
         'upper_price',
         'category_id',
@@ -42,6 +57,21 @@ class Project extends Model implements Viewable
         'street',
         'ward',
     ];
+
+    public function assets()
+    {
+        return $this->hasMany(Assets::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function town()
+    {
+        return $this->belongsTo(Town::class, 'township_id');
+    }
 
     public function categories()
     {
@@ -63,23 +93,43 @@ class Project extends Model implements Viewable
         return $this->hasOne(FacebookLink::class);
     }
 
-    public function images()
+    public function previewimages()
     {
-        return $this->hasMany(Image::class);
-    }
-
-    // public function gallery()
-    // {
-    //     return $this->hasMany(Gallery::class);
-    // }
-
-    public function towns()
-    {
-        return $this->belongsTo(Town::class);
+        return $this->hasOne(Previewimage::class);
     }
 
     public function cities()
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function towns()
+    {
+        return $this->belongsTo(Town::class, 'township_id');
+    }
+
+    public function siteProgresses()
+    {
+        return $this->hasMany(siteProgress::class, 'project_id');
+    }
+
+    public function albumTests()
+    {
+        return $this->hasMany(albumTest::class, 'project_id');
+    }
+
+    public function albumTestsImage()
+    {
+        return $this->hasManyThrough(AlbumTestImage::class, albumTest::class, 'project_id', 'album_tests_id', 'id', 'id');
+    }
+
+    public function siteProgressesImage()
+    {
+        return $this->hasManyThrough(Image::class, siteProgress::class);
+    }
+
+    public function unitprice()
+    {
+        return $this->hasMany(UnitPrice::class);
     }
 }

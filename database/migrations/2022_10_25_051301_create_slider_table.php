@@ -15,7 +15,7 @@ class CreateSliderTable extends Migration
     {
         Schema::create('slider', function (Blueprint $table) {
             $table->id();
-            $table->binary('image')->nullable(); 
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

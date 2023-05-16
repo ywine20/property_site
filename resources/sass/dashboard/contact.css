@@ -1,0 +1,255 @@
+.contact_us .row .side-contact {
+  background-color: #858483;
+  min-height: 90vh;
+  box-shadow: -3px 0px 5px black;
+  position: sticky;
+  top: 72px;
+}
+.contact_us .row .side-contact::-webkit-scrollbar {
+  width: 0.2em;
+  height: 0.2em;
+}
+.contact_us .row .side-contact::-webkit-scrollbar-track {
+  background-color: rgba(122, 117, 116, 0.568627451);
+}
+.contact_us .row .side-contact::-webkit-scrollbar-thumb {
+  background-color: rgba(173, 173, 173, 0.67);
+  outline: 1px solid #363636;
+}
+.contact_us .row .side-contact nav {
+  width: 100%;
+  height: 92vh;
+}
+.contact_us .row .side-contact nav .contact-nav .contact-link li {
+  background-color: rgba(122, 117, 116, 0.568627451);
+  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.46);
+  transition: all 0.2s;
+}
+.contact_us .row .side-contact nav .contact-nav .contact-link li:hover {
+  background-color: rgba(90, 89, 89, 0.69);
+}
+.contact_us .row .side-contact nav .contact-nav .contact-link .show-time {
+  font-size: 0.8rem;
+}
+.contact_us .row .side-contact nav .contact-nav .contact-link .sender {
+  font-size: 0.9rem;
+}
+.contact_us .row .side-contact nav .contact-nav .contact-link .subject {
+  font-size: 0.95rem;
+}
+.contact_us .row .side-contact nav .contact-nav .contact-link .noti-ball {
+  width: 10px;
+  height: 10px;
+  background-color: var(--gold);
+  border-radius: 50%;
+  position: absolute;
+  top: -1px;
+  right: -2px;
+}
+.contact_us .row .side-contact nav .contact-nav .contact-link .active {
+  background-color: rgba(122, 117, 116, 0.568627451);
+  box-shadow: inset 0px -2px 3px var(--gold);
+  border: 1px solid rgba(245, 204, 122, 0.49);
+}
+.contact_us .row .side-contact nav .contact-nav .contact-link .new {
+  background-color: rgba(217, 210, 210, 0.65);
+}
+.contact_us .row .side-contact nav .contact-nav .contact-link .new:hover {
+  background-color: rgba(217, 210, 210, 0.78);
+}
+.contact_us .row .contact-detail .contact-detail-paper {
+  width: 95%;
+  min-height: 50vh;
+  background-color: #858483;
+}
+.contact_us .row .contact-detail .contact-detail-paper .datetime .trash-icon:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.contact_us .row .contact-detail .contact-detail-paper .datetime .trash-icon:focus {
+  border: none;
+  box-shadow: none;
+}
+.contact_us .row .contact-detail .contact-detail-paper .datetime .trash-icon:disabled {
+  border: none !important;
+}
+.contact_us .row .contact-detail .contact-detail-paper .user-info-table {
+  width: 50%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .contact_us .row .side-contact {
+    min-height: 90vh;
+  }
+  .contact_us .row .side-contact .contact-nav .contact-link .show-time {
+    font-size: 0.7rem;
+  }
+  .contact_us .row .side-contact .contact-nav .contact-link .sender {
+    font-size: 0.9rem;
+  }
+  .contact_us .row .side-contact .contact-nav .contact-link .subject {
+    font-size: 0.95rem;
+  }
+  .contact_us .row .contact-detail .contact-detail-paper {
+    width: 100%;
+  }
+  .contact_us .row .contact-detail .contact-detail-paper .user-info-table {
+    font-size: 0.8rem;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .contact_us .row .side-contact {
+    background-color: #858483;
+    min-height: 90vh;
+    box-shadow: -3px 0px 5px black;
+    position: sticky;
+    top: 72px;
+  }
+  .contact_us .row .side-contact::-webkit-scrollbar {
+    width: 0.2em;
+    height: 0.2em;
+  }
+  .contact_us .row .side-contact::-webkit-scrollbar-track {
+    background-color: rgba(122, 117, 116, 0.568627451);
+  }
+  .contact_us .row .side-contact::-webkit-scrollbar-thumb {
+    background-color: rgba(173, 173, 173, 0.67);
+    outline: 1px solid #363636;
+  }
+  .contact_us .row .side-contact nav {
+    width: 100%;
+    height: 92vh;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link li {
+    background-color: rgba(122, 117, 116, 0.568627451);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.46);
+    transition: all 0.2s;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link li:hover {
+    background-color: rgba(90, 89, 89, 0.69);
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .show-time {
+    font-size: 0.8rem;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .sender {
+    font-size: 0.9rem;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .subject {
+    font-size: 0.95rem;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .noti-ball {
+    width: 10px;
+    height: 10px;
+    background-color: var(--gold);
+    border-radius: 50%;
+    position: absolute;
+    top: -1px;
+    right: -2px;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .active {
+    background-color: rgba(122, 117, 116, 0.568627451);
+    box-shadow: inset 0px -2px 3px var(--gold);
+    border: 1px solid rgba(245, 204, 122, 0.49);
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .new {
+    background-color: rgba(217, 210, 210, 0.65);
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .new:hover {
+    background-color: rgba(217, 210, 210, 0.78);
+  }
+  .contact_us .row .contact-detail .contact-detail-paper {
+    width: 95%;
+    min-height: 50vh;
+    background-color: #858483;
+  }
+  .contact_us .row .contact-detail .contact-detail-paper .datetime .trash-icon:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .contact_us .row .contact-detail .contact-detail-paper .datetime .trash-icon:focus {
+    border: none;
+    box-shadow: none;
+  }
+  .contact_us .row .contact-detail .contact-detail-paper .datetime .trash-icon:disabled {
+    border: none !important;
+  }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .contact_us .row .side-contact {
+    background-color: #858483;
+    min-height: 90vh;
+    box-shadow: -3px 0px 5px black;
+    position: sticky;
+    top: 72px;
+  }
+  .contact_us .row .side-contact::-webkit-scrollbar {
+    width: 0.2em;
+    height: 0.2em;
+  }
+  .contact_us .row .side-contact::-webkit-scrollbar-track {
+    background-color: rgba(122, 117, 116, 0.568627451);
+  }
+  .contact_us .row .side-contact::-webkit-scrollbar-thumb {
+    background-color: rgba(173, 173, 173, 0.67);
+    outline: 1px solid #363636;
+  }
+  .contact_us .row .side-contact nav {
+    width: 100%;
+    height: 92vh;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link li {
+    background-color: rgba(122, 117, 116, 0.568627451);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.46);
+    transition: all 0.2s;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link li:hover {
+    background-color: rgba(90, 89, 89, 0.69);
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .show-time {
+    font-size: 0.8rem;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .sender {
+    font-size: 0.9rem;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .subject {
+    font-size: 0.95rem;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .noti-ball {
+    width: 10px;
+    height: 10px;
+    background-color: var(--gold);
+    border-radius: 50%;
+    position: absolute;
+    top: -1px;
+    right: -2px;
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .active {
+    background-color: rgba(122, 117, 116, 0.568627451);
+    box-shadow: inset 0px -2px 3px var(--gold);
+    border: 1px solid rgba(245, 204, 122, 0.49);
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .new {
+    background-color: rgba(217, 210, 210, 0.65);
+  }
+  .contact_us .row .side-contact nav .contact-nav .contact-link .new:hover {
+    background-color: rgba(217, 210, 210, 0.78);
+  }
+  .contact_us .row .contact-detail .contact-detail-paper {
+    width: 95%;
+    min-height: 50vh;
+    background-color: #858483;
+  }
+  .contact_us .row .contact-detail .contact-detail-paper .datetime .trash-icon:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .contact_us .row .contact-detail .contact-detail-paper .datetime .trash-icon:focus {
+    border: none;
+    box-shadow: none;
+  }
+  .contact_us .row .contact-detail .contact-detail-paper .datetime .trash-icon:disabled {
+    border: none !important;
+  }
+}/*# sourceMappingURL=contact.css.map */

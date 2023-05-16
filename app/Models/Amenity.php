@@ -9,7 +9,7 @@ use App\Models\Project;
 class Amenity extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable=[   
      'amenity',
     ];
 

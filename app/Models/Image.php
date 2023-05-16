@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\siteProgress;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Project;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Image extends Model
 {
-    use HasFactory;
-    protected $fillable = [
+     use HasFactory;
+      protected $fillable=[
         'image',
-        'project_id',
+        'site_progress_id',
     ];
-
-    public function projects(){
-        return $this->belongsTo(Project::class);
+       public function siteprogress(){
+        return $this->belongsTo(siteProgress::class);
     }
 }

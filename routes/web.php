@@ -1,25 +1,47 @@
 <?php
 
+use App\Http\Middleware\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SliderController;
-use App\Http\Controllers\PanoramaController;
-use App\Http\Controllers\ProjectListController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\ContactUsController;
-// use Illuminate\Support\Facades\Session;
-// use App\Http\Controllers\EngagementController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PanoramaController;
+use App\Http\Controllers\AlbumTestController;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\RedeemCodeController;
+use App\Http\Controllers\Admin\AlbumController;
+use App\Http\Controllers\ProjectListController;
+use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\PreviewImageController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\CustomerProfileController;
+use App\Http\Controllers\Admin\SiteProgressController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageController;
+
+
+Route::get('/', function () {
+    return view('master');
+});
+//localization
+   Route::get('locale/{lang}', [LocalizationController::class, 'setLang']);
+
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/vouchers/{id}', [ProductController::class, 'voucher']);
+
+//Login
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
 
 /*
  Client Site and User View Point Routes
@@ -49,12 +71,35 @@ Route::post('/contactus', [App\Http\Controllers\ContactController::class, 'store
 Route::get('/admin/login', 'Admin\PageController@showLogin');
 Route::post('/admin/login', 'Admin\PageController@login');
 
-Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']], function(){
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Admin']], function () {
     Route::get('/', 'PageController@showDashboard');
     Route::post('/logout', 'PageController@logout');
     Route::get('/user', 'PageController@profile');
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
+
+    // Album
+    Route::get('project/{projectId}/album/create', [AlbumController::class, 'create'])->name('albumTest.create');
+    Route::post('project/{projectId}/album/store', [AlbumController::class, 'store'])->name('albumTest.store');
+    Route::get('project/{projectId}/album/{id}', [AlbumController::class, 'show'])->name('albumTest.show');
+    Route::patch('project/{projectId}/album/{id}', [AlbumController::class, 'update'])->name('albumTest.update');
+    Route::delete('album/{id}', [AlbumController::class, 'albumDelete'])->name('album.delete');
+    // Route::delete('album/{albumId}/images/{imageName}', [AlbumController::class, 'imageDelete'])->name('albumImage.delete');
+    Route::delete('album/{albumId}/images/{imageName}', [AlbumController::class, 'imageDel'])->name('albumImage.delete');
+
+
+
+    // Site Progress
+    Route::get('project/{id}/detail/', [ProjectController::class, 'detail'])->name('project.detail');
+    Route::get('project/{id}/site-progess/create', [SiteProgressController::class, 'create'])->name('siteProgress.create');
+    Route::get('project/{projectId}/site-progess/{id}', [SiteProgressController::class, 'show'])->name('siteProgress.show');
+    Route::post('project/{id}/site-progess/store', [SiteProgressController::class, 'store'])->name('siteProgress.store');
+    Route::get('project/{projectId}/site-progess/{id}/edit', [SiteProgressController::class, 'edit'])->name('siteProgress.edit');
+    Route::patch('project/{projectId}/site-progess/{id}/update', [SiteProgressController::class, 'update'])->name('siteProgress.update');
+    Route::delete('project/{projectId}/site-progess/{id}/delete', [SiteProgressController::class, 'destroy'])->name('siteProgress.destory');
+    Route::delete('site-progess/{siteProgressId}/image/{id}', [SiteProgressController::class, 'imageDelete'])->name('siteProgressImage.destory');
+
+
     Route::resource('amenity', "AmenityController");
     Route::resource('facebooklink', "FacebookLinkController");
     Route::resource('citystate', "CityStateController");
@@ -74,56 +119,61 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>['Admin']
     Route::delete('cont-show/cont-delete/{id}', 'ContactController@delete');
 
     //winwinmawModify
-    Route::post('/delete-multiple-category',[\App\Http\Controllers\Admin\CategoryController::class,'multiDelCategory'])->name('category.multi-delete');
-    Route::post('/delete-multiple-amenity',[\App\Http\Controllers\Admin\AmenityController::class,'multiDelAmenity'])->name('amenity.multi-delete');
-    Route::post('/delete-multiple-project',[\App\Http\Controllers\Admin\ProjectController::class,'multiDelProject'])->name('project.multi-delete');
-    Route::post('/delete-multiple-facebookLink',[\App\Http\Controllers\Admin\FacebookLinkController::class,'multiDelFacebookLink'])->name('facebookLink.multi-delete');
-    Route::post('/delete-multiple-city',[\App\Http\Controllers\Admin\AddressController::class,'multiDelCity'])->name('city.multi-delete');
-    Route::post('/delete-multiple-town',[\App\Http\Controllers\Admin\AddressController::class,'multiDelTown'])->name('town.multi-delete');
-    Route::put('city-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'cityUpdate'])->name('address.cityUpdate');
-    Route::put('town-update/{id}',[\App\Http\Controllers\Admin\AddressController::class,'townUpdate'])->name('address.townUpdate');
+    Route::post('/delete-multiple-category', [\App\Http\Controllers\Admin\CategoryController::class, 'multiDelCategory'])->name('category.multi-delete');
+    Route::post('/delete-multiple-amenity', [\App\Http\Controllers\Admin\AmenityController::class, 'multiDelAmenity'])->name('amenity.multi-delete');
+    Route::post('/delete-multiple-project', [\App\Http\Controllers\Admin\ProjectController::class, 'multiDelProject'])->name('project.multi-delete');
+    Route::post('/delete-multiple-facebookLink', [\App\Http\Controllers\Admin\FacebookLinkController::class, 'multiDelFacebookLink'])->name('facebookLink.multi-delete');
+    Route::post('/delete-multiple-city', [\App\Http\Controllers\Admin\AddressController::class, 'multiDelCity'])->name('city.multi-delete');
+    Route::post('/delete-multiple-town', [\App\Http\Controllers\Admin\AddressController::class, 'multiDelTown'])->name('town.multi-delete');
+    Route::put('city-update/{id}', [\App\Http\Controllers\Admin\AddressController::class, 'cityUpdate'])->name('address.cityUpdate');
+    Route::put('town-update/{id}', [\App\Http\Controllers\Admin\AddressController::class, 'townUpdate'])->name('address.townUpdate');
 
+    Route::delete('/previewImages/{name}/{fieldName}', [AdminPreviewImageController::class, 'delete'])->name('previewImage.delete');
+
+    //for redeem code
+    Route::get('/redeemCodes/page', [RedeemCodeController::class, 'generateRedeemCodePage'])->name('admin.generateRedeemCodePage');
+    Route::post('/redeemCodes', [RedeemCodeController::class, 'generateRedeemCode'])->name('admin.generateRedeemCode');
+
+    //to customer list
+    Route::get('/customers/list', [CustomerController::class, 'customersList'])->name('admin.customersList');
+});
+
+
+
+
+//SMT UPDATE 13-March-2023
+
+Route::group([], function () {
+
+    Route::get('/profile/{id}', [CustomerProfileController::class, 'profile'])->name('profile');
+
+    Route::get('/profile/{id}/setting', [CustomerProfileController::class, 'profileSetting'])->name('profile.setting');
+    Route::get('/profile/{id}/redeem', [CustomerProfileController::class, 'redeem'])->name('profile.redeem');
+    Route::post('/profile/{id}/changeProfile', [CustomerProfileController::class, 'changeImage'])->name('profile.changeImge');
+    Route::patch('/profile/{id}/changeProfileInfo', [CustomerProfileController::class, 'changeInfo'])->name('profile.changeInfo');
+    Route::patch('/profile/{id}/changePassword', [CustomerProfileController::class, 'changePassword'])->name('profile.changePassword');
+    Route::post('/forgotpassword', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
+    Route::get('project/{projectId}/siteprogress', [ProjectListController::class, 'siteProgressList'])->name('siteProgressList');
+    Route::get('project/{projectId}/siteprogress/{id}', [ProjectListController::class, 'siteProgressDetail'])->name('client-siteProgress.show');
+    Route::get('project/{projectId}/album/{id}', [ProjectListController::class, 'albumDetail'])->name('client-album.show');
+
+
+
+    // Route::view('/profile','customer/profile')->name('profile');
+
+    Route::view('/profile/setting', 'customer/profile-setting')->name('profile-setting');
+    Route::view('/redeem', 'customer/redeem')->name('profile-redeem');
+
+
+    // Redeem Code for customemr
+    Route::post('/customer/redeemCodes', [RedeemCodeController::class, 'customerRedeemCodes'])->name('profile.customerRedeemCodes');
+
+
+    //winwinmaw
+    Route::get('/redeemCode', [RedeemCodeController::class, 'generateCode'])->name('profile.generateCode');
+    Route::post('/code', [RedeemCodeController::class, 'code'])->name('profile.code');
+    // Route::get('locale/{lang}', [LocalizationController::class, 'setLang']);
 
 });
-    // Route::resource('contact', "ContactController");
-    // Route::delete('/deletecover/{id}', "ProjectController@deletecover");
-    //Route::delete('/delete/{id}',[ProjectController::class,'destroy']);
-/******************************************************************************************/
-    // For Gallery Route
-    // Route::get('gallery',[GalleryController::class,'index']);
-    // Route::get('add-photo',[GalleryController::class,'create']);
-    // Route::post('add-photo',[GalleryController::class,'store']);
-    // Route::get('edit-gallery/{id}',[GalleryController::class,'edit']);
-    // Route::put('update-gallery/{id}',[GalleryController::class,'update']);
-    // Route::get('delete-gallery/{id}',[GalleryController::class,'destroy']);
-    // Route::get('show-gallery/{id}',[GalleryController::class,'show']);
 
-    // For Address Route
-    // Route::get('address',[AddressController::class,'index']);
-    // Route::get('add-address',[AddressController::class,'create']);
-    // Route::post('add-address',[AddressController::class,'store']);
-    // Route::get('edit-address/{id}',[AddressController::class,'edit']);
-    // Route::put('update-address/{id}',[AddressController::class,'update']);
-    // Route::get('delete-address/{id}',[AddressController::class,'destory']);
-    // Route::get('show-address/{id}',[AddressController::class,'show']);
-
-    //for Slider
-    // Route::get('slider',[SliderController::class,'index']);
-    // Route::get('add-slider',[SliderController::class,'create']);
-    // Route::post('add-slider',[SliderController::class,'store']);
-    // Route::get('edit-slider/{id}',[SliderController::class,'edit']);
-    // Route::put('update-slider/{id}',[SliderController::class,'update']);
-    // Route::get('show-slider/{id}',[SliderController::class,'show']);
-    // Route::get('delete-slider/{id}',[SliderController::class,'destory']);
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/hello', function(){
-//     // Session::put('message', 0);
-//     $message = Session::get('message');
-//     $message += 1;
-//     Session::put('message', $message);
-//     // echo Session::get('message');
-// });
+Route::view('/multiple-selected', 'test');
