@@ -462,8 +462,8 @@
                             {{ Session::get('g-recaptcha-response') }}
                             </i>
                             @endif --}} -->
-                            <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
-                            <input type="hidden" name="gRecaptchaResponse" id="gRecaptchaResponse" />
+                            <!--<div class="g-recaptcha" data-sitekey="{{ config('app.recaptcha_site_key') }}"></div>-->                
+{{!! Recatcha::render() !!}}
                             <small class="error-text g-recaptcha-response_error text-danger"></small>
 
                         </div>

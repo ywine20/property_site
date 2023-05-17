@@ -91,8 +91,8 @@
 
                                                 <td>
                                                     <div class="d-flex justify-content-center align-items-center">
-                                                        <div class="mx-1">
-                                                            <a href="{{ route('project.detail',$customer->id) }}"
+                                                        <div class="mx-1 d-none">
+                                                            <a href="#"
                                                                 class="  info-icon px-2 py-1">
                                                                 <i class="bi bi-info-circle text-info fa-fw"></i>
                                                             </a>
