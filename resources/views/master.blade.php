@@ -455,16 +455,10 @@
                             <small class="error-text register_passwordConfirm_error text-danger"></small>
                         </div>
                         <div class="mb-3">
-                            <!-- <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}" name="g-recaptcha-response"></div>
-                            <small class="error-text g-recaptcha-response_error text-danger"></small>
-                            {{-- @if (Session::has('g-recaptcha-response'))
-                                <i class="{{ Session::get('alert-info') }} text-danger">
-                            {{ Session::get('g-recaptcha-response') }}
-                            </i>
-                            @endif --}} -->
-                            <!--<div class="g-recaptcha" data-sitekey="{{ config('app.recaptcha_site_key') }}"></div>-->                
-{{!! Recatcha::render() !!}}
-                            <small class="error-text g-recaptcha-response_error text-danger"></small>
+                            <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+                            <span class="text-danger" id="recaptcha-error"></span>
+
+                            <!-- <small class="error-text g-recaptcha-response_error text-danger"></small> -->
 
                         </div>
                         <!-- registere Button -->
@@ -752,71 +746,74 @@
         registerForm.addEventListener('submit', e => {
             e.preventDefault();
 
-            // Get the reCAPTCHA response
-            const gRecaptchaResponse = grecaptcha.getResponse();
-            gRecaptchaResponseInputValue = document.getElementById('gRecaptchaResponse').value;
-            gRecaptchaResponseInputValue = gRecaptchaResponse;
+            // // Get the reCAPTCHA response
+            // const gRecaptchaResponse = grecaptcha.getResponse();
+            // gRecaptchaResponseInputValue = document.getElementById('gRecaptchaResponse').value;
+            // gRecaptchaResponseInputValue = gRecaptchaResponse;
 
-            const name = registerForm.elements.name.value;
-            const email = registerForm.elements.email.value;
-            const password = registerForm.elements.password.value;
-            const password_confirmation = registerForm.elements.password_confirmation.value;
-            gRecaptchaResponseServer = gRecaptchaResponseInputValue;
+            // const name = registerForm.elements.name.value;
+            // const email = registerForm.elements.email.value;
+            // const password = registerForm.elements.password.value;
+            // const password_confirmation = registerForm.elements.password_confirmation.value;
+            // gRecaptchaResponseServer = gRecaptchaResponseInputValue;
 
+            if (grecaptcha.getResponse().length > 0) {
+                console.log(grecaptcha.getResponse());
+                var formData = new FormData(registerForm);
+                axios.post('/register', formData)
+                    .then(response => {
+                        localStorage.setItem('token', JSON.stringify(response.data.access_token));
+                        window.location.reload();
+                        // // console.log(response.data);
+                        // loginModal.style.display = "none";
+                        // document.body.classList.remove('backdropShow');          console.log(response.data);
+                        // localStorage.setItem('token', JSON.stringify(response.data.token));
 
-            axios.post('/register', {
-                    name: name,
-                    email: email,
-                    password: password,
-                    password_confirmation: password_confirmation,
-                    gRecaptchaResponseServer: gRecaptchaResponseInputValue,
+                    })
+                    .catch(err => {
 
-                })
-                .then(response => {
-                    localStorage.setItem('token', JSON.stringify(response.data.access_token));
-                    window.location.reload();
-                    // // console.log(response.data);
-                    // loginModal.style.display = "none";
-                    // document.body.classList.remove('backdropShow');          console.log(response.data);
-                    // localStorage.setItem('token', JSON.stringify(response.data.token));
+                        // handle the error response
+                        console.log(err.response.data);
 
-                })
-                .catch(err => {
+                        document.querySelector('.register_name_error').innerText = '';
+                        document.querySelector('.register_email_error').innerText = '';
+                        document.querySelector('.register_password_error').innerText = '';
+                        document.querySelector('.register_passwordConfirm_error').innerText = '';
 
-                    // handle the error response
-                    console.log(err.response.data);
+                        if (err.response) {
+                            const {
+                                error
+                            } = err.response.data;
+                            const nameError = error.name ? error.name[0] : '';
+                            const emailError = error.email ? error.email[0] : '';
+                            const passwordError = error.password ? error.password[0] : '';
+                            const passwordConfirmError = error.password_confirmation ? error.password_confirmation[0] : '';
+                            const gRecaptchaError = error.gRecaptchaResponseServer ? error.gRecaptchaResponseServer[0] : '';
 
-                    document.querySelector('.register_name_error').innerText = '';
-                    document.querySelector('.register_email_error').innerText = '';
-                    document.querySelector('.register_password_error').innerText = '';
-                    document.querySelector('.register_passwordConfirm_error').innerText = '';
-                    document.querySelector('.g-recaptcha-response_error').innerText = '';
+                            document.querySelector('.register_name_error').innerText = nameError;
+                            document.querySelector('.register_email_error').innerText = emailError;
+                            document.querySelector('.register_password_error').innerText = passwordError;
+                            document.querySelector('.register_passwordConfirm_error').innerText = passwordConfirmError;
 
-                    if (err.response) {
-                        const {
-                            error
-                        } = err.response.data;
-                        const nameError = error.name ? error.name[0] : '';
-                        const emailError = error.email ? error.email[0] : '';
-                        const passwordError = error.password ? error.password[0] : '';
-                        const passwordConfirmError = error.password_confirmation ? error.password_confirmation[0] : '';
-                        const gRecaptchaError = error.gRecaptchaResponseServer ? error.gRecaptchaResponseServer[0] : '';
-
-                        document.querySelector('.register_name_error').innerText = nameError;
-                        document.querySelector('.register_email_error').innerText = emailError;
-                        document.querySelector('.register_password_error').innerText = passwordError;
-                        document.querySelector('.register_passwordConfirm_error').innerText = passwordConfirmError;
-                        document.querySelector('.g-recaptcha-response_error').innerText = gRecaptchaError;
+                            document.getElementById("recaptcha-error").innerText = error.response.data.message;
 
 
 
-                    } else if (err.request) {
-                        console.log('request error', err.request)
-                    } else {
-                        // Anything else
-                        console.log('Error', err.message);
-                    }
-                });
+
+                        } else if (err.request) {
+                            console.log('request error', err.request)
+                        } else {
+                            // Anything else
+                            console.log('Error', err.message);
+                        }
+                    });
+            } else {
+                document.getElementById("recaptcha-error").innerText = "Please complete the reCAPTCHA.";
+
+            }
+
+
+
         });
 
 

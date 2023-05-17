@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
+use Google\Recaptcha\Recaptcha;
 
 
 class AuthController extends Controller
@@ -27,8 +28,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|max:16',
             'password_confirmation' => 'required|same:password',
-            'gRecaptchaResponseServer' => 'required|recaptcha',
-           
+            'g-recaptcha-response' => 'required|recaptcha:' . config('app.GOOGLE_RECAPTCHA_SECRET'),
         ]);
 
 
