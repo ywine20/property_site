@@ -28,7 +28,19 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|max:16',
             'password_confirmation' => 'required|same:password',
-            'g-recaptcha-response' => 'required|recaptcha:' . config('app.GOOGLE_RECAPTCHA_SECRET'),
+            'g_recaptcha_response' => function ($attribute, $value, $fail) {
+                $secretKey = config('services.recaptcha.secret');
+                $response = $value;
+                $userIP = $_SERVER['REMOTE_ADDR'];
+                $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$userIP";
+                $response = \file_get_contents($url);
+                $response = json_decode($response);
+                if (!$response->success) {
+                    Session::flash('g-recaptcha-response', 'please check reCaptcha.');
+                    Session::flash('alert-class', 'alert-danger');
+                    $fail($attribute . 'google reCaptcha fail');
+                }
+            },
         ]);
 
 

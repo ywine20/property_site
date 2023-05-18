@@ -751,15 +751,21 @@
             // gRecaptchaResponseInputValue = document.getElementById('gRecaptchaResponse').value;
             // gRecaptchaResponseInputValue = gRecaptchaResponse;
 
-            // const name = registerForm.elements.name.value;
-            // const email = registerForm.elements.email.value;
-            // const password = registerForm.elements.password.value;
-            // const password_confirmation = registerForm.elements.password_confirmation.value;
+            const name = registerForm.elements.name.value;
+            const email = registerForm.elements.email.value;
+            const password = registerForm.elements.password.value;
+            const password_confirmation = registerForm.elements.password_confirmation.value;
+            const recaptchaResponse = grecaptcha.getResponse()
             // gRecaptchaResponseServer = gRecaptchaResponseInputValue;
 
             if (grecaptcha.getResponse().length > 0) {
                 console.log(grecaptcha.getResponse());
-                var formData = new FormData(registerForm);
+  		const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('password', password);
+                formData.append('password_confirmation', password_confirmation);
+                formData.append('g_recaptcha_response', recaptchaResponse);
                 axios.post('/register', formData)
                     .then(response => {
                         localStorage.setItem('token', JSON.stringify(response.data.access_token));
@@ -788,14 +794,14 @@
                             const emailError = error.email ? error.email[0] : '';
                             const passwordError = error.password ? error.password[0] : '';
                             const passwordConfirmError = error.password_confirmation ? error.password_confirmation[0] : '';
-                            const gRecaptchaError = error.gRecaptchaResponseServer ? error.gRecaptchaResponseServer[0] : '';
+                            const gRecaptchaError = error.g_recaptcha_response ? error.g_recaptcha_response[0] : '';
 
                             document.querySelector('.register_name_error').innerText = nameError;
                             document.querySelector('.register_email_error').innerText = emailError;
                             document.querySelector('.register_password_error').innerText = passwordError;
                             document.querySelector('.register_passwordConfirm_error').innerText = passwordConfirmError;
 
-                            document.getElementById("recaptcha-error").innerText = error.response.data.message;
+                            document.getElementById("recaptcha-error").innerText = gRecaptchaError;
 
 
 

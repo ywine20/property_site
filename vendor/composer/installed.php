@@ -3,13 +3,22 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '61e1760b6a46a1d7309842e21ba60f75cac71a22',
+        'reference' => '782928f5cea2c360c128485e23ab30652d572a11',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'anhskohbo/no-captcha' => array(
+            'pretty_version' => '3.5.0',
+            'version' => '3.5.0.0',
+            'reference' => '81302b9ddfb4ee5904b66f24bf3e11ea74fa0b92',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../anhskohbo/no-captcha',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'asm89/stack-cors' => array(
             'pretty_version' => 'v2.1.1',
             'version' => '2.1.1.0',
@@ -442,7 +451,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '61e1760b6a46a1d7309842e21ba60f75cac71a22',
+            'reference' => '782928f5cea2c360c128485e23ab30652d572a11',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
