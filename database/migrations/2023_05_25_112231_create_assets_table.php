@@ -15,8 +15,10 @@ class CreateAssetsTable extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->integer("customer_id")->nullable();
-            $table->string("project_id")->nullable();
+            // $table->integer("customer_id")->nullable();
+            // $table->string("project_id")->nullable();
+            $table->foreignId('project_id')->constrained('projects')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('customer_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');
             $table->string("site_progress")->nullable();
             $table->string("legal_document")->nullable();
             $table->timestamps();

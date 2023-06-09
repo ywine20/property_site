@@ -8,7 +8,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('project.detail', $siteProgress->project_id) }}">
+                        <a href="#" onclick="history.back()">
                             <i class="bi bi-arrow-left me-1"></i>Back
                         </a>
                     </li>
@@ -37,7 +37,7 @@
                             @if (count($siteProgress->images) > 0)
                             @foreach ($siteProgress->images as $img)
                             <div class="col overflow-hidden" style="height:180px">
-                                <img src="{{ asset('storage/images/siteimages/' . $img->image) }}" alt="" class="w-100 h-100" style="object-fit: fill;">
+                                <img src="{{ asset('storage/images/siteimages/' . $img->image) }}" alt="" class="w-100 h-100" style="object-fit:cover;">
                             </div>
                             @endforeach
                             @else

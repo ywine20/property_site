@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Project;
+use Illuminate\Database\QueryException;
 
 class AddressController extends Controller
 {
@@ -30,11 +32,12 @@ class AddressController extends Controller
         $request->validate([
             'name' => 'required|string',
         ]);
+
         City::create([
-            'slug' => Str::slug($request->name).uniqid(),
+            'slug' => Str::slug($request->name) . uniqid(),
             'name' => $request->name,
         ]);
-        return redirect('/admin/address')->with('success', 'your city&state has been added');
+        return redirect('/admin/address')->with('success', 'your city or state has been added');
     }
 
     public function townCreate()
@@ -49,7 +52,7 @@ class AddressController extends Controller
         ]);
 
         Town::create([
-            'slug' => Str::slug($request->name).uniqid(),
+            'slug' => Str::slug($request->name) . uniqid(),
             'name' => $request->name,
             // 'city_id' => $city->id,
         ]);
@@ -58,29 +61,67 @@ class AddressController extends Controller
 
     public function destroy($id)
     {
-        $city = City::where('id', $id);
-        if(!$city->first()){
-            return redirect()->back()->with('error', 'there is no city');
+
+        try {
+
+            $city = City::where('id', $id);
+            if (!$city->first()) {
+                return redirect()->back()->with('error', 'there is no city');
+            }
+            // Check if any projects are associated with the category
+            $projects = Project::where('city_id', $id)->exists();
+            if ($projects) {
+                return response()->json([
+                    "status" => 'error',
+                    "info" => 'Cannot delete the city because it is associated with one or more projects.'
+                ]);
+            }
+
+            $city->delete();
+            return response()->json([
+                'status' => 'success',
+                'info' => 'delete Successful'
+            ]);
+        } catch (QueryException $e) {
+            return response()->json([
+                "status" => 'error',
+                "info" => 'An error occurred while deleting the city.'
+            ]);
         }
-        $city->delete();
-        return response()->json([
-            'status' => 'success',
-            'info' => 'delete Successful'
-        ]);
     }
 
     public function delete($id)
     {
-        $town = Town::where('id', $id);
-        if(!$town->first()){
-            return redirect()->back()->with('error', 'there is no town');
+
+        try {
+
+            $town = Town::where('id', $id);
+            if (!$town->first()) {
+                return redirect()->back()->with('error', 'there is no town');
+            }
+            // Check if any projects are associated with the category
+            $projects = Project::where('township_id', $id)->exists();
+            if ($projects) {
+                return response()->json([
+                    "status" => 'error',
+                    "info" => 'Cannot delete the township because it is associated with one or more projects.'
+                ]);
+            }
+
+            $town->delete();
+            return response()->json([
+                'status' => 'status',
+                'info' => 'delete successful'
+            ]);
+        } catch (QueryException $e) {
+            return response()->json([
+                "status" => 'error',
+                "info" => 'An error occurred while deleting the city.'
+            ]);
         }
-        $town->delete();
-        return response()->json([
-            'status' => 'success',
-            'info' => 'delete successful'
-        ]);
     }
+
+
 
     public function cityUpdate(Request $request)
     {
@@ -90,7 +131,7 @@ class AddressController extends Controller
 
 
         if ($validator->fails()) {
-//            $errorText = $validator->messages()->getMessages();
+            //            $errorText = $validator->messages()->getMessages();
             return redirect()->back()->with('error', 'Something Wrong');
         } else {
             City::where('id', $request->city_id)->update([
@@ -98,8 +139,6 @@ class AddressController extends Controller
             ]);
         }
         return redirect('/admin/address')->with('status', 'City Updated Successful');
-
-
     }
 
     public function townUpdate(Request $request)
@@ -108,25 +147,38 @@ class AddressController extends Controller
             'town_name' => 'required|string|min:3|max:255'
         ]);
         if ($validator->fails()) {
-//            $errorText = $validator->messages()->getMessages();
+            //            $errorText = $validator->messages()->getMessages();
             return redirect()->back()->with('error', 'Something Wrong');
         } else {
             Town::where('id', $request->town_id)->update([
                 'name' => $request->town_name,
             ]);
         }
-        return redirect('/admin/address')->with('status', 'Town Updated Successful');
+        return redirect('/admin/address')->with('status', 'Township Updated Successful');
     }
 
-    public function multiDelCity(Request $request){
+
+
+    public function multiDelCity(Request $request)
+    {
         $ids = $request->chkCity;
-        City::whereIn('id',$ids)->delete();
-        return redirect()->back()->with('status','City Multiple Delete Successful');
+
+        $associatedCities = Project::whereIn('city_id', $ids)->exists();
+        if ($associatedCities) {
+            return redirect()->back()->with('error', 'Cannot delete some city because they are associated with one or more projects.');
+        }
+        City::whereIn('id', $ids)->delete();
+        return redirect()->back()->with('status', 'Cities Delete Successful');
     }
 
-    public function multiDelTown(Request $request){
+    public function multiDelTown(Request $request)
+    {
         $ids = $request->chkTown;
-        Town::whereIn('id',$ids)->delete();
-        return redirect()->back()->with('status','Town Multiple Delete Successful');
+        $associatedTownships = Project::whereIn('township_id', $ids)->exists();
+        if ($associatedTownships) {
+            return redirect()->back()->with('error', 'Cannot delete some township because they are associated with one or more projects.');
+        }
+        Town::whereIn('id', $ids)->delete();
+        return redirect()->back()->with('status', 'Townships Delete Successful');
     }
 }

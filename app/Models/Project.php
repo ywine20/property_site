@@ -47,7 +47,7 @@ class Project extends Model implements Viewable
         'city_id',
         'layer',
         // 'amenity',
-        'squre_feet',
+        'square_feet',
         // 'project_id_number',
         'gmlink',
         'progress',

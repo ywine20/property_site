@@ -58,13 +58,15 @@
 
                         <form action="{{ route('admin.generateRedeemCode') }}" method="POST" enctype="multipart/form-data" class="create-form" id="redeem-code-form">
                             @csrf
+                            <div id="error-message" class="text-danger"></div>
+
                             <div class="row flex-column">
                                 <!--Choose Tier -->
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-3">
                                         <label for="tier" class="form-label">Tier :</label>
                                         <div class="position-relative">
-                                            <select name="tier" class="create-select form-select form-select-lg fs-6 text-white rounded rounded-1 c mb-2 mb-md-0" id="tier" require>
+                                            <select name="tier" class="create-select form-select form-select-lg fs-6 text-white rounded rounded-1 c mb-2 mb-md-0 position-relative" style="cursor:pointer" id="tier" require>
                                                 <option value="">Choose Tier</option>
                                                 <option value="bronze">Bronze</option>
                                                 <option value="silver">Silver</option>
@@ -72,7 +74,7 @@
                                                 <option value="platinum">Platinum</option>
                                                 <option value="diamond">Diamond</option>
                                             </select>
-                                            <i class="bi bi-caret-down-fill text-white opacity-25 position-absolute m-2 top-0 end-0"></i>
+                                            <!-- <i class="bi bi-caret-down-fill text-white opacity-25 position-absolute m-2 top-0 end-0"></i> -->
                                         </div>
                                         @error('tier')
                                         <div class=" text-danger" role="alert">
@@ -88,7 +90,7 @@
                                             <label for="tier" class="form-label">Projects :</label>
                                             <button type="button" class="create-select form-control toggle-next ellipsis d-flex justify-content-between align-items-center">
                                                 Choose Projects
-                                                <i class="bi bi-caret-down-fill opacity-25"></i>
+                                                <!-- <i class="bi bi-caret-down-fill opacity-25"></i> -->
                                             </button>
 
                                             <div class="checkboxes create-select bg-opacity-100" id="projectName">
@@ -152,7 +154,6 @@
                                 </div>
 
 
-                                <div id="error-message" class="text-danger"></div>
 
                                 <!-- Generate Code Button -->
                                 <div class="col-12 col-lg-4 ">
@@ -195,14 +196,8 @@
 </div>
 <!--end content-->
 @endsection
-@section('script')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script> -->
-@endsection
-
 @push('customScript')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- this is for multiple select -->
 <script>
     //generate redeem code with modal
@@ -217,7 +212,7 @@
                 },
                 dataType: 'json',
                 type: 'POST',
-                url: 'http://127.0.0.1:8000/admin/redeemCodes',
+                url: '{{ asset("admin/redeemCodes") }}',
                 data: formData,
                 success: function(data) {
                     $('#redeem-code').text(data.code);
@@ -259,6 +254,24 @@
     }
 
 
+
+    function copyCode2() {
+        var codeElem = document.getElementById('redeem-code');
+        if (codeElem) {
+            var codeText = codeElem.textContent || codeElem.innerText;
+            if (codeText) {
+                navigator.clipboard.writeText(codeText)
+                    .then(function() {
+                        alert('Code copied to clipboard!');
+                    })
+                    .catch(function(error) {
+                        console.error('Unable to copy code to clipboard:', error);
+                    });
+            }
+        }
+    }
+
+
     const toggleNext = document.querySelector('.toggle-next');
     const checkBoxesContainer = document.querySelector('.checkboxes');
     const checkAll = document.querySelector('.all');
@@ -288,7 +301,7 @@
     function updateCount() {
         // Count the number of checked checkboxes
         const count = document.querySelectorAll('.val:checked').length;
-        console.log(count);
+        // console.log(count);
 
         if (count > 0) {
             toggleNext.innerText = count + ' selected';

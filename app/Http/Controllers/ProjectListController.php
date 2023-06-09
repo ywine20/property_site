@@ -74,14 +74,14 @@ class ProjectListController extends Controller
         // $address = Address::all();
         $towns = Town::all();
         $projects = Project::latest()->paginate(9);
-        $findCat = Category::where('category_id')->first();
+        $findCat = Category::where('id')->first();
         $findTon = Town::where('id')->first();
         $finPro = Project::where('id')->first();
         $findPro = Project::where('id')->first();
-         $user = Auth::guard('user')->user();
+        $user = Auth::guard('user')->user();
 
 
-        return view('projectlist', compact('user','projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'findPro', 'finPro'));
+        return view('projectlist', compact('user', 'projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'findPro', 'finPro'));
     }
 
     // public function search(Request $request){
@@ -105,11 +105,11 @@ class ProjectListController extends Controller
 
 
         if ($category_id = request()->category) {
-            $findCategory = Category::where('category_id', $category_id)->first();
+            $findCategory = Category::where('id', $category_id)->first();
             if (!$findCategory) {
                 return redirect('/projectlist')->with('error', 'category not found');
             }
-            $projects->where('category_id', $findCategory->category_id);
+            $projects->where('category_id', $findCategory->id);
         }
 
         if ($id = request()->township) {
@@ -121,21 +121,21 @@ class ProjectListController extends Controller
         }
 
 
-       if ($request->input('search')) {
-    $searchTerm = strtolower($request->search);
-    $projects = $projects->whereRaw('LOWER(project_name) LIKE ?', ['%'.$searchTerm.'%'])
-        ->orWhereRaw('LOWER(lower_price) LIKE ?', ['%'.$searchTerm.'%'])
-        ->orWhereRaw('LOWER(upper_price) LIKE ?', ['%'.$searchTerm.'%'])
-        ->orWhereRaw('LOWER(squre_feet) LIKE ?', ['%'.$searchTerm.'%'])
-        ->orWhereRaw('LOWER(progress) LIKE ?', ['%'.$searchTerm.'%'])
-        ->orWhereRaw('LOWER(layer) LIKE ?', ['%'.$searchTerm.'%'])
-        ->orWhereRaw('LOWER(hou_no) LIKE ?', ['%'.$searchTerm.'%'])
-        ->orWhereRaw('LOWER(street) LIKE ?', ['%'.$searchTerm.'%'])
-        ->orWhereRaw('LOWER(ward) LIKE ?', ['%'.$searchTerm.'%']);
-}
+        if ($request->input('search')) {
+            $searchTerm = strtolower($request->search);
+            $projects = $projects->whereRaw('LOWER(project_name) LIKE ?', ['%' . $searchTerm . '%'])
+                ->orWhereRaw('LOWER(lower_price) LIKE ?', ['%' . $searchTerm . '%'])
+                ->orWhereRaw('LOWER(upper_price) LIKE ?', ['%' . $searchTerm . '%'])
+                ->orWhereRaw('LOWER(square_feet) LIKE ?', ['%' . $searchTerm . '%'])
+                ->orWhereRaw('LOWER(progress) LIKE ?', ['%' . $searchTerm . '%'])
+                ->orWhereRaw('LOWER(layer) LIKE ?', ['%' . $searchTerm . '%'])
+                ->orWhereRaw('LOWER(hou_no) LIKE ?', ['%' . $searchTerm . '%'])
+                ->orWhereRaw('LOWER(street) LIKE ?', ['%' . $searchTerm . '%'])
+                ->orWhereRaw('LOWER(ward) LIKE ?', ['%' . $searchTerm . '%']);
+        }
 
         // $arr = [];
-        $findCat = Category::where('category_id', $category_id)->pluck('category_name')->first();
+        $findCat = Category::where('id', $category_id)->pluck('category_name')->first();
         $findTon = Town::where('id', $id)->pluck('name')->first();
         $finPro = $request->get('min_price');
         $findPro = $request->get('max_price');
@@ -152,11 +152,11 @@ class ProjectListController extends Controller
             })->get();
 
 
-            return view('projectListAdvance', compact('user','projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro', 'findSearch',));
+            return view('projectListAdvance', compact('user', 'projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro', 'findSearch',));
         }
 
 
-        $findCat = Category::where('category_id', $category_id)->pluck('category_name')->first();
+        $findCat = Category::where('id', $category_id)->pluck('category_name')->first();
         $findTon = Town::where('id', $id)->pluck('name')->first();
         $finPro = $request->get('min_price');
         $findPro = $request->get('max_price');
@@ -164,14 +164,14 @@ class ProjectListController extends Controller
 
         $projects = $projects->paginate(9);
 
-        return view('projectlist', compact('user','projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro', 'findSearch'));
+        return view('projectlist', compact('user', 'projects', 'amenities', 'categories', 'towns', 'cities', 'findCat', 'findTon', 'finPro', 'findPro', 'findSearch'));
     }
 
     public function detail($id, Request $request)
     {
         //production route
-          $user = Auth::guard('user')->user();
-        if(!$user) {
+        $user = Auth::guard('user')->user();
+        if (!$user) {
             return view('error');
         }
 
@@ -259,80 +259,70 @@ class ProjectListController extends Controller
 
     public function siteProgressList($projectId)
     {
-            $user = Auth::guard('user')->user();
+        $user = Auth::guard('user')->user();
 
-        if($user) {
+        if ($user) {
             $assets =  Assets::where('customer_id',  Auth::guard('user')->user()->id)
                 ->where('project_id', $projectId)
                 ->first();
-                // return $projectId;
-            if($assets->customer_id == $user->id){
-                 $siteProgresses = siteProgress::latest()->where('project_id', $projectId)->get();
+            // return $projectId;
+            if ($assets->customer_id == $user->id) {
+                $siteProgresses = siteProgress::latest()->where('project_id', $projectId)->get();
                 return view('siteprogress.list', ['siteProgresses' => $siteProgresses]);
-            }else{
+            } else {
                 return view('error');
             }
-        }
-        else{
+        } else {
             return view('error');
         }
-
-
-
     }
 
-    public function siteProgressDetail($projectId,$id)
+    public function siteProgressDetail($projectId, $id)
     {
 
-         $user = Auth::guard('user')->user();
-        if($user) {
+        $user = Auth::guard('user')->user();
+        if ($user) {
             $assets =  Assets::where('customer_id',  Auth::guard('user')->user()->id)
                 ->where('project_id', $projectId)
                 ->first();
-                // dd($assets);
-            if($assets->customer_id == $user->id){
+            // dd($assets);
+            if ($assets->customer_id == $user->id) {
 
                 $siteProgress = siteProgress::find($id);
-                if($siteProgress){
+                if ($siteProgress) {
                     return view('siteprogress.show', ['siteProgress' => $siteProgress]);
-                }else{
+                } else {
                     return abort(404);
                 }
-
-            }else{
+            } else {
                 return view('error');
             }
-        }
-        else{
+        } else {
             return view('error');
         }
-
     }
 
-    public function albumDetail($projectId,$id)
+    public function albumDetail($projectId, $id)
     {
         $user = Auth::guard('user')->user();
-        if($user) {
+        if ($user) {
             $assets =  Assets::where('customer_id',  Auth::guard('user')->user()->id)
                 ->where('project_id', $projectId)
                 ->first();
-            if($assets->customer_id == $user->id){
+            if ($assets->customer_id == $user->id) {
                 $album = albumTest::where('id', $id)->first();
-                if($album){
+                if ($album) {
 
                     return view('albumDetail', ['album' => $album]);
+                } else {
+                    return abort(404);
                 }
-                else{
-                     return abort(404);
-                }
-            }else{
+            } else {
                 return view('error');
             }
-        }
-        else{
+        } else {
             return view('error');
         }
-
     }
 }
     // public function advance(Request $request)

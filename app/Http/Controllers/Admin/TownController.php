@@ -52,11 +52,11 @@ class TownController extends Controller
         // }
 
         Town::create([
-            'slug' => Str::slug($request->name).uniqid(),
+            'slug' => Str::slug($request->name) . uniqid(),
             'name' => $request->name,
             // 'city_id' => $city->id,
         ]);
-        return redirect('/admin/township')->with('success', 'your township has been added');
+        return redirect('/admin/township')->with('status', 'your township has been added');
     }
 
     /**
@@ -67,12 +67,12 @@ class TownController extends Controller
      */
     public function show($id)
     {
-       // $cities = City::all();
-       $town = Town::where('slug', $id)->first();
-        if(!$town) {
+        // $cities = City::all();
+        $town = Town::where('slug', $id)->first();
+        if (!$town) {
             return redirect()->back()->with('error', 'township not found');
         }
-        return view('admin.township.show',compact('town'));
+        return view('admin.township.show', compact('town'));
     }
 
     /**
@@ -85,10 +85,10 @@ class TownController extends Controller
     {
         // $cities = City::all();
         $town = Town::where('slug', $id)->first();
-        if(!$town) {
+        if (!$town) {
             return redirect()->back()->with('error', 'township not found');
         }
-        return view('admin.township.edit',compact('town'));
+        return view('admin.township.edit', compact('town'));
     }
 
     /**
@@ -100,12 +100,12 @@ class TownController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $request->validate([
-        'name' => 'required|string',
+        $request->validate([
+            'name' => 'required|string',
         ]);
 
         $town = Town::where('slug', $id)->first();
-        if(!$town) {
+        if (!$town) {
             return redirect()->back()->with('error', 'township not found');
         }
 
@@ -118,7 +118,7 @@ class TownController extends Controller
             'name' => $request->name,
             // 'city_id' => $city->id,
         ]);
-        return redirect('/admin/township')->with('success', 'your township updated');
+        return redirect('/admin/township')->with('status', 'your township updated');
     }
 
     /**
@@ -130,10 +130,10 @@ class TownController extends Controller
     public function destroy($id)
     {
         $town = Town::where('slug', $id);
-        if (!$town->first()){
+        if (!$town->first()) {
             return redirect()->back()->with('error', 'township Not Found');
         }
         $town->delete();
-        return redirect('/admin/township')->with('success', 'township deleted successfully');
+        return redirect('/admin/township')->with('status', 'township deleted successfully');
     }
 }

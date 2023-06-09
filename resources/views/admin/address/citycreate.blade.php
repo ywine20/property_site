@@ -62,9 +62,11 @@
 <script>
     //logoutt
     let logOut = document.querySelector('#logout');
-    logOut.addEventListener('click',(e)=>{
+    if(logOut){
+        logOut.addEventListener('click',(e)=>{
         e.preventDefault();
         logout();
     })
+    }
 </script>
 @endsection

@@ -118,12 +118,20 @@
     <!-- project -->
     <section id="project">
         <div class="container d-flex flex-column justify-content-center align-items-center mx-auto px-0 pb-2 pb-lg-4 pb-xl-0">
+
             <!-- <div class="row  text-center px-2 py-1 pt-2 pt-md-3 pt-xl-0 py-md-2 pb-md-4 py-lg-0">
-                                                                                                  <div class="col-12 mx-auto project-heading">
-                                                                                                    <span class="fs-1 fw-bold text-secondary">Our Running Projects</span>
-                                                                                                    <p class="text-black-50 pt-2 pt-lg-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam fugiat ipsam sequi ipsa deleniti necessitatibus, vero, totam ut quasi porro illo doloremque quidem eligendi minima quaerat veritatis tempore, error ducimus.</p>
-                                                                                                  </div>
-                                                                                                </div> -->
+                                                                                                              <div class="col-12 mx-auto project-heading">
+                                                                                                                <span class="fs-1 fw-bold text-secondary">Our Running Projects</span>
+                                                                                                                <p class="text-black-50 pt-2 pt-lg-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam fugiat ipsam sequi ipsa deleniti necessitatibus, vero, totam ut quasi porro illo doloremque quidem eligendi minima quaerat veritatis tempore, error ducimus.</p>
+                                                                                                              </div>
+                                                                                                            </div> -->
+
+            <div class="row  text-center px-2 py-1 pt-2 pt-md-3 pt-xl-0 py-md-2 pb-md-4 py-lg-0">
+                <div class="col-12 mx-auto project-heading mb-4">
+                    <span class=" fw-bold text-secondary text-nowrap feature-projects">Feature Projects</span>
+                    <!-- <p class="text-black-50 pt-2 pt-lg-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam fugiat ipsam sequi ipsa deleniti necessitatibus, vero, totam ut quasi porro illo doloremque quidem eligendi minima quaerat veritatis tempore, error ducimus.</p> -->
+                </div>
+            </div>
             <div class="row row-cols-1 row-cols-md-2 g-2 g-md-3 g-lg-4 mb-0 mb-lg-3 mb-xl-5 pb-4 pb-md-5  pb-lg-3 pb-xl-5 px-3 px-lg-0">
 
 
@@ -132,6 +140,7 @@
                 <div class="col">
                     <a href="{{ url('detail/' . $p->id) }}" class="text-decoration-none detailCard">
                         <div class="project-card card mb-2 mb-md-3 d-flex justify-content-center align-items-center overflow-hidden border-0 shadow">
+
                             <div class="row row-cols-1 h-100 w-100 g-0">
                                 <div class="col-5 ">
                                     <img src="{{ asset('storage/images/cover/' . $p->cover) }}" class="rounded-start project-img" alt="..." style="width:100%;height:100%;">
@@ -226,6 +235,8 @@
             </div>
         </div>
 
+        </div>
+
     </section>
     <!-- end about -->
     <!-- contact -->
@@ -239,27 +250,32 @@
                 <div class="col-12">
                     <div class="my-4 send-message-input mx-auto">
                         <div class="input-group input-group-lg mb-3">
-
-                            <input type="text" class="form-control bg-primary bg-opacity-25 rounded send-input-tag" value="" placeholder="Freely Contact Our Team" aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-secondary text-gold fw-bold rounded rounded-start" type="button" id="button-addon2">
-                                <form id="sendMail" method="post" action="mailto:salses@sunmyattun.com?subject=SMT Information Website!&body=This is only a test!">
-                                    <a href="mailto:salses@sunmyattun.com?subject=SMT Information Website!&body=This is only a test!" class="text-decoration-none" id="sendBtn">@lang('public.send')</a>
-                                </form>
+                            <input type="text" id="cname" required name="subject" class="form-control bg-primary bg-opacity-25 rounded send-input-tag" placeholder="Freely Contact" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                            <button class="btn btn-secondary text-gold fw-bold rounded rounded-start" id="send">
+                                @lang('public.send')
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
     <!-- end contact -->
 </main>
 <!-- end main -->
 
 @endsection
-@section('script')
 
-@endsection
+
+@push('clientScript')
+<script>
+    let send = document.querySelector('#send');
+    send.addEventListener('click', () => {
+        let subject = document.getElementById("cname").value;
+        window.location.replace(`mailto:salses@sunmyattun.com?subject=${subject}`);
+    })
+</script>
+@endpush
+
 @push('clientScript')
 <script type="text/javascript">
     $(document).ready(function() {
@@ -366,18 +382,20 @@
 <script>
     let detailCard = document.querySelectorAll('.detailCard');
     for (let i = 0; i <= detailCard.length; i++) {
-        detailCard[i].addEventListener('click', function(e) {
-            e.preventDefault();
-            let url = detailCard[i].href;
-            let user = @json($user);
-            if (user) {
-                window.location.href = url;
-            } else {
-                // user is not logged in
-                openLoginModal();
-            }
+        if (detailCard[i]) {
+            detailCard[i].addEventListener('click', function(e) {
+                e.preventDefault();
+                let url = detailCard[i].href;
+                let user = @json($user);
+                if (user) {
+                    window.location.href = url;
+                } else {
+                    // user is not logged in
+                    openLoginModal();
+                }
 
-        })
+            })
+        }
     }
 </script>
 @endpush

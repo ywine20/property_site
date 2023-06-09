@@ -102,8 +102,9 @@
         /* for profile dropdown */
         .profile-dropdown-content {
             position: absolute;
+
             right: 0;
-            margin-top: 5px;
+            margin-top: 0px;
             display: none;
             transition: all 1s;
             backdrop-filter: blur(10px);
@@ -200,7 +201,7 @@
                 </ul>
 
             </div>
-            <div class="px-2 py-2 d-lg-none position-absolute bottom-0 w-100">
+            <div class="px-2 py-2 d-lg-none position-absolute w-100 " id="loginLogOutDiv">
                 <div class="d-flex justify-content-start align-items-center">
 
                     @if (auth()->guard('user')->check())
@@ -426,32 +427,32 @@
             <div class="card bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
                 <span class="close fs-5 me-2 end-0 position-absolute pointer registerClose" onclick="closeRegisterModal()">&times;</span>
                 <div class="card-body">
-                    <h4 class="mb-4">Register To Sun Myat Tun</h4>
+                    <h4 class="mb-4">@lang('public.login')</h4>
 
                     <form action="{{ route('register') }}" method="POST" class="register-form">
                         @csrf
                         <!-- user name -->
                         <div class="form-floating mb-3">
                             <input type="text" name="name" class="form-control form-control-border-bottom" id="floatingInputName" placeholder="JohnDoe" />
-                            <label for="floatingInputName">User Name</label>
+                            <label for="floatingInputName">@lang('public.username')</label>
                             <small class="error-text register_name_error text-danger"></small>
                         </div>
                         <!-- email -->
                         <div class="form-floating mb-3">
                             <input type="text" name="email" class="form-control form-control-border-bottom" id="floatingInputEmail" placeholder="name@example.com" />
-                            <label for="floatingInputEmail">Email</label>
+                            <label for="floatingInputEmail">@lang('public.email1')</label>
                             <small class="error-text register_email_error text-danger"></small>
                         </div>
                         <!-- password -->
                         <div class="form-floating mb-3">
                             <input type="password" name="password" class="form-control form-control-border-bottom" id="floatingInputPassword" placeholder="name@example.com" />
-                            <label for="floatingInputPassword">Password</label>
+                            <label for="floatingInputPassword">@lang('public.password')</label>
                             <small class="error-text register_password_error text-danger"></small>
                         </div>
                         <!-- confirm password -->
                         <div class="form-floating mb-3">
                             <input type="password" name="password_confirmation" class="form-control form-control-border-bottom" id="floatingInputConfirmPassword" placeholder="name@example.com" />
-                            <label for="floatingInputConfirmPassword">Confirm Password</label>
+                            <label for="floatingInputConfirmPassword">@lang('public.confrimps')</label>
                             <small class="error-text register_passwordConfirm_error text-danger"></small>
                         </div>
                         <div class="mb-3">
@@ -462,7 +463,7 @@
 
                         </div>
                         <!-- registere Button -->
-                        <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">Register</button>
+                        <button type="submit" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase my-5">@lang('public.register')</button>
                     </form>
                     <!-- register with social app -->
                     <div class="text-center w-100 d-none">
@@ -475,8 +476,8 @@
                     </div>
                     <!-- Already have an account -->
                     <div class="text-center w-100 my-3">
-                        <small class="d-flex justify-content-center align-items-center">Don't have an account?
-                            <button class="btn btn-link text-primary" onclick="openLoginModal()">Log in</button> Now!
+                        <small class="d-flex justify-content-center align-items-center">@lang('public.account')
+                            <button class="btn btn-link text-primary" onclick="openLoginModal()">@lang('public.login')</button> @lang('public.now')
                         </small>
                     </div>
                 </div>
@@ -491,19 +492,19 @@
             <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
                 <span class="close fs-5 me-2 end-0 position-absolute pointer loginClose" onclick="closeLoginModal()">&times;</span>
                 <div class="card-body">
-                    <h4 class="mb-4">Log In To Sun Myat Tun</h4>
+                    <h4 class="mb-4">@lang('public.login') </h4>
                     <form enctype="multipart/form-data" class="login-form">
                         <!-- email -->
                         <div class="form-floating mb-3">
                             <input type="email" name="email" class="form-control form-control-border-bottom" id="floatingInputLoginEmail" placeholder="name@example.com" />
-                            <label for="floatingInputLoginEmail">Email</label>
+                            <label for="floatingInputLoginEmail">@lang('public.email1')</label>
                             <small class="error-text login_email_error text-danger"></small>
 
                         </div>
                         <!-- password -->
                         <div class="form-floating mb-3">
                             <input type="password" name="password" class="form-control form-control-border-bottom @error('email') is-invalid @enderror" id="floatingInputLoginPassword" placeholder="name@example.com" />
-                            <label for="floatingInputLoginPassword">Password</label>
+                            <label for="floatingInputLoginPassword">@lang('public.password')</label>
                             <small class="error-text login_password_error text-danger"></small>
 
                         </div>
@@ -515,7 +516,7 @@
                     </form>
                     <!-- forgot password -->
                     <div class="w-100 text-end mb-3">
-                        <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span class="text-primary">Forgot Password?</span></buttonhref=>
+                        <button class=" btn btn-link text-decoration-none " onclick="openForgotPasswordModal()"><span class="text-primary">@lang('public.forgotps')</span></button>
                     </div>
                     <!-- login with social app -->
                     <div class="text-center w-100 pt-1 d-none">
@@ -528,10 +529,10 @@
                     </div>
                     <!-- don't have an account -->
                     <div class="text-center w-100 my-3">
-                        <small class="d-flex justify-content-center align-items-center">Don't have an account?
-                            <button class="btn btn-link text-primary" onclick="openRegisterModal()">@lang('public.register')</button>
-                            Now!
+                        <small class="d-flex justify-content-center align-items-center">@lang('public.account')
+                            <button class="btn btn-link text-primary" onclick="openRegisterModal()">@lang('public.register')</button>@lang('public.now')
                         </small>
+
                     </div>
                 </div>
             </div>
@@ -547,9 +548,8 @@
             <div class="card  border-0 bg-white shadow px-2 py-2 animate__animated animate__fadeIn" style="width:400px;height:fit-content">
                 <span class="close fs-5 me-2 end-0 position-absolute pointer forgoPasswordCloseButton" onclick="closeforgotPasswordModal()">&times;</span>
                 <div class="card-body">
-                    <h5 class="mb-4 fw-bolder">Forgot Password?</h5>
-                    <span class="text-black-50 mb-5" style="font-size: .9rem;">Please Enter Your Email Address To
-                        Receive A New Password</span>
+                    <h5 class="mb-4 fw-bolder">@lang('public.forgotps')</h5>
+                    <span class="text-black-50 mb-5" style="font-size: .9rem;">@lang('public.enteremail')</span>
 
                     <form action="{{ route('forgotPassword') }}" id="forgot_password_form" method="POST">
                         @csrf
@@ -560,10 +560,10 @@
                             @else
                             <input type="email" name="email" value="" class="form-control form-control-border-bottom" id="floatingInput" placeholder="name@example.com" />
                             @endif
-                            <label for="floatingInput">Vertify Email Address</label>
+                            <label for="floatingInput">@lang('public.vertifyemail')</label>
                             <small class="text-danger forgotPasswordError"></small>
                         </div>
-                        <button type="submit" id="send-email-btn" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">SEND</button>
+                        <button type="submit" id="send-email-btn" class="btn btn-secondary btn-lg rounded-2 w-100 text-primary fw-bolder text-uppercase">@lang('public.send')</button>
                         <div id="email-send-success-alert" class="alert alert-success my-3 text-center animate__animated animate__slideInDown">
                             Your password has been sent to your email.
                             <br>
@@ -755,16 +755,19 @@
             const email = registerForm.elements.email.value;
             const password = registerForm.elements.password.value;
             const password_confirmation = registerForm.elements.password_confirmation.value;
+
             const recaptchaResponse = grecaptcha.getResponse()
-            // gRecaptchaResponseServer = gRecaptchaResponseInputValue;
 
             if (grecaptcha.getResponse().length > 0) {
-                console.log(grecaptcha.getResponse());
-  		const formData = new FormData();
+
+                //console.log(grecaptcha.getResponse());
+                const formData = new FormData();
+
                 formData.append('name', name);
                 formData.append('email', email);
                 formData.append('password', password);
                 formData.append('password_confirmation', password_confirmation);
+
                 formData.append('g_recaptcha_response', recaptchaResponse);
                 axios.post('/register', formData)
                     .then(response => {
@@ -793,13 +796,16 @@
                             const nameError = error.name ? error.name[0] : '';
                             const emailError = error.email ? error.email[0] : '';
                             const passwordError = error.password ? error.password[0] : '';
-                            const passwordConfirmError = error.password_confirmation ? error.password_confirmation[0] : '';
-                            const gRecaptchaError = error.g_recaptcha_response ? error.g_recaptcha_response[0] : '';
+                            const passwordConfirmError = error.password_confirmation ? error
+                                .password_confirmation[0] : '';
+                            const gRecaptchaError = error.g_recaptcha_response ? error.g_recaptcha_response[0] :
+                                '';
 
                             document.querySelector('.register_name_error').innerText = nameError;
                             document.querySelector('.register_email_error').innerText = emailError;
                             document.querySelector('.register_password_error').innerText = passwordError;
-                            document.querySelector('.register_passwordConfirm_error').innerText = passwordConfirmError;
+                            document.querySelector('.register_passwordConfirm_error').innerText =
+                                passwordConfirmError;
 
                             document.getElementById("recaptcha-error").innerText = gRecaptchaError;
 

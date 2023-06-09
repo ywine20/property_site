@@ -41,6 +41,7 @@ class AuthController extends Controller
                     $fail($attribute . 'google reCaptcha fail');
                 }
             },
+
         ]);
 
 

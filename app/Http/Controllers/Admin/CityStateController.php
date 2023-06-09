@@ -42,10 +42,10 @@ class CityStateController extends Controller
             'name' => 'required|string',
         ]);
         City::create([
-            'slug' => Str::slug($request->name).uniqid(),
+            'slug' => Str::slug($request->name) . uniqid(),
             'name' => $request->name,
         ]);
-        return redirect('/admin/citystate')->with('success', 'your city&state has been added');
+        return redirect('/admin/citystate')->with('status', 'your city&state has been added');
     }
 
     /**
@@ -56,11 +56,11 @@ class CityStateController extends Controller
      */
     public function show($id)
     {
-       $city = City::where('id', $id)->first();
-        if(!$city) {
+        $city = City::where('id', $id)->first();
+        if (!$city) {
             return redirect()->back()->with('error', 'city-state not found');
         }
-        return view('admin.citystate.show',compact('city'));
+        return view('admin.citystate.show', compact('city'));
     }
 
     /**
@@ -72,10 +72,10 @@ class CityStateController extends Controller
     public function edit($id)
     {
         $city = City::where('id', $id)->first();
-        if(!$city) {
+        if (!$city) {
             return redirect()->back()->with('error', 'City & State not found');
         }
-        return view('admin.citystate.edit',compact('city'));
+        return view('admin.citystate.edit', compact('city'));
     }
 
     /**
@@ -88,16 +88,16 @@ class CityStateController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-        'name' => 'required|string',
+            'name' => 'required|string',
         ]);
         $city = City::where('id', $id)->first();
-        if(!$city) {
+        if (!$city) {
             return redirect()->back()->with('error', 'City & State not found');
         }
         City::where('id', $id)->update([
             'name' => $request->name,
         ]);
-        return redirect('/admin/citystate')->with('success', 'your city & state updated');
+        return redirect('/admin/citystate')->with('status', 'your city & state updated');
     }
 
     /**
@@ -109,10 +109,10 @@ class CityStateController extends Controller
     public function destroy($id)
     {
         $city = City::where('id', $id);
-        if (!$city->first()){
+        if (!$city->first()) {
             return redirect()->back()->with('error', 'City & State Not Found');
         }
         $city->delete();
-        return redirect('/admin/citystate')->with('success', 'City&State deleted successfully');
+        return redirect('/admin/citystate')->with('status', 'City&State deleted successfully');
     }
 }

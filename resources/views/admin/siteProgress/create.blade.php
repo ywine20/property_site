@@ -2,37 +2,37 @@
 
 @section('style')
 <style>
-#output {
-    display: flex;
-}
+    #output {
+        display: flex;
+    }
 
-.img-div {
-    overflow: hidden;
-    height: 180px;
-}
+    .img-div {
+        overflow: hidden;
+        height: 180px;
+    }
 
-.thumbnail {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    transition: all .6s;
-    box-shadow: 1px 1px 6px gray
-}
+    .thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all .6s;
+        box-shadow: 1px 1px 6px gray
+    }
 
-img {
-    position: relative;
-}
+    img {
+        position: relative;
+    }
 
-.removeBtn {
-    position: absolute;
-    width: 150px;
-    height: 50px;
-    z-index: 10000;
-    top: 0;
-    right: 0;
-    background-color: red;
+    .removeBtn {
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        z-index: 10000;
+        top: 0;
+        right: 0;
+        background-color: red;
 
-}
+    }
 </style>
 @endsection
 
@@ -73,26 +73,21 @@ img {
     @endif -->
 
                         @if (Session::has('success'))
-                        <div
-                            class="alert alert-success d-flex justify-content-between align-items-center animate__animated animate__fadeInDown">
+                        <div class="alert alert-success d-flex justify-content-between align-items-center animate__animated animate__fadeInDown">
                             {{ Session::get('success') }}
                             <div class="text-end">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </div>
                         @endif
 
-                        <form method="POST" action="{{ route('siteProgress.store', '$porjectId') }}"
-                            enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('siteProgress.store', '$porjectId') }}" enctype="multipart/form-data">
                             @csrf
 
                             <input type="text" name="project_id" value="{{ $projectId }}" hidden>
                             <div class="form-group mb-3">
                                 <label for="title" class="form-label text-white-50">Title :</label>
-                                <input type="text" name="title"
-                                    class="create-input form-control @error('title') is-invalid @enderror" id="title"
-                                    value="{{ old('title') }}" required>
+                                <input type="text" name="title" class="create-input form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title') }}" required>
                                 @error('title')
                                 <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -100,9 +95,7 @@ img {
 
                             <div class="form- mb-3">
                                 <label for="description" class="form-label text-white-50">Description :</label>
-                                <textarea type="text" name="description" rows="10"
-                                    class="create-input form-control @error('description') border border-danger @enderror"
-                                    id="description" required>{{ old('description') }}</textarea>
+                                <textarea type="text" name="description" rows="10" class="create-input form-control @error('description') border border-danger @enderror" id="description" required>{{ old('description') }}</textarea>
                                 @error('description')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -110,9 +103,7 @@ img {
 
                             <div class="form-group mb-3">
                                 <label for="images" class="form-label text-white-50">Images</label>
-                                <input type="file" name="images[]" accept="image/*"
-                                    class="create-input form-control mb-3 @error('images.*') is-invalid @enderror @error('images') is-invalid @enderror"
-                                    id="images" value="{{ old('images') }}" multiple>
+                                <input type="file" name="images[]" accept="image/*" class="create-input form-control mb-3 @error('images.*') is-invalid @enderror @error('images') is-invalid @enderror" id="images" value="{{ old('images') }}" multiple>
                                 @error('images')
                                 <div class="invalid-feedback text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -139,41 +130,41 @@ img {
 
 @section('script')
 <script>
-// preview images
-let fileInput = document.querySelector("#images");
-fileInput.addEventListener("change", (e) => {
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-        // CODE TO PREVIEW IMAGE
-        const files = e.target.files;
-        const limit = 8;
+    // preview images
+    let fileInput = document.querySelector("#images");
+    fileInput.addEventListener("change", (e) => {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            // CODE TO PREVIEW IMAGE
+            const files = e.target.files;
+            const limit = 8;
 
-        if (files.length > limit) {
-            alert("you can select max " + limit + " images");
-            fileInput.value = null;
-        } else {
-            const output = document.querySelector("#output");
-            output.innerHTML = "";
-            for (let i = 0; i < files.length; i++) {
-                if (!files[i].type.match("image")) continue;
-                const imgReader = new FileReader();
-                imgReader.addEventListener("load", function(event) {
-                    const imgFile = event.target;
-                    const div = document.createElement("div");
-                    div.className = "col img-div";
-                    const img = document.createElement("img");
-                    img.className = "thumbnail";
-                    img.src = imgFile.result;
-                    div.appendChild(img);
-                    output.appendChild(div);
-                });
+            if (files.length > limit) {
+                alert("you can select max " + limit + " images");
+                fileInput.value = null;
+            } else {
+                const output = document.querySelector("#output");
+                output.innerHTML = "";
+                for (let i = 0; i < files.length; i++) {
+                    if (!files[i].type.match("image")) continue;
+                    const imgReader = new FileReader();
+                    imgReader.addEventListener("load", function(event) {
+                        const imgFile = event.target;
+                        const div = document.createElement("div");
+                        div.className = "col img-div";
+                        const img = document.createElement("img");
+                        img.className = "thumbnail";
+                        img.src = imgFile.result;
+                        div.appendChild(img);
+                        output.appendChild(div);
+                    });
 
-                imgReader.readAsDataURL(files[i]);
+                    imgReader.readAsDataURL(files[i]);
+                }
             }
+        } else {
+            alert("Your browser does not support File API");
         }
-    } else {
-        alert("Your browser does not support File API");
-    }
-});
+    });
 </script>
 
 

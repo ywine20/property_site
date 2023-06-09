@@ -172,9 +172,11 @@ function formReset() {
 <script>
 //logoutt
 let logOut = document.querySelector('#logout');
-logOut.addEventListener('click', (e) => {
-    e.preventDefault();
-    logout();
-})
+if(logOut){
+        logOut.addEventListener('click',(e)=>{
+        e.preventDefault();
+        logout();
+    })
+    }
 </script>
 @endsection

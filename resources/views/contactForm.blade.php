@@ -70,7 +70,7 @@
                                     {{--                          @endif --}}
                                     <input type="text" value="{{ old('name') }}"
                                         class="form-control @error('name') is-invalid @enderror " name="name"
-                                        id="name" placeholder="Enter your name">
+                                        id="name" placeholder="@lang('public.name')">
                                 </div>
                                 <div class="col-12 col-md-7 mb-2">
                                     {{--                          @if ($errors->has('email')) --}}
@@ -80,7 +80,7 @@
                                     {{--                          @endif --}}
                                     <input type="email" value="{{ old('email') }}"
                                         class="form-control @error('email') is-invalid @enderror " name="email"
-                                        id="email" placeholder="Enter your email">
+                                        id="email" placeholder="@lang('public.email')">
                                 </div>
                                 <div class="col-12 col-md-5 mb-2">
                                     {{--                          @if ($errors->has('phone')) --}}
@@ -90,7 +90,7 @@
                                     {{--                          @endif --}}
                                     <input type="text" value="{{ old('phone') }}"
                                         class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                        id="phone" placeholder="Enter your phone">
+                                        id="phone" placeholder="@lang('public.phone')">
                                 </div>
                                 <div class="col-12 mb-2">
                                     {{--                          @if ($errors->has('subject')) --}}
@@ -100,7 +100,7 @@
                                     {{--                          @endif --}}
                                     <input type="text" value="{{ old('subject') }}"
                                         class="form-control @error('subject') is-invalid @enderror" name="subject"
-                                        id="subject" placeholder="Enter subject">
+                                        id="subject" placeholder="@lang('public.subject')">
                                 </div>
                                 <div class="col-12 mb-2">
                                     {{--                          @if ($errors->has('message')) --}}
@@ -109,7 +109,7 @@
                                     {{--                          </div> --}}
                                     {{--                          @endif --}}
                                     <textarea name="message" id="" cols="30" rows="5"
-                                        class="form-control @error('message') is-invalid @enderror " placeholder="Please Fill Your Message">{{ old('message') }}</textarea>
+                                        class="form-control @error('message') is-invalid @enderror " placeholder="@lang('public.massage')">{{ old('message') }}</textarea>
                                 </div>
                                 <div class="col-12 mb-2">
                                     <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
@@ -120,7 +120,7 @@
                                     @endif
                                 </div>
                                 <div class="col-4">
-                                    <input type="submit" name="send" value="Submit"
+                                    <input type="submit" name="send" value="@lang('public.submit')"
                                         class="btn btn-primary btn-md rounded rounded-2 submitBtn text-secondary fw-bold">
                                     <!-- <button type="submit" name="send" class="btn btn-primary btn-lg rounded rounded-2 submitBtn text-secondary fw-bold">SEND</button> -->
                                 </div>

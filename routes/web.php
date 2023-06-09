@@ -17,6 +17,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\RedeemCodeController;
 use App\Http\Controllers\Admin\AlbumController;
 use App\Http\Controllers\ProjectListController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PreviewImageController;
 use App\Http\Controllers\Admin\ProjectController;
@@ -30,6 +31,9 @@ use App\Http\Controllers\Admin\PreviewImageController as AdminPreviewImageContro
 Route::get('/', function () {
     return view('master');
 });
+
+
+    // Route::get('download-pdf', [ExportController::class, 'downloadPDF'])->name('download-pdf');
 //localization
    Route::get('locale/{lang}', [LocalizationController::class, 'setLang']);
 
@@ -77,6 +81,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
     Route::get('/user', 'PageController@profile');
     Route::resource('category', "CategoryController");
     Route::resource('project', "ProjectController");
+    Route::get('export', [ExportController::class, 'create'])->name('export.create');
+    Route::get('export/excel', [ExportController::class, 'exportToExcel'])->name('export.excel');
+
+
+
 
     // Album
     Route::get('project/{projectId}/album/create', [AlbumController::class, 'create'])->name('albumTest.create');
@@ -136,6 +145,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['Adm
 
     //to customer list
     Route::get('/customers/list', [CustomerController::class, 'customersList'])->name('admin.customersList');
+    Route::get('/customers/{id}', [CustomerController::class, 'customerDetail'])->name('admin.customerDetail');
+
 });
 
 

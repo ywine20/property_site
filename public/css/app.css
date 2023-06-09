@@ -21408,6 +21408,10 @@ nav .nav-item:hover {
   transform: translateX(-110%);
 }
 
+#loginLogOutDiv {
+  bottom: 0;
+}
+
 #footer {
   position: relative;
   z-index: 1001;
@@ -21470,6 +21474,13 @@ main {
 
 .show {
   display: flex;
+}
+
+.project-heading {
+  width: 100%;
+}
+.project-heading .feature-projects {
+  font-size: 1.8rem;
 }
 
 .project-card {
@@ -21558,6 +21569,9 @@ main {
   .project-heading {
     width: 100%;
   }
+  .project-heading .feature-projects {
+    font-size: 1.375rem;
+  }
   .project-card {
     width: 100%;
   }
@@ -21645,6 +21659,9 @@ main {
   .project-heading {
     width: 100%;
   }
+  .project-heading .feature-projects {
+    font-size: 1.5rem;
+  }
   .project-card {
     width: 100%;
   }
@@ -21725,6 +21742,9 @@ main {
   .project-heading {
     width: 100%;
   }
+  .project-heading .feature-projects {
+    font-size: 1.8rem;
+  }
   .project-card {
     width: 100%;
   }
@@ -21791,6 +21811,12 @@ main {
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.24);
     right: -2%;
     top: 50%;
+  }
+  .project-heading {
+    width: 100%;
+  }
+  .project-heading .feature-projects {
+    font-size: 2rem;
   }
   .project-card {
     width: 100%;
@@ -21874,6 +21900,9 @@ main {
   }
   .project-heading {
     width: 75%;
+  }
+  .project-heading .feature-projects {
+    font-size: 2.3rem;
   }
   .project-card {
     width: 100%;
@@ -21961,6 +21990,9 @@ main {
   .project-heading {
     width: 75%;
   }
+  .project-heading .feature-projects {
+    font-size: 2.5rem;
+  }
   .project-card {
     width: 100%;
   }
@@ -22023,6 +22055,12 @@ main {
   .seemore-fb {
     top: 50%;
   }
+  .project-heading {
+    width: 100%;
+  }
+  .project-heading .feature-projects {
+    font-size: 2.8rem;
+  }
   .project-card .card-title {
     font-size: 1.5rem;
   }
@@ -22078,6 +22116,12 @@ main {
   .seemore-fb {
     top: 50%;
   }
+  .project-heading {
+    width: 75%;
+  }
+  .project-heading .feature-projects {
+    font-size: 3rem;
+  }
   .project-card .card-title {
     font-size: 1.5rem;
   }
@@ -22097,5 +22141,12 @@ main {
     background-repeat: no-repeat;
     background-attachment: local;
     background-position: right;
+  }
+}
+/* Media query for phone browsers */
+@media only screen and (max-width: 600px) {
+  #loginLogOutDiv {
+    position: fixed;
+    bottom: 30px; /* Adjust the distance from the bottom as needed */
   }
 }

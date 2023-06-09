@@ -9,12 +9,14 @@ use App\Models\Project;
 use App\Models\Category;
 use App\Models\Town;
 use App\Models\Amenity;
+use App\Models\Assets;
 use App\Models\Previewimage;
 use App\Models\City;
 use App\Models\UnitPrice;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
 
 class ProjectController extends Controller
 {
@@ -91,7 +93,7 @@ class ProjectController extends Controller
 
         ]);
 
-        $category = Category::where('category_id', $request->category)->first();
+        $category = Category::where('id', $request->category)->first();
         if (!$category) {
             return redirect()->back()->with('error', 'Not found category');
         }
@@ -142,7 +144,7 @@ class ProjectController extends Controller
             'cover' => $cover_name,
             'three_sixty_image' =>  $threeSixtyImage_name,
             'priceImg' =>  $priceImg_name,
-            'category_id' => $category->category_id,
+            'category_id' => $category->id,
             'township_id' => $town->id,
             'city_id' => $city->id,
             'gmlink' => $request->map_link,
@@ -151,7 +153,7 @@ class ProjectController extends Controller
             'lower_price' => $request->lower_price,
             'upper_price' => $request->upper_price,
             'layer' => $request->layer,
-            'squre_feet' => $request->squre_feet,
+            'square_feet' => $request->squre_feet,
             'hou_no' => $request->hou_no,
             'street' => $request->street,
             'ward' => $request->ward,
@@ -382,7 +384,7 @@ class ProjectController extends Controller
 
         // return $find_project
 
-        $category = Category::where('category_id', $request->category_id)->first();
+        $category = Category::where('id', $request->category_id)->first();
         if (!$category) {
             return redirect()->back()->with('error', 'Not found category');
         }
@@ -445,7 +447,7 @@ class ProjectController extends Controller
             'cover' => $cover_name,
             'three_sixty_image' => $threeSixtyImage_name,
             'priceImg' => $priceImg_name,
-            'category_id' => $category->category_id,
+            'category_id' => $category->id,
             'township_id' => $town->id,
             'city_id' => $city->id,
             'gmlink' => $request->map_link,
@@ -454,7 +456,7 @@ class ProjectController extends Controller
             'lower_price' => $request->lower_price,
             'upper_price' => $request->upper_price,
             'layer' => $request->layer,
-            'squre_feet' => $request->squre_feet,
+            'square_feet' => $request->squre_feet,
             'hou_no' => $request->hou_no,
             'street' => $request->street,
             'ward' => $request->ward,
@@ -548,7 +550,7 @@ class ProjectController extends Controller
 
 
 
-        return redirect(route('project.index', $id))->with('status', 'Project updated successful.');
+        return redirect()->back()->with('status', 'Project updated successful.');
     }
 
 
@@ -561,97 +563,134 @@ class ProjectController extends Controller
     public function destroy($id)
     {
 
-        $project = Project::where('id', $id)->first();
-        // Project::find($project->first()->id)->amenity()->sync([]);
 
-        //Delete all the rows in unit price table related with the project's id
-        UnitPrice::where('project_id', $id)->delete();
-
-        // Delete related records from project_amenity table
-        Project::find($id)->amenity()->detach();
-
-        //delete cover from local
-        Storage::delete('public/images/cover/' . $project->cover);
-
-        //delete cover from local
-        Storage::delete('public/images/priceImg/' . $project->priceImg);
-
-        //delete 360 image form local
-        Storage::delete('public/images/360Images/' . $project->three_sixty_image);
-
-
-        // delete small image form local
-        $previewImage = Previewimage::where('project_id', $id)->first();
-        for ($i = 1; $i <= 9; $i++) {
-            $name = 'small_img' . $i;
-            if ($previewImage->$name) {
-                Storage::delete('public/images/gallery/' . $previewImage->$name);
+        try {
+            $useInProjects = Assets::where('project_id', $id)->exists();
+            if ($useInProjects) {
+                return response()->json([
+                    "status" => 'error',
+                    "info" => 'Cannot delete the project because it is associated with one or more assets.'
+                ]);
             }
-        }
 
-        $previewImage->delete();
-        $project->delete();
-        return response()->json([
-            "status" => 'success',
-            "info" => 'delete successful',
-        ]);
+            $project = Project::where('id', $id)->first();
+
+
+            // Project::find($project->first()->id)->amenity()->sync([]);
+
+            //Delete all the rows in unit price table related with the project's id
+            UnitPrice::where('project_id', $id)->delete();
+
+            // Delete related records from project_amenity table
+            Project::find($id)->amenity()->detach();
+
+            //delete cover from local
+            Storage::delete('public/images/cover/' . $project->cover);
+
+            //delete cover from local
+            Storage::delete('public/images/priceImg/' . $project->priceImg);
+
+            //delete 360 image form local
+            Storage::delete('public/images/360Images/' . $project->three_sixty_image);
+
+
+            // delete small image form local
+            $previewImage = Previewimage::where('project_id', $id)->first();
+            for ($i = 1; $i <= 9; $i++) {
+                $name = 'small_img' . $i;
+                if ($previewImage->$name) {
+                    Storage::delete('public/images/gallery/' . $previewImage->$name);
+                }
+            }
+
+            $previewImage->delete();
+            $project->delete();
+            return response()->json([
+                "status" => 'success',
+                "info" => 'delete successful',
+            ]);
+        } catch (QueryException $e) {
+            // Handle any database query exceptions
+            return response()->json([
+                "status" => 'error',
+                "info" => 'An error occurred while deleting the project.'
+            ]);
+        }
     }
 
     // Win Win Maw
     //  delete multiple project
     public function multiDelProject(Request $request)
     {
-        $ids = $request->chk;
+        try {
 
-        if (empty($ids)) {
-            return response()->json(['message' => 'No IDs provided.'], 400);
-        }
+            $ids = $request->chk;
 
-        $projects = Project::whereIn('id', $ids)->get();
-
-        $unitPrice = UnitPrice::whereIn('project_id', $ids)->delete();
-        // $unitPrice->delete();
-
-        // dd($unitPrice->toArray());
-
-        //Delete Cover Photo
-        foreach ($projects as $project) {
-            $cover = $project->cover;
-            if ($cover) {
-                Storage::delete('public/images/cover/' . $cover);
+            if (empty($ids)) {
+                return response()->json(['message' => 'No IDs provided.'], 400);
             }
-        }
 
-        //Delete priceImg Photo
-        foreach ($projects as $project) {
-            $priceImg = $project->priceImg;
-            if ($priceImg) {
-                Storage::delete('public/images/priceImg/' . $priceImg);
+            // Check if any of the categories are associated with projects
+            $useInAssects = Assets::whereIn('project_id', $ids)->exists();
+            if ($useInAssects) {
+                return redirect()->back()->with('error', 'Cannot delete some projects because they are associated with one or more assets.');
             }
-        }
 
-        //Delete 360 Image
-        foreach ($projects as $project) {
-            $threeSixty = $project->three_sixty_image;
-            if ($threeSixty) {
-                Storage::delete('public/images/360Images/' . $threeSixty);
-            }
-        }
 
-        // delete small image form local
-        $previewImage = Previewimage::whereIn('project_id', $ids)->get();
-        foreach ($previewImage as $smallImage) {
-            for ($i = 1; $i <= 9; $i++) {
-                $name = 'small_img' . $i;
-                if ($smallImage->$name) {
-                    Storage::delete('public/images/gallery/' . $smallImage->$name);
+
+
+            $projects = Project::whereIn('id', $ids)->get();
+
+            $unitPrice = UnitPrice::whereIn('project_id', $ids)->delete();
+            // $unitPrice->delete();
+
+            // dd($unitPrice->toArray());
+
+            //Delete Cover Photo
+            foreach ($projects as $project) {
+                $cover = $project->cover;
+                if ($cover) {
+                    Storage::delete('public/images/cover/' . $cover);
                 }
             }
-        }
 
-        Previewimage::whereIn('project_id', $ids)->delete();
-        Project::whereIn('id', $ids)->delete();
-        //        Category::destroy(collect($ids));
-        return redirect()->back()->with('status', 'Multiple Delete Successful');
+            //Delete priceImg Photo
+            foreach ($projects as $project) {
+                $priceImg = $project->priceImg;
+                if ($priceImg) {
+                    Storage::delete('public/images/priceImg/' . $priceImg);
+                }
+            }
+
+            //Delete 360 Image
+            foreach ($projects as $project) {
+                $threeSixty = $project->three_sixty_image;
+                if ($threeSixty) {
+                    Storage::delete('public/images/360Images/' . $threeSixty);
+                }
+            }
+
+            // delete small image form local
+            $previewImage = Previewimage::whereIn('project_id', $ids)->get();
+            foreach ($previewImage as $smallImage) {
+                for ($i = 1; $i <= 9; $i++) {
+                    $name = 'small_img' . $i;
+                    if ($smallImage->$name) {
+                        Storage::delete('public/images/gallery/' . $smallImage->$name);
+                    }
+                }
+            }
+
+            Previewimage::whereIn('project_id', $ids)->delete();
+            Project::whereIn('id', $ids)->delete();
+            // //        Category::destroy(collect($ids));
+            return redirect()->back()->with('status', 'Multiple Delete Successful');
+        } catch (QueryException $e) {
+            // Handle any database query exceptions
+            return response()->json([
+                "status" => 'error',
+                "info" => 'An error occurred while deleting the project.'
+            ]);
+        }
     }
 }

@@ -17,8 +17,6 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('project_name');
-            $table->string('site_progress_id')->nullable();
-            $table->string('legal_document_id')->nullable();
             $table->longText('description');
             $table->text('cover');
             $table->text('three_sixty_image')->nullable();
@@ -26,10 +24,10 @@ class CreateProjectsTable extends Migration
             $table->string('lower_price');
             $table->string('upper_price');
             $table->integer('layer');
-            $table->integer('squre_feet');
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('township_id');
-            $table->unsignedBigInteger('city_id');
+            $table->integer('square_feet');
+            $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('city_id')->constrained('cities')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('township_id')->constrained('towns')->onUpdate('cascade')->onDelete('restrict');
             $table->longText('gmlink');
             $table->string('progress');
             $table->string('hou_no');

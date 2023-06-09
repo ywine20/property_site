@@ -26,11 +26,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
 Validator::extend('recaptcha', function ($attribute, $value, $parameters, $validator) {
         $recaptchaResponse = $value;
        /** $recaptchaSecret = config('app.GOOGLE_RECAPTCH_SECRET'); */
 	$recaptchaSecret = config('services.recaptcha.secret');
-	
+
 
 
         $client = new \GuzzleHttp\Client();

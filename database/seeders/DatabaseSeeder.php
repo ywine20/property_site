@@ -2,16 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Amenity;
-use App\Models\FacebookLink;
-use App\Models\Slider;
-use App\Models\Visitor;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Seeder;
+use App\Models\City;
+use App\Models\Town;
+use App\Models\User;
 use App\Models\Admin;
-use App\Models\Previewimage;
+use App\Models\Slider;
+use App\Models\Amenity;
 use App\Models\Product;
 use App\Models\Project;
+use App\Models\Visitor;
+use App\Models\Category;
+use App\Models\FacebookLink;
+use App\Models\Previewimage;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 
 class DatabaseSeeder extends Seeder
@@ -26,15 +30,33 @@ class DatabaseSeeder extends Seeder
 
         Admin::create([
             'name' => 'SMT',
-            'email' => 'smt@gmail.com',
+            'email' => 'admin@sunmyattun.com',
             'password' => Hash::make('password'),
             'phone' => '09497777701',
             'role' => 'SuperAdmin',
             'image' => null,
         ]);
 
+        User::create([
+            'name' => 'John Doe',
+            'email' => 'johndoe@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '0987654321',
+            'profile_img' => null,
+            'tier' => 'bronze'
+        ]);
 
-        // \App\Models\Category::factory(5)->create();
+        // User::create([
+        //     'name' => 'WinWinMaw',
+        //     'email' => 'mawinwinmaw4@gmail.com',
+        //     'password' => Hash::make('password'),
+        //     'phone' => '0987654321',
+        //     'profile_img' => null,
+        //     'tier' => 'bronze'
+        // ]);
+
+
+        \App\Models\Category::factory(5)->create();
         // \App\Models\City::factory(5)->create();
         // \App\Models\Town::factory(5)->create();
         // \App\Models\Project::factory(50)->create();

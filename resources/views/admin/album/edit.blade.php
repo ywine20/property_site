@@ -14,9 +14,13 @@
     .thumbnail {
         width: 100%;
         height: 100%;
-        object-fit: fill;
+        object-fit: cover;
         transition: all .6s;
-        box-shadow: 1px 1px 6px gray
+        /* box-shadow: 1px 1px 6px gray */
+    }
+
+    .thumbnail>img {
+        object-fit: cover !important;
     }
 
     img {
@@ -45,7 +49,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item">
-                        <a href="#" onclick="window.history.back()">
+                        <a href="#" onclick="{{ route('project.edit', $projectId) }}">
                             <i class="bi bi-arrow-left me-1"></i>Back
                         </a>
                     </li>

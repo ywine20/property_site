@@ -29,58 +29,99 @@ class CustomerProfileController extends Controller
     //     $this->middleware(['user']);
     // }
 
+    // public function profile($id)
+    // {
+
+    //     // $user = User::findOrFail($id);
+    //     $user = Auth::guard('user')->user();
+    //     if (!$user) {
+    //         return view('error');
+    //     }
+    //     if ($id != $user->id) {
+    //         return view('error');
+    //     }
+
+    //     $assets = Assets::where('customer_id', $id)->get();
+    //     // dd($latestSiteProgress->toArray());
+    //     if (isset($assets) && count($assets) > 0) {
+    //         $projectIds = [];
+    //         foreach ($assets as $asset) {
+    //             $projectId = $asset->project_id;
+    //             array_push($projectIds, $projectId);
+    //         }
+    //         $customerProjects = collect();
+    //         $siteProgresses = collect();
+    //         foreach ($projectIds as $projectId) {
+    //             $project = Project::where('id', $projectId)
+    //                 ->with('town', 'city')->first();
+    //             $latestSiteProgress = siteProgress::where('project_id', $projectId)->latest()->first();
+    //             if ($latestSiteProgress) {
+    //                 $siteProgresses->push($latestSiteProgress);
+    //             }
+    //             return $project;
+
+    //             // dd($latestSiteProgress->toArray());
+
+    //             // foreach ($assets as $asset) {
+    //             //     $project = Project::where('id', $asset->project_id)->get();
+    //             //     return $project;
+    //             // }
+
+    //             // if ($project) {
+    //             //     $customerProjects->push($project);
+    //             // }
+    //         }
+
+    //         return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets, 'siteProgresses' => $siteProgresses]);
+    //     } else {
+    //         return view("customer.profile", ["user" => $user, 'assets' => $assets]);
+    //     }
+    // }
+
+
+
     public function profile($id)
     {
 
         // $user = User::findOrFail($id);
         $user = Auth::guard('user')->user();
-        if(!$user) {
+        if (!$user) {
             return view('error');
         }
-        if($id != $user->id){
+        if ($id != $user->id) {
             return view('error');
         }
 
         $assets = Assets::where('customer_id', $id)->get();
-        // dd($latestSiteProgress->toArray());
-        if (isset($assets) && count($assets) > 0) {
-            $projectIds = [];
-            foreach ($assets as $asset) {
-                $projectId = $asset->project_id;
-                array_push($projectIds, $projectId);
-            }
-            $customerProjects = collect();
-            $siteProgresses = collect();
-            foreach ($projectIds as $projectId) {
-                $project = Project::where('id', $projectId)
-                    ->with('town', 'city', 'assets')->first();
 
-                $latestSiteProgress = siteProgress::where('project_id', $projectId)->latest()->first();
-                if ($latestSiteProgress) {
-                    $siteProgresses->push($latestSiteProgress);
-                }
-                // dd($latestSiteProgress->toArray());
-
-                if ($project) {
-                    $customerProjects->push($project);
-                }
-            }
-            return view("customer.profile", ["user" => $user, 'customerProjects' => $customerProjects, 'assets' => $assets, 'siteProgresses' => $siteProgresses]);
-        } else {
-            return view("customer.profile", ["user" => $user, 'assets' => $assets]);
-        }
+        return view("customer.profile", ["user" => $user, 'assets' => $assets]);
     }
 
 
 
     public function profileSetting($id)
     {
+        $LoginUser = Auth::guard('user')->user();
+        if (!$LoginUser) {
+            return view('error');
+        }
+        if ($id != $LoginUser->id) {
+            return view('error');
+        }
         $user = User::findOrFail($id);
         return view("customer.profile-setting", ["user" => $user]);
     }
 
     public function redeem($id)
     {
+        $LoginUser = Auth::guard('user')->user();
+        if (!$LoginUser) {
+            return view('error');
+        }
+        if ($id != $LoginUser->id) {
+            return view('error');
+        }
+
         $user = User::findOrFail($id);
         return view("customer.redeem", ["user" => $user]);
     }
@@ -89,6 +130,7 @@ class CustomerProfileController extends Controller
     {
 
         $user = Auth::guard('user')->user();
+
         $validator = Validator::make(
             $request->all(),
             [

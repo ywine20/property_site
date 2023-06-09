@@ -54,7 +54,7 @@ class AlbumController extends Controller
             }
         }
 
-        return redirect()->action([ProjectController::class, 'edit'], ['project' => $request->project_id])->with('status','Files upload successfully');
+        return redirect()->action([ProjectController::class, 'edit'], ['project' => $request->project_id])->with('status', 'Files upload successfully');
     }
 
     public function show($projectId, $id)
@@ -97,10 +97,11 @@ class AlbumController extends Controller
             return redirect()->back()->with('error', 'Project Not found');
         }
 
+        // return redirect()->to(url()->previous() . "#albumDiv")->with('status', 'Files upload success');
 
-        return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'))->with('status', 'Files upload success');
+        // return view('admin.project.edit', compact('categories', 'project', 'amenity', 'towns', 'cities'))->with('status', 'Files upload success');
 
-        // return redirect()->back()->with('status', 'Files upload success');
+        return redirect()->back()->with('status', 'Files upload success');
     }
     //the whole album delete
     public function albumDelete($id)
@@ -113,12 +114,13 @@ class AlbumController extends Controller
             // return $id;
         }
         $album->delete();
-        return redirect()->back()->with('status', 'Album deleted successfully.');
+        // return redirect()->back()->with('status', 'Album deleted successfully.');
+        return redirect()->to(url()->previous() . "#albumDiv")->with('status', 'Album deleted successfully.');
     }
     //each delete
     public function imageDel($albumId, $image)
     {
-        $image = AlbumTestImage::where('album_tests_id', $albumId)->where('image',$image)->first();
+        $image = AlbumTestImage::where('album_tests_id', $albumId)->where('image', $image)->first();
 
         // Delete the image file from storage
         Storage::delete('public/images/album/' . $image->image);

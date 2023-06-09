@@ -14,7 +14,7 @@
         .thumbnail {
             width: 100%;
             height: 100%;
-            object-fit: fill;
+            object-fit: cover;
             transition: all .6s;
             box-shadow: 1px 1px 6px gray
         }

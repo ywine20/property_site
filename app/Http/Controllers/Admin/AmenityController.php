@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Amenity;
+use App\Models\Project;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 // use App\Models\Project;
@@ -58,7 +61,7 @@ class AmenityController extends Controller
             // 'project_id' => $project->id,
         ]);
         $amenity->save();
-        return redirect('/admin/amenity')->with('success', 'Your Amenity has been added');
+        return redirect('/admin/amenity')->with('status', 'Your Amenity has been added');
     }
 
     /**
@@ -70,10 +73,10 @@ class AmenityController extends Controller
     public function show($id)
     {
         $amenity = Amenity::where('id', $id)->first();
-        if(!$amenity) {
+        if (!$amenity) {
             return redirect()->back()->with('error', 'Amenity not found');
         }
-        return view('admin.amenity.show',compact('amenity'));
+        return view('admin.amenity.show', compact('amenity'));
     }
 
     /**
@@ -88,9 +91,9 @@ class AmenityController extends Controller
         $amenity = Amenity::where('id', $id)
             ->with('projects')
             ->first();
-            if(!$amenity){
-                return redirect()->back()->with('error', 'Amenity Not found');
-            }
+        if (!$amenity) {
+            return redirect()->back()->with('error', 'Amenity Not found');
+        }
         return view('admin.amenity.edit', compact('amenity'));
     }
 
@@ -110,7 +113,7 @@ class AmenityController extends Controller
 
 
         if ($validator->fails()) {
-//            $errorText = $validator->messages()->getMessages();
+            //            $errorText = $validator->messages()->getMessages();
             return redirect()->back()->with('error', 'Something Wrong');
         } else {
             Amenity::where('id', $request->amenity_id)->update([
@@ -119,10 +122,10 @@ class AmenityController extends Controller
         }
         return redirect('/admin/amenity')->with('status', 'Amenity Updated Successful');
 
-//        $amenity = Amenity::where('id', $request->amenity_id);
-//        if(!$amenity->first()){
-//            return redirect()->back()->with('error', 'amenity is not here');
-//        }
+        //        $amenity = Amenity::where('id', $request->amenity_id);
+        //        if(!$amenity->first()){
+        //            return redirect()->back()->with('error', 'amenity is not here');
+        //        }
 
     }
 
@@ -134,22 +137,62 @@ class AmenityController extends Controller
      */
     public function destroy($id)
     {
-        $amenity = Amenity::where('id', $id);
-        if(!$amenity->first()){
-            return redirect()->back()->with('error', 'there is no amenity');
+
+        try {
+            $amenity = Amenity::find($id);
+
+            if (!$amenity) {
+                return response()->json([
+                    "status" => 'error',
+                    "info" => 'not found amenity'
+                ]);
+            }
+
+            $usedInProjects = DB::table('project_amenity')->where('amenity_id', $id)->exists();
+
+            if ($usedInProjects) {
+                return response()->json([
+                    "status" => 'error',
+                    "info" => 'Cannot delete the amenity because it is associated with one or more projects.'
+                ]);
+            }
+
+            $amenity->delete();
+
+            return response()->json([
+                "status" => 'success',
+                "info" => 'Delete successful'
+            ]);
+        } catch (QueryException $e) {
+            return response()->json([
+                "status" => 'error',
+                "info" => 'An error occurred while deleting the amenity..'
+            ]);
         }
-        $amenity->delete();
-        return response()->json([
-            "status" => 'success',
-            "info"=>'delete successful'
-        ]);
-        // return redirect('/admin/amenity')->with('success', 'Amenity deleted successfully');
     }
 
-    public function multiDelAmenity(Request $request){
+    // public function multiDelAmenity(Request $request)
+    // {
+    //     $ids = $request->chk;
+    //     Amenity::whereIn('id', $ids)->delete();
+    //     //        Category::destroy(collect($ids));
+    //     return redirect()->back()->with('status', 'Multiple Delete Successful');
+    // }
+
+
+    public function multiDelAmenity(Request $request)
+    {
         $ids = $request->chk;
-        Amenity::whereIn('id',$ids)->delete();
-//        Category::destroy(collect($ids));
-        return redirect()->back()->with('status','Multiple Delete Successful');
+
+        // Check if any of the amenities are associated with projects
+        $usedInProjects = DB::table('project_amenity')->whereIn('amenity_id', $ids)->exists();
+
+        if ($usedInProjects) {
+            return redirect()->back()->with('error', 'Cannot delete the amenity because it is associated with one or more projects.');
+        }
+
+        Amenity::whereIn('id', $ids)->delete();
+
+        return redirect()->back()->with('status', 'Multiple Delete Successful');
     }
 }
