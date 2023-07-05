@@ -46,11 +46,14 @@ class PageController extends Controller
     //         ->groupBy(DB::raw("month_name, DATE(created_at)"))
     //         ->orderBy(DB::raw("MONTH(created_at)"), 'ASC')
     //         ->pluck('count', 'month_name');
-            $chartVisitor = Visitor::select(DB::raw("COUNT(*) as count"), DB::raw("to_char(created_at, 'Month') as month_name"), DB::raw("DATE(created_at) as created_date"))
+
+
+    $chartVisitor = Visitor::select(DB::raw("COUNT(*) as count"), DB::raw("to_char(created_at, 'Month') as month_name"), DB::raw("DATE(created_at) as created_date"))
     ->where('created_at', '>=', Carbon::now()->subMonths(9))
-    ->groupBy(DB::raw("month_name, DATE(created_at)"))
+    ->groupBy(DB::raw("to_char(created_at, 'Month'), DATE(created_at)"))
     ->orderBy(DB::raw("EXTRACT(MONTH FROM created_at)"), 'ASC')
     ->pluck('count', 'month_name');
+
 
         // $chartUsers = User::select(DB::raw("COUNT(*) as count"), DB::raw("DATE_FORMAT(created_at, '%M') as month_name"), DB::raw("DATE(created_at) as created_date"))
         //     ->where('created_at', '>=', Carbon::now()->subMonths(9))
@@ -58,11 +61,12 @@ class PageController extends Controller
         //     ->orderBy(DB::raw("MONTH(created_at)"), 'ASC')
         //     ->pluck('count', 'month_name');
 
-        $chartUsers = User::select(DB::raw("COUNT(*) as count"), DB::raw("to_char(created_at, 'Month') as month_name"), DB::raw("DATE(created_at) as created_date"))
+   $chartUsers = User::select(DB::raw("COUNT(*) as count"), DB::raw("to_char(created_at, 'Month') as month_name"), DB::raw("DATE(created_at) as created_date"))
     ->where('created_at', '>=', Carbon::now()->subMonths(9))
-    ->groupBy(DB::raw("month_name, DATE(created_at)"))
+    ->groupBy(DB::raw("to_char(created_at, 'Month'), DATE(created_at)"))
     ->orderBy(DB::raw("EXTRACT(MONTH FROM created_at)"), 'ASC')
     ->pluck('count', 'month_name');
+
 
 
         $visitorData = [];
